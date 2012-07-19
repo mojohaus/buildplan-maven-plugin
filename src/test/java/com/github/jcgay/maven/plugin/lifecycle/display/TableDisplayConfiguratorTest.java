@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 import static com.github.jcgay.maven.plugin.lifecycle.model.builder.MojoExecutionBuilder.aMojoExecution;
 import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.fail;
 
 public class TableDisplayConfiguratorTest {
 
@@ -34,15 +35,27 @@ public class TableDisplayConfiguratorTest {
     }
 
     @Test
-    public void should_build_a_row_format_for_a_table_descriptor() {
+    public void should_build_a_row_format_for_a_list_table_descriptor() {
 
         TableDescriptor descriptor = new TableDescriptor().setPluginSize(1)
                                                           .setPhaseSize(2)
                                                           .setExecutionIdSize(3)
                                                           .setGoalSize(4);
 
-        String result = TableDisplayConfigurator.buildRowFormat(descriptor);
+        String result = TableDisplayConfigurator.buildRowFormatForList(descriptor);
 
         assertThat(result).contains("%-1s").contains("%-2s").contains("%-3s").contains("%-4s");
+    }
+
+    @Test
+    public void should_build_a_row_format_for_a_list_phase_table_descriptor() {
+
+        TableDescriptor descriptor = new TableDescriptor().setPluginSize(1)
+                                                          .setExecutionIdSize(2)
+                                                          .setGoalSize(3);
+
+        String result = TableDisplayConfigurator.buildRowFormatForListPhase(descriptor);
+
+        assertThat(result).isEqualTo("    + %-1s|%-2s|%-3s");
     }
 }

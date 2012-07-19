@@ -1,8 +1,10 @@
 package com.github.jcgay.maven.plugin.lifecycle.display;
 
 import com.github.jcgay.maven.plugin.lifecycle.display.model.TableDescriptor;
+import com.google.common.collect.Multimap;
 import org.apache.maven.plugin.MojoExecution;
 
+import java.util.Collection;
 import java.util.List;
 
 public class TableDisplayConfigurator {
@@ -11,7 +13,7 @@ public class TableDisplayConfigurator {
     private static final String FORMAT_LEFT_ALIGN = "%-";
     private static final Character FORMAT_STRING = 's';
 
-    public static TableDescriptor findMaxSize(List<MojoExecution> executions) {
+    public static TableDescriptor findMaxSize(Collection<MojoExecution> executions) {
 
         int sizePlugin = 0, sizePhase = 0, sizeGoal = 0, sizeId = 0;
 
@@ -29,12 +31,24 @@ public class TableDisplayConfigurator {
                                     .plus(2);
     }
 
-    public static String buildRowFormat(TableDescriptor descriptor) {
+    public static String buildRowFormatForList(TableDescriptor descriptor) {
 
         StringBuilder builder = new StringBuilder();
         builder.append(FORMAT_LEFT_ALIGN).append(descriptor.getPluginSize()).append(FORMAT_STRING)
                .append(SEPARATOR)
                .append(FORMAT_LEFT_ALIGN).append(descriptor.getPhaseSize()).append(FORMAT_STRING)
+               .append(SEPARATOR)
+               .append(FORMAT_LEFT_ALIGN).append(descriptor.getExecutionIdSize()).append(FORMAT_STRING)
+               .append(SEPARATOR)
+               .append(FORMAT_LEFT_ALIGN).append(descriptor.getGoalSize()).append(FORMAT_STRING);
+        return builder.toString();
+    }
+
+    public static String buildRowFormatForListPhase(TableDescriptor descriptor) {
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("    + ")
+               .append(FORMAT_LEFT_ALIGN).append(descriptor.getPluginSize()).append(FORMAT_STRING)
                .append(SEPARATOR)
                .append(FORMAT_LEFT_ALIGN).append(descriptor.getExecutionIdSize()).append(FORMAT_STRING)
                .append(SEPARATOR)
