@@ -18,10 +18,12 @@ public class TableDisplayConfigurator {
         int sizePlugin = 0, sizePhase = 0, sizeGoal = 0, sizeId = 0;
 
         for (MojoExecution execution : executions) {
-            sizePlugin = max(sizePlugin, execution.getArtifactId().length());
-            sizePhase = max(sizePhase, execution.getMojoDescriptor().getPhase().length());
-            sizeGoal = max(sizeGoal, execution.getMojoDescriptor().getGoal().length());
             sizeId = max(sizeId, execution.getExecutionId().length());
+            sizePlugin = max(sizePlugin, execution.getArtifactId().length());
+            sizeGoal = max(sizeGoal, execution.getGoal().length());
+            if (execution.getMojoDescriptor() != null) {
+                sizePhase = max(sizePhase, execution.getMojoDescriptor().getPhase().length());
+            }
         }
 
         return new TableDescriptor().setPluginSize(sizePlugin)

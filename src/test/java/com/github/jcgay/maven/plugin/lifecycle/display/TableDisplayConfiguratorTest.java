@@ -30,8 +30,31 @@ public class TableDisplayConfiguratorTest {
 
         assertThat(descriptor.getPluginSize()).isGreaterThan(executionB.getArtifactId().length());
         assertThat(descriptor.getExecutionIdSize()).isGreaterThan(executionB.getExecutionId().length());
-        assertThat(descriptor.getGoalSize()).isGreaterThan(executionB.getMojoDescriptor().getGoal().length());
+        assertThat(descriptor.getGoalSize()).isGreaterThan(executionB.getGoal().length());
         assertThat(descriptor.getPhaseSize()).isGreaterThan(executionB.getMojoDescriptor().getPhase().length());
+    }
+
+    @Test
+    public void should_not_failed_when_finding_max_size_with_a_mojo_execution_with_a_null_mojo_descriptor() {
+
+        MojoExecution executionA = aMojoExecution().withArtifactId("plugin-a")
+                                                   .withPhase("phase-a")
+                                                   .withExecutionId("execution-id-a")
+                                                   .withGoal("goal-a")
+                                                   .build();
+
+        MojoExecution executionB = aMojoExecution().withArtifactId("plugin-b-longer-than-a")
+                                                   .withExecutionId("execution-id-b-longer-than-b")
+                                                   .withGoal("goal-b-longer-than-a")
+                                                   .withoutMojoDescriptor()
+                                                   .build();
+
+        TableDescriptor result = TableDisplayConfigurator.findMaxSize(Arrays.asList(executionA, executionB));
+
+        assertThat(result.getExecutionIdSize()).isGreaterThan(executionB.getExecutionId().length());
+        assertThat(result.getPluginSize()).isGreaterThan(executionB.getArtifactId().length());
+        assertThat(result.getGoalSize()).isGreaterThan(executionB.getGoal().length());
+        assertThat(result.getPhaseSize()).isGreaterThan(executionA.getMojoDescriptor().getPhase().length());
     }
 
     @Test
