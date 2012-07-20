@@ -21,7 +21,7 @@ public class TableDisplayConfigurator {
             sizeId = max(sizeId, execution.getExecutionId().length());
             sizePlugin = max(sizePlugin, execution.getArtifactId().length());
             sizeGoal = max(sizeGoal, execution.getGoal().length());
-            if (execution.getMojoDescriptor() != null) {
+            if (execution.getMojoDescriptor() != null && execution.getMojoDescriptor().getPhase() != null) {
                 sizePhase = max(sizePhase, execution.getMojoDescriptor().getPhase().length());
             }
         }

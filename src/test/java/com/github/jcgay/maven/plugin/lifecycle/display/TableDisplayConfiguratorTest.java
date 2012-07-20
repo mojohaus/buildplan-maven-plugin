@@ -49,7 +49,13 @@ public class TableDisplayConfiguratorTest {
                                                    .withoutMojoDescriptor()
                                                    .build();
 
-        TableDescriptor result = TableDisplayConfigurator.findMaxSize(Arrays.asList(executionA, executionB));
+        MojoExecution executionC = aMojoExecution().withArtifactId("plugin-c")
+                                                   .withPhase(null)
+                                                   .withExecutionId("execution-id-c")
+                                                   .withGoal("goal-c")
+                                                   .build();
+
+        TableDescriptor result = TableDisplayConfigurator.findMaxSize(Arrays.asList(executionA, executionB, executionC));
 
         assertThat(result.getExecutionIdSize()).isGreaterThan(executionB.getExecutionId().length());
         assertThat(result.getPluginSize()).isGreaterThan(executionB.getArtifactId().length());

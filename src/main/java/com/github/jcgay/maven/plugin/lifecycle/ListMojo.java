@@ -1,5 +1,6 @@
 package com.github.jcgay.maven.plugin.lifecycle;
 
+import com.github.jcgay.maven.plugin.lifecycle.display.model.MojoExecutionDisplay;
 import com.github.jcgay.maven.plugin.lifecycle.display.model.TableDescriptor;
 import com.google.common.base.Strings;
 import org.apache.maven.lifecycle.MavenExecutionPlan;
@@ -31,11 +32,14 @@ public class ListMojo extends AbstractLifecycleMojo {
     }
 
     private String tableRow(String row, MojoExecution execution) {
+
+        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);
+
         return String.format(row,
-                execution.getArtifactId(),
-                execution.getMojoDescriptor().getPhase(),
-                execution.getExecutionId(),
-                execution.getMojoDescriptor().getGoal());
+                display.getArtifactId(),
+                display.getPhase(),
+                display.getExecutionId(),
+                display.getGoal());
     }
 
     private String tableHead(String row) {

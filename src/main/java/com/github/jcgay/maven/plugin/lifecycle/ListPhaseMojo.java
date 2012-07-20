@@ -1,6 +1,7 @@
 package com.github.jcgay.maven.plugin.lifecycle;
 
 import com.github.jcgay.maven.plugin.lifecycle.display.TableDisplayConfigurator;
+import com.github.jcgay.maven.plugin.lifecycle.display.model.MojoExecutionDisplay;
 import com.github.jcgay.maven.plugin.lifecycle.display.model.TableDescriptor;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
@@ -31,9 +32,12 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
     }
 
     private String line(String rowFormat, MojoExecution execution) {
-        return String.format(rowFormat, execution.getArtifactId(),
-                                        execution.getExecutionId(),
-                                        execution.getGoal());
+
+        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);
+
+        return String.format(rowFormat, display.getArtifactId(),
+                                        display.getExecutionId(),
+                                        display.getGoal());
     }
 
     private String phaseTitleLine(TableDescriptor descriptor, String key) {

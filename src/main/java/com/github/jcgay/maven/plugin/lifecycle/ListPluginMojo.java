@@ -1,6 +1,7 @@
 package com.github.jcgay.maven.plugin.lifecycle;
 
 import com.github.jcgay.maven.plugin.lifecycle.display.TableDisplayConfigurator;
+import com.github.jcgay.maven.plugin.lifecycle.display.model.MojoExecutionDisplay;
 import com.github.jcgay.maven.plugin.lifecycle.display.model.TableDescriptor;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
@@ -12,8 +13,8 @@ import org.apache.maven.plugins.annotations.Mojo;
 import java.util.Collection;
 import java.util.Map;
 
-@Mojo(name = "list-plugins", threadSafe = true)
-public class ListPluginsMojo extends AbstractLifecycleMojo {
+@Mojo(name = "list-plugin", threadSafe = true)
+public class ListPluginMojo extends AbstractLifecycleMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
 
@@ -32,9 +33,12 @@ public class ListPluginsMojo extends AbstractLifecycleMojo {
     }
 
     private String line(String rowFormat, MojoExecution execution) {
-        return String.format(rowFormat, execution.getMojoDescriptor().getPhase(),
-                                        execution.getExecutionId(),
-                                        execution.getGoal());
+
+        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);
+
+        return String.format(rowFormat, display.getPhase(),
+                                        display.getExecutionId(),
+                                        display.getGoal());
     }
 
     private String pluginTitleLine(TableDescriptor descriptor, String key) {
