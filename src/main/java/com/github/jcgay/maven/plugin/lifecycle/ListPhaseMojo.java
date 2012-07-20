@@ -29,7 +29,6 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
                 getLog().info(line(rowFormat, execution));
             }
         }
-
     }
 
     private String line(String row, MojoExecution execution) {
@@ -39,6 +38,7 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
     }
 
     private String phaseTitleLine(TableDescriptor descriptor, String key) {
-        return key + Strings.repeat("-", descriptor.width() - key.length());
+        int descriptorSize = descriptor.getGoalSize() + descriptor.getExecutionIdSize() + descriptor.getPluginSize() + 5;
+        return key + " " + Strings.repeat("-", descriptorSize - key.length());
     }
 }

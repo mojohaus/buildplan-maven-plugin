@@ -24,10 +24,11 @@ public class TableDescriptor {
 
     @Override
     public String toString() {
-        return toStringHelper(this).add("Plugin column size", pluginSize)
-                                   .add("Phase column size", phaseSize)
-                                   .add("Execution ID column size", executionIdSize)
-                                   .add("Goal column size", goalSize)
+        return toStringHelper(this).add("Plugin column size", getPluginSize())
+                                   .add("Phase column size", getPhaseSize())
+                                   .add("Execution ID column size", getExecutionIdSize())
+                                   .add("Goal column size", getGoalSize())
+                                   .add("width", width())
                                    .toString();
     }
 
