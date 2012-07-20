@@ -2,7 +2,6 @@ package com.github.jcgay.maven.plugin.lifecycle;
 
 import com.github.jcgay.maven.plugin.lifecycle.display.TableDisplayConfigurator;
 import com.github.jcgay.maven.plugin.lifecycle.display.model.TableDescriptor;
-import com.github.jcgay.maven.plugin.lifecycle.listphase.MavenPhaseGroups;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
 import org.apache.maven.plugin.MojoExecution;
@@ -18,7 +17,7 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {
 
-        Multimap<String,MojoExecution> phases = MavenPhaseGroups.of(calculateExecutionPlan().getMojoExecutions());
+        Multimap<String,MojoExecution> phases = Groups.ByPhase.of(calculateExecutionPlan().getMojoExecutions());
 
         TableDescriptor descriptor = TableDisplayConfigurator.findMaxSize(phases.values());
         String rowFormat = TableDisplayConfigurator.buildRowFormatForListPhase(descriptor);
