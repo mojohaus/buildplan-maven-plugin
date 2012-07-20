@@ -30,10 +30,10 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
         }
     }
 
-    private String line(String row, MojoExecution execution) {
-        return String.format(row, execution.getArtifactId(),
-                                  execution.getExecutionId(),
-                                  execution.getMojoDescriptor().getGoal());
+    private String line(String rowFormat, MojoExecution execution) {
+        return String.format(rowFormat, execution.getArtifactId(),
+                                        execution.getExecutionId(),
+                                        execution.getGoal());
     }
 
     private String phaseTitleLine(TableDescriptor descriptor, String key) {

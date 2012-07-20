@@ -58,6 +58,18 @@ public class TableDisplayConfigurator {
         return builder.toString();
     }
 
+    public static String buildRowFormatForListPlugin(TableDescriptor descriptor) {
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("    + ")
+               .append(FORMAT_LEFT_ALIGN).append(descriptor.getPhaseSize()).append(FORMAT_STRING)
+               .append(SEPARATOR)
+               .append(FORMAT_LEFT_ALIGN).append(descriptor.getExecutionIdSize()).append(FORMAT_STRING)
+               .append(SEPARATOR)
+               .append(FORMAT_LEFT_ALIGN).append(descriptor.getGoalSize()).append(FORMAT_STRING);
+        return builder.toString();
+    }
+
     private static int max(int size, int anotherSize) {
         if (size >= anotherSize) {
             return size;

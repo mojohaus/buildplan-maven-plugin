@@ -81,4 +81,16 @@ public class TableDisplayConfiguratorTest {
 
         assertThat(result).isEqualTo("    + %-1s|%-2s|%-3s");
     }
+
+    @Test
+    public void should_build_a_row_format_for_a_list_plugin_table_descriptor() {
+
+        TableDescriptor descriptor = new TableDescriptor().setPhaseSize(1)
+                                                          .setExecutionIdSize(2)
+                                                          .setGoalSize(3);
+
+        String result = TableDisplayConfigurator.buildRowFormatForListPlugin(descriptor);
+
+        assertThat(result).isEqualTo("    + %-1s|%-2s|%-3s");
+    }
 }
