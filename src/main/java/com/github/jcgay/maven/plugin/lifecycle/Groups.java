@@ -14,9 +14,16 @@ public class Groups {
     public static class ByPlugin {
 
         public static Multimap<String, MojoExecution> of(List<MojoExecution> executions) {
+            return of(executions, null);
+        }
+
+        public static Multimap<String,MojoExecution> of(List<MojoExecution> executions, String artifactIdFilter) {
             Multimap<String, MojoExecution> result = ArrayListMultimap.create();
+            boolean notFiltering = Strings.isNullOrEmpty(artifactIdFilter);
             for (MojoExecution execution : executions) {
-                result.put(execution.getArtifactId(), execution);
+                if (notFiltering || execution.getArtifactId().equalsIgnoreCase(artifactIdFilter)) {
+                    result.put(execution.getArtifactId(), execution);
+                }
             }
             return result;
         }
@@ -28,11 +35,11 @@ public class Groups {
             return of(plan, null);
         }
 
-        public static Multimap<String, MojoExecution> of(List<MojoExecution> plan, String phaseFilter) {
+        public static Multimap<String, MojoExecution> of(List<MojoExecution> executions, String phaseFilter) {
             Multimap<String, MojoExecution> result = ArrayListMultimap.create();
             boolean notFiltering = Strings.isNullOrEmpty(phaseFilter);
-            for (MojoExecution execution : plan) {
-                if (notFiltering || execution.getMojoDescriptor().getPhase().equals(phaseFilter)) {
+            for (MojoExecution execution : executions) {
+                if (notFiltering || execution.getMojoDescriptor().getPhase().equalsIgnoreCase(phaseFilter)) {
                     result.put(execution.getMojoDescriptor().getPhase(), execution);
                 }
             }

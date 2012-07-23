@@ -95,4 +95,23 @@ public class GroupsTest {
 
         assertThat(result.keySet()).containsOnly("phase-a");
     }
+
+    @Test
+    public void should_filter_mojo_execution_by_artifactId() {
+
+        MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
+                .withExecutionId("a")
+                .withGoal("goal-a")
+                .withPhase("phase-a")
+                .build();
+        MojoExecution pluginB = aMojoExecution().withArtifactId("plugin-b")
+                .withExecutionId("b")
+                .withGoal("goal-b")
+                .withPhase("phase-b")
+                .build();
+
+        Multimap<String, MojoExecution> result = Groups.ByPlugin.of(Arrays.asList(pluginA, pluginB), "plugin-a");
+
+        assertThat(result.keySet()).containsOnly("plugin-a");
+    }
 }
