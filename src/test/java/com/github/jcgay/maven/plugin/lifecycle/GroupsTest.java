@@ -14,7 +14,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 public class GroupsTest {
 
     @Test
-    public void should_ordered_mojo_execution_by_phase_name() {
+    public void should_order_mojo_execution_by_phase_name() {
 
         MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
                                                 .withExecutionId("a")
@@ -46,7 +46,7 @@ public class GroupsTest {
     }
 
     @Test
-    public void should_ordered_mojo_execution_by_artifact_id() {
+    public void should_order_mojo_execution_by_artifact_id() {
 
         MojoExecution pluginB = aMojoExecution().withArtifactId("plugin-b")
                                                 .withExecutionId("b")
@@ -75,5 +75,24 @@ public class GroupsTest {
         assertThat(result.get("plugin-a")).containsOnly(pluginA, pluginAA);
         assertThat(result.get("plugin-b")).containsOnly(pluginB);
         assertThat(result.get("plugin-c")).containsOnly(pluginC);
+    }
+
+    @Test
+    public void should_filter_mojo_execution_by_phase_name() {
+
+        MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
+                                                .withExecutionId("a")
+                                                .withGoal("goal-a")
+                                                .withPhase("phase-a")
+                                                .build();
+        MojoExecution pluginB = aMojoExecution().withArtifactId("plugin-b")
+                                                .withExecutionId("b")
+                                                .withGoal("goal-b")
+                                                .withPhase("phase-b")
+                                                .build();
+
+        Multimap<String, MojoExecution> result = Groups.ByPhase.of(Arrays.asList(pluginA, pluginB), "phase-a");
+
+        assertThat(result.keySet()).containsOnly("phase-a");
     }
 }

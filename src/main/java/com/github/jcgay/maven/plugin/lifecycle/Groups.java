@@ -1,5 +1,6 @@
 package com.github.jcgay.maven.plugin.lifecycle;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
@@ -24,10 +25,16 @@ public class Groups {
     public static class ByPhase {
 
         public static Multimap<String, MojoExecution> of(List<MojoExecution> plan) {
+            return of(plan, null);
+        }
 
+        public static Multimap<String, MojoExecution> of(List<MojoExecution> plan, String phaseFilter) {
             Multimap<String, MojoExecution> result = ArrayListMultimap.create();
+            boolean notFiltering = Strings.isNullOrEmpty(phaseFilter);
             for (MojoExecution execution : plan) {
-                result.put(execution.getMojoDescriptor().getPhase(), execution);
+                if (notFiltering || execution.getMojoDescriptor().getPhase().equals(phaseFilter)) {
+                    result.put(execution.getMojoDescriptor().getPhase(), execution);
+                }
             }
             return result;
         }
