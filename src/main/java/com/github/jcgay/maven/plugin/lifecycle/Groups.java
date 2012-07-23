@@ -39,11 +39,19 @@ public class Groups {
             Multimap<String, MojoExecution> result = ArrayListMultimap.create();
             boolean notFiltering = Strings.isNullOrEmpty(phaseFilter);
             for (MojoExecution execution : executions) {
-                if (notFiltering || execution.getMojoDescriptor().getPhase().equalsIgnoreCase(phaseFilter)) {
-                    result.put(execution.getMojoDescriptor().getPhase(), execution);
+                String phase = getPhase(execution);
+                if (notFiltering || phase.equalsIgnoreCase(phaseFilter)) {
+                    result.put(phase, execution);
                 }
             }
             return result;
+        }
+
+        private static String getPhase(MojoExecution execution) {
+            if (execution.getMojoDescriptor() != null && execution.getMojoDescriptor().getPhase() != null) {
+                return execution.getMojoDescriptor().getPhase();
+            }
+            return "default-phase";
         }
     }
 }
