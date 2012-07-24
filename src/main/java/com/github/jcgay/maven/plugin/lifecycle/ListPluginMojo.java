@@ -1,8 +1,7 @@
 package com.github.jcgay.maven.plugin.lifecycle;
 
-import com.github.jcgay.maven.plugin.lifecycle.display.TableDisplayConfigurator;
+import com.github.jcgay.maven.plugin.lifecycle.display.model.ListPluginTableDescriptor;
 import com.github.jcgay.maven.plugin.lifecycle.display.model.MojoExecutionDisplay;
-import com.github.jcgay.maven.plugin.lifecycle.display.model.TableDescriptor;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
 import org.apache.maven.plugin.MojoExecution;
@@ -24,13 +23,12 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
 
         Multimap<String,MojoExecution> plan = Groups.ByPlugin.of(calculateExecutionPlan().getMojoExecutions(), plugin);
 
-        TableDescriptor descriptor = TableDisplayConfigurator.findMaxSize(plan.values());
-        String rowFormat = TableDisplayConfigurator.buildRowFormatForListPlugin(descriptor);
+        ListPluginTableDescriptor descriptor = ListPluginTableDescriptor.of(plan.values());
 
         for (Map.Entry<String, Collection<MojoExecution>> executions : plan.asMap().entrySet()) {
             getLog().info(pluginTitleLine(descriptor, executions.getKey()));
             for (MojoExecution execution : executions.getValue()) {
-                getLog().info(line(rowFormat, execution));
+                getLog().info(line(descriptor.rowFormat(), execution));
             }
         }
     }
@@ -44,8 +42,7 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
                                         display.getGoal());
     }
 
-    private String pluginTitleLine(TableDescriptor descriptor, String key) {
-        int descriptorSize = descriptor.getGoalSize() + descriptor.getExecutionIdSize() + descriptor.getPluginSize() + 5;
-        return key + " " + Strings.repeat("-", descriptorSize - key.length());
+    private String pluginTitleLine(ListPluginTableDescriptor descriptor, String key) {
+        return key + " " + Strings.repeat("-", descriptor.width() - key.length());
     }
 }

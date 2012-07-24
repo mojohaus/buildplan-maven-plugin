@@ -1,6 +1,5 @@
 package com.github.jcgay.maven.plugin.lifecycle;
 
-import com.github.jcgay.maven.plugin.lifecycle.Groups;
 import com.google.common.collect.Multimap;
 import org.apache.maven.plugin.MojoExecution;
 import org.junit.Test;

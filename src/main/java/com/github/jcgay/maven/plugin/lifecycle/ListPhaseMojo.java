@@ -1,8 +1,7 @@
 package com.github.jcgay.maven.plugin.lifecycle;
 
-import com.github.jcgay.maven.plugin.lifecycle.display.TableDisplayConfigurator;
+import com.github.jcgay.maven.plugin.lifecycle.display.model.ListPhaseTableDescriptor;
 import com.github.jcgay.maven.plugin.lifecycle.display.model.MojoExecutionDisplay;
-import com.github.jcgay.maven.plugin.lifecycle.display.model.TableDescriptor;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
 import org.apache.maven.plugin.MojoExecution;
@@ -23,14 +22,12 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
 
         Multimap<String,MojoExecution> phases = Groups.ByPhase.of(calculateExecutionPlan().getMojoExecutions(), phase);
-
-        TableDescriptor descriptor = TableDisplayConfigurator.findMaxSize(phases.values());
-        String rowFormat = TableDisplayConfigurator.buildRowFormatForListPhase(descriptor);
+        ListPhaseTableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values());
 
         for (Map.Entry<String, Collection<MojoExecution>> phase : phases.asMap().entrySet()) {
             getLog().info(phaseTitleLine(descriptor, phase.getKey()));
             for (MojoExecution execution : phase.getValue()) {
-                getLog().info(line(rowFormat, execution));
+                getLog().info(line(descriptor.rowFormat(), execution));
             }
         }
     }
@@ -44,8 +41,7 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
                                         display.getGoal());
     }
 
-    private String phaseTitleLine(TableDescriptor descriptor, String key) {
-        int descriptorSize = descriptor.getGoalSize() + descriptor.getExecutionIdSize() + descriptor.getPluginSize() + 5;
-        return key + " " + Strings.repeat("-", descriptorSize - key.length());
+    private String phaseTitleLine(ListPhaseTableDescriptor descriptor, String key) {
+        return key + " " + Strings.repeat("-", descriptor.width() - key.length());
     }
 }
