@@ -9,7 +9,7 @@ import static com.google.common.base.Objects.toStringHelper;
 
 public class ListTableDescriptor implements TableDescriptor {
 
-    static final int SEPARATOR_SIZE = 3;
+    static final int SEPARATOR_SIZE = 3 * SEPARATOR.length();
 
     private int pluginSize;
     private int phaseSize;
@@ -21,34 +21,18 @@ public class ListTableDescriptor implements TableDescriptor {
         int sizePlugin = 0, sizePhase = 0, sizeGoal = 0, sizeId = 0;
 
         for (MojoExecution execution : executions) {
-            sizeId = max(sizeId, execution.getExecutionId().length());
-            sizePlugin = max(sizePlugin, execution.getArtifactId().length());
-            sizeGoal = max(sizeGoal, execution.getGoal().length());
+            sizeId = Math.max(sizeId, execution.getExecutionId().length());
+            sizePlugin = Math.max(sizePlugin, execution.getArtifactId().length());
+            sizeGoal = Math.max(sizeGoal, execution.getGoal().length());
             if (execution.getMojoDescriptor() != null && execution.getMojoDescriptor().getPhase() != null) {
-                sizePhase = max(sizePhase, execution.getMojoDescriptor().getPhase().length());
+                sizePhase = Math.max(sizePhase, execution.getMojoDescriptor().getPhase().length());
             }
         }
 
         return new ListTableDescriptor().setPluginSize(sizePlugin)
                                         .setPhaseSize(sizePhase)
                                         .setGoalSize(sizeGoal)
-                                        .setExecutionIdSize(sizeId)
-                                        .plus(2);
-    }
-
-    private static int max(int size, int anotherSize) {
-        if (size >= anotherSize) {
-            return size;
-        } else {
-            return anotherSize;
-        }
-    }
-
-    public ListTableDescriptor plus(int size) {
-        return new ListTableDescriptor().setPluginSize(getPluginSize() + size)
-                                        .setPhaseSize(getPhaseSize() + size)
-                                        .setExecutionIdSize(getExecutionIdSize() + size)
-                                        .setGoalSize(getGoalSize() + size);
+                                        .setExecutionIdSize(sizeId);
     }
 
     public String rowFormat() {

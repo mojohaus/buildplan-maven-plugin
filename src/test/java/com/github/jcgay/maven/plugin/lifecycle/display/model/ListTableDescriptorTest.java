@@ -10,7 +10,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 public class ListTableDescriptorTest {
 
     @Test
-    public void should_add_all_size_and_1_by_separator_to_get_descriptor_width() {
+    public void should_add_all_size_and_the_separator_size_to_get_descriptor_width() {
 
         ListTableDescriptor descriptor = new ListTableDescriptor().setExecutionIdSize(1)
                                                                   .setGoalSize(2)
@@ -36,10 +36,10 @@ public class ListTableDescriptorTest {
 
         ListTableDescriptor descriptor = ListTableDescriptor.of(asList(executionA, executionB));
 
-        assertThat(descriptor.getPluginSize()).isGreaterThan(executionB.getArtifactId().length());
-        assertThat(descriptor.getExecutionIdSize()).isGreaterThan(executionB.getExecutionId().length());
-        assertThat(descriptor.getGoalSize()).isGreaterThan(executionB.getGoal().length());
-        assertThat(descriptor.getPhaseSize()).isGreaterThan(executionB.getMojoDescriptor().getPhase().length());
+        assertThat(descriptor.getPluginSize()).isEqualTo(executionB.getArtifactId().length());
+        assertThat(descriptor.getExecutionIdSize()).isEqualTo(executionB.getExecutionId().length());
+        assertThat(descriptor.getGoalSize()).isEqualTo(executionB.getGoal().length());
+        assertThat(descriptor.getPhaseSize()).isEqualTo(executionB.getMojoDescriptor().getPhase().length());
     }
 
     @Test
@@ -65,10 +65,10 @@ public class ListTableDescriptorTest {
 
         ListTableDescriptor result = ListTableDescriptor.of(asList(executionA, executionB, executionC));
 
-        assertThat(result.getExecutionIdSize()).isGreaterThan(executionB.getExecutionId().length());
-        assertThat(result.getPluginSize()).isGreaterThan(executionB.getArtifactId().length());
-        assertThat(result.getGoalSize()).isGreaterThan(executionB.getGoal().length());
-        assertThat(result.getPhaseSize()).isGreaterThan(executionA.getMojoDescriptor().getPhase().length());
+        assertThat(result.getExecutionIdSize()).isEqualTo(executionB.getExecutionId().length());
+        assertThat(result.getPluginSize()).isEqualTo(executionB.getArtifactId().length());
+        assertThat(result.getGoalSize()).isEqualTo(executionB.getGoal().length());
+        assertThat(result.getPhaseSize()).isEqualTo(executionA.getMojoDescriptor().getPhase().length());
     }
 
     @Test
@@ -81,6 +81,6 @@ public class ListTableDescriptorTest {
 
         String result = descriptor.rowFormat();
 
-        assertThat(result).contains("%-1s").contains("%-2s").contains("%-3s").contains("%-4s");
+        assertThat(result).isEqualTo("%-1s | %-2s | %-3s | %-4s");
     }
 }

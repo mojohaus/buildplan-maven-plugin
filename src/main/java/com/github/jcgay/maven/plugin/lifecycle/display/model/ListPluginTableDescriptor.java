@@ -7,13 +7,15 @@ import java.util.Collection;
 
 public class ListPluginTableDescriptor implements TableDescriptor {
 
+    static int SEPARATOR_SIZE = ROW_START.length() + 2 * SEPARATOR.length();
+
     private int phaseSize;
     private int executionIdSize;
     private int goalSize;
 
     public String rowFormat() {
         StringBuilder builder = new StringBuilder();
-        builder.append("    + ")
+        builder.append(ROW_START)
                 .append(FORMAT_LEFT_ALIGN).append(getPhaseSize()).append(FORMAT_STRING)
                 .append(SEPARATOR)
                 .append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING)
@@ -23,11 +25,7 @@ public class ListPluginTableDescriptor implements TableDescriptor {
     }
 
     public int width() {
-        return getExecutionIdSize() + getGoalSize() + getPhaseSize() + 5;
-    }
-
-    public TableDescriptor plus(int size) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return getExecutionIdSize() + getGoalSize() + getPhaseSize() + SEPARATOR_SIZE;
     }
 
     public int getPhaseSize() {

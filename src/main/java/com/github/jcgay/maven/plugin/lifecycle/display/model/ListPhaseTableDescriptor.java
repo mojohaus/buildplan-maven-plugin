@@ -7,6 +7,8 @@ import java.util.Collection;
 
 public class ListPhaseTableDescriptor implements TableDescriptor {
 
+    static int SEPARATOR_SIZE = ROW_START.length() + 2 * SEPARATOR.length();
+
     private int pluginSize;
     private int executionIdSize;
     private int goalSize;
@@ -28,7 +30,7 @@ public class ListPhaseTableDescriptor implements TableDescriptor {
 
     public String rowFormat() {
         StringBuilder builder = new StringBuilder();
-        builder.append("    + ")
+        builder.append(ROW_START)
                 .append(FORMAT_LEFT_ALIGN).append(getPluginSize()).append(FORMAT_STRING)
                 .append(SEPARATOR)
                 .append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING)
@@ -38,12 +40,7 @@ public class ListPhaseTableDescriptor implements TableDescriptor {
     }
 
     public int width() {
-        return getExecutionIdSize() + getGoalSize() + getPluginSize() + 5;
-    }
-
-    public TableDescriptor plus(int size) {
-        return null;
-
+        return getExecutionIdSize() + getGoalSize() + getPluginSize() + SEPARATOR_SIZE;
     }
 
     public int getPluginSize() {

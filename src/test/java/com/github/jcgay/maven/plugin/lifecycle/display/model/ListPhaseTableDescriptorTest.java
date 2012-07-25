@@ -16,6 +16,6 @@ public class ListPhaseTableDescriptorTest {
 
         String result = descriptor.rowFormat();
 
-        assertThat(result).isEqualTo("    + %-1s|%-2s|%-3s");
+        assertThat(result).isEqualTo("    + %-1s | %-2s | %-3s");
     }
 }
