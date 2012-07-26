@@ -1,6 +1,5 @@
 package com.github.jcgay.maven.plugin.lifecycle.display;
 
-import com.github.jcgay.maven.plugin.lifecycle.display.MojoExecutionDisplay;
 import org.apache.maven.plugin.MojoExecution;
 import org.junit.Test;
 

@@ -1,8 +1,8 @@
 package com.github.jcgay.maven.plugin.lifecycle;
 
-import com.github.jcgay.maven.plugin.lifecycle.display.TableDescriptor;
 import com.github.jcgay.maven.plugin.lifecycle.display.ListPluginTableDescriptor;
 import com.github.jcgay.maven.plugin.lifecycle.display.MojoExecutionDisplay;
+import com.github.jcgay.maven.plugin.lifecycle.display.TableDescriptor;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
 import org.apache.maven.plugin.MojoExecution;
@@ -14,9 +14,13 @@ import org.apache.maven.plugins.annotations.Parameter;
 import java.util.Collection;
 import java.util.Map;
 
+/**
+ * List plugin executions by plugin for the current project.
+ */
 @Mojo(name = "list-plugin", threadSafe = true)
 public class ListPluginMojo extends AbstractLifecycleMojo {
 
+    /** Display plugin executions only for the specified plugin. */
     @Parameter(property = "lifecycle.plugin")
     private String plugin;
 

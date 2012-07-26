@@ -13,6 +13,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <prerequisites>
+        <maven>3.0</maven>
+    </prerequisites>
+
     <distributionManagement>
         <repository>
             <id>jcgay-cloudbees-release</id>

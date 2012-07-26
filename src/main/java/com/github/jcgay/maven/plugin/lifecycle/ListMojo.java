@@ -1,8 +1,8 @@
 package com.github.jcgay.maven.plugin.lifecycle;
 
-import com.github.jcgay.maven.plugin.lifecycle.display.TableDescriptor;
 import com.github.jcgay.maven.plugin.lifecycle.display.ListTableDescriptor;
 import com.github.jcgay.maven.plugin.lifecycle.display.MojoExecutionDisplay;
+import com.github.jcgay.maven.plugin.lifecycle.display.TableDescriptor;
 import com.google.common.base.Strings;
 import org.apache.maven.lifecycle.MavenExecutionPlan;
 import org.apache.maven.plugin.MojoExecution;
@@ -10,6 +10,9 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 
+/**
+ * List plugin executions for the current project.
+ */
 @Mojo(name = "list", threadSafe = true)
 public class ListMojo extends AbstractLifecycleMojo {
 

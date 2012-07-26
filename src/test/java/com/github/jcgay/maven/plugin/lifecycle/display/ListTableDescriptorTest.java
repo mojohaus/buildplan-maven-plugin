@@ -1,6 +1,5 @@
 package com.github.jcgay.maven.plugin.lifecycle.display;
 
-import com.github.jcgay.maven.plugin.lifecycle.display.ListTableDescriptor;
 import org.apache.maven.plugin.MojoExecution;
 import org.junit.Test;
 

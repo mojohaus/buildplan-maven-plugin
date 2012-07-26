@@ -1,6 +1,5 @@
 package com.github.jcgay.maven.plugin.lifecycle.display;
 
-import com.github.jcgay.maven.plugin.lifecycle.display.ListPhaseTableDescriptor;
 import org.junit.Test;
 
 import static org.fest.assertions.api.Assertions.assertThat;
