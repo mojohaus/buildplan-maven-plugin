@@ -1,6 +1,5 @@
-package com.github.jcgay.maven.plugin.lifecycle.display.model;
+package com.github.jcgay.maven.plugin.lifecycle.display;
 
-import com.github.jcgay.maven.plugin.lifecycle.display.TableDescriptor;
 import com.google.common.base.Strings;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;

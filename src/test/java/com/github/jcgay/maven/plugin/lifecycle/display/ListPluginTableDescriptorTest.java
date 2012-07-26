@@ -1,5 +1,6 @@
-package com.github.jcgay.maven.plugin.lifecycle.display.model;
+package com.github.jcgay.maven.plugin.lifecycle.display;
 
+import com.github.jcgay.maven.plugin.lifecycle.display.ListPluginTableDescriptor;
 import org.junit.Test;
 
 import static org.fest.assertions.api.Assertions.assertThat;

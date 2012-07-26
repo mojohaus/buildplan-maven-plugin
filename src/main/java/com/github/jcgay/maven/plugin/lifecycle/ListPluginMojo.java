@@ -1,8 +1,8 @@
 package com.github.jcgay.maven.plugin.lifecycle;
 
 import com.github.jcgay.maven.plugin.lifecycle.display.TableDescriptor;
-import com.github.jcgay.maven.plugin.lifecycle.display.model.ListPluginTableDescriptor;
-import com.github.jcgay.maven.plugin.lifecycle.display.model.MojoExecutionDisplay;
+import com.github.jcgay.maven.plugin.lifecycle.display.ListPluginTableDescriptor;
+import com.github.jcgay.maven.plugin.lifecycle.display.MojoExecutionDisplay;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
 import org.apache.maven.plugin.MojoExecution;

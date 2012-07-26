@@ -1,4 +1,4 @@
-package com.github.jcgay.maven.plugin.lifecycle.display.model;
+package com.github.jcgay.maven.plugin.lifecycle.display;
 
 public enum TableColumn {
 
