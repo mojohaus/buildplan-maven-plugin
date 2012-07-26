@@ -1,13 +1,13 @@
 package com.github.jcgay.maven.plugin.lifecycle.display.model;
 
-import com.github.jcgay.maven.plugin.lifecycle.display.TableDescriptor;
 import org.apache.maven.plugin.MojoExecution;
 
 import java.util.Collection;
+import java.util.Map;
 
 import static com.google.common.base.Objects.toStringHelper;
 
-public class ListTableDescriptor implements TableDescriptor {
+public class ListTableDescriptor extends AbstractTableDescriptor {
 
     static final int SEPARATOR_SIZE = 3 * SEPARATOR.length();
 
@@ -18,21 +18,12 @@ public class ListTableDescriptor implements TableDescriptor {
 
     public static ListTableDescriptor of(Collection<MojoExecution> executions) {
 
-        int sizePlugin = 0, sizePhase = 0, sizeGoal = 0, sizeId = 0;
+        Map<TableColumn,Integer> maxSize = findMaxSize(executions, TableColumn.values());
 
-        for (MojoExecution execution : executions) {
-            sizeId = Math.max(sizeId, execution.getExecutionId().length());
-            sizePlugin = Math.max(sizePlugin, execution.getArtifactId().length());
-            sizeGoal = Math.max(sizeGoal, execution.getGoal().length());
-            if (execution.getMojoDescriptor() != null && execution.getMojoDescriptor().getPhase() != null) {
-                sizePhase = Math.max(sizePhase, execution.getMojoDescriptor().getPhase().length());
-            }
-        }
-
-        return new ListTableDescriptor().setPluginSize(sizePlugin)
-                                        .setPhaseSize(sizePhase)
-                                        .setGoalSize(sizeGoal)
-                                        .setExecutionIdSize(sizeId);
+        return new ListTableDescriptor().setPluginSize(maxSize.get(TableColumn.ARTIFACT_ID))
+                                        .setPhaseSize(maxSize.get(TableColumn.PHASE))
+                                        .setGoalSize(maxSize.get(TableColumn.GOAL))
+                                        .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));
     }
 
     public String rowFormat() {

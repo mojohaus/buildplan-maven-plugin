@@ -1,5 +1,6 @@
 package com.github.jcgay.maven.plugin.lifecycle;
 
+import com.github.jcgay.maven.plugin.lifecycle.display.TableDescriptor;
 import com.github.jcgay.maven.plugin.lifecycle.display.model.ListPluginTableDescriptor;
 import com.github.jcgay.maven.plugin.lifecycle.display.model.MojoExecutionDisplay;
 import com.google.common.base.Strings;
@@ -23,7 +24,7 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
 
         Multimap<String,MojoExecution> plan = Groups.ByPlugin.of(calculateExecutionPlan().getMojoExecutions(), plugin);
 
-        ListPluginTableDescriptor descriptor = ListPluginTableDescriptor.of(plan.values());
+        TableDescriptor descriptor = ListPluginTableDescriptor.of(plan.values());
 
         for (Map.Entry<String, Collection<MojoExecution>> executions : plan.asMap().entrySet()) {
             getLog().info(pluginTitleLine(descriptor, executions.getKey()));
@@ -42,7 +43,7 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
                                         display.getGoal());
     }
 
-    private String pluginTitleLine(ListPluginTableDescriptor descriptor, String key) {
+    private String pluginTitleLine(TableDescriptor descriptor, String key) {
         return key + " " + Strings.repeat("-", descriptor.width() - key.length());
     }
 }

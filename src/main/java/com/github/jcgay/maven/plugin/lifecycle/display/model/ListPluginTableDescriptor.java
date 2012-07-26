@@ -1,11 +1,11 @@
 package com.github.jcgay.maven.plugin.lifecycle.display.model;
 
-import com.github.jcgay.maven.plugin.lifecycle.display.TableDescriptor;
 import org.apache.maven.plugin.MojoExecution;
 
 import java.util.Collection;
+import java.util.Map;
 
-public class ListPluginTableDescriptor implements TableDescriptor {
+public class ListPluginTableDescriptor extends AbstractTableDescriptor {
 
     static int SEPARATOR_SIZE = ROW_START.length() + 2 * SEPARATOR.length();
 
@@ -57,18 +57,10 @@ public class ListPluginTableDescriptor implements TableDescriptor {
 
     public static ListPluginTableDescriptor of(Collection<MojoExecution> executions) {
 
-        int sizePhase = 0, sizeGoal = 0, sizeId = 0;
+        Map<TableColumn,Integer> maxSize = findMaxSize(executions, TableColumn.PHASE, TableColumn.EXECUTION_ID, TableColumn.GOAL);
 
-        for (MojoExecution execution : executions) {
-            sizeId = Math.max(sizeId, execution.getExecutionId().length());
-            sizeGoal = Math.max(sizeGoal, execution.getGoal().length());
-            if (execution.getMojoDescriptor() != null && execution.getMojoDescriptor().getPhase() != null) {
-                sizePhase = Math.max(sizePhase, execution.getMojoDescriptor().getPhase().length());
-            }
-        }
-
-        return new ListPluginTableDescriptor().setPhaseSize(sizePhase)
-                                              .setGoalSize(sizeGoal)
-                                              .setExecutionIdSize(sizeId);
+        return new ListPluginTableDescriptor().setPhaseSize(maxSize.get(TableColumn.PHASE))
+                                              .setGoalSize(maxSize.get(TableColumn.GOAL))
+                                              .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));
     }
 }

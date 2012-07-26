@@ -1,11 +1,11 @@
 package com.github.jcgay.maven.plugin.lifecycle.display.model;
 
-import com.github.jcgay.maven.plugin.lifecycle.display.TableDescriptor;
 import org.apache.maven.plugin.MojoExecution;
 
 import java.util.Collection;
+import java.util.Map;
 
-public class ListPhaseTableDescriptor implements TableDescriptor {
+public class ListPhaseTableDescriptor extends AbstractTableDescriptor {
 
     static int SEPARATOR_SIZE = ROW_START.length() + 2 * SEPARATOR.length();
 
@@ -15,27 +15,21 @@ public class ListPhaseTableDescriptor implements TableDescriptor {
 
     public static ListPhaseTableDescriptor of(Collection<MojoExecution> executions) {
 
-        int sizePlugin = 0, sizeGoal = 0, sizeId = 0;
+        Map<TableColumn,Integer> maxSize = findMaxSize(executions, TableColumn.ARTIFACT_ID, TableColumn.EXECUTION_ID, TableColumn.GOAL);
 
-        for (MojoExecution execution : executions) {
-            sizeId = Math.max(sizeId, execution.getExecutionId().length());
-            sizePlugin = Math.max(sizePlugin, execution.getArtifactId().length());
-            sizeGoal = Math.max(sizeGoal, execution.getGoal().length());
-        }
-
-        return new ListPhaseTableDescriptor().setPluginSize(sizePlugin)
-                                             .setGoalSize(sizeGoal)
-                                             .setExecutionIdSize(sizeId);
+        return new ListPhaseTableDescriptor().setPluginSize(maxSize.get(TableColumn.ARTIFACT_ID))
+                                             .setGoalSize(maxSize.get(TableColumn.GOAL))
+                                             .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));
     }
 
     public String rowFormat() {
         StringBuilder builder = new StringBuilder();
         builder.append(ROW_START)
-                .append(FORMAT_LEFT_ALIGN).append(getPluginSize()).append(FORMAT_STRING)
-                .append(SEPARATOR)
-                .append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING)
-                .append(SEPARATOR)
-                .append(FORMAT_LEFT_ALIGN).append(getGoalSize()).append(FORMAT_STRING);
+               .append(FORMAT_LEFT_ALIGN).append(getPluginSize()).append(FORMAT_STRING)
+               .append(SEPARATOR)
+               .append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING)
+               .append(SEPARATOR)
+               .append(FORMAT_LEFT_ALIGN).append(getGoalSize()).append(FORMAT_STRING);
         return builder.toString();
     }
 

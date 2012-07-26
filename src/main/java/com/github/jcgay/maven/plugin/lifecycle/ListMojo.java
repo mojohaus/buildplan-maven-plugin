@@ -1,5 +1,6 @@
 package com.github.jcgay.maven.plugin.lifecycle;
 
+import com.github.jcgay.maven.plugin.lifecycle.display.TableDescriptor;
 import com.github.jcgay.maven.plugin.lifecycle.display.model.ListTableDescriptor;
 import com.github.jcgay.maven.plugin.lifecycle.display.model.MojoExecutionDisplay;
 import com.google.common.base.Strings;
@@ -16,7 +17,7 @@ public class ListMojo extends AbstractLifecycleMojo {
 
         MavenExecutionPlan plan = calculateExecutionPlan();
 
-        ListTableDescriptor descriptor = ListTableDescriptor.of(plan.getMojoExecutions());
+        TableDescriptor descriptor = ListTableDescriptor.of(plan.getMojoExecutions());
         String row = descriptor.rowFormat();
 
         getLog().info(lineSeparator(descriptor));
@@ -43,7 +44,7 @@ public class ListMojo extends AbstractLifecycleMojo {
         return String.format(row, "PLUGIN", "PHASE", "ID", "GOAL");
     }
 
-    private String lineSeparator(ListTableDescriptor descriptor) {
+    private String lineSeparator(TableDescriptor descriptor) {
         return Strings.repeat("-", descriptor.width());
     }
 }

@@ -1,5 +1,6 @@
 package com.github.jcgay.maven.plugin.lifecycle;
 
+import com.github.jcgay.maven.plugin.lifecycle.display.TableDescriptor;
 import com.github.jcgay.maven.plugin.lifecycle.display.model.ListPhaseTableDescriptor;
 import com.github.jcgay.maven.plugin.lifecycle.display.model.MojoExecutionDisplay;
 import com.google.common.base.Strings;
@@ -22,7 +23,7 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
 
         Multimap<String,MojoExecution> phases = Groups.ByPhase.of(calculateExecutionPlan().getMojoExecutions(), phase);
-        ListPhaseTableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values());
+        TableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values());
 
         for (Map.Entry<String, Collection<MojoExecution>> phase : phases.asMap().entrySet()) {
             getLog().info(phaseTitleLine(descriptor, phase.getKey()));
@@ -41,7 +42,7 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
                                         display.getGoal());
     }
 
-    private String phaseTitleLine(ListPhaseTableDescriptor descriptor, String key) {
+    private String phaseTitleLine(TableDescriptor descriptor, String key) {
         return key + " " + Strings.repeat("-", descriptor.width() - key.length());
     }
 }
