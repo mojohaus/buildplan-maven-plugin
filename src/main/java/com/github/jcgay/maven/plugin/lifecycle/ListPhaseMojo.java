@@ -23,14 +23,19 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
 
         Multimap<String,MojoExecution> phases = Groups.ByPhase.of(calculateExecutionPlan().getMojoExecutions(), phase);
-        TableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values());
 
-        for (Map.Entry<String, Collection<MojoExecution>> phase : phases.asMap().entrySet()) {
-            getLog().info(phaseTitleLine(descriptor, phase.getKey()));
-            for (MojoExecution execution : phase.getValue()) {
-                getLog().info(line(descriptor.rowFormat(), execution));
+        if (!phases.isEmpty()) {
+
+            TableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values());
+            for (Map.Entry<String, Collection<MojoExecution>> phase : phases.asMap().entrySet()) {
+                getLog().info(phaseTitleLine(descriptor, phase.getKey()));
+                for (MojoExecution execution : phase.getValue()) {
+                    getLog().info(line(descriptor.rowFormat(), execution));
+                }
             }
         }
+
+        getLog().warn("No plugin execution found within phase: " + phase);
     }
 
     private String line(String rowFormat, MojoExecution execution) {

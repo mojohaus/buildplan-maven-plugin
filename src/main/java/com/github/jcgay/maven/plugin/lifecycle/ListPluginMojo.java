@@ -24,14 +24,18 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
 
         Multimap<String,MojoExecution> plan = Groups.ByPlugin.of(calculateExecutionPlan().getMojoExecutions(), plugin);
 
-        TableDescriptor descriptor = ListPluginTableDescriptor.of(plan.values());
+        if (!plan.isEmpty()) {
 
-        for (Map.Entry<String, Collection<MojoExecution>> executions : plan.asMap().entrySet()) {
-            getLog().info(pluginTitleLine(descriptor, executions.getKey()));
-            for (MojoExecution execution : executions.getValue()) {
-                getLog().info(line(descriptor.rowFormat(), execution));
+            TableDescriptor descriptor = ListPluginTableDescriptor.of(plan.values());
+            for (Map.Entry<String, Collection<MojoExecution>> executions : plan.asMap().entrySet()) {
+                getLog().info(pluginTitleLine(descriptor, executions.getKey()));
+                for (MojoExecution execution : executions.getValue()) {
+                    getLog().info(line(descriptor.rowFormat(), execution));
+                }
             }
         }
+
+        getLog().warn("No plugin found with artifactId: " + plugin);
     }
 
     private String line(String rowFormat, MojoExecution execution) {
