@@ -8,7 +8,7 @@ The plugin is available in the repository:
 
 	<pluginRepositories>
     		<pluginRepository>
-      			<id>jcgay-releases</id>
+      			<id>jcgay-snapshots</id>
       			<url>https://repository-jcgay.forge.cloudbees.com/snapshot/</url>
     		</pluginRepository>
   	</pluginRepositories>
