@@ -29,7 +29,6 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
         Multimap<String,MojoExecution> phases = Groups.ByPhase.of(calculateExecutionPlan().getMojoExecutions(), phase);
 
         if (!phases.isEmpty()) {
-
             TableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values());
             for (Map.Entry<String, Collection<MojoExecution>> phase : phases.asMap().entrySet()) {
                 getLog().info(phaseTitleLine(descriptor, phase.getKey()));
@@ -37,9 +36,9 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
                     getLog().info(line(descriptor.rowFormat(), execution));
                 }
             }
+        } else {
+            getLog().warn("No plugin execution found within phase: " + phase);
         }
-
-        getLog().warn("No plugin execution found within phase: " + phase);
     }
 
     private String line(String rowFormat, MojoExecution execution) {
