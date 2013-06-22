@@ -4,7 +4,7 @@ import org.apache.maven.plugin.MojoExecution;
 import org.junit.Test;
 
 import static com.github.jcgay.maven.plugin.lifecycle.model.builder.MojoExecutionBuilder.aMojoExecution;
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MojoExecutionDisplayTest {
 
