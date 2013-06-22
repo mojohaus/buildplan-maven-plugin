@@ -19,7 +19,7 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
         try {
             return lifecycleExecutor.calculateExecutionPlan(session, "deploy");
         } catch (Exception e) {
-            throw new MojoFailureException(String.format("Cannot calculate Maven execution plan, caused by: %s", e.getMessage()));
+            throw new MojoFailureException(String.format("Cannot calculate Maven execution plan, caused by: %s", e.getMessage()), e);
         }
     }
 }
