@@ -13,7 +13,9 @@ import org.apache.maven.plugins.annotations.Mojo;
 /**
  * List plugin executions for the current project.
  */
-@Mojo(name = "list", threadSafe = true)
+@Mojo(name = "list",
+      threadSafe = true,
+      requiresProject = true)
 public class ListMojo extends AbstractLifecycleMojo {
 
     public void execute() throws MojoExecutionException, MojoFailureException {

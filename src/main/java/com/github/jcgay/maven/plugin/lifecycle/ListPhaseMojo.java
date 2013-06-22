@@ -17,7 +17,9 @@ import java.util.Map;
 /**
  * List plugin executions by phase for the current project.
  */
-@Mojo(name = "list-phase", threadSafe = true)
+@Mojo(name = "list-phase",
+      threadSafe = true,
+      requiresProject = true)
 public class ListPhaseMojo extends AbstractLifecycleMojo {
 
     /** Display plugin executions only for the specified phase. */

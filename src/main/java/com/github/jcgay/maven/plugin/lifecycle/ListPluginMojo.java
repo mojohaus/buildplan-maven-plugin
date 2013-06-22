@@ -17,7 +17,9 @@ import java.util.Map;
 /**
  * List plugin executions by plugin for the current project.
  */
-@Mojo(name = "list-plugin", threadSafe = true)
+@Mojo(name = "list-plugin",
+      threadSafe = true,
+      requiresProject = true)
 public class ListPluginMojo extends AbstractLifecycleMojo {
 
     /** Display plugin executions only for the specified plugin. */
