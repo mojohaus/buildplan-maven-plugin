@@ -1,4 +1,4 @@
-package com.github.jcgay.maven.plugin.lifecycle;
+package com.github.jcgay.maven.plugin.buildplan;
 
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.lifecycle.LifecycleExecutor;

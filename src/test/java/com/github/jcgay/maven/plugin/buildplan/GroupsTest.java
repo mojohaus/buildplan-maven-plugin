@@ -1,4 +1,4 @@
-package com.github.jcgay.maven.plugin.lifecycle;
+package com.github.jcgay.maven.plugin.buildplan;
 
 import com.google.common.collect.Multimap;
 import org.apache.maven.plugin.MojoExecution;
@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static com.github.jcgay.maven.plugin.lifecycle.model.builder.MojoExecutionBuilder.aMojoExecution;
+import static com.github.jcgay.maven.plugin.buildplan.model.builder.MojoExecutionBuilder.aMojoExecution;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 

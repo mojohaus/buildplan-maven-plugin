@@ -1,4 +1,4 @@
-package com.github.jcgay.maven.plugin.lifecycle.display;
+package com.github.jcgay.maven.plugin.buildplan.display;
 
 import org.apache.maven.plugin.MojoExecution;
 

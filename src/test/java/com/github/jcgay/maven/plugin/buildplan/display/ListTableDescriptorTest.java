@@ -1,9 +1,9 @@
-package com.github.jcgay.maven.plugin.lifecycle.display;
+package com.github.jcgay.maven.plugin.buildplan.display;
 
 import org.apache.maven.plugin.MojoExecution;
 import org.junit.Test;
 
-import static com.github.jcgay.maven.plugin.lifecycle.model.builder.MojoExecutionBuilder.aMojoExecution;
+import static com.github.jcgay.maven.plugin.buildplan.model.builder.MojoExecutionBuilder.aMojoExecution;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 

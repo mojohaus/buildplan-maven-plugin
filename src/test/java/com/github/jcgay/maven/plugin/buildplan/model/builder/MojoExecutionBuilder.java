@@ -1,4 +1,4 @@
-package com.github.jcgay.maven.plugin.lifecycle.model.builder;
+package com.github.jcgay.maven.plugin.buildplan.model.builder;
 
 import org.apache.maven.model.Plugin;
 import org.apache.maven.plugin.MojoExecution;

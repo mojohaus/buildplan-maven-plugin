@@ -1,8 +1,8 @@
-package com.github.jcgay.maven.plugin.lifecycle;
+package com.github.jcgay.maven.plugin.buildplan;
 
-import com.github.jcgay.maven.plugin.lifecycle.display.ListPhaseTableDescriptor;
-import com.github.jcgay.maven.plugin.lifecycle.display.MojoExecutionDisplay;
-import com.github.jcgay.maven.plugin.lifecycle.display.TableDescriptor;
+import com.github.jcgay.maven.plugin.buildplan.display.ListPhaseTableDescriptor;
+import com.github.jcgay.maven.plugin.buildplan.display.MojoExecutionDisplay;
+import com.github.jcgay.maven.plugin.buildplan.display.TableDescriptor;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
 import org.apache.maven.plugin.MojoExecution;
@@ -23,7 +23,7 @@ import java.util.Map;
 public class ListPhaseMojo extends AbstractLifecycleMojo {
 
     /** Display plugin executions only for the specified phase. */
-    @Parameter(property = "lifecycle.phase")
+    @Parameter(property = "buildplan.phase")
     private String phase;
 
     public void execute() throws MojoExecutionException, MojoFailureException {

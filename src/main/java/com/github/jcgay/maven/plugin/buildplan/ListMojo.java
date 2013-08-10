@@ -1,8 +1,8 @@
-package com.github.jcgay.maven.plugin.lifecycle;
+package com.github.jcgay.maven.plugin.buildplan;
 
-import com.github.jcgay.maven.plugin.lifecycle.display.ListTableDescriptor;
-import com.github.jcgay.maven.plugin.lifecycle.display.MojoExecutionDisplay;
-import com.github.jcgay.maven.plugin.lifecycle.display.TableDescriptor;
+import com.github.jcgay.maven.plugin.buildplan.display.ListTableDescriptor;
+import com.github.jcgay.maven.plugin.buildplan.display.MojoExecutionDisplay;
+import com.github.jcgay.maven.plugin.buildplan.display.TableDescriptor;
 import com.google.common.base.Strings;
 import org.apache.maven.lifecycle.MavenExecutionPlan;
 import org.apache.maven.plugin.MojoExecution;

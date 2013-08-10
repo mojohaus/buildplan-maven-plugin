@@ -1,4 +1,4 @@
-package com.github.jcgay.maven.plugin.lifecycle;
+package com.github.jcgay.maven.plugin.buildplan;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ArrayListMultimap;
