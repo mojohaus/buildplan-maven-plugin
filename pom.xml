@@ -24,6 +24,11 @@
         <url>https://jcgay.ci.cloudbees.com/job/buildplan-maven-plugin/</url>
     </ciManagement>
 
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/jcgay/buildplan-maven-plugin/issues</url>
+    </issueManagement>
+
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
