@@ -11,6 +11,18 @@
 
     <inceptionYear>2012</inceptionYear>
 
+    <scm>
+        <url>https://github.com/jcgay/lifecycle-maven-plugin.git</url>
+        <connection>scm:git:git://github.com/jcgay/lifecycle-maven-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:jcgay/lifecycle-maven-plugin.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <ciManagement>
+        <system>jenkins</system>
+        <url>https://jcgay.ci.cloudbees.com/job/buildplan-maven-plugin/</url>
+    </ciManagement>
+
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -159,6 +171,7 @@
                         <exclude>pom.xml</exclude>
                         <exclude>src/test/resources/**</exclude>
                         <exclude>src/main/resources/**</exclude>
+                        <exclude>src/site/**</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -204,10 +217,42 @@
             <plugin>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.3</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-markdown</artifactId>
+                        <version>1.4</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.15</version>
+            </plugin>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.8</version>
+                <configuration>
+                    <message>Creating site for ${project.version}</message>
+                    <repositoryOwner>jcgay</repositoryOwner>
+                    <repositoryName>lifecycle-maven-plugin</repositoryName>
+                    <server>github</server>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>site-deploy</phase>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <extensions>
@@ -218,5 +263,34 @@
             </extension>
         </extensions>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.7</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>index</report>
+                            <report>dependencies</report>
+                            <report>cim</report>
+                            <report>issue-tracking</report>
+                            <report>license</report>
+                            <report>distribution-management</report>
+                            <report>summary</report>
+                            <report>scm</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.2</version>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>
