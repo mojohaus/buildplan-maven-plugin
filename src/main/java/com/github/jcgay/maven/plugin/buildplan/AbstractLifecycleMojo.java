@@ -25,10 +25,10 @@ import org.apache.maven.plugins.annotations.Component;
 public abstract class AbstractLifecycleMojo extends AbstractMojo {
 
     @Component
-    protected MavenSession session;
+    private MavenSession session;
 
     @Component
-    protected LifecycleExecutor lifecycleExecutor;
+    private LifecycleExecutor lifecycleExecutor;
 
     protected MavenExecutionPlan calculateExecutionPlan() throws MojoFailureException {
         try {

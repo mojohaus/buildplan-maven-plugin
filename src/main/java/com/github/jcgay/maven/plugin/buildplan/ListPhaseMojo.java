@@ -47,9 +47,9 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
 
         if (!phases.isEmpty()) {
             TableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values());
-            for (Map.Entry<String, Collection<MojoExecution>> phase : phases.asMap().entrySet()) {
-                getLog().info(phaseTitleLine(descriptor, phase.getKey()));
-                for (MojoExecution execution : phase.getValue()) {
+            for (Map.Entry<String, Collection<MojoExecution>> currentPhase : phases.asMap().entrySet()) {
+                getLog().info(phaseTitleLine(descriptor, currentPhase.getKey()));
+                for (MojoExecution execution : currentPhase.getValue()) {
                     getLog().info(line(descriptor.rowFormat(), execution));
                 }
             }

@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class ListPhaseTableDescriptor extends AbstractTableDescriptor {
 
-    static int SEPARATOR_SIZE = ROW_START.length() + 2 * SEPARATOR.length();
+    private static final int SEPARATOR_SIZE = ROW_START.length() + 2 * SEPARATOR.length();
 
     private int pluginSize;
     private int executionIdSize;
