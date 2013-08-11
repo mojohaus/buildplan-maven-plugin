@@ -12,9 +12,9 @@
     <inceptionYear>2012</inceptionYear>
 
     <scm>
-        <url>https://github.com/jcgay/lifecycle-maven-plugin.git</url>
-        <connection>scm:git:git://github.com/jcgay/lifecycle-maven-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:jcgay/lifecycle-maven-plugin.git</developerConnection>
+        <url>https://github.com/jcgay/buildplan-maven-plugin.git</url>
+        <connection>scm:git:git://github.com/jcgay/buildplan-maven-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:jcgay/buildplan-maven-plugin.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
@@ -242,7 +242,7 @@
                 <configuration>
                     <message>Creating site for ${project.version}</message>
                     <repositoryOwner>jcgay</repositoryOwner>
-                    <repositoryName>lifecycle-maven-plugin</repositoryName>
+                    <repositoryName>buildplan-maven-plugin</repositoryName>
                     <server>github</server>
                 </configuration>
                 <executions>
