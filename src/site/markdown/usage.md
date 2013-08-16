@@ -76,7 +76,7 @@ Activate the plugin group in your Maven *settings.xml*:
 ```
 It is possible to limit the list to a specific phase:
 	
-	mvn buildplan:list-phase -Dlifecycle.phase=test
+	mvn buildplan:list-phase -Dbuildplan.phase=test
 	
 ##List plugin executions by plugins
 ```
@@ -111,4 +111,4 @@ It is possible to limit the list to a specific phase:
 ```
 It is possible to limit the list to a specific plugin:
 
-	mvn buildplan:list-plugin -Dlifecycle.plugin=maven-compiler-plugin
+	mvn buildplan:list-plugin -Dbuildplan.plugin=maven-compiler-plugin
