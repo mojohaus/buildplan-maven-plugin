@@ -16,7 +16,7 @@ The plugin is available in the repository:
 Activate the plugin group in your Maven *settings.xml*:
 
 	<pluginGroups>
-	    <pluginGroup>com.github.jcgay.maven.plugins</pluginGroup>
+	    <pluginGroup>fr.jcgay.maven.plugins</pluginGroup>
   	</pluginGroups>
 
 ###List plugin executions within a project
