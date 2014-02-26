@@ -4,10 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>9</version>
+    </parent>
+
     <groupId>fr.jcgay.maven.plugins</groupId>
     <artifactId>buildplan-maven-plugin</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
+    <name>BuildPlan Maven Plugin</name>
+    <description>The BuildPlan Plugin can inspect your project lifecycle.</description>
 
     <inceptionYear>2012</inceptionYear>
     <url>http://jcgay.github.io/buildplan-maven-plugin/</url>
@@ -36,6 +44,15 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <id>jcgay</id>
+            <name>Jean-Christophe Gay</name>
+            <email>contact@jeanchristophegay.com</email>
+            <timezone>+1</timezone>
+        </developer>
+    </developers>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -43,17 +60,6 @@
     <prerequisites>
         <maven>3.0</maven>
     </prerequisites>
-
-    <distributionManagement>
-        <repository>
-            <id>jcgay-cloudbees-release</id>
-            <url>dav:https://repository-jcgay.forge.cloudbees.com/release/</url>
-        </repository>
-        <snapshotRepository>
-            <id>jcgay-cloudbees-snapshot</id>
-            <url>dav:https://repository-jcgay.forge.cloudbees.com/snapshot/</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <dependencies>
         <dependency>
@@ -263,6 +269,25 @@
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.9.1</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.4.2</version>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <localCheckout>true</localCheckout>
+                    <mavenExecutorId>forked-path</mavenExecutorId>
+                    <useReleaseProfile>false</useReleaseProfile>
+                    <arguments>${arguments} -Psonatype-oss-release</arguments>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.scm</groupId>
+                        <artifactId>maven-scm-provider-gitexe</artifactId>
+                        <!-- This version is necessary for use with git version 1.8.5 -->
+                        <version>1.8.1</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
         <extensions>
