@@ -18,7 +18,7 @@
     <description>The BuildPlan Plugin can inspect your project lifecycle.</description>
 
     <inceptionYear>2012</inceptionYear>
-    <url>http://jcgay.github.io/buildplan-maven-plugin/</url>
+    <url>http://buildplan.jcgay.fr</url>
 
     <scm>
         <url>https://github.com/jcgay/buildplan-maven-plugin.git</url>

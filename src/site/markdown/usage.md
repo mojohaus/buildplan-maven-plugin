@@ -1,15 +1,5 @@
 #Usage
 
-The plugin is available in the repository:
-
-```
-<pluginRepositories>
-    <pluginRepository>
-        <id>jcgay-snapshots</id>
-        <url>https://repository-jcgay.forge.cloudbees.com/snapshot/</url>
-    </pluginRepository>
-</pluginRepositories>
-```
 Activate the plugin group in your Maven *settings.xml*:
 
 ```
