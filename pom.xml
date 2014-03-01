@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -12,7 +10,7 @@
 
     <groupId>fr.jcgay.maven.plugins</groupId>
     <artifactId>buildplan-maven-plugin</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>maven-plugin</packaging>
     <name>BuildPlan Maven Plugin</name>
     <description>The BuildPlan Plugin can inspect your project lifecycle.</description>
@@ -24,7 +22,7 @@
         <url>https://github.com/jcgay/buildplan-maven-plugin.git</url>
         <connection>scm:git:git://github.com/jcgay/buildplan-maven-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:jcgay/buildplan-maven-plugin.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>v1.0</tag>
     </scm>
 
     <ciManagement>
