@@ -58,7 +58,7 @@ public class ListTableDescriptorTest {
     }
 
     @Test
-    public void should_not_failed_when_finding_max_size_with_a_mojo_execution_with_a_null_mojo_descriptor() {
+    public void should_not_fail_when_finding_max_size_with_a_mojo_execution_with_a_null_mojo_descriptor() {
 
         MojoExecution executionA = aMojoExecution().withArtifactId("plugin-a")
                                                    .withPhase("phase-a")
@@ -84,6 +84,21 @@ public class ListTableDescriptorTest {
         assertThat(result.getPluginSize()).isEqualTo(executionB.getArtifactId().length());
         assertThat(result.getGoalSize()).isEqualTo(executionB.getGoal().length());
         assertThat(result.getPhaseSize()).isEqualTo(executionA.getMojoDescriptor().getPhase().length());
+    }
+
+    @Test
+    public void should_not_return_zero_as_max_size_when_phase_is_null() {
+
+        MojoExecution execution = aMojoExecution().withArtifactId("plugin-a")
+                .withPhase(null)
+                .withExecutionId("execution-id-a")
+                .withGoal("goal-a")
+                .build();
+        execution.setLifecyclePhase("phase-a");
+
+        ListTableDescriptor result = ListTableDescriptor.of(asList(execution));
+
+        assertThat(result.getPhaseSize()).isEqualTo(execution.getLifecyclePhase().length());
     }
 
     @Test

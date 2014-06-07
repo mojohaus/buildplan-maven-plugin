@@ -19,6 +19,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import org.apache.maven.plugin.MojoExecution;
+import org.apache.maven.plugin.descriptor.MojoDescriptor;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -45,8 +46,11 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
                         count.put(column, safeLength(execution.getGoal()));
                         break;
                     case PHASE:
-                        if (execution.getMojoDescriptor() != null) {
-                            count.put(column, safeLength(execution.getMojoDescriptor().getPhase()));
+                        MojoDescriptor mojoDescriptor = execution.getMojoDescriptor();
+                        if (mojoDescriptor != null && mojoDescriptor.getPhase() != null) {
+                            count.put(column, safeLength(mojoDescriptor.getPhase()));
+                        } else {
+                            count.put(column, safeLength(execution.getLifecyclePhase()));
                         }
                 }
             }
