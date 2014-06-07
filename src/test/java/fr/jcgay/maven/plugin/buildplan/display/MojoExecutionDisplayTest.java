@@ -56,4 +56,19 @@ public class MojoExecutionDisplayTest {
         assertThat(result.getGoal()).isEmpty();
         assertThat(result.getPhase()).isEmpty();
     }
+
+    @Test
+    public void should_get_mojo_lifecycle_phase_when_descriptor_phase_is_null() throws Exception {
+
+        MojoExecution execution = aMojoExecution().withArtifactId("plugin-a")
+                .withPhase(null)
+                .withExecutionId("execution-id-a")
+                .withGoal("goal-a")
+                .build();
+        execution.setLifecyclePhase("phase-a");
+
+        MojoExecutionDisplay result = new MojoExecutionDisplay(execution);
+
+        assertThat(result.getPhase()).isEqualTo(execution.getLifecyclePhase());
+    }
 }

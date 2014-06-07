@@ -28,7 +28,10 @@ public class MojoExecutionDisplay {
     }
 
     public String getPhase() {
-        return nullToEmpty(execution.getMojoDescriptor().getPhase());
+        if (execution.getMojoDescriptor().getPhase() != null) {
+            return execution.getMojoDescriptor().getPhase();
+        }
+        return nullToEmpty(execution.getLifecyclePhase());
     }
 
     public String getArtifactId() {
