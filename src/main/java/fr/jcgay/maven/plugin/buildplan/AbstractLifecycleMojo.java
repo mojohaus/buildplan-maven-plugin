@@ -21,6 +21,7 @@ import org.apache.maven.lifecycle.MavenExecutionPlan;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Component;
+import org.apache.maven.plugins.annotations.Parameter;
 
 public abstract class AbstractLifecycleMojo extends AbstractMojo {
 
@@ -30,9 +31,13 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
     @Component
     private LifecycleExecutor lifecycleExecutor;
 
+    /** Allow to specify which tasks will be used to calculate execution plan. */
+    @Parameter(property = "buildplan.tasks", defaultValue = "deploy")
+    private String[] tasks;
+
     protected MavenExecutionPlan calculateExecutionPlan() throws MojoFailureException {
         try {
-            return lifecycleExecutor.calculateExecutionPlan(session, "deploy");
+            return lifecycleExecutor.calculateExecutionPlan(session, tasks);
         } catch (Exception e) {
             throw new MojoFailureException(String.format("Cannot calculate Maven execution plan, caused by: %s", e.getMessage()), e);
         }

@@ -31,7 +31,10 @@ Activate the plugin group in your Maven *settings.xml*:
 [INFO] maven-install-plugin        | install                | default-install                   | install
 [INFO] maven-deploy-plugin         | deploy                 | default-deploy                    | deploy
 ```
-	
+It is possible to define the tasks used to calculate execution plan:
+
+	mvn buildplan:list-phase -Dbuildplan.tasks=clean,test
+
 ##List plugin executions within phases
 ```
 > mvn buildplan:list-phase
