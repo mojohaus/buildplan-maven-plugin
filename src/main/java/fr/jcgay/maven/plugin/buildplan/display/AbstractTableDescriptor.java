@@ -55,6 +55,9 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
                 }
             }
         }
+        for (TableColumn column : TableColumn.values()) {
+            count.put(column, column.title().length());
+        }
 
         for (TableColumn key : count.keySet()) {
             result.put(key, Collections.max(count.get(key)));

@@ -102,6 +102,41 @@ public class ListTableDescriptorTest {
     }
 
     @Test
+    public void should_return_column_title_as_max_size_when_source_is_null() {
+
+        MojoExecution execution = aMojoExecution().withArtifactId(null)
+                .withPhase(null)
+                .withExecutionId(null)
+                .withGoal(null)
+                .build();
+        execution.setLifecyclePhase(null);
+
+        ListTableDescriptor result = ListTableDescriptor.of(asList(execution));
+
+        assertThat(result.getPhaseSize()).isEqualTo(TableColumn.PHASE.title().length());
+        assertThat(result.getExecutionIdSize()).isEqualTo(TableColumn.EXECUTION_ID.title().length());
+        assertThat(result.getGoalSize()).isEqualTo(TableColumn.GOAL.title().length());
+        assertThat(result.getPluginSize()).isEqualTo(TableColumn.ARTIFACT_ID.title().length());
+    }
+
+    @Test
+    public void should_return_column_title_as_max_size_when_source_is_smaller() {
+
+        MojoExecution execution = aMojoExecution().withArtifactId("a")
+                .withPhase("a")
+                .withExecutionId("a")
+                .withGoal("a")
+                .build();
+
+        ListTableDescriptor result = ListTableDescriptor.of(asList(execution));
+
+        assertThat(result.getPhaseSize()).isEqualTo(TableColumn.PHASE.title().length());
+        assertThat(result.getExecutionIdSize()).isEqualTo(TableColumn.EXECUTION_ID.title().length());
+        assertThat(result.getGoalSize()).isEqualTo(TableColumn.GOAL.title().length());
+        assertThat(result.getPluginSize()).isEqualTo(TableColumn.ARTIFACT_ID.title().length());
+    }
+
+    @Test
     public void should_build_a_row_format_for_a_list_table_descriptor() {
 
         ListTableDescriptor descriptor = new ListTableDescriptor().setPluginSize(1)

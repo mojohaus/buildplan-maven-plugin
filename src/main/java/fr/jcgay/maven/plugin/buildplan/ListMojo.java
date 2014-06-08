@@ -15,15 +15,20 @@
  */
 package fr.jcgay.maven.plugin.buildplan;
 
+import com.google.common.base.Strings;
 import fr.jcgay.maven.plugin.buildplan.display.ListTableDescriptor;
 import fr.jcgay.maven.plugin.buildplan.display.MojoExecutionDisplay;
 import fr.jcgay.maven.plugin.buildplan.display.TableDescriptor;
-import com.google.common.base.Strings;
 import org.apache.maven.lifecycle.MavenExecutionPlan;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
+
+import static fr.jcgay.maven.plugin.buildplan.display.TableColumn.ARTIFACT_ID;
+import static fr.jcgay.maven.plugin.buildplan.display.TableColumn.EXECUTION_ID;
+import static fr.jcgay.maven.plugin.buildplan.display.TableColumn.GOAL;
+import static fr.jcgay.maven.plugin.buildplan.display.TableColumn.PHASE;
 
 /**
  * List plugin executions for the current project.
@@ -61,7 +66,7 @@ public class ListMojo extends AbstractLifecycleMojo {
     }
 
     private String tableHead(String row) {
-        return String.format(row, "PLUGIN", "PHASE", "ID", "GOAL");
+        return String.format(row, ARTIFACT_ID.title(), PHASE.title(), EXECUTION_ID.title(), GOAL.title());
     }
 
     private String lineSeparator(TableDescriptor descriptor) {

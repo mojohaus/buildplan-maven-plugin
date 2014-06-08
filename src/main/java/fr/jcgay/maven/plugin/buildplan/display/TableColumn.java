@@ -17,8 +17,18 @@ package fr.jcgay.maven.plugin.buildplan.display;
 
 public enum TableColumn {
 
-    EXECUTION_ID,
-    ARTIFACT_ID,
-    GOAL,
-    PHASE
+    EXECUTION_ID("ID"),
+    ARTIFACT_ID("PLUGIN"),
+    GOAL("GOAL"),
+    PHASE("PHASE");
+
+    private final String title;
+
+    TableColumn(String title) {
+        this.title = title;
+    }
+
+    public String title() {
+        return title;
+    }
 }
