@@ -24,3 +24,5 @@ It is possible to limit the list to a specific phase:
 It is possible to limit the list to a specific plugin:
 
 	mvn buildplan:list-plugin -Dbuildplan.plugin=maven-compiler-plugin
+
+[Plugin documentation](http://buildplan.jcgay.fr/)
