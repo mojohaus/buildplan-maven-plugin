@@ -39,12 +39,12 @@ public class ListTableDescriptorTest {
     public void should_calculate_column_size_from_longest_element_in_each_column() {
 
         MojoExecution executionA = aMojoExecution().withArtifactId("plugin-a")
-                                                   .withPhase("short-phase")
+                                                   .withLifecyclePhase("short-phase")
                                                    .withExecutionId("short-execution-id")
                                                    .withGoal("short-goal")
                                                    .build();
         MojoExecution executionB = aMojoExecution().withArtifactId("plugin-b-longer-than-a")
-                                                   .withPhase("a-very-very-very-long-phase")
+                                                   .withLifecyclePhase("a-very-very-very-long-phase")
                                                    .withExecutionId("a-very-very-very-long-execution-id")
                                                    .withGoal("a-very-very-very-long-goal")
                                                    .build();
@@ -54,14 +54,14 @@ public class ListTableDescriptorTest {
         assertThat(descriptor.getPluginSize()).isEqualTo(executionB.getArtifactId().length());
         assertThat(descriptor.getExecutionIdSize()).isEqualTo(executionB.getExecutionId().length());
         assertThat(descriptor.getGoalSize()).isEqualTo(executionB.getGoal().length());
-        assertThat(descriptor.getPhaseSize()).isEqualTo(executionB.getMojoDescriptor().getPhase().length());
+        assertThat(descriptor.getPhaseSize()).isEqualTo(executionB.getLifecyclePhase().length());
     }
 
     @Test
     public void should_not_fail_when_finding_max_size_with_a_mojo_execution_with_a_null_mojo_descriptor() {
 
         MojoExecution executionA = aMojoExecution().withArtifactId("plugin-a")
-                                                   .withPhase("phase-a")
+                                                   .withLifecyclePhase("phase-a")
                                                    .withExecutionId("execution-id-a")
                                                    .withGoal("goal-a")
                                                    .build();
@@ -73,7 +73,7 @@ public class ListTableDescriptorTest {
                                                    .build();
 
         MojoExecution executionC = aMojoExecution().withArtifactId("plugin-c")
-                                                   .withPhase(null)
+                                                   .withLifecyclePhase(null)
                                                    .withExecutionId("execution-id-c")
                                                    .withGoal("goal-c")
                                                    .build();
@@ -83,14 +83,14 @@ public class ListTableDescriptorTest {
         assertThat(result.getExecutionIdSize()).isEqualTo(executionB.getExecutionId().length());
         assertThat(result.getPluginSize()).isEqualTo(executionB.getArtifactId().length());
         assertThat(result.getGoalSize()).isEqualTo(executionB.getGoal().length());
-        assertThat(result.getPhaseSize()).isEqualTo(executionA.getMojoDescriptor().getPhase().length());
+        assertThat(result.getPhaseSize()).isEqualTo(executionA.getLifecyclePhase().length());
     }
 
     @Test
     public void should_not_return_zero_as_max_size_when_phase_is_null() {
 
         MojoExecution execution = aMojoExecution().withArtifactId("plugin-a")
-                .withPhase(null)
+                .withLifecyclePhase(null)
                 .withExecutionId("execution-id-a")
                 .withGoal("goal-a")
                 .build();
@@ -105,7 +105,7 @@ public class ListTableDescriptorTest {
     public void should_return_column_title_as_max_size_when_source_is_null() {
 
         MojoExecution execution = aMojoExecution().withArtifactId(null)
-                .withPhase(null)
+                .withLifecyclePhase(null)
                 .withExecutionId(null)
                 .withGoal(null)
                 .build();
@@ -123,7 +123,7 @@ public class ListTableDescriptorTest {
     public void should_return_column_title_as_max_size_when_source_is_smaller() {
 
         MojoExecution execution = aMojoExecution().withArtifactId("a")
-                .withPhase("a")
+                .withLifecyclePhase("a")
                 .withExecutionId("a")
                 .withGoal("a")
                 .build();

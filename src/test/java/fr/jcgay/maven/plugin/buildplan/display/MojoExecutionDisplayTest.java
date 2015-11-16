@@ -29,7 +29,7 @@ public class MojoExecutionDisplayTest {
         MojoExecution execution = aMojoExecution().withArtifactId("artifactId")
                                                   .withExecutionId("executionId")
                                                   .withGoal("goal")
-                                                  .withPhase("phase")
+                                                  .withLifecyclePhase("phase")
                                                   .build();
 
         MojoExecutionDisplay result = new MojoExecutionDisplay(execution);
@@ -46,7 +46,7 @@ public class MojoExecutionDisplayTest {
         MojoExecution execution = aMojoExecution().withArtifactId(null)
                                                   .withExecutionId(null)
                                                   .withGoal(null)
-                                                  .withPhase(null)
+                                                  .withLifecyclePhase(null)
                                                   .build();
 
         MojoExecutionDisplay result = new MojoExecutionDisplay(execution);
@@ -61,14 +61,14 @@ public class MojoExecutionDisplayTest {
     public void should_get_mojo_lifecycle_phase_when_descriptor_phase_is_null() throws Exception {
 
         MojoExecution execution = aMojoExecution().withArtifactId("plugin-a")
-                .withPhase(null)
+                .withLifecyclePhase("phase-a")
+                .withDescriptorPhase("phase-b")
                 .withExecutionId("execution-id-a")
                 .withGoal("goal-a")
                 .build();
-        execution.setLifecyclePhase("phase-a");
 
         MojoExecutionDisplay result = new MojoExecutionDisplay(execution);
 
-        assertThat(result.getPhase()).isEqualTo(execution.getLifecyclePhase());
+        assertThat(result.getPhase()).isEqualTo("phase-a");
     }
 }

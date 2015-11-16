@@ -33,22 +33,22 @@ public class GroupsTest {
         MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
                                                 .withExecutionId("a")
                                                 .withGoal("goal-a")
-                                                .withPhase("phase")
+                                                .withLifecyclePhase("phase")
                                                 .build();
         MojoExecution pluginB = aMojoExecution().withArtifactId("plugin-b")
                                                 .withExecutionId("b")
                                                 .withGoal("goal-b")
-                                                .withPhase("phase")
+                                                .withLifecyclePhase("phase")
                                                 .build();
         MojoExecution pluginC = aMojoExecution().withArtifactId("plugin-c")
                                                 .withExecutionId("c")
                                                 .withGoal("goal-c")
-                                                .withPhase("a-phase")
+                                                .withLifecyclePhase("a-phase")
                                                 .build();
         MojoExecution pluginD = aMojoExecution().withArtifactId("plugin-d")
                                                 .withExecutionId("d")
                                                 .withGoal("goal-d")
-                                                .withPhase("d-phase")
+                                                .withLifecyclePhase("d-phase")
                                                 .build();
 
         Multimap<String,MojoExecution> result = Groups.ByPhase.of(asList(pluginD, pluginA, pluginC, pluginB));
@@ -65,22 +65,22 @@ public class GroupsTest {
         MojoExecution pluginB = aMojoExecution().withArtifactId("plugin-b")
                                                 .withExecutionId("b")
                                                 .withGoal("goal-b")
-                                                .withPhase("phase-b")
+                                                .withLifecyclePhase("phase-b")
                                                 .build();
         MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
                                                 .withExecutionId("a-a")
                                                 .withGoal("goal-a-a")
-                                                .withPhase("phase-a")
+                                                .withLifecyclePhase("phase-a")
                                                 .build();
         MojoExecution pluginC = aMojoExecution().withArtifactId("plugin-c")
                                                 .withExecutionId("c")
                                                 .withGoal("goal-c")
-                                                .withPhase("phase-c")
+                                                .withLifecyclePhase("phase-c")
                                                 .build();
         MojoExecution pluginAA = aMojoExecution().withArtifactId("plugin-a")
                                                 .withExecutionId("a-b")
                                                 .withGoal("goal-a-b")
-                                                .withPhase("phase-a-b")
+                                                .withLifecyclePhase("phase-a-b")
                                                 .build();
 
         Multimap<String, MojoExecution> result = Groups.ByPlugin.of(Arrays.asList(pluginA, pluginB, pluginC, pluginAA));
@@ -97,12 +97,12 @@ public class GroupsTest {
         MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
                                                 .withExecutionId("a")
                                                 .withGoal("goal-a")
-                                                .withPhase("phase-a")
+                                                .withLifecyclePhase("phase-a")
                                                 .build();
         MojoExecution pluginB = aMojoExecution().withArtifactId("plugin-b")
                                                 .withExecutionId("b")
                                                 .withGoal("goal-b")
-                                                .withPhase("phase-b")
+                                                .withLifecyclePhase("phase-b")
                                                 .build();
 
         Multimap<String, MojoExecution> result = Groups.ByPhase.of(Arrays.asList(pluginA, pluginB), "phase-a");
@@ -116,12 +116,12 @@ public class GroupsTest {
         MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
                                                 .withExecutionId("a")
                                                 .withGoal("goal-a")
-                                                .withPhase("phase-a")
+                                                .withLifecyclePhase("phase-a")
                                                 .build();
         MojoExecution pluginB = aMojoExecution().withArtifactId("plugin-b")
                                                 .withExecutionId("b")
                                                 .withGoal("goal-b")
-                                                .withPhase("phase-b")
+                                                .withLifecyclePhase("phase-b")
                                                 .build();
 
         Multimap<String, MojoExecution> result = Groups.ByPlugin.of(Arrays.asList(pluginA, pluginB), "plugin-a");

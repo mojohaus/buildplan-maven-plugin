@@ -22,6 +22,8 @@ import org.apache.maven.plugin.MojoExecution;
 
 import java.util.List;
 
+import static com.google.common.base.Objects.firstNonNull;
+
 public class Groups {
 
     public static class ByPlugin {
@@ -52,7 +54,7 @@ public class Groups {
             Multimap<String, MojoExecution> result = ArrayListMultimap.create();
             boolean notFiltering = Strings.isNullOrEmpty(phaseFilter);
             for (MojoExecution execution : executions) {
-                String phase = getPhase(execution);
+                String phase = firstNonNull(execution.getLifecyclePhase(), "default-phase");
                 if (notFiltering || phase.equalsIgnoreCase(phaseFilter)) {
                     result.put(phase, execution);
                 }
@@ -60,11 +62,5 @@ public class Groups {
             return result;
         }
 
-        private static String getPhase(MojoExecution execution) {
-            if (execution.getMojoDescriptor() != null && execution.getMojoDescriptor().getPhase() != null) {
-                return execution.getMojoDescriptor().getPhase();
-            }
-            return "default-phase";
-        }
     }
 }

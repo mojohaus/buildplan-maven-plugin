@@ -24,7 +24,8 @@ public class MojoExecutionBuilder {
 
     private String artifactId;
     private String goal;
-    private String phase;
+    private String lifecyclePhase;
+    private String descriptorPhase;
     private String executionId;
     private boolean useMojoDescriptorConstructor = true;
 
@@ -52,28 +53,34 @@ public class MojoExecutionBuilder {
         return this;
     }
 
-    public MojoExecutionBuilder withPhase(String phase) {
-        this.phase = phase;
+    public MojoExecutionBuilder withLifecyclePhase(String phase) {
+        this.lifecyclePhase = phase;
+        return this;
+    }
+
+    public MojoExecutionBuilder withDescriptorPhase(String phase) {
+        this.descriptorPhase = phase;
         return this;
     }
 
     public MojoExecution build() {
-
         if (useMojoDescriptorConstructor) {
-
             MojoDescriptor descriptor = new MojoDescriptor();
             descriptor.setGoal(goal);
-            descriptor.setPhase(phase);
+            descriptor.setPhase(descriptorPhase);
             PluginDescriptor pluginDescriptor = new PluginDescriptor();
             pluginDescriptor.setArtifactId(artifactId);
             descriptor.setPluginDescriptor(pluginDescriptor);
 
-            return new MojoExecution(descriptor, executionId);
+            MojoExecution mojoExecution = new MojoExecution(descriptor, executionId);
+            mojoExecution.setLifecyclePhase(lifecyclePhase);
+            return mojoExecution;
         } else {
-
             Plugin plugin = new Plugin();
             plugin.setArtifactId(artifactId);
-            return new MojoExecution(plugin, goal, executionId);
+            MojoExecution mojoExecution = new MojoExecution(plugin, goal, executionId);
+            mojoExecution.setLifecyclePhase(lifecyclePhase);
+            return mojoExecution;
         }
     }
 }

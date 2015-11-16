@@ -28,9 +28,6 @@ public class MojoExecutionDisplay {
     }
 
     public String getPhase() {
-        if (execution.getMojoDescriptor().getPhase() != null) {
-            return execution.getMojoDescriptor().getPhase();
-        }
         return nullToEmpty(execution.getLifecyclePhase());
     }
 
