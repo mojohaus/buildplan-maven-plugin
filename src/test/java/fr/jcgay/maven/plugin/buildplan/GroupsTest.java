@@ -17,9 +17,11 @@ package fr.jcgay.maven.plugin.buildplan;
 
 import com.google.common.collect.Multimap;
 import org.apache.maven.plugin.MojoExecution;
+import org.assertj.core.api.iterable.Extractor;
 import org.junit.Test;
 
-import java.util.Arrays;
+import java.util.Collection;
+import java.util.Map;
 
 import static fr.jcgay.maven.plugin.buildplan.model.builder.MojoExecutionBuilder.aMojoExecution;
 import static java.util.Arrays.asList;
@@ -83,7 +85,7 @@ public class GroupsTest {
                                                 .withLifecyclePhase("phase-a-b")
                                                 .build();
 
-        Multimap<String, MojoExecution> result = Groups.ByPlugin.of(Arrays.asList(pluginA, pluginB, pluginC, pluginAA));
+        Multimap<String, MojoExecution> result = Groups.ByPlugin.of(asList(pluginA, pluginB, pluginC, pluginAA));
 
         assertThat(result.keySet()).containsOnly("plugin-a", "plugin-b", "plugin-c");
         assertThat(result.get("plugin-a")).containsOnly(pluginA, pluginAA);
@@ -105,7 +107,7 @@ public class GroupsTest {
                                                 .withLifecyclePhase("phase-b")
                                                 .build();
 
-        Multimap<String, MojoExecution> result = Groups.ByPhase.of(Arrays.asList(pluginA, pluginB), "phase-a");
+        Multimap<String, MojoExecution> result = Groups.ByPhase.of(asList(pluginA, pluginB), "phase-a");
 
         assertThat(result.keySet()).containsOnly("phase-a");
     }
@@ -124,7 +126,7 @@ public class GroupsTest {
                                                 .withLifecyclePhase("phase-b")
                                                 .build();
 
-        Multimap<String, MojoExecution> result = Groups.ByPlugin.of(Arrays.asList(pluginA, pluginB), "plugin-a");
+        Multimap<String, MojoExecution> result = Groups.ByPlugin.of(asList(pluginA, pluginB), "plugin-a");
 
         assertThat(result.keySet()).containsOnly("plugin-a");
     }
@@ -138,8 +140,89 @@ public class GroupsTest {
                                                 .withoutMojoDescriptor()
                                                 .build();
 
-        Multimap<String, MojoExecution> result = Groups.ByPhase.of(Arrays.asList(pluginA));
+        Multimap<String, MojoExecution> result = Groups.ByPhase.of(asList(pluginA));
 
         assertThat(result.keySet()).containsOnly("default-phase");
+    }
+
+    @Test
+    public void should_keep_phase_order_when_grouping_execution_by_phase() {
+        MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
+                .withExecutionId("a")
+                .withGoal("goal-a")
+                .withLifecyclePhase("phase")
+                .build();
+        MojoExecution pluginB = aMojoExecution().withArtifactId("plugin-b")
+                .withExecutionId("b")
+                .withGoal("goal-b")
+                .withLifecyclePhase("phase")
+                .build();
+        MojoExecution pluginC = aMojoExecution().withArtifactId("plugin-c")
+                .withExecutionId("c")
+                .withGoal("goal-c")
+                .withLifecyclePhase("a-phase")
+                .build();
+        MojoExecution pluginD = aMojoExecution().withArtifactId("plugin-d")
+                .withExecutionId("d")
+                .withGoal("goal-d")
+                .withLifecyclePhase("d-phase")
+                .build();
+
+        Multimap<String,MojoExecution> result = Groups.ByPhase.of(asList(pluginA, pluginB, pluginC, pluginD));
+
+        assertThat(result.asMap().entrySet())
+                .extracting("key")
+                .containsExactly("phase", "a-phase", "d-phase");
+
+        assertThat(result.asMap().entrySet())
+                .flatExtracting(new Extractor<Map.Entry<String, Collection<MojoExecution>>, Collection<MojoExecution>>() {
+                    @Override
+                    public Collection<MojoExecution> extract(Map.Entry<String, Collection<MojoExecution>> input) {
+                        return input.getValue();
+                    }
+                })
+                .extracting("goal")
+                .containsExactly("goal-a", "goal-b", "goal-c", "goal-d");
+    }
+
+    @Test
+    public void should_keep_phase_order_when_grouping_execution_by_artifactId() {
+
+        MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
+                .withExecutionId("a-a")
+                .withGoal("goal-a-a")
+                .withLifecyclePhase("phase-a")
+                .build();
+        MojoExecution pluginAA = aMojoExecution().withArtifactId("plugin-a")
+                .withExecutionId("a-b")
+                .withGoal("goal-a-b")
+                .withLifecyclePhase("phase-a-b")
+                .build();
+        MojoExecution pluginB = aMojoExecution().withArtifactId("plugin-b")
+                .withExecutionId("b")
+                .withGoal("goal-b")
+                .withLifecyclePhase("phase-b")
+                .build();
+        MojoExecution pluginC = aMojoExecution().withArtifactId("plugin-c")
+                .withExecutionId("c")
+                .withGoal("goal-c")
+                .withLifecyclePhase("phase-c")
+                .build();
+
+        Multimap<String, MojoExecution> result = Groups.ByPlugin.of(asList(pluginA, pluginB, pluginC, pluginAA));
+
+        assertThat(result.asMap().entrySet())
+                .extracting("key")
+                .containsExactly("plugin-a", "plugin-b", "plugin-c");
+
+        assertThat(result.asMap().entrySet())
+                .flatExtracting(new Extractor<Map.Entry<String, Collection<MojoExecution>>, Collection<MojoExecution>>() {
+                    @Override
+                    public Collection<MojoExecution> extract(Map.Entry<String, Collection<MojoExecution>> input) {
+                        return input.getValue();
+                    }
+                })
+                .extracting("lifecyclePhase")
+                .containsExactly("phase-a", "phase-a-b", "phase-b", "phase-c");
     }
 }

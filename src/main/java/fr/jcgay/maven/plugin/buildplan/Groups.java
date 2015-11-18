@@ -16,7 +16,7 @@
 package fr.jcgay.maven.plugin.buildplan;
 
 import com.google.common.base.Strings;
-import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
 import org.apache.maven.plugin.MojoExecution;
 
@@ -33,7 +33,7 @@ public class Groups {
         }
 
         public static Multimap<String,MojoExecution> of(List<MojoExecution> executions, String artifactIdFilter) {
-            Multimap<String, MojoExecution> result = ArrayListMultimap.create();
+            Multimap<String, MojoExecution> result = LinkedListMultimap.create();
             boolean notFiltering = Strings.isNullOrEmpty(artifactIdFilter);
             for (MojoExecution execution : executions) {
                 if (notFiltering || execution.getArtifactId().equalsIgnoreCase(artifactIdFilter)) {
@@ -51,7 +51,7 @@ public class Groups {
         }
 
         public static Multimap<String, MojoExecution> of(List<MojoExecution> executions, String phaseFilter) {
-            Multimap<String, MojoExecution> result = ArrayListMultimap.create();
+            Multimap<String, MojoExecution> result = LinkedListMultimap.create();
             boolean notFiltering = Strings.isNullOrEmpty(phaseFilter);
             for (MojoExecution execution : executions) {
                 String phase = firstNonNull(execution.getLifecyclePhase(), "default-phase");
