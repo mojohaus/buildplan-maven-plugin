@@ -25,7 +25,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 public abstract class AbstractLifecycleMojo extends AbstractMojo {
 
-    @Component
+    @Parameter(defaultValue = "${session}", readonly = true)
     private MavenSession session;
 
     @Component
