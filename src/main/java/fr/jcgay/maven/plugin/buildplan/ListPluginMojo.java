@@ -15,11 +15,11 @@
  */
 package fr.jcgay.maven.plugin.buildplan;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.Multimap;
 import fr.jcgay.maven.plugin.buildplan.display.ListPluginTableDescriptor;
 import fr.jcgay.maven.plugin.buildplan.display.MojoExecutionDisplay;
 import fr.jcgay.maven.plugin.buildplan.display.TableDescriptor;
-import com.google.common.base.Strings;
-import com.google.common.collect.Multimap;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -28,6 +28,8 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import java.util.Collection;
 import java.util.Map;
+
+import static fr.jcgay.maven.plugin.buildplan.display.Output.lineSeparator;
 
 /**
  * List plugin executions by plugin for the current project.
@@ -48,13 +50,17 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
         if (plan.isEmpty()) {
             getLog().warn("No plugin found with artifactId: " + plugin);
         } else {
+            StringBuilder output = new StringBuilder();
             TableDescriptor descriptor = ListPluginTableDescriptor.of(plan.values());
             for (Map.Entry<String, Collection<MojoExecution>> executions : plan.asMap().entrySet()) {
-                getLog().info(pluginTitleLine(descriptor, executions.getKey()));
+                output.append(lineSeparator())
+                        .append(pluginTitleLine(descriptor, executions.getKey()));
                 for (MojoExecution execution : executions.getValue()) {
-                    getLog().info(line(descriptor.rowFormat(), execution));
+                    output.append(lineSeparator())
+                            .append(line(descriptor.rowFormat(), execution));
                 }
             }
+            getLog().info(output.toString());
         }
     }
 

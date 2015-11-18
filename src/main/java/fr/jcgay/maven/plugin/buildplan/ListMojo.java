@@ -25,6 +25,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 
+import static fr.jcgay.maven.plugin.buildplan.display.Output.lineSeparator;
 import static fr.jcgay.maven.plugin.buildplan.display.TableColumn.ARTIFACT_ID;
 import static fr.jcgay.maven.plugin.buildplan.display.TableColumn.EXECUTION_ID;
 import static fr.jcgay.maven.plugin.buildplan.display.TableColumn.GOAL;
@@ -45,13 +46,19 @@ public class ListMojo extends AbstractLifecycleMojo {
         TableDescriptor descriptor = ListTableDescriptor.of(plan.getMojoExecutions());
         String row = descriptor.rowFormat();
 
-        getLog().info(lineSeparator(descriptor));
-        getLog().info(tableHead(row));
-        getLog().info(lineSeparator(descriptor));
+        StringBuilder output = new StringBuilder()
+                .append(titleSeparator(descriptor))
+                .append(lineSeparator())
+                .append(tableHead(row))
+                .append(lineSeparator())
+                .append(titleSeparator(descriptor));
 
         for (MojoExecution execution : plan.getMojoExecutions()) {
-            getLog().info(tableRow(row, execution));
+            output.append(lineSeparator())
+                    .append(tableRow(row, execution));
         }
+
+        getLog().info(output.toString());
     }
 
     private String tableRow(String row, MojoExecution execution) {
@@ -69,7 +76,7 @@ public class ListMojo extends AbstractLifecycleMojo {
         return String.format(row, ARTIFACT_ID.title(), PHASE.title(), EXECUTION_ID.title(), GOAL.title());
     }
 
-    private String lineSeparator(TableDescriptor descriptor) {
+    private String titleSeparator(TableDescriptor descriptor) {
         return Strings.repeat("-", descriptor.width());
     }
 }

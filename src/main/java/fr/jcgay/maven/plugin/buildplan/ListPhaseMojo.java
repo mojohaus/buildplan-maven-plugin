@@ -15,11 +15,11 @@
  */
 package fr.jcgay.maven.plugin.buildplan;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.Multimap;
 import fr.jcgay.maven.plugin.buildplan.display.ListPhaseTableDescriptor;
 import fr.jcgay.maven.plugin.buildplan.display.MojoExecutionDisplay;
 import fr.jcgay.maven.plugin.buildplan.display.TableDescriptor;
-import com.google.common.base.Strings;
-import com.google.common.collect.Multimap;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -28,6 +28,8 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import java.util.Collection;
 import java.util.Map;
+
+import static fr.jcgay.maven.plugin.buildplan.display.Output.lineSeparator;
 
 /**
  * List plugin executions by phase for the current project.
@@ -47,12 +49,16 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
 
         if (!phases.isEmpty()) {
             TableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values());
+            StringBuilder output = new StringBuilder();
             for (Map.Entry<String, Collection<MojoExecution>> currentPhase : phases.asMap().entrySet()) {
-                getLog().info(phaseTitleLine(descriptor, currentPhase.getKey()));
+                output.append(lineSeparator())
+                        .append(phaseTitleLine(descriptor, currentPhase.getKey()));
                 for (MojoExecution execution : currentPhase.getValue()) {
-                    getLog().info(line(descriptor.rowFormat(), execution));
+                    output.append(lineSeparator())
+                            .append(line(descriptor.rowFormat(), execution));
                 }
             }
+            getLog().info(output.toString());
         } else {
             getLog().warn("No plugin execution found within phase: " + phase);
         }
