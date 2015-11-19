@@ -26,3 +26,10 @@ It is possible to limit the list to a specific plugin:
 	mvn buildplan:list-plugin -Dbuildplan.plugin=maven-compiler-plugin
 
 [Plugin documentation](http://buildplan.jcgay.fr/)
+
+# Build
+
+## Status
+
+[![Build Status](https://travis-ci.org/jcgay/buildplan-maven-plugin.svg?branch=master)](https://travis-ci.org/jcgay/buildplan-maven-plugin)
+[![Coverage Status](https://coveralls.io/repos/jcgay/buildplan-maven-plugin/badge.svg?branch=master)](https://coveralls.io/r/jcgay/buildplan-maven-plugin?branch=master)

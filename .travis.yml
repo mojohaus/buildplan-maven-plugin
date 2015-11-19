@@ -1,5 +1,13 @@
+sudo: false
 language: java
 jdk:
   - oraclejdk8
   - oraclejdk7
   - openjdk6
+after_success:
+  - "[[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_TAG} == '' ]] && mvn deploy -DskipTests --settings etc/deploy-settings.xml"
+  - mvn verify coveralls:report -Prun-coverage
+env:
+  global:
+  - secure: mPG/d5MSk4AxXVR6RGncxyV3Ps+lMLvLck0qGvp35h92nUtgr55PgBLjkL7sbabkqefQzDHaokhcEfJKostyU3yGzBSiFUQOV7pqNkQvQOxC3u3nXcF5zjqfvwyFKf37p1SgGkCbUZJkigLCVkGj3plNwbEHa7qCU2b5U/EDzCI=
+  - secure: bRt2Kmg2uoGgcdKqKspl1xwniyvDqweLkZJT6TjxkG8nDnh3CIiZYkf2NltxcGwuX7N9L765RjbwVBSBxYZtvwz7tI9fCwQPBjqzCKxvdEqNi+Sy6NnSbf4yS6aRngfTLHQ0Li4FyyU9WLfWiuRAs47F5VAV8sS+tja8gotv5o0=
