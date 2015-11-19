@@ -179,6 +179,12 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <goals>deploy site-deploy</goals>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
