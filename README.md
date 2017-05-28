@@ -1,8 +1,8 @@
-#buildplan-maven-plugin
+# buildplan-maven-plugin
 
 A Maven 3.x plugin to inspect the lifecycle of your project. [Documentation](http://buildplan.jcgay.fr/)
 
-###Usage
+### Usage
 
 Activate the plugin group in your Maven *settings.xml*:
 
@@ -10,11 +10,11 @@ Activate the plugin group in your Maven *settings.xml*:
 	    <pluginGroup>fr.jcgay.maven.plugins</pluginGroup>
   	</pluginGroups>
 
-###List plugin executions within a project
+### List plugin executions within a project
 
 	mvn buildplan:list
 	
-###List plugin executions within phases
+### List plugin executions within phases
 
 	mvn buildplan:list-phase
 
@@ -22,7 +22,7 @@ It is possible to limit the list to a specific phase:
 	
 	mvn buildplan:list-phase -Dbuildplan.phase=test
 	
-###List plugin executions by plugins
+### List plugin executions by plugins
 
 	mvn buildplan:list-plugin
 
