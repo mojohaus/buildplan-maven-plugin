@@ -90,27 +90,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>animal-sniffer-maven-plugin</artifactId>
-                <version>1.15</version>
-                <configuration>
-                    <signature>
-                        <groupId>org.codehaus.mojo.signature</groupId>
-                        <artifactId>java16</artifactId>
-                        <version>1.0</version>
-                    </signature>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>check-signature</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
                 <version>3.0</version>
@@ -218,5 +197,35 @@
             </plugin>
         </plugins>
     </reporting>
+
+    <profiles>
+        <profile>
+            <id>build-with-jdk-6</id>
+            <activation>
+                <jdk>[1.7,)</jdk>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-toolchains-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>toolchain</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <toolchains>
+                                <jdk>
+                                    <version>1.6</version>
+                                </jdk>
+                            </toolchains>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
