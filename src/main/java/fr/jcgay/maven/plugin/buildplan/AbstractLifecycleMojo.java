@@ -15,6 +15,10 @@
  */
 package fr.jcgay.maven.plugin.buildplan;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.lifecycle.LifecycleExecutor;
 import org.apache.maven.lifecycle.MavenExecutionPlan;
@@ -22,6 +26,8 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
+
+import fr.jcgay.maven.plugin.buildplan.display.Output;
 
 public abstract class AbstractLifecycleMojo extends AbstractMojo {
 
@@ -34,12 +40,34 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
     /** Allow to specify which tasks will be used to calculate execution plan. */
     @Parameter(property = "buildplan.tasks", defaultValue = "deploy")
     private String[] tasks;
+    
+    /** Allow to specify an output file to bypass console output */
+    @Parameter(property = "buildplan.outputFile")
+    private String outputFile;
 
     protected MavenExecutionPlan calculateExecutionPlan() throws MojoFailureException {
         try {
             return lifecycleExecutor.calculateExecutionPlan(session, tasks);
         } catch (Exception e) {
             throw new MojoFailureException(String.format("Cannot calculate Maven execution plan, caused by: %s", e.getMessage()), e);
+        }
+    }
+    
+    protected void handleOutput(final String output) {
+        if (outputFile == null) {
+            getLog().info(output);
+        } else {
+            try {
+                final PrintWriter writer = new PrintWriter(outputFile, "UTF-8");
+                writer.write(output);
+                writer.write(Output.lineSeparator());
+                writer.close();
+                getLog().info("Wrote buildplan output to " + outputFile);
+            } catch (FileNotFoundException e) {
+                getLog().warn("Unable to write to output file", e);
+            } catch (UnsupportedEncodingException e) {
+                getLog().warn("Unable to write to output file", e);
+            }
         }
     }
 }

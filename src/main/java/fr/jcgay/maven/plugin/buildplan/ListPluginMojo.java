@@ -60,7 +60,7 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
                             .append(line(descriptor.rowFormat(), execution));
                 }
             }
-            getLog().info(output.toString());
+            handleOutput(output.toString());
         }
     }
 
