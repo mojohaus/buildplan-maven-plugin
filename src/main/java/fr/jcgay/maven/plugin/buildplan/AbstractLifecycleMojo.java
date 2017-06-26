@@ -34,6 +34,9 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${session}", readonly = true)
     private MavenSession session;
+    
+   @Parameter( defaultValue = "${project}", readonly = true)
+   private MavenProject project;
 
     @Component
     private LifecycleExecutor lifecycleExecutor;
@@ -62,14 +65,18 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
         if (outputFile == null) {
             getLog().info(output);
         } else {
-            try {
-                final FileWriter writer = new FileWriter(outputFile, appendOutput);
-                writer.write(output);
-                writer.write(Output.lineSeparator());
-                writer.close();
-                getLog().info("Wrote buildplan output to " + outputFile);
-            } catch (IOException e) {
-                getLog().warn("Unable to write to output file", e);
+            synchronized(outputFile) {
+                try {
+                    final FileWriter writer = new FileWriter(outputFile, appendOutput);
+                    writer.write("Build Plan for " + project.getName());
+                    writer.write(Output.lineSeparator());
+                    writer.write(output);
+                    writer.write(Output.lineSeparator());
+                    writer.close();
+                    getLog().info("Wrote buildplan output to " + outputFile);
+                } catch (IOException e) {
+                    getLog().warn("Unable to write to output file", e);
+                }
             }
         }
     }
