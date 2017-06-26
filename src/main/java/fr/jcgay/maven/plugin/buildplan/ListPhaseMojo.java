@@ -58,7 +58,7 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
                             .append(line(descriptor.rowFormat(), execution));
                 }
             }
-            getLog().info(output.toString());
+            handleOutput(output.toString());
         } else {
             getLog().warn("No plugin execution found within phase: " + phase);
         }

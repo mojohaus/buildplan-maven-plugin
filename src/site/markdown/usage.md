@@ -105,3 +105,7 @@ It is possible to limit the list to a specific phase:
 It is possible to limit the list to a specific plugin:
 
 	mvn buildplan:list-plugin -Dbuildplan.plugin=maven-compiler-plugin
+
+It is possible to redirect the output to a file:
+
+	mvn buildplan:list-plugin -Dbuildplan.outputFile=buildplan_output.txt

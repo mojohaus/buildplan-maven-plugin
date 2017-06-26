@@ -6,9 +6,11 @@ A Maven 3.x plugin to inspect the lifecycle of your project. [Documentation](htt
 
 Activate the plugin group in your Maven *settings.xml*:
 
-	<pluginGroups>
-	    <pluginGroup>fr.jcgay.maven.plugins</pluginGroup>
-  	</pluginGroups>
+```xml
+<pluginGroups>
+  <pluginGroup>fr.jcgay.maven.plugins</pluginGroup>
+</pluginGroups>
+```
 
 ### List plugin executions within a project
 
@@ -29,6 +31,10 @@ It is possible to limit the list to a specific phase:
 It is possible to limit the list to a specific plugin:
 
 	mvn buildplan:list-plugin -Dbuildplan.plugin=maven-compiler-plugin
+
+### List to output file
+
+	mvn buildplan:list -Dbuildplan.outputFile=buildplan_output.txt
 
 # Build
 

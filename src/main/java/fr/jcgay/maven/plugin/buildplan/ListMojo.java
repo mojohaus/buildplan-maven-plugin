@@ -58,7 +58,7 @@ public class ListMojo extends AbstractLifecycleMojo {
                     .append(tableRow(row, execution));
         }
 
-        getLog().info(output.toString());
+        handleOutput(output.toString());
     }
 
     private String tableRow(String row, MojoExecution execution) {
