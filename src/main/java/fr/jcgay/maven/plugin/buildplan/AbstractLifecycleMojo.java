@@ -15,9 +15,9 @@
  */
 package fr.jcgay.maven.plugin.buildplan;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.lifecycle.LifecycleExecutor;
@@ -26,6 +26,7 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.MavenProject;
 
 import fr.jcgay.maven.plugin.buildplan.display.Output;
 
@@ -43,7 +44,11 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
     
     /** Allow to specify an output file to bypass console output */
     @Parameter(property = "buildplan.outputFile")
-    private String outputFile;
+    private File outputFile;
+
+    /** Allow to specify appending to the output file */
+    @Parameter(property = "buildplan.appendOutput", defaultValue = "false")
+    private boolean appendOutput;
 
     protected MavenExecutionPlan calculateExecutionPlan() throws MojoFailureException {
         try {
@@ -58,14 +63,12 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
             getLog().info(output);
         } else {
             try {
-                final PrintWriter writer = new PrintWriter(outputFile, "UTF-8");
+                final FileWriter writer = new FileWriter(outputFile, appendOutput);
                 writer.write(output);
                 writer.write(Output.lineSeparator());
                 writer.close();
                 getLog().info("Wrote buildplan output to " + outputFile);
-            } catch (FileNotFoundException e) {
-                getLog().warn("Unable to write to output file", e);
-            } catch (UnsupportedEncodingException e) {
+            } catch (IOException e) {
                 getLog().warn("Unable to write to output file", e);
             }
         }
