@@ -108,6 +108,7 @@
                         <exclude>src/site/**</exclude>
                         <exclude>.editorconfig</exclude>
                         <exclude>etc/*</exclude>
+                        <exclude>src/it/**</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -165,6 +166,28 @@
                 <configuration>
                     <goals>deploy site-deploy</goals>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-invoker-plugin</artifactId>
+                <version>2.0.0</version>
+                <configuration>
+                    <projectsDirectory>src/it</projectsDirectory>
+                    <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
+                    <settingsFile>src/it/settings.xml</settingsFile>
+                    <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
+                    <cloneClean>true</cloneClean>
+                    <showVersion>true</showVersion>
+                    <postBuildHookScript>verify.groovy</postBuildHookScript>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>install</goal>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

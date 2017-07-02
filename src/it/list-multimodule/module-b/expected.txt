@@ -1,0 +1,13 @@
+[INFO] ------------------------------------------------------------------------------------------
+PLUGIN                 | PHASE                  | ID                    | GOAL            
+------------------------------------------------------------------------------------------
+maven-resources-plugin | process-resources      | default-resources     | resources       
+maven-compiler-plugin  | compile                | default-compile       | compile         
+maven-resources-plugin | process-test-resources | default-testResources | testResources   
+maven-compiler-plugin  | test-compile           | default-testCompile   | testCompile     
+maven-surefire-plugin  | test                   | default-test          | test            
+maven-jar-plugin       | package                | default-jar           | jar             
+maven-failsafe-plugin  | integration-test       | default               | integration-test
+maven-failsafe-plugin  | verify                 | default               | verify          
+maven-install-plugin   | install                | default-install       | install         
+maven-deploy-plugin    | deploy                 | default-deploy        | deploy          

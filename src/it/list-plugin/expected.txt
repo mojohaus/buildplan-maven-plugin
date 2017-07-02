@@ -1,0 +1,14 @@
+maven-resources-plugin ----------------------------------------------
+    + process-resources      | default-resources     | resources    
+    + process-test-resources | default-testResources | testResources
+maven-compiler-plugin -----------------------------------------------
+    + compile                | default-compile       | compile      
+    + test-compile           | default-testCompile   | testCompile  
+maven-surefire-plugin -----------------------------------------------
+    + test                   | default-test          | test         
+maven-jar-plugin ----------------------------------------------------
+    + package                | default-jar           | jar          
+maven-install-plugin ------------------------------------------------
+    + install                | default-install       | install      
+maven-deploy-plugin -------------------------------------------------
+    + deploy                 | default-deploy        | deploy       

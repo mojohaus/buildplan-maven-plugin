@@ -1,0 +1,5 @@
+[INFO] ----------------------------------------------------------
+PLUGIN               | PHASE   | ID              | GOAL   
+----------------------------------------------------------
+maven-install-plugin | install | default-install | install
+maven-deploy-plugin  | deploy  | default-deploy  | deploy 
