@@ -15,10 +15,6 @@
  */
 package fr.jcgay.maven.plugin.buildplan;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.lifecycle.LifecycleExecutor;
 import org.apache.maven.lifecycle.MavenExecutionPlan;
@@ -28,13 +24,14 @@ import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
-import fr.jcgay.maven.plugin.buildplan.display.Output;
+import java.io.File;
+import java.io.IOException;
 
 public abstract class AbstractLifecycleMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${session}", readonly = true)
     private MavenSession session;
-    
+
    @Parameter( defaultValue = "${project}", readonly = true)
    private MavenProject project;
 
@@ -44,7 +41,7 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
     /** Allow to specify which tasks will be used to calculate execution plan. */
     @Parameter(property = "buildplan.tasks", defaultValue = "deploy")
     private String[] tasks;
-    
+
     /** Allow to specify an output file to bypass console output */
     @Parameter(property = "buildplan.outputFile")
     private File outputFile;
@@ -60,23 +57,17 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
             throw new MojoFailureException(String.format("Cannot calculate Maven execution plan, caused by: %s", e.getMessage()), e);
         }
     }
-    
+
     protected void handleOutput(final String output) {
+        String outputWithTitle = "Build Plan for " + project.getName() + ": " + output;
         if (outputFile == null) {
-            getLog().info(output);
+            getLog().info(outputWithTitle);
         } else {
-            synchronized(outputFile) {
-                try {
-                    final FileWriter writer = new FileWriter(outputFile, appendOutput);
-                    writer.write("Build Plan for " + project.getName());
-                    writer.write(Output.lineSeparator());
-                    writer.write(output);
-                    writer.write(Output.lineSeparator());
-                    writer.close();
-                    getLog().info("Wrote buildplan output to " + outputFile);
-                } catch (IOException e) {
-                    getLog().warn("Unable to write to output file", e);
-                }
+            try {
+                SynchronizedFileReporter.write(outputWithTitle, outputFile, appendOutput);
+                getLog().info("Wrote build plan output to: " + outputFile);
+            } catch (IOException e) {
+                getLog().warn("Unable to write to output file: " + outputFile, e);
             }
         }
     }

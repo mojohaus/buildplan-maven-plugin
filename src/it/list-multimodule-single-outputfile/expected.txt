@@ -1,10 +1,12 @@
-Build Plan for list-multimodule-single-outputfile
+
+Build Plan for list-multimodule-single-outputfile: 
 ----------------------------------------------------------
 PLUGIN               | PHASE   | ID              | GOAL   
 ----------------------------------------------------------
 maven-install-plugin | install | default-install | install
 maven-deploy-plugin  | deploy  | default-deploy  | deploy 
-Build Plan for list-multimodule-single-outputfile-module-a
+
+Build Plan for list-multimodule-single-outputfile-module-a: 
 ---------------------------------------------------------------------------------------
 PLUGIN                 | PHASE                  | ID                    | GOAL         
 ---------------------------------------------------------------------------------------
@@ -16,7 +18,8 @@ maven-surefire-plugin  | test                   | default-test          | test
 maven-jar-plugin       | package                | default-jar           | jar          
 maven-install-plugin   | install                | default-install       | install      
 maven-deploy-plugin    | deploy                 | default-deploy        | deploy       
-Build Plan for list-multimodule-single-outputfile-module-b
+
+Build Plan for list-multimodule-single-outputfile-module-b: 
 ------------------------------------------------------------------------------------------
 PLUGIN                 | PHASE                  | ID                    | GOAL            
 ------------------------------------------------------------------------------------------
