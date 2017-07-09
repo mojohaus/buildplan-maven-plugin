@@ -47,6 +47,7 @@ public class ListMojo extends AbstractLifecycleMojo {
         String row = descriptor.rowFormat();
 
         StringBuilder output = new StringBuilder()
+                .append(lineSeparator())
                 .append(titleSeparator(descriptor))
                 .append(lineSeparator())
                 .append(tableHead(row))
