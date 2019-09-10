@@ -3,7 +3,7 @@ language: java
 before_install:
   - jdk_switcher use openjdk6
   - sed -i "s|\[JDK6\]|$JAVA_HOME|g" etc/toolchains.xml
-  - jdk_switcher use oraclejdk8
+  - jdk_switcher use openjdk8
 install:
   - mvn install -DskipTests -B -V -t etc/toolchains.xml
 script:
