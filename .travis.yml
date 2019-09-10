@@ -1,5 +1,9 @@
-sudo: false
+dist: trusty
 language: java
+addons:
+  apt:
+    packages:
+      - openjdk-6-jdk
 before_install:
   - jdk_switcher use openjdk6
   - sed -i "s|\[JDK6\]|$JAVA_HOME|g" etc/toolchains.xml
