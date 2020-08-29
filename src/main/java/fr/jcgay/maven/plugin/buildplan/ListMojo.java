@@ -39,7 +39,7 @@ import static fr.jcgay.maven.plugin.buildplan.display.TableColumn.PHASE;
       requiresProject = true)
 public class ListMojo extends AbstractLifecycleMojo {
 
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void executeInternal() throws MojoExecutionException, MojoFailureException {
 
         MavenExecutionPlan plan = calculateExecutionPlan();
 
