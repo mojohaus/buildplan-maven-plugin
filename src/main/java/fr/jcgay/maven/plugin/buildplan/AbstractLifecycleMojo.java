@@ -51,9 +51,9 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
     @Parameter(property = "buildplan.appendOutput", defaultValue = "false")
     private boolean appendOutput;
 
-    /** Allow to skip execution  */
+    /** Flag to easily skip all checks  */
     @Parameter(property = "buildplan.skip", defaultValue = "false")
-    private boolean skip;
+    private boolean skip = false;
 
     protected MavenExecutionPlan calculateExecutionPlan() throws MojoFailureException {
         try {
@@ -80,6 +80,7 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
     @Override
     public final void execute() throws MojoExecutionException, MojoFailureException {
         if(skip) {
+            getLog().info( "Skipping build plan execution." );
             return;
         }
         executeInternal();
