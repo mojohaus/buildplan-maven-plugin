@@ -1,3 +1,9 @@
+# 1.4
+***
+
+- Migrate to Java 8 ([724e6fa](http://github.com/jcgay/buildplan-maven-plugin/commit/724e6faa41ad555ea1fb8529552232b6464ccec2))
+- Add 'skip' parameter to bypass execution ([c443a6a](http://github.com/jcgay/buildplan-maven-plugin/commit/c443a6add0930ca3d818f1aac6624d68b4105872)) by [@stdx](https://github.com/stdx)
+
 # 1.3
 ***
 

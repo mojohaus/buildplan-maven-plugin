@@ -1,4 +1,4 @@
-#Usage
+# Usage
 
 Activate the plugin group in your Maven *settings.xml*:
 
@@ -7,7 +7,7 @@ Activate the plugin group in your Maven *settings.xml*:
     <pluginGroup>fr.jcgay.maven.plugins</pluginGroup>
 </pluginGroups>
 ```
-##List plugin executions within a project
+## List plugin executions within a project
 ```
 > mvn buildplan:list
 
@@ -35,7 +35,7 @@ It is possible to define the tasks used to calculate execution plan:
 
 	mvn buildplan:list-phase -Dbuildplan.tasks=clean,test
 
-##List plugin executions within phases
+## List plugin executions within phases
 ```
 > mvn buildplan:list-phase
 
@@ -68,10 +68,10 @@ It is possible to define the tasks used to calculate execution plan:
 [INFO]     + maven-deploy-plugin         | default-deploy                    | deploy
 ```
 It is possible to limit the list to a specific phase:
-	
+
 	mvn buildplan:list-phase -Dbuildplan.phase=test
-	
-##List plugin executions by plugins
+
+## List plugin executions by plugins
 ```
 > mvn buildplan:list-plugin
 

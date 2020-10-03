@@ -134,6 +134,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-site-plugin</artifactId>
+                <version>3.9.1</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.doxia</groupId>
@@ -208,10 +209,10 @@
                     <reportSet>
                         <reports>
                             <report>index</report>
-                            <report>dependencies</report>
-                            <report>cim</report>
-                            <report>issue-tracking</report>
-                            <report>license</report>
+                            <report>dependency-management</report>
+                            <report>ci-management</report>
+                            <report>issue-management</report>
+                            <report>licenses</report>
                             <report>distribution-management</report>
                             <report>summary</report>
                             <report>scm</report>
