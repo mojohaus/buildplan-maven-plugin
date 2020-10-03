@@ -43,7 +43,7 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
     @Parameter(property = "buildplan.plugin")
     private String plugin;
 
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void executeInternal() throws MojoExecutionException, MojoFailureException {
 
         Multimap<String,MojoExecution> plan = Groups.ByPlugin.of(calculateExecutionPlan().getMojoExecutions(), plugin);
 

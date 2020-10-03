@@ -43,7 +43,7 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
     @Parameter(property = "buildplan.phase")
     private String phase;
 
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    public void executeInternal() throws MojoExecutionException, MojoFailureException {
 
         Multimap<String,MojoExecution> phases = Groups.ByPhase.of(calculateExecutionPlan().getMojoExecutions(), phase);
 

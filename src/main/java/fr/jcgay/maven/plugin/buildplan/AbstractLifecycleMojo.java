@@ -19,6 +19,7 @@ import org.apache.maven.execution.MavenSession;
 import org.apache.maven.lifecycle.LifecycleExecutor;
 import org.apache.maven.lifecycle.MavenExecutionPlan;
 import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -50,6 +51,10 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
     @Parameter(property = "buildplan.appendOutput", defaultValue = "false")
     private boolean appendOutput;
 
+    /** Flag to easily skip all checks  */
+    @Parameter(property = "buildplan.skip", defaultValue = "false")
+    private boolean skip = false;
+
     protected MavenExecutionPlan calculateExecutionPlan() throws MojoFailureException {
         try {
             return lifecycleExecutor.calculateExecutionPlan(session, tasks);
@@ -71,4 +76,15 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
             }
         }
     }
+
+    @Override
+    public final void execute() throws MojoExecutionException, MojoFailureException {
+        if(skip) {
+            getLog().info( "Skipping build plan execution." );
+            return;
+        }
+        executeInternal();
+    }
+
+    protected abstract void executeInternal() throws MojoExecutionException, MojoFailureException;
 }
