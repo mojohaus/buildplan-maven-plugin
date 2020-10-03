@@ -114,6 +114,7 @@
                         <exclude>.editorconfig</exclude>
                         <exclude>etc/*</exclude>
                         <exclude>src/it/**</exclude>
+                        <exclude>.github/**</exclude>
                     </excludes>
                 </configuration>
                 <executions>
