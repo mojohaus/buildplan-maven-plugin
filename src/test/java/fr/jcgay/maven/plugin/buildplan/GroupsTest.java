@@ -17,10 +17,8 @@ package fr.jcgay.maven.plugin.buildplan;
 
 import com.google.common.collect.Multimap;
 import org.apache.maven.plugin.MojoExecution;
-import org.assertj.core.api.iterable.Extractor;
 import org.junit.Test;
 
-import java.util.Collection;
 import java.util.Map;
 
 import static fr.jcgay.maven.plugin.buildplan.model.builder.MojoExecutionBuilder.aMojoExecution;
@@ -175,12 +173,7 @@ public class GroupsTest {
                 .containsExactly("phase", "a-phase", "d-phase");
 
         assertThat(result.asMap().entrySet())
-                .flatExtracting(new Extractor<Map.Entry<String, Collection<MojoExecution>>, Collection<MojoExecution>>() {
-                    @Override
-                    public Collection<MojoExecution> extract(Map.Entry<String, Collection<MojoExecution>> input) {
-                        return input.getValue();
-                    }
-                })
+                .flatExtracting(Map.Entry::getValue)
                 .extracting("goal")
                 .containsExactly("goal-a", "goal-b", "goal-c", "goal-d");
     }
@@ -216,12 +209,7 @@ public class GroupsTest {
                 .containsExactly("plugin-a", "plugin-b", "plugin-c");
 
         assertThat(result.asMap().entrySet())
-                .flatExtracting(new Extractor<Map.Entry<String, Collection<MojoExecution>>, Collection<MojoExecution>>() {
-                    @Override
-                    public Collection<MojoExecution> extract(Map.Entry<String, Collection<MojoExecution>> input) {
-                        return input.getValue();
-                    }
-                })
+                .flatExtracting(Map.Entry::getValue)
                 .extracting("lifecyclePhase")
                 .containsExactly("phase-a", "phase-a-b", "phase-b", "phase-c");
     }

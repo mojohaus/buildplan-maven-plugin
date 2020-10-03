@@ -58,7 +58,7 @@ public class MojoExecutionDisplayTest {
     }
 
     @Test
-    public void should_get_mojo_lifecycle_phase_when_descriptor_phase_is_null() throws Exception {
+    public void should_get_mojo_lifecycle_phase_when_descriptor_phase_is_null() {
 
         MojoExecution execution = aMojoExecution().withArtifactId("plugin-a")
                 .withLifecyclePhase("phase-a")

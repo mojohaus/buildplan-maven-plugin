@@ -30,7 +30,7 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
 
     protected static Map<TableColumn, Integer> findMaxSize(Collection<MojoExecution> executions, TableColumn... columns) {
 
-        Map<TableColumn, Integer> result = new HashMap<TableColumn, Integer>();
+        Map<TableColumn, Integer> result = new HashMap<>();
 
         Multimap<TableColumn, Integer> count = ArrayListMultimap.create();
         for (MojoExecution execution : executions) {

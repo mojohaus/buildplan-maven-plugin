@@ -21,7 +21,7 @@ import static com.google.common.base.Strings.nullToEmpty;
 
 public class MojoExecutionDisplay {
 
-    private MojoExecution execution;
+    private final MojoExecution execution;
 
     public MojoExecutionDisplay(MojoExecution execution) {
         this.execution = execution;

@@ -79,8 +79,8 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
 
     @Override
     public final void execute() throws MojoExecutionException, MojoFailureException {
-        if(skip) {
-            getLog().info( "Skipping build plan execution." );
+        if (skip) {
+            getLog().info("Skipping build plan execution.");
             return;
         }
         executeInternal();

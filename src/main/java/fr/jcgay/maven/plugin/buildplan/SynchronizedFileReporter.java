@@ -15,7 +15,6 @@
  */
 package fr.jcgay.maven.plugin.buildplan;
 
-import com.google.common.io.Closeables;
 import fr.jcgay.maven.plugin.buildplan.display.Output;
 
 import java.io.File;
@@ -25,14 +24,10 @@ import java.io.IOException;
 class SynchronizedFileReporter {
 
     static synchronized void write(String output, File outputFile, boolean appendOutput) throws IOException {
-        FileWriter writer = null;
-        try {
-            writer = new FileWriter(outputFile, appendOutput);
+        try (FileWriter writer = new FileWriter(outputFile, appendOutput)) {
             writer.write(Output.lineSeparator());
             writer.write(output);
             writer.write(Output.lineSeparator());
-        } finally {
-            Closeables.closeQuietly(writer);
         }
     }
 }

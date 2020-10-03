@@ -1,20 +1,16 @@
-dist: trusty
+sudo: false
 language: java
-addons:
-  apt:
-    packages:
-      - openjdk-6-jdk
-before_install:
-  - jdk_switcher use openjdk6
-  - sed -i "s|\[JDK6\]|$JAVA_HOME|g" etc/toolchains.xml
-  - jdk_switcher use openjdk8
-install:
-  - mvn install -DskipTests -B -V -t etc/toolchains.xml
+jdk:
+  - openjdk8
+install: true
 script:
-  - mvn verify -B -t etc/toolchains.xml
+  - mvn verify -B
 after_success:
-  - "[[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_TAG} == '' ]] && mvn deploy -DskipTests --settings etc/deploy-settings.xml -t etc/toolchains.xml"
-  - mvn verify coveralls:report -Prun-coverage -t etc/toolchains.xml
+  - "[[ ${TRAVIS_PULL_REQUEST} == 'false' ]] && [[ ${TRAVIS_TAG} == '' ]] && mvn deploy -DskipTests --settings etc/deploy-settings.xml"
+  - mvn verify coveralls:report -Prun-coverage
+cache:
+  directories:
+  - '$HOME/.m2/repository'
 env:
   global:
   - secure: mPG/d5MSk4AxXVR6RGncxyV3Ps+lMLvLck0qGvp35h92nUtgr55PgBLjkL7sbabkqefQzDHaokhcEfJKostyU3yGzBSiFUQOV7pqNkQvQOxC3u3nXcF5zjqfvwyFKf37p1SgGkCbUZJkigLCVkGj3plNwbEHa7qCU2b5U/EDzCI=
