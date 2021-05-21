@@ -20,14 +20,17 @@ import com.google.common.collect.Multimap;
 import fr.jcgay.maven.plugin.buildplan.display.ListPhaseTableDescriptor;
 import fr.jcgay.maven.plugin.buildplan.display.MojoExecutionDisplay;
 import fr.jcgay.maven.plugin.buildplan.display.TableDescriptor;
+import org.apache.maven.lifecycle.Lifecycle;
+import org.apache.maven.lifecycle.MavenExecutionPlan;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
+import java.util.Collections;
 
 import static fr.jcgay.maven.plugin.buildplan.display.Output.lineSeparator;
 
@@ -43,25 +46,71 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
     @Parameter(property = "buildplan.phase")
     private String phase;
 
+    @Parameter(property = "buildplan.showLifecycles", defaultValue = "false")
+    private boolean showLifecycles;
+
+    @Parameter(property = "buildplan.showAllPhases", defaultValue = "false")
+    private boolean showAllPhases;
+
     public void executeInternal() throws MojoExecutionException, MojoFailureException {
 
-        Multimap<String,MojoExecution> phases = Groups.ByPhase.of(calculateExecutionPlan().getMojoExecutions(), phase);
+        MavenExecutionPlan executionPlan = calculateExecutionPlan();
+        Multimap<String,MojoExecution> executionsByPhase = Groups.ByPhase.of(executionPlan.getMojoExecutions(), phase);
+
+        Collection<String> phases;
+        if (showAllPhases && phase == null) {
+            phases = new ArrayList<String>();
+            for (String phase : executionsByPhase.asMap().keySet()) {
+                if (!phases.contains(phase)) {
+                    Lifecycle lifecycle = defaultLifecycles.get(phase);
+                    if (lifecycle != null) {
+                      phases.addAll(lifecycle.getPhases());
+                    } else {
+                      phases.add(phase);
+                    }
+                }
+            }
+        } else {
+            phases = executionsByPhase.asMap().keySet();
+        }
 
         if (!phases.isEmpty()) {
-            TableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values());
+            TableDescriptor descriptor = ListPhaseTableDescriptor.of(executionsByPhase.values(), defaultLifecycles);
+            Lifecycle currentLifecycle = null;
             StringBuilder output = new StringBuilder();
-            for (Map.Entry<String, Collection<MojoExecution>> currentPhase : phases.asMap().entrySet()) {
+            for (String phase : phases) {
+                if (showLifecycles) {
+                  Lifecycle lifecycleForPhase = defaultLifecycles.get(phase);
+                  if (lifecycleForPhase == null) {
+                      lifecycleForPhase = new Lifecycle("", Collections.EMPTY_LIST, Collections.EMPTY_MAP);
+                  }
+                  if (!lifecycleForPhase.equals(currentLifecycle)) {
+                      currentLifecycle = lifecycleForPhase;
+                      output.append(lineSeparator()).append(lineSeparator()).append("[")
+                              .append(currentLifecycle.getId()).append("]");
+                  }
+                }
                 output.append(lineSeparator())
-                        .append(phaseTitleLine(descriptor, currentPhase.getKey()));
-                for (MojoExecution execution : currentPhase.getValue()) {
+                        .append(phaseTitleLine(descriptor, phase));
+                Collection<MojoExecution> executions = executionsByPhase.get(phase);
+                if (executions.isEmpty()) {
                     output.append(lineSeparator())
-                            .append(line(descriptor.rowFormat(), execution));
+                            .append(empty(descriptor.rowFormat()));
+                } else {
+                    for (MojoExecution execution : executions) {
+                        output.append(lineSeparator())
+                                .append(line(descriptor.rowFormat(), execution));
+                    }
                 }
             }
             handleOutput(output.toString());
         } else {
             getLog().warn("No plugin execution found within phase: " + phase);
         }
+    }
+
+    private String empty(String rowFormat) {
+        return String.format(rowFormat, "", "", "");
     }
 
     private String line(String rowFormat, MojoExecution execution) {

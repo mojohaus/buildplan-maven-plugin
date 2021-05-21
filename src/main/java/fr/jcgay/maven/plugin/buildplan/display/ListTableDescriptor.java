@@ -15,6 +15,7 @@
  */
 package fr.jcgay.maven.plugin.buildplan.display;
 
+import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.plugin.MojoExecution;
 
 import java.util.Collection;
@@ -24,19 +25,21 @@ import static com.google.common.base.Objects.toStringHelper;
 
 public class ListTableDescriptor extends AbstractTableDescriptor {
 
-    static final int SEPARATOR_SIZE = 3 * SEPARATOR.length();
+    static final int SEPARATOR_SIZE = 4 * SEPARATOR.length();
 
     private int pluginSize;
     private int phaseSize;
+    private int lifecycleSize;
     private int executionIdSize;
     private int goalSize;
 
-    public static ListTableDescriptor of(Collection<MojoExecution> executions) {
+    public static ListTableDescriptor of(Collection<MojoExecution> executions, DefaultLifecycles defaultLifecycles) {
 
-        Map<TableColumn,Integer> maxSize = findMaxSize(executions, TableColumn.values());
+        Map<TableColumn,Integer> maxSize = findMaxSize(executions, defaultLifecycles, TableColumn.values());
 
         return new ListTableDescriptor().setPluginSize(maxSize.get(TableColumn.ARTIFACT_ID))
                                         .setPhaseSize(maxSize.get(TableColumn.PHASE))
+                                        .setLifecycleSize(maxSize.get(TableColumn.LIFECYCLE))
                                         .setGoalSize(maxSize.get(TableColumn.GOAL))
                                         .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));
     }
@@ -46,21 +49,26 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
         builder.append(FORMAT_LEFT_ALIGN).append(getPluginSize()).append(FORMAT_STRING)
                .append(SEPARATOR)
                .append(FORMAT_LEFT_ALIGN).append(getPhaseSize()).append(FORMAT_STRING)
-               .append(SEPARATOR)
-               .append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING)
+               .append(SEPARATOR);
+        if (lifecycleSize > 0) {
+            builder.append(FORMAT_LEFT_ALIGN).append(getLifecycleSize()).append(FORMAT_STRING)
+                   .append(SEPARATOR);
+        }
+        builder.append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING)
                .append(SEPARATOR)
                .append(FORMAT_LEFT_ALIGN).append(getGoalSize()).append(FORMAT_STRING);
         return builder.toString();
     }
 
     public int width() {
-        return getPluginSize() + getPhaseSize() + getExecutionIdSize() + getGoalSize() + SEPARATOR_SIZE;
+        return getPluginSize() + getPhaseSize() + getLifecycleSize() + getExecutionIdSize() + getGoalSize() + SEPARATOR_SIZE;
     }
 
     @Override
     public String toString() {
         return toStringHelper(this).add("Plugin column size", getPluginSize())
                                    .add("Phase column size", getPhaseSize())
+                                   .add("Lifecycle column size", getLifecycleSize())
                                    .add("Execution ID column size", getExecutionIdSize())
                                    .add("Goal column size", getGoalSize())
                                    .add("width", width())
@@ -85,6 +93,15 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
         return this;
     }
 
+    public int getLifecycleSize() {
+        return lifecycleSize;
+    }
+
+    public ListTableDescriptor setLifecycleSize(int lifecycleSize) {
+        this.lifecycleSize = lifecycleSize;
+        return this;
+    }
+
     public int getExecutionIdSize() {
         return executionIdSize;
     }
@@ -101,5 +118,9 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
     public ListTableDescriptor setGoalSize(int goalSize) {
         this.goalSize = goalSize;
         return this;
+    }
+
+    public void hideLifecycle() {
+        this.lifecycleSize = -1 * SEPARATOR.length();
     }
 }

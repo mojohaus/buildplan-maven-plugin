@@ -1,0 +1,15 @@
+[INFO] Build Plan for list-multimodule-module-b: 
+------------------------------------------------------------------------------------------------------
+PLUGIN                 | PHASE                  | LIFECYCLE | ID                    | GOAL            
+------------------------------------------------------------------------------------------------------
+maven-clean-plugin     | clean                  | clean     | default-clean         | clean           
+versions-maven-plugin  |                        |           | default-cli           | set             
+maven-resources-plugin | process-resources      | default   | default-resources     | resources       
+maven-compiler-plugin  | compile                | default   | default-compile       | compile         
+maven-resources-plugin | process-test-resources | default   | default-testResources | testResources   
+maven-compiler-plugin  | test-compile           | default   | default-testCompile   | testCompile     
+maven-surefire-plugin  | test                   | default   | default-test          | test            
+maven-jar-plugin       | package                | default   | default-jar           | jar             
+maven-failsafe-plugin  | integration-test       | default   | default               | integration-test
+maven-failsafe-plugin  | verify                 | default   | default               | verify          
+maven-install-plugin   | install                | default   | default-install       | install         

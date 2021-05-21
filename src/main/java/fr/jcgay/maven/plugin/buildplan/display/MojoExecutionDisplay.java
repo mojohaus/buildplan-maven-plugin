@@ -15,6 +15,8 @@
  */
 package fr.jcgay.maven.plugin.buildplan.display;
 
+import org.apache.maven.lifecycle.DefaultLifecycles;
+import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
 
 import static com.google.common.base.Strings.nullToEmpty;
@@ -29,6 +31,11 @@ public class MojoExecutionDisplay {
 
     public String getPhase() {
         return nullToEmpty(execution.getLifecyclePhase());
+    }
+
+    public String getLifecycle(DefaultLifecycles defaultLifecycles) {
+        Lifecycle lifecycle = defaultLifecycles.get(execution.getLifecyclePhase());
+        return nullToEmpty(lifecycle == null ? null : lifecycle.getId());
     }
 
     public String getArtifactId() {

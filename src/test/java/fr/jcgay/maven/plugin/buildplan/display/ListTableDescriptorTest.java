@@ -15,14 +15,32 @@
  */
 package fr.jcgay.maven.plugin.buildplan.display;
 
+import org.apache.maven.lifecycle.DefaultLifecycles;
+import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
+import org.codehaus.plexus.logging.console.ConsoleLogger;
+import org.junit.Before;
 import org.junit.Test;
 
 import static fr.jcgay.maven.plugin.buildplan.model.builder.MojoExecutionBuilder.aMojoExecution;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Collections;
+import java.util.HashMap;
+
 public class ListTableDescriptorTest {
+
+    private DefaultLifecycles defaultLifecycles;
+
+    @Before
+    public void prepare_default_lifecycle() {
+        HashMap<String, Lifecycle> defaultLifecyclesMap = new HashMap<String, Lifecycle>();
+        for (String lifecycleName : DefaultLifecycles.STANDARD_LIFECYCLES) {
+            defaultLifecyclesMap.put(lifecycleName, new Lifecycle(lifecycleName, Collections.EMPTY_LIST, Collections.EMPTY_MAP));
+        }
+        defaultLifecycles = new DefaultLifecycles(defaultLifecyclesMap, new ConsoleLogger());
+    }
 
     @Test
     public void should_add_all_size_and_the_separator_size_to_get_descriptor_width() {
@@ -49,7 +67,7 @@ public class ListTableDescriptorTest {
                                                    .withGoal("a-very-very-very-long-goal")
                                                    .build();
 
-        ListTableDescriptor descriptor = ListTableDescriptor.of(asList(executionA, executionB));
+        ListTableDescriptor descriptor = ListTableDescriptor.of(asList(executionA, executionB), defaultLifecycles);
 
         assertThat(descriptor.getPluginSize()).isEqualTo(executionB.getArtifactId().length());
         assertThat(descriptor.getExecutionIdSize()).isEqualTo(executionB.getExecutionId().length());
@@ -78,7 +96,7 @@ public class ListTableDescriptorTest {
                                                    .withGoal("goal-c")
                                                    .build();
 
-        ListTableDescriptor result = ListTableDescriptor.of(asList(executionA, executionB, executionC));
+        ListTableDescriptor result = ListTableDescriptor.of(asList(executionA, executionB, executionC), defaultLifecycles);
 
         assertThat(result.getExecutionIdSize()).isEqualTo(executionB.getExecutionId().length());
         assertThat(result.getPluginSize()).isEqualTo(executionB.getArtifactId().length());
@@ -96,7 +114,7 @@ public class ListTableDescriptorTest {
                 .build();
         execution.setLifecyclePhase("phase-a");
 
-        ListTableDescriptor result = ListTableDescriptor.of(asList(execution));
+        ListTableDescriptor result = ListTableDescriptor.of(asList(execution), defaultLifecycles);
 
         assertThat(result.getPhaseSize()).isEqualTo(execution.getLifecyclePhase().length());
     }
@@ -111,7 +129,7 @@ public class ListTableDescriptorTest {
                 .build();
         execution.setLifecyclePhase(null);
 
-        ListTableDescriptor result = ListTableDescriptor.of(asList(execution));
+        ListTableDescriptor result = ListTableDescriptor.of(asList(execution), defaultLifecycles);
 
         assertThat(result.getPhaseSize()).isEqualTo(TableColumn.PHASE.title().length());
         assertThat(result.getExecutionIdSize()).isEqualTo(TableColumn.EXECUTION_ID.title().length());
@@ -128,7 +146,7 @@ public class ListTableDescriptorTest {
                 .withGoal("a")
                 .build();
 
-        ListTableDescriptor result = ListTableDescriptor.of(asList(execution));
+        ListTableDescriptor result = ListTableDescriptor.of(asList(execution), defaultLifecycles);
 
         assertThat(result.getPhaseSize()).isEqualTo(TableColumn.PHASE.title().length());
         assertThat(result.getExecutionIdSize()).isEqualTo(TableColumn.EXECUTION_ID.title().length());

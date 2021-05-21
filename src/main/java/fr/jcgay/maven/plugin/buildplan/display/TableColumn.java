@@ -20,7 +20,8 @@ public enum TableColumn {
     EXECUTION_ID("ID"),
     ARTIFACT_ID("PLUGIN"),
     GOAL("GOAL"),
-    PHASE("PHASE");
+    PHASE("PHASE"),
+    LIFECYCLE("LIFECYCLE");
 
     private final String title;
 

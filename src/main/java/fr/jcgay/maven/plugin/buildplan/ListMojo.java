@@ -24,11 +24,13 @@ import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 import static fr.jcgay.maven.plugin.buildplan.display.Output.lineSeparator;
 import static fr.jcgay.maven.plugin.buildplan.display.TableColumn.ARTIFACT_ID;
 import static fr.jcgay.maven.plugin.buildplan.display.TableColumn.EXECUTION_ID;
 import static fr.jcgay.maven.plugin.buildplan.display.TableColumn.GOAL;
+import static fr.jcgay.maven.plugin.buildplan.display.TableColumn.LIFECYCLE;
 import static fr.jcgay.maven.plugin.buildplan.display.TableColumn.PHASE;
 
 /**
@@ -39,11 +41,17 @@ import static fr.jcgay.maven.plugin.buildplan.display.TableColumn.PHASE;
       requiresProject = true)
 public class ListMojo extends AbstractLifecycleMojo {
 
+    @Parameter(property = "buildplan.showLifecycles", defaultValue = "false")
+    private boolean showLifecycles;
+
     public void executeInternal() throws MojoExecutionException, MojoFailureException {
 
         MavenExecutionPlan plan = calculateExecutionPlan();
 
-        TableDescriptor descriptor = ListTableDescriptor.of(plan.getMojoExecutions());
+        TableDescriptor descriptor = ListTableDescriptor.of(plan.getMojoExecutions(), defaultLifecycles);
+        if (!showLifecycles) {
+            ((ListTableDescriptor) descriptor).hideLifecycle();
+        }
         String row = descriptor.rowFormat();
 
         StringBuilder output = new StringBuilder()
@@ -66,15 +74,28 @@ public class ListMojo extends AbstractLifecycleMojo {
 
         MojoExecutionDisplay display = new MojoExecutionDisplay(execution);
 
-        return String.format(row,
+        if (showLifecycles) {
+            return String.format(row,
                 display.getArtifactId(),
                 display.getPhase(),
+                display.getLifecycle(defaultLifecycles),
                 display.getExecutionId(),
                 display.getGoal());
+        } else {
+            return String.format(row,
+                    display.getArtifactId(),
+                    display.getPhase(),
+                    display.getExecutionId(),
+                    display.getGoal());
+        }
     }
 
     private String tableHead(String row) {
-        return String.format(row, ARTIFACT_ID.title(), PHASE.title(), EXECUTION_ID.title(), GOAL.title());
+        if (showLifecycles) {
+            return String.format(row, ARTIFACT_ID.title(), PHASE.title(), LIFECYCLE.title(), EXECUTION_ID.title(), GOAL.title());
+        } else {
+            return String.format(row, ARTIFACT_ID.title(), PHASE.title(), EXECUTION_ID.title(), GOAL.title());
+        }
     }
 
     private String titleSeparator(TableDescriptor descriptor) {
