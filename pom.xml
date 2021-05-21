@@ -35,8 +35,6 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <!-- This activates JaCoCo when using the invoker-plugin -->
-        <jacoco.propertyName>invoker.mavenOpts</jacoco.propertyName>
     </properties>
 
     <dependencies>
@@ -75,6 +73,17 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <configuration>
+                        <append>true</append>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <artifactId>maven-plugin-plugin</artifactId>
@@ -187,6 +196,7 @@
                     <cloneClean>true</cloneClean>
                     <showVersion>true</showVersion>
                     <postBuildHookScript>verify.groovy</postBuildHookScript>
+                    <mavenOpts>${argLine}</mavenOpts>
                 </configuration>
                 <executions>
                     <execution>
