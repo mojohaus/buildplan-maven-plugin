@@ -16,6 +16,7 @@
 package fr.jcgay.maven.plugin.buildplan;
 
 import org.apache.maven.execution.MavenSession;
+import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.lifecycle.LifecycleExecutor;
 import org.apache.maven.lifecycle.MavenExecutionPlan;
 import org.apache.maven.plugin.AbstractMojo;
@@ -30,11 +31,14 @@ import java.io.IOException;
 
 public abstract class AbstractLifecycleMojo extends AbstractMojo {
 
+    @Component(role = DefaultLifecycles.class)
+    DefaultLifecycles defaultLifecycles;
+
     @Parameter(defaultValue = "${session}", readonly = true)
     private MavenSession session;
 
-   @Parameter( defaultValue = "${project}", readonly = true)
-   private MavenProject project;
+    @Parameter( defaultValue = "${project}", readonly = true)
+    private MavenProject project;
 
     @Component
     private LifecycleExecutor lifecycleExecutor;

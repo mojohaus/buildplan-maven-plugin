@@ -18,6 +18,8 @@ package fr.jcgay.maven.plugin.buildplan.display;
 import com.google.common.base.Strings;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import org.apache.maven.lifecycle.DefaultLifecycles;
+import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.descriptor.MojoDescriptor;
 
@@ -28,7 +30,7 @@ import java.util.Map;
 
 public abstract class AbstractTableDescriptor implements TableDescriptor {
 
-    protected static Map<TableColumn, Integer> findMaxSize(Collection<MojoExecution> executions, TableColumn... columns) {
+    protected static Map<TableColumn, Integer> findMaxSize(Collection<MojoExecution> executions, DefaultLifecycles defaultLifecycles, TableColumn... columns) {
 
         Map<TableColumn, Integer> result = new HashMap<>();
 
@@ -52,6 +54,17 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
                         } else {
                             count.put(column, safeLength(execution.getLifecyclePhase()));
                         }
+                        break;
+                    case LIFECYCLE:
+                        mojoDescriptor = execution.getMojoDescriptor();
+                        String phase;
+                        if (mojoDescriptor != null && mojoDescriptor.getPhase() != null) {
+                            phase = mojoDescriptor.getPhase();
+                        } else {
+                            phase = execution.getLifecyclePhase();
+                        }
+                        Lifecycle lifecycle = defaultLifecycles.get(phase);
+                        count.put(column, lifecycle == null ? 0 : safeLength(lifecycle.getId()));
                 }
             }
         }

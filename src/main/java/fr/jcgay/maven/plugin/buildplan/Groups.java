@@ -54,7 +54,7 @@ public class Groups {
             Multimap<String, MojoExecution> result = LinkedListMultimap.create();
             boolean notFiltering = Strings.isNullOrEmpty(phaseFilter);
             for (MojoExecution execution : executions) {
-                String phase = firstNonNull(execution.getLifecyclePhase(), "default-phase");
+                String phase = firstNonNull(execution.getLifecyclePhase(), "<no phase>");
                 if (notFiltering || phase.equalsIgnoreCase(phaseFilter)) {
                     result.put(phase, execution);
                 }

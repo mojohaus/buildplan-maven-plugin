@@ -15,6 +15,7 @@
  */
 package fr.jcgay.maven.plugin.buildplan.display;
 
+import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.plugin.MojoExecution;
 
 import java.util.Collection;
@@ -28,9 +29,9 @@ public class ListPhaseTableDescriptor extends AbstractTableDescriptor {
     private int executionIdSize;
     private int goalSize;
 
-    public static ListPhaseTableDescriptor of(Collection<MojoExecution> executions) {
+    public static ListPhaseTableDescriptor of(Collection<MojoExecution> executions, DefaultLifecycles defaultLifecycles) {
 
-        Map<TableColumn,Integer> maxSize = findMaxSize(executions, TableColumn.ARTIFACT_ID, TableColumn.EXECUTION_ID, TableColumn.GOAL);
+        Map<TableColumn,Integer> maxSize = findMaxSize(executions, defaultLifecycles, TableColumn.ARTIFACT_ID, TableColumn.EXECUTION_ID, TableColumn.GOAL);
 
         return new ListPhaseTableDescriptor().setPluginSize(maxSize.get(TableColumn.ARTIFACT_ID))
                                              .setGoalSize(maxSize.get(TableColumn.GOAL))

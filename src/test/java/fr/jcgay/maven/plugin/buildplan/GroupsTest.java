@@ -140,7 +140,7 @@ public class GroupsTest {
 
         Multimap<String, MojoExecution> result = Groups.ByPhase.of(asList(pluginA));
 
-        assertThat(result.keySet()).containsOnly("default-phase");
+        assertThat(result.keySet()).containsOnly("<no phase>");
     }
 
     @Test

@@ -51,7 +51,7 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
             getLog().warn("No plugin found with artifactId: " + plugin);
         } else {
             StringBuilder output = new StringBuilder();
-            TableDescriptor descriptor = ListPluginTableDescriptor.of(plan.values());
+            TableDescriptor descriptor = ListPluginTableDescriptor.of(plan.values(), defaultLifecycles);
             for (Map.Entry<String, Collection<MojoExecution>> executions : plan.asMap().entrySet()) {
                 output.append(lineSeparator())
                         .append(pluginTitleLine(descriptor, executions.getKey()));

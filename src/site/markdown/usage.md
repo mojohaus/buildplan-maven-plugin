@@ -35,6 +35,10 @@ It is possible to define the tasks used to calculate execution plan:
 
 	mvn buildplan:list-phase -Dbuildplan.tasks=clean,test
 
+If you want to show the lifecycle that defines the listed phase(s), add this parameter:
+
+	mvn buildplan:list-phase -Dbuildplan.showLifecycles
+
 ## List plugin executions within phases
 ```
 > mvn buildplan:list-phase
@@ -70,6 +74,17 @@ It is possible to define the tasks used to calculate execution plan:
 It is possible to limit the list to a specific phase:
 
 	mvn buildplan:list-phase -Dbuildplan.phase=test
+
+If you want to include phases that have no executions mapped:
+
+	mvn buildplan:list-phase -Dbuildplan.showAllPhases
+
+Here it is also possible to show the lifecycle(s) by running:
+
+	mvn buildplan:list-phase -Dbuildplan.showLifecycles
+
+Be aware that setting 'buildplan.tasks' to direct plugin-executions (eg 'release:prepare') will show an empty lifecycle and '&lt;no phase&gt;', since they are not mapped.
+Also, because executions are collected per phase, direct plugin-executions are shown in the list at the location of the very first execution.
 
 ## List plugin executions by plugins
 ```
