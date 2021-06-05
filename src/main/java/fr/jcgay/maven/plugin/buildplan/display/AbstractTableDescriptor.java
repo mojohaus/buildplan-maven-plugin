@@ -48,22 +48,10 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
                         count.put(column, safeLength(execution.getGoal()));
                         break;
                     case PHASE:
-                        MojoDescriptor mojoDescriptor = execution.getMojoDescriptor();
-                        if (mojoDescriptor != null && mojoDescriptor.getPhase() != null) {
-                            count.put(column, safeLength(mojoDescriptor.getPhase()));
-                        } else {
-                            count.put(column, safeLength(execution.getLifecyclePhase()));
-                        }
+                        count.put(column, safeLength(phase(execution)));
                         break;
                     case LIFECYCLE:
-                        mojoDescriptor = execution.getMojoDescriptor();
-                        String phase;
-                        if (mojoDescriptor != null && mojoDescriptor.getPhase() != null) {
-                            phase = mojoDescriptor.getPhase();
-                        } else {
-                            phase = execution.getLifecyclePhase();
-                        }
-                        Lifecycle lifecycle = defaultLifecycles.get(phase);
+                        Lifecycle lifecycle = defaultLifecycles.get(phase(execution));
                         count.put(column, lifecycle == null ? 0 : safeLength(lifecycle.getId()));
                 }
             }
@@ -77,6 +65,14 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
         }
 
         return result;
+    }
+
+    private static String phase(MojoExecution execution) {
+        MojoDescriptor mojoDescriptor = execution.getMojoDescriptor();
+        if (mojoDescriptor != null && mojoDescriptor.getPhase() != null) {
+            return mojoDescriptor.getPhase();
+        }
+        return execution.getLifecyclePhase();
     }
 
     private static int safeLength(String string) {

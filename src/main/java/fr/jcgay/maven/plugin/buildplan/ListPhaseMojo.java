@@ -23,16 +23,16 @@ import fr.jcgay.maven.plugin.buildplan.display.TableDescriptor;
 import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.lifecycle.MavenExecutionPlan;
 import org.apache.maven.plugin.MojoExecution;
-import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 import static fr.jcgay.maven.plugin.buildplan.display.Output.lineSeparator;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
 
 /**
  * List plugin executions by phase for the current project.
@@ -52,14 +52,14 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
     @Parameter(property = "buildplan.showAllPhases", defaultValue = "false")
     private boolean showAllPhases;
 
-    public void executeInternal() throws MojoExecutionException, MojoFailureException {
+    public void executeInternal() throws MojoFailureException {
 
         MavenExecutionPlan executionPlan = calculateExecutionPlan();
         Multimap<String,MojoExecution> executionsByPhase = Groups.ByPhase.of(executionPlan.getMojoExecutions(), phase);
 
         Collection<String> phases;
         if (showAllPhases && phase == null) {
-            phases = new ArrayList<String>();
+            phases = new ArrayList<>();
             for (String phase : executionsByPhase.asMap().keySet()) {
                 if (!phases.contains(phase)) {
                     Lifecycle lifecycle = defaultLifecycles.get(phase);
@@ -82,7 +82,7 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
                 if (showLifecycles) {
                   Lifecycle lifecycleForPhase = defaultLifecycles.get(phase);
                   if (lifecycleForPhase == null) {
-                      lifecycleForPhase = new Lifecycle("", Collections.EMPTY_LIST, Collections.EMPTY_MAP);
+                      lifecycleForPhase = new Lifecycle("", emptyList(), emptyMap());
                   }
                   if (!lifecycleForPhase.equals(currentLifecycle)) {
                       currentLifecycle = lifecycleForPhase;

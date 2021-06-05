@@ -21,7 +21,6 @@ import fr.jcgay.maven.plugin.buildplan.display.MojoExecutionDisplay;
 import fr.jcgay.maven.plugin.buildplan.display.TableDescriptor;
 import org.apache.maven.lifecycle.MavenExecutionPlan;
 import org.apache.maven.plugin.MojoExecution;
-import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -44,13 +43,13 @@ public class ListMojo extends AbstractLifecycleMojo {
     @Parameter(property = "buildplan.showLifecycles", defaultValue = "false")
     private boolean showLifecycles;
 
-    public void executeInternal() throws MojoExecutionException, MojoFailureException {
+    public void executeInternal() throws MojoFailureException {
 
         MavenExecutionPlan plan = calculateExecutionPlan();
 
-        TableDescriptor descriptor = ListTableDescriptor.of(plan.getMojoExecutions(), defaultLifecycles);
+        ListTableDescriptor descriptor = ListTableDescriptor.of(plan.getMojoExecutions(), defaultLifecycles);
         if (!showLifecycles) {
-            ((ListTableDescriptor) descriptor).hideLifecycle();
+            descriptor.hideLifecycle();
         }
         String row = descriptor.rowFormat();
 

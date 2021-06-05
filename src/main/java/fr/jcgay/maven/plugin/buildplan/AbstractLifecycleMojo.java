@@ -90,5 +90,5 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
         executeInternal();
     }
 
-    protected abstract void executeInternal() throws MojoExecutionException, MojoFailureException;
+    protected abstract void executeInternal() throws MojoFailureException;
 }

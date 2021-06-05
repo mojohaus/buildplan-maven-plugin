@@ -21,7 +21,6 @@ import fr.jcgay.maven.plugin.buildplan.display.ListPluginTableDescriptor;
 import fr.jcgay.maven.plugin.buildplan.display.MojoExecutionDisplay;
 import fr.jcgay.maven.plugin.buildplan.display.TableDescriptor;
 import org.apache.maven.plugin.MojoExecution;
-import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -43,7 +42,7 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
     @Parameter(property = "buildplan.plugin")
     private String plugin;
 
-    public void executeInternal() throws MojoExecutionException, MojoFailureException {
+    public void executeInternal() throws MojoFailureException {
 
         Multimap<String,MojoExecution> plan = Groups.ByPlugin.of(calculateExecutionPlan().getMojoExecutions(), plugin);
 

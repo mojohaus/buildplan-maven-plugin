@@ -35,7 +35,7 @@ public class ListTableDescriptorTest {
 
     @Before
     public void prepare_default_lifecycle() {
-        HashMap<String, Lifecycle> defaultLifecyclesMap = new HashMap<String, Lifecycle>();
+        HashMap<String, Lifecycle> defaultLifecyclesMap = new HashMap<>();
         for (String lifecycleName : DefaultLifecycles.STANDARD_LIFECYCLES) {
             defaultLifecyclesMap.put(lifecycleName, new Lifecycle(lifecycleName, Collections.EMPTY_LIST, Collections.EMPTY_MAP));
         }
