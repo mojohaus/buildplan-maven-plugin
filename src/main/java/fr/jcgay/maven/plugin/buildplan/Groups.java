@@ -18,8 +18,12 @@ package fr.jcgay.maven.plugin.buildplan;
 import com.google.common.base.Strings;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
+import org.apache.maven.lifecycle.DefaultLifecycles;
+import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
+import org.codehaus.plexus.logging.console.ConsoleLogger;
 
+import java.util.Collections;
 import java.util.List;
 
 import static com.google.common.base.Objects.firstNonNull;
@@ -47,20 +51,62 @@ public class Groups {
     public static class ByPhase {
 
         public static Multimap<String, MojoExecution> of(List<MojoExecution> plan) {
-            return of(plan, null);
+            return of(plan, new Options(defaultLifecycles()));
         }
 
         public static Multimap<String, MojoExecution> of(List<MojoExecution> executions, String phaseFilter) {
+            return of(executions, new Options(defaultLifecycles()).forPhase(phaseFilter));
+        }
+
+        public static Multimap<String, MojoExecution> of(List<MojoExecution> executions, Options options) {
             Multimap<String, MojoExecution> result = LinkedListMultimap.create();
-            boolean notFiltering = Strings.isNullOrEmpty(phaseFilter);
+            boolean notFiltering = Strings.isNullOrEmpty(options.phase);
             for (MojoExecution execution : executions) {
                 String phase = firstNonNull(execution.getLifecyclePhase(), "<no phase>");
-                if (notFiltering || phase.equalsIgnoreCase(phaseFilter)) {
+                if (options.showingAllPhases) {
+                    Lifecycle lifecycle = options.defaultLifecycles.get(phase);
+                    if (lifecycle != null) {
+                        lifecycle.getPhases().forEach(defaultPhase -> result.put(defaultPhase, NoMojoExecution.INSTANCE));
+                    }
+                }
+                if (notFiltering || phase.equalsIgnoreCase(options.phase)) {
                     result.put(phase, execution);
                 }
             }
             return result;
         }
 
+        private static DefaultLifecycles defaultLifecycles() {
+            return new DefaultLifecycles(Collections.emptyMap(), new ConsoleLogger());
+        }
+
+    }
+
+    public static class Options {
+
+        private final DefaultLifecycles defaultLifecycles;
+
+        private String phase;
+        private boolean showingAllPhases;
+        private boolean showingLifecycles;
+
+        public Options(DefaultLifecycles defaultLifecycles) {
+            this.defaultLifecycles = defaultLifecycles;
+        }
+
+        public Options forPhase(String phase) {
+            this.phase = phase;
+            return this;
+        }
+
+        public Options showingAllPhases() {
+            this.showingAllPhases = true;
+            return this;
+        }
+
+        public Options showingLifecycles() {
+            this.showingLifecycles = true;
+            return this;
+        }
     }
 }

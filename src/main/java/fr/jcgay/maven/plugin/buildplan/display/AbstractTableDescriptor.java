@@ -67,7 +67,7 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
         return result;
     }
 
-    private static String phase(MojoExecution execution) {
+    public static String phase(MojoExecution execution) {
         MojoDescriptor mojoDescriptor = execution.getMojoDescriptor();
         if (mojoDescriptor != null && mojoDescriptor.getPhase() != null) {
             return mojoDescriptor.getPhase();
