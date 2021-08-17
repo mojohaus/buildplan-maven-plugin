@@ -1,3 +1,9 @@
+# 1.5
+
+- Hide empty line from empty phase ([f3cc6c8](http://github.com/jcgay/buildplan-maven-plugin/commit/f3cc6c83614171b8fc4627a79b97958eb47cab06))
+- Report ITs in code coverage ([354101b](http://github.com/jcgay/buildplan-maven-plugin/commit/354101b4ce40f6c7a7ada4cd88cc25ad3e45a43a)) by [@malice00](https://github.com/malice00)
+- Add options showLifecycles and showAllPhases ([45c2cd9](http://github.com/jcgay/buildplan-maven-plugin/commit/45c2cd9be647193dacb0f3607a78cc6bca069fe3)) by [@malice00](https://github.com/malice00)
+
 # 1.4
 ***
 
