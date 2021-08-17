@@ -126,6 +126,7 @@
                         <exclude>etc/*</exclude>
                         <exclude>src/it/**</exclude>
                         <exclude>.github/**</exclude>
+                        <exclude>jreleaser.yml</exclude>
                     </excludes>
                 </configuration>
                 <executions>
@@ -206,6 +207,14 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jreleaser</groupId>
+                <artifactId>jreleaser-maven-plugin</artifactId>
+                <version>0.6.0</version>
+                <configuration>
+                    <configFile>jreleaser.yml</configFile>
+                </configuration>
             </plugin>
         </plugins>
     </build>
