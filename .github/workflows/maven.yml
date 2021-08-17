@@ -28,3 +28,5 @@ jobs:
         key: local-maven-repository
     - name: Build with Maven
       run: mvn -B verify coveralls:report -Prun-coverage -DrepoToken=${{ secrets.COVERALLS_TOKEN }}
+    - name: Build documentation
+      run: mvn -B site
