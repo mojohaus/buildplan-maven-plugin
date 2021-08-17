@@ -40,7 +40,7 @@ It is possible to limit the list to a specific plugin:
 
 ## Status
 
-[![Build Status](https://www.travis-ci.com/jcgay/buildplan-maven-plugin.svg?branch=master)](https://www.travis-ci.com/jcgay/buildplan-maven-plugin)
+[![Build Status](https://github.com/jcgay/buildplan-maven-plugin/actions/workflows/maven.yml/badge.svg)](https://github.com/jcgay/buildplan-maven-plugin/actions/workflows/maven.yml)
 [![Coverage Status](https://coveralls.io/repos/jcgay/buildplan-maven-plugin/badge.svg?branch=master)](https://coveralls.io/r/jcgay/buildplan-maven-plugin?branch=master)
 
 ## Release
