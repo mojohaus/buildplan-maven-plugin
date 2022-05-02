@@ -1,6 +1,6 @@
 release:
     github:
-        owner: jcgay
+        owner: mojohaus
         username: jcgay
         overwrite: true
         skipTag: true

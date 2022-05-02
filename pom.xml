@@ -3,12 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>fr.jcgay.maven</groupId>
-        <artifactId>jcgay-build-configuration</artifactId>
-        <version>1.19</version>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>mojo-parent</artifactId>
+        <version>67</version>
     </parent>
 
-    <groupId>fr.jcgay.maven.plugins</groupId>
     <artifactId>buildplan-maven-plugin</artifactId>
     <version>2.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
@@ -16,14 +15,22 @@
     <description>The BuildPlan Plugin can inspect your project lifecycle.</description>
 
     <inceptionYear>2012</inceptionYear>
-    <url>http://buildplan.jcgay.fr</url>
+    <url>http://www.mojohaus.org/buildplan-maven-plugin/</url>
+
+    <prerequisites>
+        <maven>3.2.5</maven>
+    </prerequisites>
 
     <scm>
-        <url>https://github.com/jcgay/buildplan-maven-plugin.git</url>
-        <connection>scm:git:git://github.com/jcgay/buildplan-maven-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:jcgay/buildplan-maven-plugin.git</developerConnection>
+        <connection>scm:git:https://github.com/mojohaus/buildplan-maven-plugin.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/mojohaus/buildplan-maven-plugin.git</developerConnection>
+        <url>https://github.com/mojohaus/buildplan-maven-plugin</url>
         <tag>HEAD</tag>
     </scm>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/mojohaus/buildplan-maven-plugin/issues</url>
+    </issueManagement>
 
     <licenses>
         <license>
@@ -54,17 +61,18 @@
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>3.0.5</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>
-            <version>3.0.5</version>
+            <version>${project.prerequisites.maven}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
-            <version>3.6.4</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -119,6 +127,7 @@
                     </properties>
                     <excludes>
                         <exclude>**/README</exclude>
+                        <exclude>LICENSE</exclude>
                         <exclude>pom.xml</exclude>
                         <exclude>src/test/resources/**</exclude>
                         <exclude>src/main/resources/**</exclude>
@@ -146,49 +155,7 @@
                 </dependencies>
             </plugin>
             <plugin>
-                <artifactId>maven-site-plugin</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.doxia</groupId>
-                        <artifactId>doxia-module-markdown</artifactId>
-                        <version>1.9.1</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>default-deploy</id>
-                        <phase>none</phase>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.github.github</groupId>
-                <artifactId>site-maven-plugin</artifactId>
-                <version>0.12</version>
-                <configuration>
-                    <message>Creating site for ${project.version}</message>
-                    <repositoryOwner>jcgay</repositoryOwner>
-                    <repositoryName>buildplan-maven-plugin</repositoryName>
-                    <server>github</server>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>site-deploy</phase>
-                        <goals>
-                            <goal>site</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <configuration>
-                    <goals>deploy site-deploy</goals>
-                </configuration>
-            </plugin>
-            <plugin>
                 <artifactId>maven-invoker-plugin</artifactId>
-                <version>3.2.2</version>
                 <configuration>
                     <projectsDirectory>src/it</projectsDirectory>
                     <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
@@ -220,35 +187,6 @@
         </plugins>
     </build>
 
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.3.0</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>index</report>
-                            <report>dependency-management</report>
-                            <report>ci-management</report>
-                            <report>issue-management</report>
-                            <report>licenses</report>
-                            <report>distribution-management</report>
-                            <report>summary</report>
-                            <report>scm</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.6.4</version>
-            </plugin>
-        </plugins>
-    </reporting>
-
     <profiles>
         <profile>
             <id>build-with-toolchains</id>
@@ -259,6 +197,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-toolchains-plugin</artifactId>
+                        <version>3.0.0</version>
                         <executions>
                             <execution>
                                 <goals>
