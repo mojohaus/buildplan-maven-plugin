@@ -1,48 +1,31 @@
-# buildplan-maven-plugin
+# MojoHaus BuildPlan Maven Plugin
 
-A Maven 3.x plugin to inspect the lifecycle of your project. [Documentation](http://buildplan.jcgay.fr/)
+[![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/mojohaus/bp-maven-plugin.svg?label=License)](http://www.apache.org/licenses/)
+[![Maven Central](https://img.shields.io/maven-central/v/org.codehaus.mojo/bp-maven-plugin.svg?label=Maven%20Central)](https://search.maven.org/artifact/org.codehaus.mojo/bp-maven-plugin)
+[![Build Status](https://github.com/mojohaus/bp-maven-plugin/workflows/GitHub%20CI/badge.svg?branch=master)](https://github.com/mojohaus/bp-maven-plugin/actions/workflows/maven.yml?query=branch%3Amaster)
 
-### Usage
-
-Activate the plugin group in your Maven *settings.xml*:
-
-```xml
-<pluginGroups>
-  <pluginGroup>fr.jcgay.maven.plugins</pluginGroup>
-</pluginGroups>
-```
+A Maven 3.x plugin to inspect the lifecycle of your project. [Documentation](http://www.mojohaus.org/bp-maven-plugin/)
 
 ### List plugin executions within a project
 
-	mvn buildplan:list
+	mvn bp:list
 
 ### List plugin executions within phases
 
-	mvn buildplan:list-phase
+	mvn bp:list-phase
 
 It is possible to limit the list to a specific phase:
 
-	mvn buildplan:list-phase -Dbuildplan.phase=test
+	mvn bp:list-phase -Dbp.phase=test
 
 ### List plugin executions by plugins
 
-	mvn buildplan:list-plugin
+	mvn bp:list-plugin
 
 It is possible to limit the list to a specific plugin:
 
-	mvn buildplan:list-plugin -Dbuildplan.plugin=maven-compiler-plugin
+	mvn bp:list-plugin -Dbp.plugin=maven-compiler-plugin
 
 ### List to output file
 
-	mvn buildplan:list -Dbuildplan.outputFile=buildplan_output.txt
-
-# Build
-
-## Status
-
-[![Build Status](https://github.com/jcgay/buildplan-maven-plugin/actions/workflows/maven.yml/badge.svg)](https://github.com/jcgay/buildplan-maven-plugin/actions/workflows/maven.yml)
-[![Coverage Status](https://coveralls.io/repos/jcgay/buildplan-maven-plugin/badge.svg?branch=master)](https://coveralls.io/r/jcgay/buildplan-maven-plugin?branch=master)
-
-## Release
-
-    mvn -B release:prepare release:perform
+	mvn bp:list -Dbp.outputFile=buildplan_output.txt

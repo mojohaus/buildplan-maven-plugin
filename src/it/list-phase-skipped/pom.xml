@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.github.jcgay.buildplan</groupId>
+  <groupId>org.codehaus.mojo.bp</groupId>
   <artifactId>list-phase-skipped</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <description>
-    Test buildplan:list-phase
+    Test bp:list-phase
   </description>
 
 </project>
