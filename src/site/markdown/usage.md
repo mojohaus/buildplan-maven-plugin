@@ -1,12 +1,5 @@
 # Usage
 
-Activate the plugin group in your Maven *settings.xml*:
-
-```
-<pluginGroups>
-    <pluginGroup>fr.jcgay.maven.plugins</pluginGroup>
-</pluginGroups>
-```
 ## List plugin executions within a project
 ```
 > mvn buildplan:list
@@ -83,7 +76,7 @@ Here it is also possible to show the lifecycle(s) by running:
 
 	mvn buildplan:list-phase -Dbuildplan.showLifecycles
 
-Be aware that setting 'buildplan.tasks' to direct plugin-executions (eg 'release:prepare') will show an empty lifecycle and '&lt;no phase&gt;', since they are not mapped.
+Be aware that setting `buildplan.tasks` to direct plugin-executions (eg 'release:prepare') will show an empty lifecycle and '&lt;no phase&gt;', since they are not mapped.
 Also, because executions are collected per phase, direct plugin-executions are shown in the list at the location of the very first execution.
 
 ## List plugin executions by plugins
