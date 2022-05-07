@@ -10,7 +10,7 @@
   <packaging>pom</packaging>
 
   <description>
-    Test buildplan:list on multimodule project with a single output file
+    Test bp:list on multimodule project with a single output file
   </description>
 
   <modules>

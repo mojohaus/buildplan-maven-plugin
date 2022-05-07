@@ -9,7 +9,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <description>
-    Test buildplan:list-phase
+    Test bp:list-phase
   </description>
 
   <build>

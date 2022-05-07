@@ -41,13 +41,13 @@ import org.codehaus.plexus.util.StringUtils;
 public class ListPhaseMojo extends AbstractLifecycleMojo {
 
     /** Display plugin executions only for the specified phase. */
-    @Parameter(property = "buildplan.phase")
+    @Parameter(property = "bp.phase")
     private String phase;
 
-    @Parameter(property = "buildplan.showLifecycles", defaultValue = "false")
+    @Parameter(property = "bp.showLifecycles", defaultValue = "false")
     private boolean showLifecycles;
 
-    @Parameter(property = "buildplan.showAllPhases", defaultValue = "false")
+    @Parameter(property = "bp.showAllPhases", defaultValue = "false")
     private boolean showAllPhases;
 
     public void executeInternal() throws MojoFailureException {

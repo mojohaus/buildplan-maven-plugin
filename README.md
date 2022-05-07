@@ -9,24 +9,24 @@ A Maven 3.x plugin to inspect the lifecycle of your project. [Documentation](htt
 
 ### List plugin executions within a project
 
-	mvn buildplan:list
+	mvn bp:list
 
 ### List plugin executions within phases
 
-	mvn buildplan:list-phase
+	mvn bp:list-phase
 
 It is possible to limit the list to a specific phase:
 
-	mvn buildplan:list-phase -Dbuildplan.phase=test
+	mvn bp:list-phase -Dbp.phase=test
 
 ### List plugin executions by plugins
 
-	mvn buildplan:list-plugin
+	mvn bp:list-plugin
 
 It is possible to limit the list to a specific plugin:
 
-	mvn buildplan:list-plugin -Dbuildplan.plugin=maven-compiler-plugin
+	mvn bp:list-plugin -Dbp.plugin=maven-compiler-plugin
 
 ### List to output file
 
-	mvn buildplan:list -Dbuildplan.outputFile=buildplan_output.txt
+	mvn bp:list -Dbp.outputFile=buildplan_output.txt

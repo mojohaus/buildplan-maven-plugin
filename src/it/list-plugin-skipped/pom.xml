@@ -9,7 +9,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <description>
-    Test buildplan:list-plugin
+    Test bp:list-plugin
   </description>
 
 </project>

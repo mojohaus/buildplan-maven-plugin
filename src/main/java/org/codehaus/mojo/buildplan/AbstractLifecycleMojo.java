@@ -44,19 +44,19 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
     private LifecycleExecutor lifecycleExecutor;
 
     /** Allow to specify which tasks will be used to calculate execution plan. */
-    @Parameter(property = "buildplan.tasks", defaultValue = "deploy")
+    @Parameter(property = "bp.tasks", defaultValue = "deploy")
     private String[] tasks;
 
     /** Allow to specify an output file to bypass console output */
-    @Parameter(property = "buildplan.outputFile")
+    @Parameter(property = "bp.outputFile")
     private File outputFile;
 
     /** Allow to specify appending to the output file */
-    @Parameter(property = "buildplan.appendOutput", defaultValue = "false")
+    @Parameter(property = "bp.appendOutput", defaultValue = "false")
     private boolean appendOutput;
 
     /** Flag to easily skip all checks  */
-    @Parameter(property = "buildplan.skip", defaultValue = "false")
+    @Parameter(property = "bp.skip", defaultValue = "false")
     private boolean skip = false;
 
     protected MavenExecutionPlan calculateExecutionPlan() throws MojoFailureException {

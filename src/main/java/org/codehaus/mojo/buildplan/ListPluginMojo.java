@@ -39,7 +39,7 @@ import org.codehaus.plexus.util.StringUtils;
 public class ListPluginMojo extends AbstractLifecycleMojo {
 
     /** Display plugin executions only for the specified plugin. */
-    @Parameter(property = "buildplan.plugin")
+    @Parameter(property = "bp.plugin")
     private String plugin;
 
     public void executeInternal() throws MojoFailureException {

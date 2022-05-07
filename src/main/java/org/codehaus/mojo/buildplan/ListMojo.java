@@ -41,7 +41,7 @@ import org.codehaus.plexus.util.StringUtils;
       requiresProject = true)
 public class ListMojo extends AbstractLifecycleMojo {
 
-    @Parameter(property = "buildplan.showLifecycles", defaultValue = "false")
+    @Parameter(property = "bp.showLifecycles", defaultValue = "false")
     private boolean showLifecycles;
 
     public void executeInternal() throws MojoFailureException {

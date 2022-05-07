@@ -83,6 +83,7 @@
                 <artifactId>maven-plugin-plugin</artifactId>
                 <configuration>
                     <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+                    <goalPrefix>bp</goalPrefix>
                 </configuration>
                 <executions>
                     <execution>
