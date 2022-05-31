@@ -15,13 +15,11 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
-import org.apache.maven.lifecycle.DefaultLifecycles;
-import org.apache.maven.plugin.MojoExecution;
-
 import java.util.Collection;
 import java.util.Map;
-
-import static com.google.common.base.Objects.toStringHelper;
+import java.util.StringJoiner;
+import org.apache.maven.lifecycle.DefaultLifecycles;
+import org.apache.maven.plugin.MojoExecution;
 
 public class ListTableDescriptor extends AbstractTableDescriptor {
 
@@ -66,13 +64,15 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
 
     @Override
     public String toString() {
-        return toStringHelper(this).add("Plugin column size", getPluginSize())
-                                   .add("Phase column size", getPhaseSize())
-                                   .add("Lifecycle column size", getLifecycleSize())
-                                   .add("Execution ID column size", getExecutionIdSize())
-                                   .add("Goal column size", getGoalSize())
-                                   .add("width", width())
-                                   .toString();
+        return new StringJoiner(", ", ListTableDescriptor.class.getSimpleName() + "[", "]")
+            .add("Plugin column size=" + pluginSize)
+            .add("Phase column size=" + phaseSize)
+            .add("Lifecycle column size=" + lifecycleSize)
+            .add("Execution ID column size=" + executionIdSize)
+            .add("Goal column size=" + goalSize)
+            .add("width=" + width())
+            .toString();
+
     }
 
     public int getPluginSize() {

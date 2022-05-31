@@ -15,11 +15,11 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
+import static org.codehaus.plexus.util.StringUtils.defaultString;
+
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
-
-import static com.google.common.base.Strings.nullToEmpty;
 
 public class MojoExecutionDisplay {
 
@@ -30,23 +30,23 @@ public class MojoExecutionDisplay {
     }
 
     public String getPhase() {
-        return nullToEmpty(execution.getLifecyclePhase());
+        return defaultString(execution.getLifecyclePhase());
     }
 
     public String getLifecycle(DefaultLifecycles defaultLifecycles) {
         Lifecycle lifecycle = defaultLifecycles.get(execution.getLifecyclePhase());
-        return nullToEmpty(lifecycle == null ? null : lifecycle.getId());
+        return defaultString(lifecycle == null ? null : lifecycle.getId());
     }
 
     public String getArtifactId() {
-        return nullToEmpty(execution.getArtifactId());
+        return defaultString(execution.getArtifactId());
     }
 
     public String getGoal() {
-        return nullToEmpty(execution.getGoal());
+        return defaultString(execution.getGoal());
     }
 
     public String getExecutionId() {
-        return nullToEmpty(execution.getExecutionId());
+        return defaultString(execution.getExecutionId());
     }
 }

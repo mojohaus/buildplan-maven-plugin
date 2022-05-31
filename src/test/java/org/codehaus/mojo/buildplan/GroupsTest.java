@@ -15,15 +15,16 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import com.google.common.collect.Multimap;
-import org.apache.maven.plugin.MojoExecution;
-import org.junit.Test;
-
-import java.util.Map;
-
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.codehaus.mojo.buildplan.model.builder.MojoExecutionBuilder.aMojoExecution;
+
+import java.util.Map;
+import org.apache.maven.plugin.MojoExecution;
+import org.codehaus.mojo.buildplan.Groups.ByPhase;
+import org.codehaus.mojo.buildplan.Groups.ByPlugin;
+import org.codehaus.mojo.buildplan.util.Multimap;
+import org.junit.Test;
 
 public class GroupsTest {
 
@@ -51,7 +52,7 @@ public class GroupsTest {
                                                 .withLifecyclePhase("d-phase")
                                                 .build();
 
-        Multimap<String,MojoExecution> result = Groups.ByPhase.of(asList(pluginD, pluginA, pluginC, pluginB));
+        Multimap<String, MojoExecution> result = Groups.ByPhase.of(asList(pluginD, pluginA, pluginC, pluginB));
 
         assertThat(result.keySet()).containsOnly("phase", "a-phase", "d-phase");
         assertThat(result.get("phase")).containsOnly(pluginA, pluginB);

@@ -15,9 +15,12 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.Multimap;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
+import static org.codehaus.mojo.buildplan.display.Output.lineSeparator;
 
+import java.util.Collection;
+import java.util.Map;
 import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoFailureException;
@@ -26,13 +29,8 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.buildplan.display.ListPhaseTableDescriptor;
 import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
 import org.codehaus.mojo.buildplan.display.TableDescriptor;
-
-import java.util.Collection;
-import java.util.Map;
-
-import static java.util.Collections.emptyList;
-import static java.util.Collections.emptyMap;
-import static org.codehaus.mojo.buildplan.display.Output.lineSeparator;
+import org.codehaus.mojo.buildplan.util.Multimap;
+import org.codehaus.plexus.util.StringUtils;
 
 /**
  * List plugin executions by phase for the current project.
@@ -100,6 +98,6 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
     }
 
     private String phaseTitleLine(TableDescriptor descriptor, String key) {
-        return key + " " + Strings.repeat("-", descriptor.width() - key.length());
+        return key + " " + StringUtils.repeat("-", descriptor.width() - key.length());
     }
 }

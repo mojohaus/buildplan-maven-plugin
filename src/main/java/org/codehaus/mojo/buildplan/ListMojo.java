@@ -15,7 +15,6 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import com.google.common.base.Strings;
 
 import static org.codehaus.mojo.buildplan.display.Output.lineSeparator;
 import static org.codehaus.mojo.buildplan.display.TableColumn.ARTIFACT_ID;
@@ -32,6 +31,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.buildplan.display.ListTableDescriptor;
 import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
 import org.codehaus.mojo.buildplan.display.TableDescriptor;
+import org.codehaus.plexus.util.StringUtils;
 
 /**
  * List plugin executions for the current project.
@@ -99,6 +99,6 @@ public class ListMojo extends AbstractLifecycleMojo {
     }
 
     private String titleSeparator(TableDescriptor descriptor) {
-        return Strings.repeat("-", descriptor.width());
+        return StringUtils.repeat("-", descriptor.width());
     }
 }
