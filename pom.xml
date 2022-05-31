@@ -112,7 +112,7 @@
             <plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-                <version>3.0</version>
+                <version>4.1</version>
                 <configuration>
                     <header>com/mycila/licenses/APACHE-2</header>
                     <properties>
