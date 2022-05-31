@@ -2,7 +2,7 @@
 
 [![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/mojohaus/buildplan-maven-plugin.svg?label=License)](http://www.apache.org/licenses/)
 [![Maven Central](https://img.shields.io/maven-central/v/org.codehaus.mojo/buildplan-maven-plugin.svg?label=Maven%20Central)](https://search.maven.org/artifact/org.codehaus.mojo/buildplan-maven-plugin)
-[![Build Status](https://github.com/mojohaus/buildplan-maven-plugin/workflows/GitHub%20CI/badge.svg?branch=master)](https://github.com/mojohaus/buildplan-maven-plugin/actions/workflows/maven.yml?query=branch%3Amaster)
+[![Build Status](https://github.com/mojohaus/buildplan-maven-plugin/actions/workflows/maven.yml/badge.svg)](https://github.com/mojohaus/buildplan-maven-plugin/actions/workflows/maven.yml)
 
 A Maven 3.x plugin to inspect the lifecycle of your project. [Documentation](http://www.mojohaus.org/buildplan-maven-plugin/)
 
