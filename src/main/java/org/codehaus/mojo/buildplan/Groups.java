@@ -15,18 +15,17 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.LinkedListMultimap;
-import com.google.common.collect.Multimap;
-import org.apache.maven.lifecycle.DefaultLifecycles;
-import org.apache.maven.lifecycle.Lifecycle;
-import org.apache.maven.plugin.MojoExecution;
-import org.codehaus.plexus.logging.console.ConsoleLogger;
+import static org.codehaus.mojo.buildplan.util.Objects.firstNonNull;
+import static org.codehaus.plexus.util.StringUtils.isEmpty;
 
 import java.util.Collections;
 import java.util.List;
-
-import static com.google.common.base.Objects.firstNonNull;
+import org.apache.maven.lifecycle.DefaultLifecycles;
+import org.apache.maven.lifecycle.Lifecycle;
+import org.apache.maven.plugin.MojoExecution;
+import org.codehaus.mojo.buildplan.util.LinkedMultimap;
+import org.codehaus.mojo.buildplan.util.Multimap;
+import org.codehaus.plexus.logging.console.ConsoleLogger;
 
 public class Groups {
 
@@ -37,8 +36,8 @@ public class Groups {
         }
 
         public static Multimap<String,MojoExecution> of(List<MojoExecution> executions, String artifactIdFilter) {
-            Multimap<String, MojoExecution> result = LinkedListMultimap.create();
-            boolean notFiltering = Strings.isNullOrEmpty(artifactIdFilter);
+            Multimap<String, MojoExecution> result = new LinkedMultimap<>();
+            boolean notFiltering = isEmpty(artifactIdFilter);
             for (MojoExecution execution : executions) {
                 if (notFiltering || execution.getArtifactId().equalsIgnoreCase(artifactIdFilter)) {
                     result.put(execution.getArtifactId(), execution);
@@ -59,8 +58,8 @@ public class Groups {
         }
 
         public static Multimap<String, MojoExecution> of(List<MojoExecution> executions, Options options) {
-            Multimap<String, MojoExecution> result = LinkedListMultimap.create();
-            boolean notFiltering = Strings.isNullOrEmpty(options.phase);
+            Multimap<String, MojoExecution> result = new LinkedMultimap<>();
+            boolean notFiltering = isEmpty(options.phase);
             for (MojoExecution execution : executions) {
                 String phase = firstNonNull(execution.getLifecyclePhase(), "<no phase>");
                 if (options.showingAllPhases) {

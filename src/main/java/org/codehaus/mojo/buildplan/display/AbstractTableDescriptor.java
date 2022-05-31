@@ -15,18 +15,18 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
-import org.apache.maven.lifecycle.DefaultLifecycles;
-import org.apache.maven.lifecycle.Lifecycle;
-import org.apache.maven.plugin.MojoExecution;
-import org.apache.maven.plugin.descriptor.MojoDescriptor;
+import static org.codehaus.plexus.util.StringUtils.defaultString;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.maven.lifecycle.DefaultLifecycles;
+import org.apache.maven.lifecycle.Lifecycle;
+import org.apache.maven.plugin.MojoExecution;
+import org.apache.maven.plugin.descriptor.MojoDescriptor;
+import org.codehaus.mojo.buildplan.util.LinkedMultimap;
+import org.codehaus.mojo.buildplan.util.Multimap;
 
 public abstract class AbstractTableDescriptor implements TableDescriptor {
 
@@ -34,7 +34,7 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
 
         Map<TableColumn, Integer> result = new HashMap<>();
 
-        Multimap<TableColumn, Integer> count = ArrayListMultimap.create();
+        Multimap<TableColumn, Integer> count = new LinkedMultimap<>();
         for (MojoExecution execution : executions) {
             for (TableColumn column : columns) {
                 switch (column) {
@@ -76,6 +76,6 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
     }
 
     private static int safeLength(String string) {
-        return Strings.nullToEmpty(string).length();
+        return defaultString(string).length();
     }
 }

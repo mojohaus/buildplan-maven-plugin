@@ -15,21 +15,20 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import com.google.common.base.Strings;
-import com.google.common.collect.Multimap;
-
-import org.apache.maven.plugin.MojoExecution;
-import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.Mojo;
-import org.apache.maven.plugins.annotations.Parameter;
-import org.codehaus.mojo.buildplan.display.ListPluginTableDescriptor;
-import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
-import org.codehaus.mojo.buildplan.display.TableDescriptor;
-
 import static org.codehaus.mojo.buildplan.display.Output.lineSeparator;
 
 import java.util.Collection;
 import java.util.Map;
+import org.apache.maven.plugin.MojoExecution;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.codehaus.mojo.buildplan.Groups.ByPlugin;
+import org.codehaus.mojo.buildplan.display.ListPluginTableDescriptor;
+import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
+import org.codehaus.mojo.buildplan.display.TableDescriptor;
+import org.codehaus.mojo.buildplan.util.Multimap;
+import org.codehaus.plexus.util.StringUtils;
 
 /**
  * List plugin executions by plugin for the current project.
@@ -74,6 +73,6 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
     }
 
     private String pluginTitleLine(TableDescriptor descriptor, String key) {
-        return key + " " + Strings.repeat("-", descriptor.width() - key.length());
+        return key + " " + StringUtils.repeat("-", descriptor.width() - key.length());
     }
 }
