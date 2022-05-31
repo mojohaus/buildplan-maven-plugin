@@ -122,6 +122,7 @@
                         <exclude>src/it/**</exclude>
                         <exclude>.github/**</exclude>
                         <exclude>jreleaser.yml</exclude>
+                        <exclude>.gitpod.yml</exclude>
                     </excludes>
                 </configuration>
                 <executions>
