@@ -191,6 +191,13 @@
                     <configFile>jreleaser.yml</configFile>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <localCheckout>true</localCheckout>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
