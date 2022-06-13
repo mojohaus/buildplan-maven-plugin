@@ -5,4 +5,7 @@ updates:
   schedule:
     interval: daily
     time: "04:00"
+  ignore:
+    # ignore Maven Core updates
+    - dependency-name: "org.apache.maven:*"
   open-pull-requests-limit: 10
