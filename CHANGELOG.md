@@ -1,3 +1,9 @@
+# 2.0.0
+
+- Add missing documentation on showLifecycles and showAllPhases ([d6d115a](https://github.com/mojohaus/buildplan-maven-plugin/commit/d6d115ada8e83a96ee54432a4f103e6bde284e62))
+- Switch to MojoHaus ([878bc59](https://github.com/mojohaus/buildplan-maven-plugin/commit/878bc59f10d3970b349dd88600c1450fcb3af589)) by [@hboutemy](https://github.com/hboutemy)
+- Activate Reproducible Builds ([a9eba7e](https://github.com/mojohaus/buildplan-maven-plugin/commit/a9eba7e88e0f382fe7ef12227dcecb11fa907d09)) by [@hboutemy](https://github.com/hboutemy)
+
 # 1.5
 
 - Hide empty line from empty phase ([f3cc6c8](http://github.com/mojohaus/buildplan-maven-plugin/commit/f3cc6c83614171b8fc4627a79b97958eb47cab06))
