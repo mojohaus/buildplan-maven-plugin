@@ -41,6 +41,7 @@ import org.codehaus.plexus.util.StringUtils;
       requiresProject = true)
 public class ListMojo extends AbstractLifecycleMojo {
 
+    /** Will show in which lifecycle a phase was defined (if any) */
     @Parameter(property = "buildplan.showLifecycles", defaultValue = "false")
     private boolean showLifecycles;
 

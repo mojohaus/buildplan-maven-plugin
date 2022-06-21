@@ -44,9 +44,11 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
     @Parameter(property = "buildplan.phase")
     private String phase;
 
+    /** Will show in which lifecycle a phase was defined (if any) */
     @Parameter(property = "buildplan.showLifecycles", defaultValue = "false")
     private boolean showLifecycles;
 
+    /** Will print all phases, even if no mapping to an execution is available */
     @Parameter(property = "buildplan.showAllPhases", defaultValue = "false")
     private boolean showAllPhases;
 
