@@ -1,0 +1,22 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,HelpMojo,856,0,108,0,153,0,70,0,16,0
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,AbstractLifecycleMojo,97,0,4,0,19,0,6,0,4,0
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,ListPhaseMojo,193,0,16,0,35,0,14,0,6,0
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,Groups.ByPlugin,3,37,0,6,1,8,1,5,1,2
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,Groups,3,0,0,0,1,0,1,0,1,0
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,SynchronizedFileReporter,21,0,0,0,6,0,2,0,2,0
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,ListPluginMojo,130,0,6,0,21,0,7,0,4,0
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,ListMojo,196,0,8,0,36,0,9,0,5,0
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,Groups.Options,10,11,0,0,4,5,2,2,2,2
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,NoMojoExecution,17,0,0,0,7,0,6,0,6,0
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,Groups.ByPhase,21,66,3,7,4,12,4,7,2,4
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.util,LinkedMultimap,14,39,0,0,4,7,2,6,2,6
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.util,Objects,0,7,0,2,0,1,0,2,0,1
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,ListPluginTableDescriptor,51,72,0,0,5,19,2,9,2,9
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,AbstractTableDescriptor,6,154,3,17,1,27,3,13,0,4
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,TableColumn,0,70,0,0,0,10,0,3,0,3
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,ListTableDescriptor,94,153,1,1,12,34,3,15,2,15
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,ListPhaseTableDescriptor,51,68,0,0,5,19,2,9,2,9
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,TableDescriptor,0,4,0,0,0,1,0,1,0,1
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,MojoExecutionDisplay,14,26,2,0,2,7,2,5,1,5
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,Output,6,0,0,0,2,0,2,0,2,0

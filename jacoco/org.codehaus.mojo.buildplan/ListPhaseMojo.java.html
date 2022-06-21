@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ListPhaseMojo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BuildPlan Maven Plugin</a> &gt; <a href="index.source.html" class="el_package">org.codehaus.mojo.buildplan</a> &gt; <span class="el_source">ListPhaseMojo.java</span></div><h1>ListPhaseMojo.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2012 Jean-Christophe Gay (contact@jeanchristophegay.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.codehaus.mojo.buildplan;
+
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
+import static org.codehaus.mojo.buildplan.display.Output.lineSeparator;
+
+import java.util.Collection;
+import java.util.Map;
+import org.apache.maven.lifecycle.Lifecycle;
+import org.apache.maven.plugin.MojoExecution;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.codehaus.mojo.buildplan.display.ListPhaseTableDescriptor;
+import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
+import org.codehaus.mojo.buildplan.display.TableDescriptor;
+import org.codehaus.mojo.buildplan.util.Multimap;
+import org.codehaus.plexus.util.StringUtils;
+
+/**
+ * List plugin executions by phase for the current project.
+ */
+@Mojo(name = &quot;list-phase&quot;,
+      threadSafe = true,
+      requiresProject = true)
+<span class="nc" id="L41">public class ListPhaseMojo extends AbstractLifecycleMojo {</span>
+
+    /** Display plugin executions only for the specified phase. */
+    @Parameter(property = &quot;buildplan.phase&quot;)
+    private String phase;
+
+    /** Will show in which lifecycle a phase was defined (if any) */
+    @Parameter(property = &quot;buildplan.showLifecycles&quot;, defaultValue = &quot;false&quot;)
+    private boolean showLifecycles;
+
+    /** Will print all phases, even if no mapping to an execution is available */
+    @Parameter(property = &quot;buildplan.showAllPhases&quot;, defaultValue = &quot;false&quot;)
+    private boolean showAllPhases;
+
+    public void executeInternal() throws MojoFailureException {
+<span class="nc" id="L56">        Groups.Options options = new Groups.Options(defaultLifecycles);</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (showAllPhases) {</span>
+<span class="nc" id="L58">            options = options.showingAllPhases();</span>
+        }
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (showLifecycles) {</span>
+<span class="nc" id="L61">            options = options.showingLifecycles();</span>
+        }
+
+<span class="nc" id="L64">        Multimap&lt;String,MojoExecution&gt; phases = Groups.ByPhase.of(calculateExecutionPlan().getMojoExecutions(), options);</span>
+
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (!phases.isEmpty()) {</span>
+<span class="nc" id="L67">            TableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values(), defaultLifecycles);</span>
+<span class="nc" id="L68">            Lifecycle currentLifecycle = null;</span>
+<span class="nc" id="L69">            StringBuilder output = new StringBuilder();</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">            for (Map.Entry&lt;String, Collection&lt;MojoExecution&gt;&gt; currentPhase : phases.asMap().entrySet()) {</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">                if (showLifecycles) {</span>
+<span class="nc" id="L72">                    Lifecycle lifecycleForPhase = defaultLifecycles.get(currentPhase.getKey());</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">                    if (lifecycleForPhase == null) {</span>
+<span class="nc" id="L74">                        lifecycleForPhase = new Lifecycle(&quot;&quot;, emptyList(), emptyMap());</span>
+                    }
+<span class="nc bnc" id="L76" title="All 2 branches missed.">                    if (!lifecycleForPhase.equals(currentLifecycle)) {</span>
+<span class="nc" id="L77">                        currentLifecycle = lifecycleForPhase;</span>
+<span class="nc" id="L78">                        output.append(lineSeparator()).append(lineSeparator()).append(&quot;[&quot;)</span>
+<span class="nc" id="L79">                            .append(currentLifecycle.getId()).append(&quot;]&quot;);</span>
+                    }
+                }
+<span class="nc" id="L82">                output.append(lineSeparator())</span>
+<span class="nc" id="L83">                    .append(phaseTitleLine(descriptor, currentPhase.getKey()));</span>
+<span class="nc" id="L84">                currentPhase.getValue().stream()</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">                    .filter(execution -&gt; execution != NoMojoExecution.INSTANCE)</span>
+<span class="nc" id="L86">                    .forEach(execution -&gt; output.append(lineSeparator()).append(line(descriptor.rowFormat(), execution)));</span>
+<span class="nc" id="L87">            }</span>
+<span class="nc" id="L88">            handleOutput(output.toString());</span>
+<span class="nc" id="L89">        } else {</span>
+<span class="nc" id="L90">            getLog().warn(&quot;No plugin execution found within phase: &quot; + phase);</span>
+        }
+<span class="nc" id="L92">    }</span>
+
+    private String line(String rowFormat, MojoExecution execution) {
+<span class="nc" id="L95">        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);</span>
+
+<span class="nc" id="L97">        return String.format(rowFormat, display.getArtifactId(),</span>
+<span class="nc" id="L98">                                        display.getExecutionId(),</span>
+<span class="nc" id="L99">                                        display.getGoal());</span>
+    }
+
+    private String phaseTitleLine(TableDescriptor descriptor, String key) {
+<span class="nc" id="L103">        return key + &quot; &quot; + StringUtils.repeat(&quot;-&quot;, descriptor.width() - key.length());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
