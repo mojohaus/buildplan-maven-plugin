@@ -172,6 +172,7 @@
                     <showVersion>true</showVersion>
                     <postBuildHookScript>verify.groovy</postBuildHookScript>
                     <mavenOpts>${argLine}</mavenOpts>
+                    <writeJunitReport>true</writeJunitReport>
                 </configuration>
                 <executions>
                     <execution>
