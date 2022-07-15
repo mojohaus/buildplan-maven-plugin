@@ -40,8 +40,7 @@
     </licenses>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <mojo.java.target>1.8</mojo.java.target>
         <project.build.outputTimestamp>2022-06-21T18:36:44Z</project.build.outputTimestamp>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
     </properties>
@@ -214,32 +213,13 @@
 
     <profiles>
         <profile>
-            <id>build-with-toolchains</id>
+            <id>compile-release</id>
             <activation>
                 <jdk>!1.8</jdk>
             </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-toolchains-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>toolchain</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <toolchains>
-                                <jdk>
-                                    <version>${maven.compiler.target}</version>
-                                </jdk>
-                            </toolchains>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
+            <properties>
+                <maven.compiler.release>8</maven.compiler.release>
+            </properties>
         </profile>
     </profiles>
 </project>
