@@ -1,7 +1,7 @@
 [INFO] Build Plan for list-multimodule: 
 -----------------------------------------------------------------------
-PLUGIN                | PHASE   | LIFECYCLE | ID              | GOAL   
+LIFECYCLE | PHASE   | PLUGIN                | GOAL    | ID             
 -----------------------------------------------------------------------
-maven-clean-plugin    | clean   | clean     | default-clean   | clean  
-versions-maven-plugin |         |           | default-cli     | set    
-maven-install-plugin  | install | default   | default-install | install
+clean     | clean   | maven-clean-plugin    | clean   | default-clean  
+          |         | versions-maven-plugin | set     | default-cli    
+default   | install | maven-install-plugin  | install | default-install

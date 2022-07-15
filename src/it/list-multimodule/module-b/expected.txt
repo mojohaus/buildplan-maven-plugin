@@ -1,14 +1,14 @@
 [INFO] Build Plan for list-multimodule-module-b: 
 ------------------------------------------------------------------------------------------
-PLUGIN                 | PHASE                  | ID                    | GOAL            
+PHASE                  | PLUGIN                 | GOAL             | ID                   
 ------------------------------------------------------------------------------------------
-maven-resources-plugin | process-resources      | default-resources     | resources       
-maven-compiler-plugin  | compile                | default-compile       | compile         
-maven-resources-plugin | process-test-resources | default-testResources | testResources   
-maven-compiler-plugin  | test-compile           | default-testCompile   | testCompile     
-maven-surefire-plugin  | test                   | default-test          | test            
-maven-jar-plugin       | package                | default-jar           | jar             
-maven-failsafe-plugin  | integration-test       | default               | integration-test
-maven-failsafe-plugin  | verify                 | default               | verify          
-maven-install-plugin   | install                | default-install       | install         
-maven-deploy-plugin    | deploy                 | default-deploy        | deploy          
+process-resources      | maven-resources-plugin | resources        | default-resources    
+compile                | maven-compiler-plugin  | compile          | default-compile      
+process-test-resources | maven-resources-plugin | testResources    | default-testResources
+test-compile           | maven-compiler-plugin  | testCompile      | default-testCompile  
+test                   | maven-surefire-plugin  | test             | default-test         
+package                | maven-jar-plugin       | jar              | default-jar          
+integration-test       | maven-failsafe-plugin  | integration-test | default              
+verify                 | maven-failsafe-plugin  | verify           | default              
+install                | maven-install-plugin   | install          | default-install      
+deploy                 | maven-deploy-plugin    | deploy           | default-deploy       

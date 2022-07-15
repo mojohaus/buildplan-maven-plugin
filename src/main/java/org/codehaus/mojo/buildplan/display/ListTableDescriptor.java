@@ -44,17 +44,17 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
 
     public String rowFormat() {
         StringBuilder builder = new StringBuilder();
-        builder.append(FORMAT_LEFT_ALIGN).append(getPluginSize()).append(FORMAT_STRING)
-               .append(SEPARATOR)
-               .append(FORMAT_LEFT_ALIGN).append(getPhaseSize()).append(FORMAT_STRING)
-               .append(SEPARATOR);
         if (lifecycleSize > 0) {
             builder.append(FORMAT_LEFT_ALIGN).append(getLifecycleSize()).append(FORMAT_STRING)
-                   .append(SEPARATOR);
+                .append(SEPARATOR);
         }
-        builder.append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING)
+        builder.append(FORMAT_LEFT_ALIGN).append(getPhaseSize()).append(FORMAT_STRING)
                .append(SEPARATOR)
-               .append(FORMAT_LEFT_ALIGN).append(getGoalSize()).append(FORMAT_STRING);
+               .append(FORMAT_LEFT_ALIGN).append(getPluginSize()).append(FORMAT_STRING)
+               .append(SEPARATOR);
+        builder.append(FORMAT_LEFT_ALIGN).append(getGoalSize()).append(FORMAT_STRING)
+               .append(SEPARATOR)
+               .append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING);
         return builder.toString();
     }
 
