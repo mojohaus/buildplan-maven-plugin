@@ -1,6 +1,6 @@
 [INFO] Build Plan for list-multimodule: 
 ----------------------------------------------------------
-PLUGIN               | PHASE   | ID              | GOAL   
+PHASE   | PLUGIN               | GOAL    | ID             
 ----------------------------------------------------------
-maven-install-plugin | install | default-install | install
-maven-deploy-plugin  | deploy  | default-deploy  | deploy 
+install | maven-install-plugin | install | default-install
+deploy  | maven-deploy-plugin  | deploy  | default-deploy 

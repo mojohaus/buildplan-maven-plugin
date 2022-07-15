@@ -15,19 +15,18 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
-import org.apache.maven.lifecycle.DefaultLifecycles;
-import org.apache.maven.lifecycle.Lifecycle;
-import org.apache.maven.plugin.MojoExecution;
-import org.codehaus.plexus.logging.console.ConsoleLogger;
-import org.junit.Before;
-import org.junit.Test;
-
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.codehaus.mojo.buildplan.model.builder.MojoExecutionBuilder.aMojoExecution;
 
 import java.util.Collections;
 import java.util.HashMap;
+import org.apache.maven.lifecycle.DefaultLifecycles;
+import org.apache.maven.lifecycle.Lifecycle;
+import org.apache.maven.plugin.MojoExecution;
+import org.codehaus.plexus.logging.console.ConsoleLogger;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ListTableDescriptorTest {
 
@@ -164,6 +163,6 @@ public class ListTableDescriptorTest {
 
         String result = descriptor.rowFormat();
 
-        assertThat(result).isEqualTo("%-1s | %-2s | %-3s | %-4s");
+        assertThat(result).isEqualTo("%-2s | %-1s | %-4s | %-3s");
     }
 }

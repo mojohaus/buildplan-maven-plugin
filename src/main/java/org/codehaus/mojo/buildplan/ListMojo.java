@@ -77,25 +77,25 @@ public class ListMojo extends AbstractLifecycleMojo {
 
         if (showLifecycles) {
             return String.format(row,
-                display.getArtifactId(),
-                display.getPhase(),
                 display.getLifecycle(defaultLifecycles),
-                display.getExecutionId(),
-                display.getGoal());
+                display.getPhase(),
+                display.getArtifactId(),
+                display.getGoal(),
+                display.getExecutionId());
         } else {
             return String.format(row,
-                    display.getArtifactId(),
                     display.getPhase(),
-                    display.getExecutionId(),
-                    display.getGoal());
+                    display.getArtifactId(),
+                    display.getGoal(),
+                    display.getExecutionId());
         }
     }
 
     private String tableHead(String row) {
         if (showLifecycles) {
-            return String.format(row, ARTIFACT_ID.title(), PHASE.title(), LIFECYCLE.title(), EXECUTION_ID.title(), GOAL.title());
+            return String.format(row, LIFECYCLE.title(), PHASE.title(), ARTIFACT_ID.title(), GOAL.title(), EXECUTION_ID.title());
         } else {
-            return String.format(row, ARTIFACT_ID.title(), PHASE.title(), EXECUTION_ID.title(), GOAL.title());
+            return String.format(row, PHASE.title(), ARTIFACT_ID.title(), GOAL.title(), EXECUTION_ID.title());
         }
     }
 
