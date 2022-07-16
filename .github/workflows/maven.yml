@@ -26,5 +26,14 @@ jobs:
         files: |
             target/surefire-reports/*.xml
             target/invoker-reports/TEST*.xml
+    - name: Publish Code Coverage in PR
+      id: jacoco
+      uses: madrapps/jacoco-report@v1.2
+      with:
+        paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+        token: ${{ secrets.GITHUB_TOKEN }}
+        min-coverage-overall: 55
+        min-coverage-changed-files: 70
+      if: github.event_name == 'pull_request'
     - name: Build documentation
       run: ./mvnw --batch-mode site
