@@ -1,0 +1,17 @@
+name-template: 'Release v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+categories:
+    - title: '🚀 Features'
+      labels:
+          - 'feature'
+    - title: '🐛 Bug Fixes'
+      labels:
+          - 'bug'
+    - title: '🧰 Maintenance'
+      label: 'chore'
+    - title: '⚙️ Dependencies'
+      label: 'dependencies'
+template: |
+    ## What’s Changed
+
+    $CHANGES
