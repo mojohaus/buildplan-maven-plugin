@@ -43,6 +43,8 @@
         <mojo.java.target>1.8</mojo.java.target>
         <project.build.outputTimestamp>2022-06-21T18:36:44Z</project.build.outputTimestamp>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
+        <doxia.version>1.10</doxia.version>
+        <maven-reporting.version>3.1.0</maven-reporting.version>
         <itf.version>0.11.0</itf.version>
     </properties>
 
@@ -83,6 +85,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.15.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
             <scope>provided</scope>
@@ -94,9 +102,35 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-artifact</artifactId>
+            <version>${project.prerequisites.maven}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.doxia</groupId>
+            <artifactId>doxia-sink-api</artifactId>
+            <version>${doxia.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.doxia</groupId>
+            <artifactId>doxia-site-renderer</artifactId>
+            <version>${doxia.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.reporting</groupId>
+            <artifactId>maven-reporting-impl</artifactId>
+            <version>${maven-reporting.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.reporting</groupId>
+            <artifactId>maven-reporting-api</artifactId>
+            <version>${maven-reporting.version}</version>
         </dependency>
     </dependencies>
 

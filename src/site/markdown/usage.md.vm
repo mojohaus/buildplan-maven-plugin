@@ -1,6 +1,6 @@
 # Usage
 
-## List plugin executions within a project
+#[[##]]# List plugin executions within a project
 ```
 > mvn buildplan:list
 
@@ -32,7 +32,7 @@ If you want to show the lifecycle that defines the listed phase(s), add this par
 
 	mvn buildplan:list-phase -Dbuildplan.showLifecycles
 
-## List plugin executions within phases
+#[[##]]# List plugin executions within phases
 ```
 > mvn buildplan:list-phase
 
@@ -79,7 +79,7 @@ Here it is also possible to show the lifecycle(s) by running:
 Be aware that setting `buildplan.tasks` to direct plugin-executions (eg 'release:prepare') will show an empty lifecycle and '&lt;no phase&gt;', since they are not mapped.
 Also, because executions are collected per phase, direct plugin-executions are shown in the list at the location of the very first execution.
 
-## List plugin executions by plugins
+#[[##]]# List plugin executions by plugins
 ```
 > mvn buildplan:list-plugin
 
@@ -117,3 +117,34 @@ It is possible to limit the list to a specific plugin:
 It is possible to redirect the output to a file:
 
 	mvn buildplan:list-plugin -Dbuildplan.outputFile=buildplan_output.txt
+
+#[[##]]# Generate the report as part of project reports
+
+To generate the report as part of the site generation, add the following in the `<reporting>` section of your POM:
+
+```
+    <project>
+      ...
+      <reporting>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>buildplan-maven-plugin</artifactId>
+            <version>${project.version}</version>
+          </plugin>
+        </plugins>
+      </reporting>
+      ...
+    </project>
+```
+
+When `mvn site` is invoked, the report will automatically be
+  included in the Project Reports menu as shown in the figure below.
+
+![buildplan report example](images/report-example.png "BuildPlan report example")
+
+#[[##]]# Generate the report in a standalone fashion
+
+    mvn buildplan:report
+
+A HTML report should be generated in `${basedir}/target/site/buildplan-report.html`.
