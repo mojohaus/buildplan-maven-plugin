@@ -30,3 +30,7 @@ It is possible to limit the list to a specific plugin:
 ### List to output file
 
 	mvn buildplan:list -Dbuildplan.outputFile=buildplan_output.txt
+
+### Report plugin executions within a project
+
+   mvn buildplan:report
