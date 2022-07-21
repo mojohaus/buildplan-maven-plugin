@@ -39,8 +39,7 @@ public class LinkedMultimap<K, V> implements Multimap<K, V> {
 
     @Override
     public boolean put(K key, V value) {
-        map.computeIfAbsent(key, k -> new ArrayList<>());
-        return map.get(key).add(value);
+        return map.computeIfAbsent(key, k -> new ArrayList<>()).add(value);
     }
 
     @Override

@@ -37,8 +37,7 @@ import org.codehaus.plexus.util.StringUtils;
  * List plugin executions for the current project.
  */
 @Mojo(name = "list",
-      threadSafe = true,
-      requiresProject = true)
+      threadSafe = true)
 public class ListMojo extends AbstractLifecycleMojo {
 
     /** Will show in which lifecycle a phase was defined (if any) */
