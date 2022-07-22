@@ -25,7 +25,7 @@ jobs:
       with:
         files: |
             target/surefire-reports/*.xml
-            target/invoker-reports/TEST*.xml
+            target/failsafe-reports/TEST*.xml
     - name: Publish Code Coverage in PR
       id: jacoco
       uses: madrapps/jacoco-report@v1.2
