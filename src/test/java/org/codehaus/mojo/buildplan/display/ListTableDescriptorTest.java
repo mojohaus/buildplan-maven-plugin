@@ -21,20 +21,22 @@ import static org.codehaus.mojo.buildplan.model.builder.MojoExecutionBuilder.aMo
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
 import org.codehaus.plexus.logging.console.ConsoleLogger;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ListTableDescriptorTest {
 
     private DefaultLifecycles defaultLifecycles;
 
-    @Before
-    public void prepare_default_lifecycle() {
-        HashMap<String, Lifecycle> defaultLifecyclesMap = new HashMap<>();
+    @BeforeEach
+    void beforeEach() {
+        Map<String, Lifecycle> defaultLifecyclesMap = new HashMap<>();
         for (String lifecycleName : DefaultLifecycles.STANDARD_LIFECYCLES) {
             defaultLifecyclesMap.put(lifecycleName, new Lifecycle(lifecycleName, Collections.emptyList(), Collections.emptyMap()));
         }
@@ -42,7 +44,7 @@ public class ListTableDescriptorTest {
     }
 
     @Test
-    public void should_add_all_size_and_the_separator_size_to_get_descriptor_width() {
+    void should_add_all_size_and_the_separator_size_to_get_descriptor_width() {
 
         ListTableDescriptor descriptor = new ListTableDescriptor().setExecutionIdSize(1)
                                                                   .setGoalSize(2)
@@ -104,7 +106,7 @@ public class ListTableDescriptorTest {
     }
 
     @Test
-    public void should_not_return_zero_as_max_size_when_phase_is_null() {
+    void should_not_return_zero_as_max_size_when_phase_is_null() {
 
         MojoExecution execution = aMojoExecution().withArtifactId("plugin-a")
                 .withLifecyclePhase(null)
@@ -119,7 +121,7 @@ public class ListTableDescriptorTest {
     }
 
     @Test
-    public void should_return_column_title_as_max_size_when_source_is_null() {
+    void should_return_column_title_as_max_size_when_source_is_null() {
 
         MojoExecution execution = aMojoExecution().withArtifactId(null)
                 .withLifecyclePhase(null)
@@ -137,7 +139,7 @@ public class ListTableDescriptorTest {
     }
 
     @Test
-    public void should_return_column_title_as_max_size_when_source_is_smaller() {
+    void should_return_column_title_as_max_size_when_source_is_smaller() {
 
         MojoExecution execution = aMojoExecution().withArtifactId("a")
                 .withLifecyclePhase("a")
@@ -154,7 +156,7 @@ public class ListTableDescriptorTest {
     }
 
     @Test
-    public void should_build_a_row_format_for_a_list_table_descriptor() {
+    void should_build_a_row_format_for_a_list_table_descriptor() {
 
         ListTableDescriptor descriptor = new ListTableDescriptor().setPluginSize(1)
                                                                   .setPhaseSize(2)
