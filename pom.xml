@@ -148,14 +148,8 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>generate-report</id>
-                        <goals>
                             <goal>report</goal>
                         </goals>
                     </execution>
@@ -170,7 +164,7 @@
                     <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
                     <cloneClean>true</cloneClean>
                     <showVersion>true</showVersion>
-                    <postBuildHookScript>verify.groovy</postBuildHookScript>
+                    <postBuildHookScript>verify</postBuildHookScript>
                     <mavenOpts>${argLine}</mavenOpts>
                     <writeJunitReport>true</writeJunitReport>
                 </configuration>
