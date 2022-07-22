@@ -170,7 +170,7 @@ public class GroupsTest {
         Multimap<String,MojoExecution> result = Groups.ByPhase.of(asList(pluginA, pluginB, pluginC, pluginD));
 
         assertThat(result.asMap().entrySet())
-                .extracting("key")
+                .extracting(Map.Entry::getKey)
                 .containsExactly("phase", "a-phase", "d-phase");
 
         assertThat(result.asMap().entrySet())
@@ -206,7 +206,7 @@ public class GroupsTest {
         Multimap<String, MojoExecution> result = Groups.ByPlugin.of(asList(pluginA, pluginB, pluginC, pluginAA));
 
         assertThat(result.asMap().entrySet())
-                .extracting("key")
+                .extracting(Map.Entry::getKey)
                 .containsExactly("plugin-a", "plugin-b", "plugin-c");
 
         assertThat(result.asMap().entrySet())
