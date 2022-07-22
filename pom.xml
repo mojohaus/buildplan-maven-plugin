@@ -43,6 +43,7 @@
         <mojo.java.target>1.8</mojo.java.target>
         <project.build.outputTimestamp>2022-06-21T18:36:44Z</project.build.outputTimestamp>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
+        <itf.version>0.11.0</itf.version>
     </properties>
 
     <dependencyManagement>
@@ -67,6 +68,18 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.23.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.soebes.itf.jupiter.extension</groupId>
+            <artifactId>itf-jupiter-extension</artifactId>
+            <version>${itf.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.soebes.itf.jupiter.extension</groupId>
+            <artifactId>itf-assertj</artifactId>
+            <version>${itf.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -130,6 +143,7 @@
                         <exclude>.editorconfig</exclude>
                         <exclude>etc/*</exclude>
                         <exclude>src/it/**</exclude>
+                        <exclude>src/test/resources-its/**</exclude>
                         <exclude>.github/**</exclude>
                         <exclude>jreleaser.yml</exclude>
                         <exclude>.gitpod.yml</exclude>
@@ -154,37 +168,41 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco-maven-plugin.version}</version>
-                <configuration>
-                    <append>true</append>
-                </configuration>
                 <executions>
                     <execution>
+                        <id>prepare-argument-for-test-runner</id>
+                        <configuration>
+                            <append>true</append>
+                        </configuration>
                         <goals>
                             <goal>prepare-agent</goal>
-                            <goal>report</goal>
+                            <goal>prepare-agent-integration</goal>
                         </goals>
                     </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-invoker-plugin</artifactId>
-                <configuration>
-                    <projectsDirectory>src/it</projectsDirectory>
-                    <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
-                    <settingsFile>src/it/settings.xml</settingsFile>
-                    <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
-                    <cloneClean>true</cloneClean>
-                    <showVersion>true</showVersion>
-                    <postBuildHookScript>verify</postBuildHookScript>
-                    <mavenOpts>${argLine}</mavenOpts>
-                    <writeJunitReport>true</writeJunitReport>
-                </configuration>
-                <executions>
                     <execution>
-                        <id>integration-test</id>
+                        <id>merge-unit-and-integration-tests-executions</id>
+                        <configuration>
+                            <fileSets>
+                                <fileSet>
+                                    <directory>${project.build.directory}</directory>
+                                    <includes>
+                                        <include>*.exec</include>
+                                    </includes>
+                                </fileSet>
+                            </fileSets>
+                            <destFile>${project.build.directory}/jacoco-merge.exec</destFile>
+                        </configuration>
+                        <phase>verify</phase>
                         <goals>
-                            <goal>install</goal>
-                            <goal>run</goal>
+                            <goal>merge</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <configuration>
+                            <dataFile>${project.build.directory}/jacoco-merge.exec</dataFile>
+                        </configuration>
+                        <goals>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -195,6 +213,42 @@
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                     <localCheckout>true</localCheckout>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.soebes.itf.jupiter.extension</groupId>
+                <artifactId>itf-maven-plugin</artifactId>
+                <version>${itf.version}</version>
+                <executions>
+                    <execution>
+                        <id>installing</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>install</goal>
+                            <goal>resources-its</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <configuration>
+                    <systemProperties>
+                        <maven.version>${maven.version}</maven.version>
+                        <maven.home>${maven.home}</maven.home>
+                    </systemProperties>
+                    <environmentVariables>
+                        <MAVEN_OPTS>${argLine}</MAVEN_OPTS>
+                    </environmentVariables>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
