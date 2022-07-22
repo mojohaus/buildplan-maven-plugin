@@ -21,15 +21,13 @@ import static org.codehaus.mojo.buildplan.model.builder.MojoExecutionBuilder.aMo
 
 import java.util.Map;
 import org.apache.maven.plugin.MojoExecution;
-import org.codehaus.mojo.buildplan.Groups.ByPhase;
-import org.codehaus.mojo.buildplan.Groups.ByPlugin;
 import org.codehaus.mojo.buildplan.util.Multimap;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class GroupsTest {
+class GroupsTest {
 
     @Test
-    public void should_order_mojo_execution_by_phase_name() {
+    void should_order_mojo_execution_by_phase_name() {
 
         MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
                                                 .withExecutionId("a")
@@ -131,7 +129,7 @@ public class GroupsTest {
     }
 
     @Test
-    public void should_not_fail_when_grouping_mojo_execution_by_phase_with_null_phase() {
+    void should_not_fail_when_grouping_mojo_execution_by_phase_with_null_phase() {
 
         MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
                                                 .withExecutionId("a")
@@ -145,7 +143,7 @@ public class GroupsTest {
     }
 
     @Test
-    public void should_keep_phase_order_when_grouping_execution_by_phase() {
+    void should_keep_phase_order_when_grouping_execution_by_phase() {
         MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
                 .withExecutionId("a")
                 .withGoal("goal-a")
@@ -180,7 +178,7 @@ public class GroupsTest {
     }
 
     @Test
-    public void should_keep_phase_order_when_grouping_execution_by_artifactId() {
+    void should_keep_phase_order_when_grouping_execution_by_artifactId() {
 
         MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
                 .withExecutionId("a-a")

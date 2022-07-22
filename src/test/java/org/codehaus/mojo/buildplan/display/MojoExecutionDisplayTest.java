@@ -16,15 +16,15 @@
 package org.codehaus.mojo.buildplan.display;
 
 import org.apache.maven.plugin.MojoExecution;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.codehaus.mojo.buildplan.model.builder.MojoExecutionBuilder.aMojoExecution;
 
-public class MojoExecutionDisplayTest {
+class MojoExecutionDisplayTest {
 
     @Test
-    public void should_get_non_null_values_from_mojo_execution() {
+    void should_get_non_null_values_from_mojo_execution() {
 
         MojoExecution execution = aMojoExecution().withArtifactId("artifactId")
                                                   .withExecutionId("executionId")
@@ -41,7 +41,7 @@ public class MojoExecutionDisplayTest {
     }
 
     @Test
-    public void should_get_empty_string_from_mojo_execution_when_a_value_is_null() {
+    void should_get_empty_string_from_mojo_execution_when_a_value_is_null() {
 
         MojoExecution execution = aMojoExecution().withArtifactId(null)
                                                   .withExecutionId(null)
@@ -58,7 +58,7 @@ public class MojoExecutionDisplayTest {
     }
 
     @Test
-    public void should_get_mojo_lifecycle_phase_when_descriptor_phase_is_null() {
+    void should_get_mojo_lifecycle_phase_when_descriptor_phase_is_null() {
 
         MojoExecution execution = aMojoExecution().withArtifactId("plugin-a")
                 .withLifecyclePhase("phase-a")

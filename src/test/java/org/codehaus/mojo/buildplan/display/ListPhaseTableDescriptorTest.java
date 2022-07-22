@@ -15,15 +15,15 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ListPhaseTableDescriptorTest {
+class ListPhaseTableDescriptorTest {
 
 
     @Test
-    public void should_build_a_row_format_for_a_list_phase_table_descriptor() {
+    void should_build_a_row_format_for_a_list_phase_table_descriptor() {
 
         ListPhaseTableDescriptor descriptor = new ListPhaseTableDescriptor().setPluginSize(1)
                                                                             .setExecutionIdSize(2)
