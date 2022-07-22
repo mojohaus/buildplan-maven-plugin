@@ -23,7 +23,6 @@ import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
-import org.codehaus.mojo.buildplan.Groups.ByPlugin;
 import org.codehaus.mojo.buildplan.display.ListPluginTableDescriptor;
 import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
 import org.codehaus.mojo.buildplan.display.TableDescriptor;
@@ -34,8 +33,7 @@ import org.codehaus.plexus.util.StringUtils;
  * List plugin executions by plugin for the current project.
  */
 @Mojo(name = "list-plugin",
-      threadSafe = true,
-      requiresProject = true)
+      threadSafe = true)
 public class ListPluginMojo extends AbstractLifecycleMojo {
 
     /** Display plugin executions only for the specified plugin. */
