@@ -1,7 +1,0 @@
-
-Build Plan for list-multimodule-outputfile: 
-----------------------------------------------------------
-PHASE   | PLUGIN               | GOAL    | ID             
-----------------------------------------------------------
-install | maven-install-plugin | install | default-install
-deploy  | maven-deploy-plugin  | deploy  | default-deploy 
