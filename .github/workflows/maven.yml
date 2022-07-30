@@ -19,12 +19,13 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: ./mvnw --batch-mode verify
-    - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v2.0.0-beta.2
+    - name: Upload test results
+      uses: actions/upload-artifact@v2
       if: always()
       with:
-        files: |
-            target/surefire-reports/*.xml
+        name: Test Results
+        path: |
+            target/surefire-reports/TEST*.xml
             target/failsafe-reports/TEST*.xml
     - name: Publish Code Coverage in PR
       id: jacoco
@@ -34,6 +35,15 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         min-coverage-overall: 55
         min-coverage-changed-files: 70
-      if: github.event_name == 'pull_request'
+      if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == 'mojohaus/buildplan-maven-plugin' && github.actor != 'dependabot[bot]'
     - name: Build documentation
       run: ./mvnw --batch-mode site
+  event_file:
+    name: "Publish event file"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          name: Event File
+          path: ${{ github.event_path }}
