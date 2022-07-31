@@ -33,4 +33,4 @@ It is possible to limit the list to a specific plugin:
 
 ### Report plugin executions within a project
 
-   mvn buildplan:report
+    mvn buildplan:report
