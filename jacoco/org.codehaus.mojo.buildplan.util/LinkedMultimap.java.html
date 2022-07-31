@@ -39,25 +39,24 @@ import java.util.Set;
 
     @Override
     public boolean put(K key, V value) {
-<span class="fc" id="L42">        map.computeIfAbsent(key, k -&gt; new ArrayList&lt;&gt;());</span>
-<span class="fc" id="L43">        return map.get(key).add(value);</span>
+<span class="fc" id="L42">        return map.computeIfAbsent(key, k -&gt; new ArrayList&lt;&gt;()).add(value);</span>
     }
 
     @Override
     public Map&lt;K, Collection&lt;V&gt;&gt; asMap() {
-<span class="fc" id="L48">        return map;</span>
+<span class="fc" id="L47">        return map;</span>
     }
 
     @Override
     public boolean isEmpty() {
-<span class="nc" id="L53">        return map.isEmpty();</span>
+<span class="nc" id="L52">        return map.isEmpty();</span>
     }
 
     @Override
     public Collection&lt;V&gt; values() {
-<span class="nc" id="L58">        return map.values().stream()</span>
-<span class="nc" id="L59">            .flatMap(Collection::stream)</span>
-<span class="nc" id="L60">            .collect(toList());</span>
+<span class="nc" id="L57">        return map.values().stream()</span>
+<span class="nc" id="L58">            .flatMap(Collection::stream)</span>
+<span class="nc" id="L59">            .collect(toList());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

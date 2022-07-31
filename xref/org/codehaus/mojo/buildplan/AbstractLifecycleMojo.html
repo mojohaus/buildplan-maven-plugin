@@ -40,7 +40,7 @@
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">class</strong> <a name="AbstractLifecycleMojo" href="../../../../org/codehaus/mojo/buildplan/AbstractLifecycleMojo.html#AbstractLifecycleMojo">AbstractLifecycleMojo</a> <strong class="jxr_keyword">extends</strong> AbstractMojo {
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>      @Component(role = DefaultLifecycles.<strong class="jxr_keyword">class</strong>)
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>      DefaultLifecycles defaultLifecycles;
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>      <strong class="jxr_keyword">protected</strong> DefaultLifecycles defaultLifecycles;
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>  
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>      @Parameter(defaultValue = <span class="jxr_string">"${session}"</span>, readonly = <strong class="jxr_keyword">true</strong>)
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>      <strong class="jxr_keyword">private</strong> MavenSession session;
@@ -65,7 +65,7 @@
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>  
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>      <em class="jxr_javadoccomment">/** Flag to easily skip all checks  */</em>
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>      @Parameter(property = <span class="jxr_string">"buildplan.skip"</span>, defaultValue = <span class="jxr_string">"false"</span>)
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> skip = false;
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> skip;
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>  
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>      <strong class="jxr_keyword">protected</strong> MavenExecutionPlan calculateExecutionPlan() <strong class="jxr_keyword">throws</strong> MojoFailureException {
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>          <strong class="jxr_keyword">try</strong> {

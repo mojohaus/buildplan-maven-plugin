@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ListMojo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BuildPlan Maven Plugin</a> &gt; <a href="index.source.html" class="el_package">org.codehaus.mojo.buildplan</a> &gt; <span class="el_source">ListMojo.java</span></div><h1>ListMojo.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2012 Jean-Christophe Gay (contact@jeanchristophegay.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.codehaus.mojo.buildplan;
+
+
+import static org.codehaus.mojo.buildplan.display.Output.lineSeparator;
+import static org.codehaus.mojo.buildplan.display.TableColumn.ARTIFACT_ID;
+import static org.codehaus.mojo.buildplan.display.TableColumn.EXECUTION_ID;
+import static org.codehaus.mojo.buildplan.display.TableColumn.GOAL;
+import static org.codehaus.mojo.buildplan.display.TableColumn.LIFECYCLE;
+import static org.codehaus.mojo.buildplan.display.TableColumn.PHASE;
+
+import org.apache.maven.lifecycle.MavenExecutionPlan;
+import org.apache.maven.plugin.MojoExecution;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.codehaus.mojo.buildplan.display.ListTableDescriptor;
+import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
+import org.codehaus.mojo.buildplan.display.TableDescriptor;
+import org.codehaus.plexus.util.StringUtils;
+
+/**
+ * List plugin executions for the current project.
+ */
+@Mojo(name = &quot;list&quot;,
+      threadSafe = true)
+<span class="fc" id="L41">public class ListMojo extends AbstractLifecycleMojo {</span>
+
+    /** Will show in which lifecycle a phase was defined (if any) */
+    @Parameter(property = &quot;buildplan.showLifecycles&quot;, defaultValue = &quot;false&quot;)
+    private boolean showLifecycles;
+
+    public void executeInternal() throws MojoFailureException {
+
+<span class="fc" id="L49">        MavenExecutionPlan plan = calculateExecutionPlan();</span>
+
+<span class="fc" id="L51">        ListTableDescriptor descriptor = ListTableDescriptor.of(plan.getMojoExecutions(), defaultLifecycles);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (!showLifecycles) {</span>
+<span class="fc" id="L53">            descriptor.hideLifecycle();</span>
+        }
+<span class="fc" id="L55">        String row = descriptor.rowFormat();</span>
+
+<span class="fc" id="L57">        StringBuilder output = new StringBuilder()</span>
+<span class="fc" id="L58">                .append(lineSeparator())</span>
+<span class="fc" id="L59">                .append(titleSeparator(descriptor))</span>
+<span class="fc" id="L60">                .append(lineSeparator())</span>
+<span class="fc" id="L61">                .append(tableHead(row))</span>
+<span class="fc" id="L62">                .append(lineSeparator())</span>
+<span class="fc" id="L63">                .append(titleSeparator(descriptor));</span>
+
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        for (MojoExecution execution : plan.getMojoExecutions()) {</span>
+<span class="fc" id="L66">            output.append(lineSeparator())</span>
+<span class="fc" id="L67">                    .append(tableRow(row, execution));</span>
+<span class="fc" id="L68">        }</span>
+
+<span class="fc" id="L70">        handleOutput(output.toString());</span>
+<span class="fc" id="L71">    }</span>
+
+    private String tableRow(String row, MojoExecution execution) {
+
+<span class="fc" id="L75">        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);</span>
+
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (showLifecycles) {</span>
+<span class="fc" id="L78">            return String.format(row,</span>
+<span class="fc" id="L79">                display.getLifecycle(defaultLifecycles),</span>
+<span class="fc" id="L80">                display.getPhase(),</span>
+<span class="fc" id="L81">                display.getArtifactId(),</span>
+<span class="fc" id="L82">                display.getGoal(),</span>
+<span class="fc" id="L83">                display.getExecutionId());</span>
+        } else {
+<span class="fc" id="L85">            return String.format(row,</span>
+<span class="fc" id="L86">                    display.getPhase(),</span>
+<span class="fc" id="L87">                    display.getArtifactId(),</span>
+<span class="fc" id="L88">                    display.getGoal(),</span>
+<span class="fc" id="L89">                    display.getExecutionId());</span>
+        }
+    }
+
+    private String tableHead(String row) {
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        if (showLifecycles) {</span>
+<span class="fc" id="L95">            return String.format(row, LIFECYCLE.title(), PHASE.title(), ARTIFACT_ID.title(), GOAL.title(), EXECUTION_ID.title());</span>
+        } else {
+<span class="fc" id="L97">            return String.format(row, PHASE.title(), ARTIFACT_ID.title(), GOAL.title(), EXECUTION_ID.title());</span>
+        }
+    }
+
+    private String titleSeparator(TableDescriptor descriptor) {
+<span class="fc" id="L102">        return StringUtils.repeat(&quot;-&quot;, descriptor.width());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

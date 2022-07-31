@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ListPluginMojo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BuildPlan Maven Plugin</a> &gt; <a href="index.source.html" class="el_package">org.codehaus.mojo.buildplan</a> &gt; <span class="el_source">ListPluginMojo.java</span></div><h1>ListPluginMojo.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2012 Jean-Christophe Gay (contact@jeanchristophegay.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.codehaus.mojo.buildplan;
+
+import static org.codehaus.mojo.buildplan.display.Output.lineSeparator;
+
+import java.util.Collection;
+import java.util.Map;
+import org.apache.maven.plugin.MojoExecution;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+import org.codehaus.mojo.buildplan.display.ListPluginTableDescriptor;
+import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
+import org.codehaus.mojo.buildplan.display.TableDescriptor;
+import org.codehaus.mojo.buildplan.util.Multimap;
+import org.codehaus.plexus.util.StringUtils;
+
+/**
+ * List plugin executions by plugin for the current project.
+ */
+@Mojo(name = &quot;list-plugin&quot;,
+      threadSafe = true)
+<span class="fc" id="L37">public class ListPluginMojo extends AbstractLifecycleMojo {</span>
+
+    /** Display plugin executions only for the specified plugin. */
+    @Parameter(property = &quot;buildplan.plugin&quot;)
+    private String plugin;
+
+    public void executeInternal() throws MojoFailureException {
+
+<span class="fc" id="L45">        Multimap&lt;String,MojoExecution&gt; plan = Groups.ByPlugin.of(calculateExecutionPlan().getMojoExecutions(), plugin);</span>
+
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (plan.isEmpty()) {</span>
+<span class="nc" id="L48">            getLog().warn(&quot;No plugin found with artifactId: &quot; + plugin);</span>
+        } else {
+<span class="fc" id="L50">            StringBuilder output = new StringBuilder();</span>
+<span class="fc" id="L51">            TableDescriptor descriptor = ListPluginTableDescriptor.of(plan.values(), defaultLifecycles);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">            for (Map.Entry&lt;String, Collection&lt;MojoExecution&gt;&gt; executions : plan.asMap().entrySet()) {</span>
+<span class="fc" id="L53">                output.append(lineSeparator())</span>
+<span class="fc" id="L54">                        .append(pluginTitleLine(descriptor, executions.getKey()));</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">                for (MojoExecution execution : executions.getValue()) {</span>
+<span class="fc" id="L56">                    output.append(lineSeparator())</span>
+<span class="fc" id="L57">                            .append(line(descriptor.rowFormat(), execution));</span>
+<span class="fc" id="L58">                }</span>
+<span class="fc" id="L59">            }</span>
+<span class="fc" id="L60">            handleOutput(output.toString());</span>
+        }
+<span class="fc" id="L62">    }</span>
+
+    private String line(String rowFormat, MojoExecution execution) {
+
+<span class="fc" id="L66">        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);</span>
+
+<span class="fc" id="L68">        return String.format(rowFormat, display.getPhase(),</span>
+<span class="fc" id="L69">                                        display.getExecutionId(),</span>
+<span class="fc" id="L70">                                        display.getGoal());</span>
+    }
+
+    private String pluginTitleLine(TableDescriptor descriptor, String key) {
+<span class="fc" id="L74">        return key + &quot; &quot; + StringUtils.repeat(&quot;-&quot;, descriptor.width() - key.length());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

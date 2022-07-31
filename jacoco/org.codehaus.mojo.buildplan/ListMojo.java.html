@@ -37,9 +37,8 @@ import org.codehaus.plexus.util.StringUtils;
  * List plugin executions for the current project.
  */
 @Mojo(name = &quot;list&quot;,
-      threadSafe = true,
-      requiresProject = true)
-<span class="nc" id="L42">public class ListMojo extends AbstractLifecycleMojo {</span>
+      threadSafe = true)
+<span class="nc" id="L41">public class ListMojo extends AbstractLifecycleMojo {</span>
 
     /** Will show in which lifecycle a phase was defined (if any) */
     @Parameter(property = &quot;buildplan.showLifecycles&quot;, defaultValue = &quot;false&quot;)
@@ -47,60 +46,60 @@ import org.codehaus.plexus.util.StringUtils;
 
     public void executeInternal() throws MojoFailureException {
 
-<span class="nc" id="L50">        MavenExecutionPlan plan = calculateExecutionPlan();</span>
+<span class="nc" id="L49">        MavenExecutionPlan plan = calculateExecutionPlan();</span>
 
-<span class="nc" id="L52">        ListTableDescriptor descriptor = ListTableDescriptor.of(plan.getMojoExecutions(), defaultLifecycles);</span>
-<span class="nc bnc" id="L53" title="All 2 branches missed.">        if (!showLifecycles) {</span>
-<span class="nc" id="L54">            descriptor.hideLifecycle();</span>
+<span class="nc" id="L51">        ListTableDescriptor descriptor = ListTableDescriptor.of(plan.getMojoExecutions(), defaultLifecycles);</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if (!showLifecycles) {</span>
+<span class="nc" id="L53">            descriptor.hideLifecycle();</span>
         }
-<span class="nc" id="L56">        String row = descriptor.rowFormat();</span>
+<span class="nc" id="L55">        String row = descriptor.rowFormat();</span>
 
-<span class="nc" id="L58">        StringBuilder output = new StringBuilder()</span>
-<span class="nc" id="L59">                .append(lineSeparator())</span>
-<span class="nc" id="L60">                .append(titleSeparator(descriptor))</span>
-<span class="nc" id="L61">                .append(lineSeparator())</span>
-<span class="nc" id="L62">                .append(tableHead(row))</span>
-<span class="nc" id="L63">                .append(lineSeparator())</span>
-<span class="nc" id="L64">                .append(titleSeparator(descriptor));</span>
+<span class="nc" id="L57">        StringBuilder output = new StringBuilder()</span>
+<span class="nc" id="L58">                .append(lineSeparator())</span>
+<span class="nc" id="L59">                .append(titleSeparator(descriptor))</span>
+<span class="nc" id="L60">                .append(lineSeparator())</span>
+<span class="nc" id="L61">                .append(tableHead(row))</span>
+<span class="nc" id="L62">                .append(lineSeparator())</span>
+<span class="nc" id="L63">                .append(titleSeparator(descriptor));</span>
 
-<span class="nc bnc" id="L66" title="All 2 branches missed.">        for (MojoExecution execution : plan.getMojoExecutions()) {</span>
-<span class="nc" id="L67">            output.append(lineSeparator())</span>
-<span class="nc" id="L68">                    .append(tableRow(row, execution));</span>
-<span class="nc" id="L69">        }</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        for (MojoExecution execution : plan.getMojoExecutions()) {</span>
+<span class="nc" id="L66">            output.append(lineSeparator())</span>
+<span class="nc" id="L67">                    .append(tableRow(row, execution));</span>
+<span class="nc" id="L68">        }</span>
 
-<span class="nc" id="L71">        handleOutput(output.toString());</span>
-<span class="nc" id="L72">    }</span>
+<span class="nc" id="L70">        handleOutput(output.toString());</span>
+<span class="nc" id="L71">    }</span>
 
     private String tableRow(String row, MojoExecution execution) {
 
-<span class="nc" id="L76">        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);</span>
+<span class="nc" id="L75">        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);</span>
 
-<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (showLifecycles) {</span>
-<span class="nc" id="L79">            return String.format(row,</span>
-<span class="nc" id="L80">                display.getArtifactId(),</span>
-<span class="nc" id="L81">                display.getPhase(),</span>
-<span class="nc" id="L82">                display.getLifecycle(defaultLifecycles),</span>
-<span class="nc" id="L83">                display.getExecutionId(),</span>
-<span class="nc" id="L84">                display.getGoal());</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        if (showLifecycles) {</span>
+<span class="nc" id="L78">            return String.format(row,</span>
+<span class="nc" id="L79">                display.getLifecycle(defaultLifecycles),</span>
+<span class="nc" id="L80">                display.getPhase(),</span>
+<span class="nc" id="L81">                display.getArtifactId(),</span>
+<span class="nc" id="L82">                display.getGoal(),</span>
+<span class="nc" id="L83">                display.getExecutionId());</span>
         } else {
-<span class="nc" id="L86">            return String.format(row,</span>
+<span class="nc" id="L85">            return String.format(row,</span>
+<span class="nc" id="L86">                    display.getPhase(),</span>
 <span class="nc" id="L87">                    display.getArtifactId(),</span>
-<span class="nc" id="L88">                    display.getPhase(),</span>
-<span class="nc" id="L89">                    display.getExecutionId(),</span>
-<span class="nc" id="L90">                    display.getGoal());</span>
+<span class="nc" id="L88">                    display.getGoal(),</span>
+<span class="nc" id="L89">                    display.getExecutionId());</span>
         }
     }
 
     private String tableHead(String row) {
-<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (showLifecycles) {</span>
-<span class="nc" id="L96">            return String.format(row, ARTIFACT_ID.title(), PHASE.title(), LIFECYCLE.title(), EXECUTION_ID.title(), GOAL.title());</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        if (showLifecycles) {</span>
+<span class="nc" id="L95">            return String.format(row, LIFECYCLE.title(), PHASE.title(), ARTIFACT_ID.title(), GOAL.title(), EXECUTION_ID.title());</span>
         } else {
-<span class="nc" id="L98">            return String.format(row, ARTIFACT_ID.title(), PHASE.title(), EXECUTION_ID.title(), GOAL.title());</span>
+<span class="nc" id="L97">            return String.format(row, PHASE.title(), ARTIFACT_ID.title(), GOAL.title(), EXECUTION_ID.title());</span>
         }
     }
 
     private String titleSeparator(TableDescriptor descriptor) {
-<span class="nc" id="L103">        return StringUtils.repeat(&quot;-&quot;, descriptor.width());</span>
+<span class="nc" id="L102">        return StringUtils.repeat(&quot;-&quot;, descriptor.width());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

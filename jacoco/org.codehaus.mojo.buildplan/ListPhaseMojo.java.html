@@ -36,9 +36,8 @@ import org.codehaus.plexus.util.StringUtils;
  * List plugin executions by phase for the current project.
  */
 @Mojo(name = &quot;list-phase&quot;,
-      threadSafe = true,
-      requiresProject = true)
-<span class="nc" id="L41">public class ListPhaseMojo extends AbstractLifecycleMojo {</span>
+      threadSafe = true)
+<span class="nc" id="L40">public class ListPhaseMojo extends AbstractLifecycleMojo {</span>
 
     /** Display plugin executions only for the specified phase. */
     @Parameter(property = &quot;buildplan.phase&quot;)
@@ -53,54 +52,54 @@ import org.codehaus.plexus.util.StringUtils;
     private boolean showAllPhases;
 
     public void executeInternal() throws MojoFailureException {
-<span class="nc" id="L56">        Groups.Options options = new Groups.Options(defaultLifecycles);</span>
-<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (showAllPhases) {</span>
-<span class="nc" id="L58">            options = options.showingAllPhases();</span>
+<span class="nc" id="L55">        Groups.Options options = new Groups.Options(defaultLifecycles);</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (showAllPhases) {</span>
+<span class="nc" id="L57">            options = options.showingAllPhases();</span>
         }
-<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (showLifecycles) {</span>
-<span class="nc" id="L61">            options = options.showingLifecycles();</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (showLifecycles) {</span>
+<span class="nc" id="L60">            options = options.showingLifecycles();</span>
         }
 
-<span class="nc" id="L64">        Multimap&lt;String,MojoExecution&gt; phases = Groups.ByPhase.of(calculateExecutionPlan().getMojoExecutions(), options);</span>
+<span class="nc" id="L63">        Multimap&lt;String,MojoExecution&gt; phases = Groups.ByPhase.of(calculateExecutionPlan().getMojoExecutions(), options);</span>
 
-<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (!phases.isEmpty()) {</span>
-<span class="nc" id="L67">            TableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values(), defaultLifecycles);</span>
-<span class="nc" id="L68">            Lifecycle currentLifecycle = null;</span>
-<span class="nc" id="L69">            StringBuilder output = new StringBuilder();</span>
-<span class="nc bnc" id="L70" title="All 2 branches missed.">            for (Map.Entry&lt;String, Collection&lt;MojoExecution&gt;&gt; currentPhase : phases.asMap().entrySet()) {</span>
-<span class="nc bnc" id="L71" title="All 2 branches missed.">                if (showLifecycles) {</span>
-<span class="nc" id="L72">                    Lifecycle lifecycleForPhase = defaultLifecycles.get(currentPhase.getKey());</span>
-<span class="nc bnc" id="L73" title="All 2 branches missed.">                    if (lifecycleForPhase == null) {</span>
-<span class="nc" id="L74">                        lifecycleForPhase = new Lifecycle(&quot;&quot;, emptyList(), emptyMap());</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (!phases.isEmpty()) {</span>
+<span class="nc" id="L66">            TableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values(), defaultLifecycles);</span>
+<span class="nc" id="L67">            Lifecycle currentLifecycle = null;</span>
+<span class="nc" id="L68">            StringBuilder output = new StringBuilder();</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">            for (Map.Entry&lt;String, Collection&lt;MojoExecution&gt;&gt; currentPhase : phases.asMap().entrySet()) {</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">                if (showLifecycles) {</span>
+<span class="nc" id="L71">                    Lifecycle lifecycleForPhase = defaultLifecycles.get(currentPhase.getKey());</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">                    if (lifecycleForPhase == null) {</span>
+<span class="nc" id="L73">                        lifecycleForPhase = new Lifecycle(&quot;&quot;, emptyList(), emptyMap());</span>
                     }
-<span class="nc bnc" id="L76" title="All 2 branches missed.">                    if (!lifecycleForPhase.equals(currentLifecycle)) {</span>
-<span class="nc" id="L77">                        currentLifecycle = lifecycleForPhase;</span>
-<span class="nc" id="L78">                        output.append(lineSeparator()).append(lineSeparator()).append(&quot;[&quot;)</span>
-<span class="nc" id="L79">                            .append(currentLifecycle.getId()).append(&quot;]&quot;);</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">                    if (!lifecycleForPhase.equals(currentLifecycle)) {</span>
+<span class="nc" id="L76">                        currentLifecycle = lifecycleForPhase;</span>
+<span class="nc" id="L77">                        output.append(lineSeparator()).append(lineSeparator()).append(&quot;[&quot;)</span>
+<span class="nc" id="L78">                            .append(currentLifecycle.getId()).append(&quot;]&quot;);</span>
                     }
                 }
-<span class="nc" id="L82">                output.append(lineSeparator())</span>
-<span class="nc" id="L83">                    .append(phaseTitleLine(descriptor, currentPhase.getKey()));</span>
-<span class="nc" id="L84">                currentPhase.getValue().stream()</span>
-<span class="nc bnc" id="L85" title="All 2 branches missed.">                    .filter(execution -&gt; execution != NoMojoExecution.INSTANCE)</span>
-<span class="nc" id="L86">                    .forEach(execution -&gt; output.append(lineSeparator()).append(line(descriptor.rowFormat(), execution)));</span>
-<span class="nc" id="L87">            }</span>
-<span class="nc" id="L88">            handleOutput(output.toString());</span>
-<span class="nc" id="L89">        } else {</span>
-<span class="nc" id="L90">            getLog().warn(&quot;No plugin execution found within phase: &quot; + phase);</span>
+<span class="nc" id="L81">                output.append(lineSeparator())</span>
+<span class="nc" id="L82">                    .append(phaseTitleLine(descriptor, currentPhase.getKey()));</span>
+<span class="nc" id="L83">                currentPhase.getValue().stream()</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">                    .filter(execution -&gt; execution != NoMojoExecution.INSTANCE)</span>
+<span class="nc" id="L85">                    .forEach(execution -&gt; output.append(lineSeparator()).append(line(descriptor.rowFormat(), execution)));</span>
+<span class="nc" id="L86">            }</span>
+<span class="nc" id="L87">            handleOutput(output.toString());</span>
+<span class="nc" id="L88">        } else {</span>
+<span class="nc" id="L89">            getLog().warn(&quot;No plugin execution found within phase: &quot; + phase);</span>
         }
-<span class="nc" id="L92">    }</span>
+<span class="nc" id="L91">    }</span>
 
     private String line(String rowFormat, MojoExecution execution) {
-<span class="nc" id="L95">        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);</span>
+<span class="nc" id="L94">        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);</span>
 
-<span class="nc" id="L97">        return String.format(rowFormat, display.getArtifactId(),</span>
-<span class="nc" id="L98">                                        display.getExecutionId(),</span>
-<span class="nc" id="L99">                                        display.getGoal());</span>
+<span class="nc" id="L96">        return String.format(rowFormat, display.getArtifactId(),</span>
+<span class="nc" id="L97">                                        display.getExecutionId(),</span>
+<span class="nc" id="L98">                                        display.getGoal());</span>
     }
 
     private String phaseTitleLine(TableDescriptor descriptor, String key) {
-<span class="nc" id="L103">        return key + &quot; &quot; + StringUtils.repeat(&quot;-&quot;, descriptor.width() - key.length());</span>
+<span class="nc" id="L102">        return key + &quot; &quot; + StringUtils.repeat(&quot;-&quot;, descriptor.width() - key.length());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

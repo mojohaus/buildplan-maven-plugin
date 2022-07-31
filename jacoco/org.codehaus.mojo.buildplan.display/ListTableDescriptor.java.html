@@ -44,17 +44,17 @@ import org.apache.maven.plugin.MojoExecution;
 
     public String rowFormat() {
 <span class="fc" id="L46">        StringBuilder builder = new StringBuilder();</span>
-<span class="fc" id="L47">        builder.append(FORMAT_LEFT_ALIGN).append(getPluginSize()).append(FORMAT_STRING)</span>
-<span class="fc" id="L48">               .append(SEPARATOR)</span>
-<span class="fc" id="L49">               .append(FORMAT_LEFT_ALIGN).append(getPhaseSize()).append(FORMAT_STRING)</span>
-<span class="fc" id="L50">               .append(SEPARATOR);</span>
-<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (lifecycleSize &gt; 0) {</span>
-<span class="nc" id="L52">            builder.append(FORMAT_LEFT_ALIGN).append(getLifecycleSize()).append(FORMAT_STRING)</span>
-<span class="nc" id="L53">                   .append(SEPARATOR);</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (lifecycleSize &gt; 0) {</span>
+<span class="nc" id="L48">            builder.append(FORMAT_LEFT_ALIGN).append(getLifecycleSize()).append(FORMAT_STRING)</span>
+<span class="nc" id="L49">                .append(SEPARATOR);</span>
         }
-<span class="fc" id="L55">        builder.append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING)</span>
+<span class="fc" id="L51">        builder.append(FORMAT_LEFT_ALIGN).append(getPhaseSize()).append(FORMAT_STRING)</span>
+<span class="fc" id="L52">               .append(SEPARATOR)</span>
+<span class="fc" id="L53">               .append(FORMAT_LEFT_ALIGN).append(getPluginSize()).append(FORMAT_STRING)</span>
+<span class="fc" id="L54">               .append(SEPARATOR);</span>
+<span class="fc" id="L55">        builder.append(FORMAT_LEFT_ALIGN).append(getGoalSize()).append(FORMAT_STRING)</span>
 <span class="fc" id="L56">               .append(SEPARATOR)</span>
-<span class="fc" id="L57">               .append(FORMAT_LEFT_ALIGN).append(getGoalSize()).append(FORMAT_STRING);</span>
+<span class="fc" id="L57">               .append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING);</span>
 <span class="fc" id="L58">        return builder.toString();</span>
     }
 

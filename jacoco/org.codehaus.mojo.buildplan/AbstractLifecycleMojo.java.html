@@ -32,7 +32,7 @@ import java.io.IOException;
 <span class="nc" id="L32">public abstract class AbstractLifecycleMojo extends AbstractMojo {</span>
 
     @Component(role = DefaultLifecycles.class)
-    DefaultLifecycles defaultLifecycles;
+    protected DefaultLifecycles defaultLifecycles;
 
     @Parameter(defaultValue = &quot;${session}&quot;, readonly = true)
     private MavenSession session;
@@ -56,8 +56,8 @@ import java.io.IOException;
     private boolean appendOutput;
 
     /** Flag to easily skip all checks  */
-<span class="nc" id="L59">    @Parameter(property = &quot;buildplan.skip&quot;, defaultValue = &quot;false&quot;)</span>
-    private boolean skip = false;
+    @Parameter(property = &quot;buildplan.skip&quot;, defaultValue = &quot;false&quot;)
+    private boolean skip;
 
     protected MavenExecutionPlan calculateExecutionPlan() throws MojoFailureException {
         try {
