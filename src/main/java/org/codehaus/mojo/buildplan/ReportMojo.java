@@ -17,6 +17,7 @@ package org.codehaus.mojo.buildplan;
 
 
 import static org.codehaus.mojo.buildplan.display.TableColumn.ARTIFACT_ID;
+import static org.codehaus.mojo.buildplan.display.TableColumn.EXECUTION_ID;
 import static org.codehaus.mojo.buildplan.display.TableColumn.GOAL;
 import static org.codehaus.mojo.buildplan.display.TableColumn.LIFECYCLE;
 import static org.codehaus.mojo.buildplan.display.TableColumn.PHASE;
@@ -44,7 +45,7 @@ import org.codehaus.mojo.buildplan.display.TableColumn;
  */
 @Mojo(name = "report",
       defaultPhase = LifecyclePhase.SITE)
-public class ListReportMojo extends AbstractMavenReport {
+public class ReportMojo extends AbstractMavenReport {
 
     @Component
     private LifecycleExecutor lifecycleExecutor;
@@ -96,7 +97,7 @@ public class ListReportMojo extends AbstractMavenReport {
         tableHead(mainSink, PHASE);
         tableHead(mainSink, ARTIFACT_ID);
         tableHead(mainSink, GOAL);
-        tableHead(mainSink, ARTIFACT_ID);
+        tableHead(mainSink, EXECUTION_ID);
         mainSink.tableRow_();
 
         for (MojoExecution execution : plan.getMojoExecutions()) {

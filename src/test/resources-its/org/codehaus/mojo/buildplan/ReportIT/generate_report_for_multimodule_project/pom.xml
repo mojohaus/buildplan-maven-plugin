@@ -10,7 +10,7 @@
   <packaging>pom</packaging>
 
   <description>
-    Test buildplan:list on multimodule project
+    Test buildplan:report on multimodule project
   </description>
 
   <modules>
