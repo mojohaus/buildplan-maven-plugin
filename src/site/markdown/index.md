@@ -4,7 +4,7 @@ A Maven 3.x plugin to inspect the lifecycle of your project.
 
 ## Goals Overview
 
-The BuildPlan plugin has three goals:
+The BuildPlan plugin has four goals:
 
 * [buildplan:list](list-mojo.html) displays plugin executions within a Maven project.
 * [buildplan:list-phase](list-phase-mojo.html) displays plugin executions within lifecycle phases.
