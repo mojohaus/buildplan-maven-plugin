@@ -8,6 +8,7 @@
                 <item name="buildplan:list" href="list-mojo.html"/>
                 <item name="buildplan:list-phase" href="list-phase-mojo.html"/>
                 <item name="buildplan:list-plugin" href="list-plugin-mojo.html"/>
+                <item name="buildplan:report" href="report-mojo.html"/>
                 <item name="buildplan:help" href="help-mojo.html"/>
             </item>
             <item name="Usage" href="usage.html"/>
