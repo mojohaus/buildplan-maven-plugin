@@ -6,7 +6,7 @@
 
 [INFO] --- buildplan-maven-plugin:${project.version}:list (default-cli) @ buildplan-maven-plugin ---
 [INFO] --------------------------------------------------------------------------------------------------------------------
-[INFO] PHASE                  | PLUGIN                      | GOAL                      | ID
+[INFO] PHASE                  | PLUGIN                      | GOAL                      | EXECUTION_ID
 [INFO] --------------------------------------------------------------------------------------------------------------------
 [INFO] generate-sources       | maven-plugin-plugin         | helpmojo                  | help-goal
 [INFO] process-classes        | maven-plugin-plugin         | descriptor                | default-descriptor
