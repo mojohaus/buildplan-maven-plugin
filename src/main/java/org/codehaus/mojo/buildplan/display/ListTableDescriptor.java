@@ -15,15 +15,18 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import java.util.StringJoiner;
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.plugin.MojoExecution;
+import org.apache.maven.shared.utils.logging.MessageUtils;
 
 public class ListTableDescriptor extends AbstractTableDescriptor {
 
-    static final int SEPARATOR_SIZE = 5 * SEPARATOR.length();
+    private static final int ANSI_COLOR_CODES_LENGTH =
+            MessageUtils.buffer().mojo("").toString().length();
 
     private int pluginSize;
     private int versionSize;
@@ -46,6 +49,10 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
     }
 
     public String rowFormat() {
+        return columns(getPluginSize());
+    }
+
+    private String columns(int pluginSize) {
         StringBuilder builder = new StringBuilder();
         if (lifecycleSize > 0) {
             builder.append(FORMAT_LEFT_ALIGN)
@@ -58,7 +65,7 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
                 .append(FORMAT_STRING)
                 .append(SEPARATOR)
                 .append(FORMAT_LEFT_ALIGN)
-                .append(getPluginSize())
+                .append(pluginSize)
                 .append(FORMAT_STRING)
                 .append(SEPARATOR)
                 .append(FORMAT_LEFT_ALIGN)
@@ -76,14 +83,26 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
         return builder.toString();
     }
 
+    public String titleFormat() {
+        if (MessageUtils.isColorEnabled()) {
+            return columns(getPluginSize() - ANSI_COLOR_CODES_LENGTH);
+        }
+        return columns(getPluginSize());
+    }
+
     public int width() {
-        return getPluginSize()
-                + getVersionSize()
-                + getPhaseSize()
-                + getLifecycleSize()
-                + getExecutionIdSize()
-                + getGoalSize()
-                + SEPARATOR_SIZE;
+        return withSeparator(
+                getPluginSize(),
+                getVersionSize(),
+                getPhaseSize(),
+                getLifecycleSize(),
+                getExecutionIdSize(),
+                getGoalSize());
+    }
+
+    private int withSeparator(int... ints) {
+        int width = Arrays.stream(ints).sum() + (ints.length - 1) * SEPARATOR.length();
+        return MessageUtils.isColorEnabled() ? width - ANSI_COLOR_CODES_LENGTH : width;
     }
 
     @Override

@@ -50,9 +50,12 @@ public class ListTableDescriptorTest {
                 .setExecutionIdSize(1)
                 .setGoalSize(2)
                 .setPluginSize(3)
-                .setPhaseSize(4);
+                .setPhaseSize(4)
+                .setVersionSize(5);
 
-        assertThat(descriptor.width()).isEqualTo(10 + ListTableDescriptor.SEPARATOR_SIZE);
+        assertThat(descriptor.width())
+                .as("Each column size + (size needed for separators - ansi color code size)")
+                .isEqualTo(1 + 2 + 3 + 4 + 5 + (5 * TableDescriptor.SEPARATOR.length() - 8));
     }
 
     @Test
