@@ -66,8 +66,8 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
         MojoExecutionDisplay display = new MojoExecutionDisplay(execution);
 
         return String.format(rowFormat, display.getPhase(),
-                                        display.getExecutionId(),
-                                        display.getGoal());
+                                        display.getGoal(),
+                                        display.getExecutionId());
     }
 
     private String pluginTitleLine(TableDescriptor descriptor, String key) {

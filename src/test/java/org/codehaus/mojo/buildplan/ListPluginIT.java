@@ -40,19 +40,19 @@ class ListPluginIT {
                 .plain()
                 .containsSequence(
                     "maven-resources-plugin ----------------------------------------------",
-                    "    + process-resources      | default-resources     | resources    ",
-                    "    + process-test-resources | default-testResources | testResources",
+                    "    + process-resources      | resources     | default-resources    ",
+                    "    + process-test-resources | testResources | default-testResources",
                     "maven-compiler-plugin -----------------------------------------------",
-                    "    + compile                | default-compile       | compile      ",
-                    "    + test-compile           | default-testCompile   | testCompile  ",
+                    "    + compile                | compile       | default-compile      ",
+                    "    + test-compile           | testCompile   | default-testCompile  ",
                     "maven-surefire-plugin -----------------------------------------------",
-                    "    + test                   | default-test          | test         ",
+                    "    + test                   | test          | default-test         ",
                     "maven-jar-plugin ----------------------------------------------------",
-                    "    + package                | default-jar           | jar          ",
+                    "    + package                | jar           | default-jar          ",
                     "maven-install-plugin ------------------------------------------------",
-                    "    + install                | default-install       | install      ",
+                    "    + install                | install       | default-install      ",
                     "maven-deploy-plugin -------------------------------------------------",
-                    "    + deploy                 | default-deploy        | deploy       "
+                    "    + deploy                 | deploy        | default-deploy       "
                 );
         }
 

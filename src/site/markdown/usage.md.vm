@@ -85,30 +85,30 @@ Also, because executions are collected per phase, direct plugin-executions are s
 
 [INFO] --- buildplan-maven-plugin:${project.version}:list-plugin (default-cli) @ buildplan-maven-plugin ---
 [INFO] maven-deploy-plugin -------------------------------------------------------------------------
-[INFO]     + deploy                 | default-deploy                    | deploy
+[INFO]     + deploy                 | deploy                    | default-deploy
 [INFO] maven-source-plugin -------------------------------------------------------------------------
-[INFO]     + package                | attach-sources                    | jar-no-fork
+[INFO]     + package                | jar-no-fork               | attach-sources
 [INFO] license-maven-plugin ------------------------------------------------------------------------
-[INFO]     + verify                 | default                           | check
+[INFO]     + verify                 | check                     | default
 [INFO] maven-resources-plugin ----------------------------------------------------------------------
-[INFO]     + process-resources      | default-resources                 | resources
-[INFO]     + process-test-resources | default-testResources             | testResources
+[INFO]     + process-resources      | resources                 | default-resources
+[INFO]     + process-test-resources | testResources             | default-testResources
 [INFO] maven-plugin-plugin -------------------------------------------------------------------------
-[INFO]     + generate-sources       | help-goal                         | helpmojo
-[INFO]     + process-classes        | default-descriptor                | descriptor
-[INFO]     + process-classes        | mojo-descriptor                   | descriptor
-[INFO]     + package                | default-addPluginArtifactMetadata | addPluginArtifactMetadata
+[INFO]     + generate-sources       | helpmojo                  | help-goal
+[INFO]     + process-classes        | descriptor                | default-descriptor
+[INFO]     + process-classes        | descriptor                | mojo-descriptor
+[INFO]     + package                | addPluginArtifactMetadata | default-addPluginArtifactMetadata
 [INFO] maven-jar-plugin ----------------------------------------------------------------------------
-[INFO]     + package                | default-jar                       | jar
+[INFO]     + package                | jar                       | default-jar
 [INFO] animal-sniffer-maven-plugin -----------------------------------------------------------------
-[INFO]     + process-classes        | check-signature                   | check
+[INFO]     + process-classes        | check                     | check-signature
 [INFO] maven-surefire-plugin -----------------------------------------------------------------------
-[INFO]     + test                   | default-test                      | test
+[INFO]     + test                   | test                      | default-test
 [INFO] maven-compiler-plugin -----------------------------------------------------------------------
-[INFO]     + compile                | default-compile                   | compile
-[INFO]     + test-compile           | default-testCompile               | testCompile
+[INFO]     + compile                | compile                   | default-compile
+[INFO]     + test-compile           | testCompile               | default-testCompile
 [INFO] maven-install-plugin ------------------------------------------------------------------------
-[INFO]     + install                | default-install                   | install
+[INFO]     + install                | install                   | default-install
 ```
 It is possible to limit the list to a specific plugin:
 
