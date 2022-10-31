@@ -24,7 +24,6 @@ import java.util.Map;
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
-import org.apache.maven.plugin.descriptor.MojoDescriptor;
 import org.codehaus.mojo.buildplan.util.LinkedMultimap;
 import org.codehaus.mojo.buildplan.util.Multimap;
 
@@ -36,7 +35,7 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
         Map<TableColumn, Integer> result = new EnumMap<>(TableColumn.class);
 
         Multimap<TableColumn, Integer> count = new LinkedMultimap<>();
-        for (MojoExecution execution : executions) {
+        executions.stream().map(MojoExecutionDisplay::new).forEach(execution -> {
             for (TableColumn column : columns) {
                 switch (column) {
                     case ARTIFACT_ID:
@@ -49,10 +48,10 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
                         count.put(column, safeLength(execution.getGoal()));
                         break;
                     case PHASE:
-                        count.put(column, safeLength(phase(execution)));
+                        count.put(column, safeLength(execution.getPhase()));
                         break;
                     case LIFECYCLE:
-                        Lifecycle lifecycle = defaultLifecycles.get(phase(execution));
+                        Lifecycle lifecycle = defaultLifecycles.get(execution.getPhase());
                         count.put(column, lifecycle == null ? 0 : safeLength(lifecycle.getId()));
                         break;
                     case VERSION:
@@ -60,7 +59,7 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
                         break;
                 }
             }
-        }
+        });
         for (TableColumn column : TableColumn.values()) {
             count.put(column, column.title().length());
         }
@@ -70,14 +69,6 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
         }
 
         return result;
-    }
-
-    public static String phase(MojoExecution execution) {
-        MojoDescriptor mojoDescriptor = execution.getMojoDescriptor();
-        if (mojoDescriptor != null && mojoDescriptor.getPhase() != null) {
-            return mojoDescriptor.getPhase();
-        }
-        return execution.getLifecyclePhase();
     }
 
     private static int safeLength(String string) {

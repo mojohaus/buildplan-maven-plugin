@@ -19,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.codehaus.mojo.buildplan.model.builder.MojoExecutionBuilder.aMojoExecution;
 
 import org.apache.maven.plugin.MojoExecution;
+import org.apache.maven.shared.utils.logging.MessageUtils;
 import org.junit.jupiter.api.Test;
 
 class MojoExecutionDisplayTest {
@@ -65,7 +66,7 @@ class MojoExecutionDisplayTest {
         MojoExecution execution = aMojoExecution()
                 .withArtifactId("plugin-a")
                 .withLifecyclePhase("phase-a")
-                .withDescriptorPhase("phase-b")
+                .withDescriptorPhase(null)
                 .withExecutionId("execution-id-a")
                 .withGoal("goal-a")
                 .build();
@@ -73,5 +74,47 @@ class MojoExecutionDisplayTest {
         MojoExecutionDisplay result = new MojoExecutionDisplay(execution);
 
         assertThat(result.getPhase()).isEqualTo("phase-a");
+    }
+
+    @Test
+    void should_highlight_mojo_for_mojo_pattern() {
+        MojoExecution execution =
+                aMojoExecution().withArtifactId("maven-jar-plugin").build();
+
+        MojoExecutionDisplay result = new MojoExecutionDisplay(execution);
+
+        assertThat(result.getArtifactId())
+                .isEqualTo("maven-" + MessageUtils.buffer().mojo("jar") + "-plugin");
+    }
+
+    @Test
+    void should_highlight_longer_mojo_for_mojo_pattern() {
+        MojoExecution execution =
+                aMojoExecution().withArtifactId("maven-surefire-report-plugin").build();
+
+        MojoExecutionDisplay result = new MojoExecutionDisplay(execution);
+
+        assertThat(result.getArtifactId())
+                .isEqualTo("maven-" + MessageUtils.buffer().mojo("surefire-report") + "-plugin");
+    }
+
+    @Test
+    void should_highlight_mojo_for_another_mojo_pattern() {
+        MojoExecution execution =
+                aMojoExecution().withArtifactId("versions-maven-plugin").build();
+
+        MojoExecutionDisplay result = new MojoExecutionDisplay(execution);
+
+        assertThat(result.getArtifactId()).isEqualTo(MessageUtils.buffer().mojo("versions") + "-maven-plugin");
+    }
+
+    @Test
+    void should_highlight_longer_mojo_for_another_mojo_pattern() {
+        MojoExecution execution =
+                aMojoExecution().withArtifactId("versions-report-maven-plugin").build();
+
+        MojoExecutionDisplay result = new MojoExecutionDisplay(execution);
+
+        assertThat(result.getArtifactId()).isEqualTo(MessageUtils.buffer().mojo("versions-report") + "-maven-plugin");
     }
 }

@@ -16,6 +16,7 @@
 package org.codehaus.mojo.buildplan;
 
 import static com.soebes.itf.extension.assertj.MavenITAssertions.assertThat;
+import static org.fusesource.jansi.Ansi.ansi;
 
 import com.soebes.itf.jupiter.extension.MavenGoal;
 import com.soebes.itf.jupiter.extension.MavenJupiterExtension;
@@ -28,6 +29,67 @@ import org.junit.jupiter.api.Nested;
 
 @MavenJupiterExtension
 class ListIT {
+
+    @Nested
+    @MavenProject
+    @MavenGoal("${project.groupId}:${project.artifactId}:${project.version}:list")
+    class SimpleProject {
+
+        @MavenTest
+        @SystemProperty(value = "style.color", content = "always")
+        void list_with_color_activated(MavenExecutionResult result) {
+            assertThat(result)
+                    .isSuccessful()
+                    .out()
+                    .plain()
+                    .containsSequence(
+                            "-------------------------------------------------------------------------------------------------",
+                            "PHASE                  | PLUGIN                 | VERSION | GOAL          | EXECUTION ID         ",
+                            "-------------------------------------------------------------------------------------------------",
+                            "process-resources      | maven-" + green("resources")
+                                    + "-plugin | 2.6     | resources     | default-resources    ",
+                            "compile                | maven-" + green("compiler")
+                                    + "-plugin  | 3.1     | compile       | default-compile      ",
+                            "process-test-resources | maven-" + green("resources")
+                                    + "-plugin | 2.6     | testResources | default-testResources",
+                            "test-compile           | maven-" + green("compiler")
+                                    + "-plugin  | 3.1     | testCompile   | default-testCompile  ",
+                            "test                   | maven-" + green("surefire")
+                                    + "-plugin  | 2.12.4  | test          | default-test         ",
+                            "package                | maven-" + green("jar")
+                                    + "-plugin       | 2.4     | jar           | default-jar          ",
+                            "install                | maven-" + green("install")
+                                    + "-plugin   | 2.4     | install       | default-install      ",
+                            "deploy                 | maven-" + green("deploy")
+                                    + "-plugin    | 2.7     | deploy        | default-deploy       ");
+        }
+
+        @MavenTest
+        @SystemProperty(value = "style.color", content = "never")
+        void list_with_color_deactivated(MavenExecutionResult result) {
+            assertThat(result)
+                    .isSuccessful()
+                    .out()
+                    .plain()
+                    .containsSequence(
+                            "[INFO] Build Plan for list-simple-project: ",
+                            "-------------------------------------------------------------------------------------------------",
+                            "PHASE                  | PLUGIN                 | VERSION | GOAL          | EXECUTION ID         ",
+                            "-------------------------------------------------------------------------------------------------",
+                            "process-resources      | maven-resources-plugin | 2.6     | resources     | default-resources    ",
+                            "compile                | maven-compiler-plugin  | 3.1     | compile       | default-compile      ",
+                            "process-test-resources | maven-resources-plugin | 2.6     | testResources | default-testResources",
+                            "test-compile           | maven-compiler-plugin  | 3.1     | testCompile   | default-testCompile  ",
+                            "test                   | maven-surefire-plugin  | 2.12.4  | test          | default-test         ",
+                            "package                | maven-jar-plugin       | 2.4     | jar           | default-jar          ",
+                            "install                | maven-install-plugin   | 2.4     | install       | default-install      ",
+                            "deploy                 | maven-deploy-plugin    | 2.7     | deploy        | default-deploy       ");
+        }
+
+        private String green(String text) {
+            return ansi().fgGreen().a(text).reset().toString();
+        }
+    }
 
     @Nested
     @MavenProject
