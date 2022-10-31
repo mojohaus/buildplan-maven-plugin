@@ -94,8 +94,8 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
         MojoExecutionDisplay display = new MojoExecutionDisplay(execution);
 
         return String.format(rowFormat, display.getArtifactId(),
-                                        display.getExecutionId(),
-                                        display.getGoal());
+                                        display.getGoal(),
+                                        display.getExecutionId());
     }
 
     private String phaseTitleLine(TableDescriptor descriptor, String key) {

@@ -38,31 +38,31 @@ If you want to show the lifecycle that defines the listed phase(s), add this par
 
 [INFO] --- buildplan-maven-plugin:${project.version}:list-phase (default-cli) @ buildplan-maven-plugin ---
 [INFO] install ------------------------------------------------------------------------------------------
-[INFO]     + maven-install-plugin        | default-install                   | install
+[INFO]     + maven-install-plugin        | install                   | default-install
 [INFO] generate-sources ---------------------------------------------------------------------------------
-[INFO]     + maven-plugin-plugin         | help-goal                         | helpmojo
+[INFO]     + maven-plugin-plugin         | helpmojo                  | help-goal
 [INFO] process-resources --------------------------------------------------------------------------------
-[INFO]     + maven-resources-plugin      | default-resources                 | resources
+[INFO]     + maven-resources-plugin      | resources                 | default-resources
 [INFO] test ---------------------------------------------------------------------------------------------
-[INFO]     + maven-surefire-plugin       | default-test                      | test
+[INFO]     + maven-surefire-plugin       | test                      | default-test
 [INFO] test-compile -------------------------------------------------------------------------------------
-[INFO]     + maven-compiler-plugin       | default-testCompile               | testCompile
+[INFO]     + maven-compiler-plugin       | testCompile               | default-testCompile
 [INFO] process-test-resources ---------------------------------------------------------------------------
-[INFO]     + maven-resources-plugin      | default-testResources             | testResources
+[INFO]     + maven-resources-plugin      | testResources             | default-testResources
 [INFO] verify -------------------------------------------------------------------------------------------
-[INFO]     + license-maven-plugin        | default                           | check
+[INFO]     + license-maven-plugin        | check                     | default
 [INFO] process-classes ----------------------------------------------------------------------------------
-[INFO]     + maven-plugin-plugin         | default-descriptor                | descriptor
-[INFO]     + maven-plugin-plugin         | mojo-descriptor                   | descriptor
-[INFO]     + animal-sniffer-maven-plugin | check-signature                   | check
+[INFO]     + maven-plugin-plugin         | descriptor                | default-descriptor
+[INFO]     + maven-plugin-plugin         | descriptor                | mojo-descriptor
+[INFO]     + animal-sniffer-maven-plugin | check                     | check-signature
 [INFO] compile ------------------------------------------------------------------------------------------
-[INFO]     + maven-compiler-plugin       | default-compile                   | compile
+[INFO]     + maven-compiler-plugin       | compile                   | default-compile
 [INFO] package ------------------------------------------------------------------------------------------
-[INFO]     + maven-jar-plugin            | default-jar                       | jar
-[INFO]     + maven-plugin-plugin         | default-addPluginArtifactMetadata | addPluginArtifactMetadata
-[INFO]     + maven-source-plugin         | attach-sources                    | jar-no-fork
+[INFO]     + maven-jar-plugin            | jar                       | default-jar
+[INFO]     + maven-plugin-plugin         | addPluginArtifactMetadata | default-addPluginArtifactMetadata
+[INFO]     + maven-source-plugin         | jar-no-fork               | attach-sources
 [INFO] deploy -------------------------------------------------------------------------------------------
-[INFO]     + maven-deploy-plugin         | default-deploy                    | deploy
+[INFO]     + maven-deploy-plugin         | deploy                    | default-deploy
 ```
 It is possible to limit the list to a specific phase:
 
