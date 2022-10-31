@@ -45,7 +45,7 @@ class ReportIT {
                     + "   <th>PHASE</th>\n"
                     + "   <th>PLUGIN</th>\n"
                     + "   <th>GOAL</th>\n"
-                    + "   <th>ID</th>\n"
+                    + "   <th>EXECUTION ID</th>\n"
                     + "  </tr>\n"
                     + "  <tr class=\"b\">\n"
                     + "   <td>default</td>\n"
