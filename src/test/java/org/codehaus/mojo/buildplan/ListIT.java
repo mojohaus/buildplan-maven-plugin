@@ -42,14 +42,14 @@ class ListIT {
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule: ",
                     "----------------------------------------------------------",
-                    "PHASE   | PLUGIN               | GOAL    | EXECUTION_ID   ",
+                    "PHASE   | PLUGIN               | GOAL    | EXECUTION ID   ",
                     "----------------------------------------------------------",
                     "install | maven-install-plugin | install | default-install",
                     "deploy  | maven-deploy-plugin  | deploy  | default-deploy ")
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule-module-a: ",
                     "---------------------------------------------------------------------------------------",
-                    "PHASE                  | PLUGIN                 | GOAL          | EXECUTION_ID         ",
+                    "PHASE                  | PLUGIN                 | GOAL          | EXECUTION ID         ",
                     "---------------------------------------------------------------------------------------",
                     "process-resources      | maven-resources-plugin | resources     | default-resources    ",
                     "compile                | maven-compiler-plugin  | compile       | default-compile      ",
@@ -62,7 +62,7 @@ class ListIT {
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule-module-b: ",
                     "------------------------------------------------------------------------------------------",
-                    "PHASE                  | PLUGIN                 | GOAL             | EXECUTION_ID         ",
+                    "PHASE                  | PLUGIN                 | GOAL             | EXECUTION ID         ",
                     "------------------------------------------------------------------------------------------",
                     "process-resources      | maven-resources-plugin | resources        | default-resources    ",
                     "compile                | maven-compiler-plugin  | compile          | default-compile      ",
@@ -87,7 +87,7 @@ class ListIT {
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule: ",
                     "-----------------------------------------------------------------------",
-                    "LIFECYCLE | PHASE   | PLUGIN                | GOAL    | EXECUTION_ID   ",
+                    "LIFECYCLE | PHASE   | PLUGIN                | GOAL    | EXECUTION ID   ",
                     "-----------------------------------------------------------------------",
                     "clean     | clean   | maven-clean-plugin    | clean   | default-clean  ",
                     "          |         | versions-maven-plugin | set     | default-cli    ",
@@ -95,7 +95,7 @@ class ListIT {
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule-module-a: ",
                     "---------------------------------------------------------------------------------------------------",
-                    "LIFECYCLE | PHASE                  | PLUGIN                 | GOAL          | EXECUTION_ID         ",
+                    "LIFECYCLE | PHASE                  | PLUGIN                 | GOAL          | EXECUTION ID         ",
                     "---------------------------------------------------------------------------------------------------",
                     "clean     | clean                  | maven-clean-plugin     | clean         | default-clean        ",
                     "          |                        | versions-maven-plugin  | set           | default-cli          ",
@@ -109,7 +109,7 @@ class ListIT {
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule-module-b: ",
                     "------------------------------------------------------------------------------------------------------",
-                    "LIFECYCLE | PHASE                  | PLUGIN                 | GOAL             | EXECUTION_ID         ",
+                    "LIFECYCLE | PHASE                  | PLUGIN                 | GOAL             | EXECUTION ID         ",
                     "------------------------------------------------------------------------------------------------------",
                     "clean     | clean                  | maven-clean-plugin     | clean            | default-clean        ",
                     "          |                        | versions-maven-plugin  | set              | default-cli          ",
@@ -135,7 +135,7 @@ class ListIT {
                     "\n"
                         + "Build Plan for list-multimodule: \n"
                         + "----------------------------------------------------------\n"
-                        + "PHASE   | PLUGIN               | GOAL    | EXECUTION_ID   \n"
+                        + "PHASE   | PLUGIN               | GOAL    | EXECUTION ID   \n"
                         + "----------------------------------------------------------\n"
                         + "install | maven-install-plugin | install | default-install\n"
                         + "deploy  | maven-deploy-plugin  | deploy  | default-deploy \n"
@@ -146,7 +146,7 @@ class ListIT {
                     "\n"
                         + "Build Plan for list-multimodule-module-a: \n"
                         + "---------------------------------------------------------------------------------------\n"
-                        + "PHASE                  | PLUGIN                 | GOAL          | EXECUTION_ID         \n"
+                        + "PHASE                  | PLUGIN                 | GOAL          | EXECUTION ID         \n"
                         + "---------------------------------------------------------------------------------------\n"
                         + "process-resources      | maven-resources-plugin | resources     | default-resources    \n"
                         + "compile                | maven-compiler-plugin  | compile       | default-compile      \n"
@@ -163,7 +163,7 @@ class ListIT {
                     "\n"
                         + "Build Plan for list-multimodule-module-b: \n"
                         + "------------------------------------------------------------------------------------------\n"
-                        + "PHASE                  | PLUGIN                 | GOAL             | EXECUTION_ID         \n"
+                        + "PHASE                  | PLUGIN                 | GOAL             | EXECUTION ID         \n"
                         + "------------------------------------------------------------------------------------------\n"
                         + "process-resources      | maven-resources-plugin | resources        | default-resources    \n"
                         + "compile                | maven-compiler-plugin  | compile          | default-compile      \n"
@@ -192,14 +192,14 @@ class ListIT {
                     "\n"
                         + "Build Plan for list-multimodule: \n"
                         + "----------------------------------------------------------\n"
-                        + "PHASE   | PLUGIN               | GOAL    | EXECUTION_ID   \n"
+                        + "PHASE   | PLUGIN               | GOAL    | EXECUTION ID   \n"
                         + "----------------------------------------------------------\n"
                         + "install | maven-install-plugin | install | default-install\n"
                         + "deploy  | maven-deploy-plugin  | deploy  | default-deploy \n"
                         + "\n"
                         + "Build Plan for list-multimodule-module-a: \n"
                         + "---------------------------------------------------------------------------------------\n"
-                        + "PHASE                  | PLUGIN                 | GOAL          | EXECUTION_ID         \n"
+                        + "PHASE                  | PLUGIN                 | GOAL          | EXECUTION ID         \n"
                         + "---------------------------------------------------------------------------------------\n"
                         + "process-resources      | maven-resources-plugin | resources     | default-resources    \n"
                         + "compile                | maven-compiler-plugin  | compile       | default-compile      \n"
@@ -212,7 +212,7 @@ class ListIT {
                         + "\n"
                         + "Build Plan for list-multimodule-module-b: \n"
                         + "------------------------------------------------------------------------------------------\n"
-                        + "PHASE                  | PLUGIN                 | GOAL             | EXECUTION_ID         \n"
+                        + "PHASE                  | PLUGIN                 | GOAL             | EXECUTION ID         \n"
                         + "------------------------------------------------------------------------------------------\n"
                         + "process-resources      | maven-resources-plugin | resources        | default-resources    \n"
                         + "compile                | maven-compiler-plugin  | compile          | default-compile      \n"
@@ -237,7 +237,7 @@ class ListIT {
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule: ",
                     "----------------------------------------------------------------------",
-                    "LIFECYCLE | PHASE   | PLUGIN               | GOAL    | EXECUTION_ID   ",
+                    "LIFECYCLE | PHASE   | PLUGIN               | GOAL    | EXECUTION ID   ",
                     "----------------------------------------------------------------------",
                     "clean     | clean   | maven-clean-plugin   | clean   | default-clean  ",
                     "default   | install | maven-install-plugin | install | default-install",
@@ -245,7 +245,7 @@ class ListIT {
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule-module-a: ",
                     "---------------------------------------------------------------------------------------------------",
-                    "LIFECYCLE | PHASE                  | PLUGIN                 | GOAL          | EXECUTION_ID         ",
+                    "LIFECYCLE | PHASE                  | PLUGIN                 | GOAL          | EXECUTION ID         ",
                     "---------------------------------------------------------------------------------------------------",
                     "clean     | clean                  | maven-clean-plugin     | clean         | default-clean        ",
                     "default   | process-resources      | maven-resources-plugin | resources     | default-resources    ",
@@ -259,7 +259,7 @@ class ListIT {
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule-module-b: ",
                     "------------------------------------------------------------------------------------------------------",
-                    "LIFECYCLE | PHASE                  | PLUGIN                 | GOAL             | EXECUTION_ID         ",
+                    "LIFECYCLE | PHASE                  | PLUGIN                 | GOAL             | EXECUTION ID         ",
                     "------------------------------------------------------------------------------------------------------",
                     "clean     | clean                  | maven-clean-plugin     | clean            | default-clean        ",
                     "default   | process-resources      | maven-resources-plugin | resources        | default-resources    ",
