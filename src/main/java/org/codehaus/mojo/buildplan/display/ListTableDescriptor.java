@@ -23,9 +23,10 @@ import org.apache.maven.plugin.MojoExecution;
 
 public class ListTableDescriptor extends AbstractTableDescriptor {
 
-    static final int SEPARATOR_SIZE = 4 * SEPARATOR.length();
+    static final int SEPARATOR_SIZE = 5 * SEPARATOR.length();
 
     private int pluginSize;
+    private int versionSize;
     private int phaseSize;
     private int lifecycleSize;
     private int executionIdSize;
@@ -36,6 +37,7 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
         Map<TableColumn,Integer> maxSize = findMaxSize(executions, defaultLifecycles, TableColumn.values());
 
         return new ListTableDescriptor().setPluginSize(maxSize.get(TableColumn.ARTIFACT_ID))
+                                        .setVersionSize(maxSize.get(TableColumn.VERSION))
                                         .setPhaseSize(maxSize.get(TableColumn.PHASE))
                                         .setLifecycleSize(maxSize.get(TableColumn.LIFECYCLE))
                                         .setGoalSize(maxSize.get(TableColumn.GOAL))
@@ -51,7 +53,10 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
         builder.append(FORMAT_LEFT_ALIGN).append(getPhaseSize()).append(FORMAT_STRING)
                .append(SEPARATOR)
                .append(FORMAT_LEFT_ALIGN).append(getPluginSize()).append(FORMAT_STRING)
+               .append(SEPARATOR)
+               .append(FORMAT_LEFT_ALIGN).append(getVersionSize()).append(FORMAT_STRING)
                .append(SEPARATOR);
+
         builder.append(FORMAT_LEFT_ALIGN).append(getGoalSize()).append(FORMAT_STRING)
                .append(SEPARATOR)
                .append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING);
@@ -59,13 +64,14 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
     }
 
     public int width() {
-        return getPluginSize() + getPhaseSize() + getLifecycleSize() + getExecutionIdSize() + getGoalSize() + SEPARATOR_SIZE;
+        return getPluginSize() + getVersionSize() + getPhaseSize() + getLifecycleSize() + getExecutionIdSize() + getGoalSize() + SEPARATOR_SIZE;
     }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", ListTableDescriptor.class.getSimpleName() + "[", "]")
             .add("Plugin column size=" + pluginSize)
+            .add("Plugin version size=" + versionSize)
             .add("Phase column size=" + phaseSize)
             .add("Lifecycle column size=" + lifecycleSize)
             .add("Execution ID column size=" + executionIdSize)
@@ -81,6 +87,15 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
 
     public ListTableDescriptor setPluginSize(int pluginSize) {
         this.pluginSize = pluginSize;
+        return this;
+    }
+
+    private int getVersionSize() {
+        return versionSize;
+    }
+
+    public ListTableDescriptor setVersionSize(int versionSize) {
+        this.versionSize = versionSize;
         return this;
     }
 

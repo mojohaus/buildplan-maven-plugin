@@ -5,24 +5,24 @@
 > mvn buildplan:list
 
 [INFO] --- buildplan-maven-plugin:${project.version}:list (default-cli) @ buildplan-maven-plugin ---
-[INFO] --------------------------------------------------------------------------------------------------------------------
-[INFO] PHASE                  | PLUGIN                      | GOAL                      | EXECUTION ID
-[INFO] --------------------------------------------------------------------------------------------------------------------
-[INFO] generate-sources       | maven-plugin-plugin         | helpmojo                  | help-goal
-[INFO] process-classes        | maven-plugin-plugin         | descriptor                | default-descriptor
-[INFO] process-resources      | maven-resources-plugin      | resources                 | default-resources
-[INFO] compile                | maven-compiler-plugin       | compile                   | default-compile
-[INFO] process-classes        | maven-plugin-plugin         | descriptor                | mojo-descriptor
-[INFO] process-test-resources | maven-resources-plugin      | testResources             | default-testResources
-[INFO] test-compile           | maven-compiler-plugin       | testCompile               | default-testCompile
-[INFO] test                   | maven-surefire-plugin       | test                      | default-test
-[INFO] process-classes        | animal-sniffer-maven-plugin | check                     | check-signature
-[INFO] package                | maven-jar-plugin            | jar                       | default-jar
-[INFO] package                | maven-plugin-plugin         | addPluginArtifactMetadata | default-addPluginArtifactMetadata
-[INFO] package                | maven-source-plugin         | jar-no-fork               | attach-sources
-[INFO] verify                 | license-maven-plugin        | check                     | default
-[INFO] install                | maven-install-plugin        | install                   | default-install
-[INFO] deploy                 | maven-deploy-plugin         | deploy                    | default-deploy
+[INFO] ------------------------------------------------------------------------------------------------------------------------------
+[INFO] PHASE                  | PLUGIN                      | VERSION | GOAL                      | EXECUTION ID
+[INFO] ------------------------------------------------------------------------------------------------------------------------------
+[INFO] generate-sources       | maven-plugin-plugin         | 3.6.4   | helpmojo                  | help-goal
+[INFO] process-classes        | maven-plugin-plugin         | 3.6.4   | descriptor                | default-descriptor
+[INFO] process-resources      | maven-resources-plugin      | 2.6     | resources                 | default-resources
+[INFO] compile                | maven-compiler-plugin       | 3.1     | compile                   | default-compile
+[INFO] process-classes        | maven-plugin-plugin         | 3.6.4   | descriptor                | mojo-descriptor
+[INFO] process-test-resources | maven-resources-plugin      | 2.6     | testResources             | default-testResources
+[INFO] test-compile           | maven-compiler-plugin       | 3.1     | testCompile               | default-testCompile
+[INFO] test                   | maven-surefire-plugin       | 2.12.4  | test                      | default-test
+[INFO] process-classes        | animal-sniffer-maven-plugin | 1.22    | check                     | check-signature
+[INFO] package                | maven-jar-plugin            | 2.4     | jar                       | default-jar
+[INFO] package                | maven-plugin-plugin         | 3.6.4   | addPluginArtifactMetadata | default-addPluginArtifactMetadata
+[INFO] package                | maven-source-plugin         | 3.2.1   | jar-no-fork               | attach-sources
+[INFO] verify                 | license-maven-plugin        | 2.0.0   | check                     | default
+[INFO] install                | maven-install-plugin        | 2.4     | install                   | default-install
+[INFO] deploy                 | maven-deploy-plugin         | 2.7     | deploy                    | default-deploy
 ```
 It is possible to define the tasks used to calculate execution plan:
 

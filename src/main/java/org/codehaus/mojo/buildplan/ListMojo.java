@@ -22,6 +22,7 @@ import static org.codehaus.mojo.buildplan.display.TableColumn.EXECUTION_ID;
 import static org.codehaus.mojo.buildplan.display.TableColumn.GOAL;
 import static org.codehaus.mojo.buildplan.display.TableColumn.LIFECYCLE;
 import static org.codehaus.mojo.buildplan.display.TableColumn.PHASE;
+import static org.codehaus.mojo.buildplan.display.TableColumn.VERSION;
 
 import org.apache.maven.lifecycle.MavenExecutionPlan;
 import org.apache.maven.plugin.MojoExecution;
@@ -79,12 +80,14 @@ public class ListMojo extends AbstractLifecycleMojo {
                 display.getLifecycle(defaultLifecycles),
                 display.getPhase(),
                 display.getArtifactId(),
+                display.getVersion(),
                 display.getGoal(),
                 display.getExecutionId());
         } else {
             return String.format(row,
                     display.getPhase(),
                     display.getArtifactId(),
+                    display.getVersion(),
                     display.getGoal(),
                     display.getExecutionId());
         }
@@ -92,9 +95,9 @@ public class ListMojo extends AbstractLifecycleMojo {
 
     private String tableHead(String row) {
         if (showLifecycles) {
-            return String.format(row, LIFECYCLE.title(), PHASE.title(), ARTIFACT_ID.title(), GOAL.title(), EXECUTION_ID.title());
+            return String.format(row, LIFECYCLE.title(), PHASE.title(), ARTIFACT_ID.title(), VERSION.title(), GOAL.title(), EXECUTION_ID.title());
         } else {
-            return String.format(row, PHASE.title(), ARTIFACT_ID.title(), GOAL.title(), EXECUTION_ID.title());
+            return String.format(row, PHASE.title(), ARTIFACT_ID.title(), VERSION.title(), GOAL.title(), EXECUTION_ID.title());
         }
     }
 

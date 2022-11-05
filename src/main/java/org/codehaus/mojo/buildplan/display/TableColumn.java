@@ -21,7 +21,8 @@ public enum TableColumn {
     ARTIFACT_ID("PLUGIN"),
     GOAL("GOAL"),
     PHASE("PHASE"),
-    LIFECYCLE("LIFECYCLE");
+    LIFECYCLE("LIFECYCLE"),
+    VERSION("VERSION");
 
     private final String title;
 

@@ -160,11 +160,12 @@ public class ListTableDescriptorTest {
 
         ListTableDescriptor descriptor = new ListTableDescriptor().setPluginSize(1)
                                                                   .setPhaseSize(2)
+                                                                  .setVersionSize(5)
                                                                   .setExecutionIdSize(3)
                                                                   .setGoalSize(4);
 
         String result = descriptor.rowFormat();
 
-        assertThat(result).isEqualTo("%-2s | %-1s | %-4s | %-3s");
+        assertThat(result).isEqualTo("%-2s | %-1s | %-5s | %-4s | %-3s");
     }
 }
