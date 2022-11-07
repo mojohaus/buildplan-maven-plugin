@@ -54,6 +54,11 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
                     case LIFECYCLE:
                         Lifecycle lifecycle = defaultLifecycles.get(phase(execution));
                         count.put(column, lifecycle == null ? 0 : safeLength(lifecycle.getId()));
+                        break;
+                    case VERSION:
+                        count.put(column, safeLength(execution.getVersion()));
+                        break;
+
                 }
             }
         }

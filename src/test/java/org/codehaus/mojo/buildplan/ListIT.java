@@ -41,39 +41,39 @@ class ListIT {
                 .plain()
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule: ",
-                    "----------------------------------------------------------",
-                    "PHASE   | PLUGIN               | GOAL    | EXECUTION ID   ",
-                    "----------------------------------------------------------",
-                    "install | maven-install-plugin | install | default-install",
-                    "deploy  | maven-deploy-plugin  | deploy  | default-deploy ")
+                    "--------------------------------------------------------------------",
+                    "PHASE   | PLUGIN               | VERSION | GOAL    | EXECUTION ID   ",
+                    "--------------------------------------------------------------------",
+                    "install | maven-install-plugin | 2.4     | install | default-install",
+                    "deploy  | maven-deploy-plugin  | 2.7     | deploy  | default-deploy ")
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule-module-a: ",
-                    "---------------------------------------------------------------------------------------",
-                    "PHASE                  | PLUGIN                 | GOAL          | EXECUTION ID         ",
-                    "---------------------------------------------------------------------------------------",
-                    "process-resources      | maven-resources-plugin | resources     | default-resources    ",
-                    "compile                | maven-compiler-plugin  | compile       | default-compile      ",
-                    "process-test-resources | maven-resources-plugin | testResources | default-testResources",
-                    "test-compile           | maven-compiler-plugin  | testCompile   | default-testCompile  ",
-                    "test                   | maven-surefire-plugin  | test          | default-test         ",
-                    "package                | maven-jar-plugin       | jar           | default-jar          ",
-                    "install                | maven-install-plugin   | install       | default-install      ",
-                    "deploy                 | maven-deploy-plugin    | deploy        | default-deploy       ")
+                    "-------------------------------------------------------------------------------------------------",
+                    "PHASE                  | PLUGIN                 | VERSION | GOAL          | EXECUTION ID         ",
+                    "-------------------------------------------------------------------------------------------------",
+                    "process-resources      | maven-resources-plugin | 2.6     | resources     | default-resources    ",
+                    "compile                | maven-compiler-plugin  | 3.1     | compile       | default-compile      ",
+                    "process-test-resources | maven-resources-plugin | 2.6     | testResources | default-testResources",
+                    "test-compile           | maven-compiler-plugin  | 3.1     | testCompile   | default-testCompile  ",
+                    "test                   | maven-surefire-plugin  | 2.12.4  | test          | default-test         ",
+                    "package                | maven-jar-plugin       | 2.4     | jar           | default-jar          ",
+                    "install                | maven-install-plugin   | 2.4     | install       | default-install      ",
+                    "deploy                 | maven-deploy-plugin    | 2.7     | deploy        | default-deploy       ")
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule-module-b: ",
-                    "------------------------------------------------------------------------------------------",
-                    "PHASE                  | PLUGIN                 | GOAL             | EXECUTION ID         ",
-                    "------------------------------------------------------------------------------------------",
-                    "process-resources      | maven-resources-plugin | resources        | default-resources    ",
-                    "compile                | maven-compiler-plugin  | compile          | default-compile      ",
-                    "process-test-resources | maven-resources-plugin | testResources    | default-testResources",
-                    "test-compile           | maven-compiler-plugin  | testCompile      | default-testCompile  ",
-                    "test                   | maven-surefire-plugin  | test             | default-test         ",
-                    "package                | maven-jar-plugin       | jar              | default-jar          ",
-                    "integration-test       | maven-failsafe-plugin  | integration-test | default              ",
-                    "verify                 | maven-failsafe-plugin  | verify           | default              ",
-                    "install                | maven-install-plugin   | install          | default-install      ",
-                    "deploy                 | maven-deploy-plugin    | deploy           | default-deploy       "
+                    "----------------------------------------------------------------------------------------------------",
+                    "PHASE                  | PLUGIN                 | VERSION | GOAL             | EXECUTION ID         ",
+                    "----------------------------------------------------------------------------------------------------",
+                    "process-resources      | maven-resources-plugin | 2.6     | resources        | default-resources    ",
+                    "compile                | maven-compiler-plugin  | 3.1     | compile          | default-compile      ",
+                    "process-test-resources | maven-resources-plugin | 2.6     | testResources    | default-testResources",
+                    "test-compile           | maven-compiler-plugin  | 3.1     | testCompile      | default-testCompile  ",
+                    "test                   | maven-surefire-plugin  | 2.12.4  | test             | default-test         ",
+                    "package                | maven-jar-plugin       | 2.4     | jar              | default-jar          ",
+                    "integration-test       | maven-failsafe-plugin  | 2.19.1  | integration-test | default              ",
+                    "verify                 | maven-failsafe-plugin  | 2.19.1  | verify           | default              ",
+                    "install                | maven-install-plugin   | 2.4     | install          | default-install      ",
+                    "deploy                 | maven-deploy-plugin    | 2.7     | deploy           | default-deploy       "
                 );
         }
 
@@ -86,43 +86,43 @@ class ListIT {
                 .plain()
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule: ",
-                    "-----------------------------------------------------------------------",
-                    "LIFECYCLE | PHASE   | PLUGIN                | GOAL    | EXECUTION ID   ",
-                    "-----------------------------------------------------------------------",
-                    "clean     | clean   | maven-clean-plugin    | clean   | default-clean  ",
-                    "          |         | versions-maven-plugin | set     | default-cli    ",
-                    "default   | install | maven-install-plugin  | install | default-install")
+                    "---------------------------------------------------------------------------------",
+                    "LIFECYCLE | PHASE   | PLUGIN                | VERSION | GOAL    | EXECUTION ID   ",
+                    "---------------------------------------------------------------------------------",
+                    "clean     | clean   | maven-clean-plugin    | 2.5     | clean   | default-clean  ",
+                    "          |         | versions-maven-plugin | 2.13.0  | set     | default-cli    ",
+                    "default   | install | maven-install-plugin  | 2.4     | install | default-install")
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule-module-a: ",
-                    "---------------------------------------------------------------------------------------------------",
-                    "LIFECYCLE | PHASE                  | PLUGIN                 | GOAL          | EXECUTION ID         ",
-                    "---------------------------------------------------------------------------------------------------",
-                    "clean     | clean                  | maven-clean-plugin     | clean         | default-clean        ",
-                    "          |                        | versions-maven-plugin  | set           | default-cli          ",
-                    "default   | process-resources      | maven-resources-plugin | resources     | default-resources    ",
-                    "default   | compile                | maven-compiler-plugin  | compile       | default-compile      ",
-                    "default   | process-test-resources | maven-resources-plugin | testResources | default-testResources",
-                    "default   | test-compile           | maven-compiler-plugin  | testCompile   | default-testCompile  ",
-                    "default   | test                   | maven-surefire-plugin  | test          | default-test         ",
-                    "default   | package                | maven-jar-plugin       | jar           | default-jar          ",
-                    "default   | install                | maven-install-plugin   | install       | default-install      ")
+                    "-------------------------------------------------------------------------------------------------------------",
+                    "LIFECYCLE | PHASE                  | PLUGIN                 | VERSION | GOAL          | EXECUTION ID         ",
+                    "-------------------------------------------------------------------------------------------------------------",
+                    "clean     | clean                  | maven-clean-plugin     | 2.5     | clean         | default-clean        ",
+                    "          |                        | versions-maven-plugin  | 2.13.0  | set           | default-cli          ",
+                    "default   | process-resources      | maven-resources-plugin | 2.6     | resources     | default-resources    ",
+                    "default   | compile                | maven-compiler-plugin  | 3.1     | compile       | default-compile      ",
+                    "default   | process-test-resources | maven-resources-plugin | 2.6     | testResources | default-testResources",
+                    "default   | test-compile           | maven-compiler-plugin  | 3.1     | testCompile   | default-testCompile  ",
+                    "default   | test                   | maven-surefire-plugin  | 2.12.4  | test          | default-test         ",
+                    "default   | package                | maven-jar-plugin       | 2.4     | jar           | default-jar          ",
+                    "default   | install                | maven-install-plugin   | 2.4     | install       | default-install      ")
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule-module-b: ",
-                    "------------------------------------------------------------------------------------------------------",
-                    "LIFECYCLE | PHASE                  | PLUGIN                 | GOAL             | EXECUTION ID         ",
-                    "------------------------------------------------------------------------------------------------------",
-                    "clean     | clean                  | maven-clean-plugin     | clean            | default-clean        ",
-                    "          |                        | versions-maven-plugin  | set              | default-cli          ",
-                    "default   | process-resources      | maven-resources-plugin | resources        | default-resources    ",
-                    "default   | compile                | maven-compiler-plugin  | compile          | default-compile      ",
-                    "default   | process-test-resources | maven-resources-plugin | testResources    | default-testResources",
-                    "default   | test-compile           | maven-compiler-plugin  | testCompile      | default-testCompile  ",
-                    "default   | test                   | maven-surefire-plugin  | test             | default-test         ",
-                    "default   | package                | maven-jar-plugin       | jar              | default-jar          ",
-                    "default   | integration-test       | maven-failsafe-plugin  | integration-test | default              ",
-                    "default   | verify                 | maven-failsafe-plugin  | verify           | default              ",
-                    "default   | install                | maven-install-plugin   | install          | default-install      "
-                );
+                    "----------------------------------------------------------------------------------------------------------------",
+                    "LIFECYCLE | PHASE                  | PLUGIN                 | VERSION | GOAL             | EXECUTION ID         ",
+                    "----------------------------------------------------------------------------------------------------------------",
+                    "clean     | clean                  | maven-clean-plugin     | 2.5     | clean            | default-clean        ",
+                    "          |                        | versions-maven-plugin  | 2.13.0  | set              | default-cli          ",
+                    "default   | process-resources      | maven-resources-plugin | 2.6     | resources        | default-resources    ",
+                    "default   | compile                | maven-compiler-plugin  | 3.1     | compile          | default-compile      ",
+                    "default   | process-test-resources | maven-resources-plugin | 2.6     | testResources    | default-testResources",
+                    "default   | test-compile           | maven-compiler-plugin  | 3.1     | testCompile      | default-testCompile  ",
+                    "default   | test                   | maven-surefire-plugin  | 2.12.4  | test             | default-test         ",
+                    "default   | package                | maven-jar-plugin       | 2.4     | jar              | default-jar          ",
+                    "default   | integration-test       | maven-failsafe-plugin  | 2.19.1  | integration-test | default              ",
+                    "default   | verify                 | maven-failsafe-plugin  | 2.19.1  | verify           | default              ",
+                    "default   | install                | maven-install-plugin   | 2.4     | install          | default-install      "
+                    );
         }
 
         @MavenTest
@@ -134,47 +134,46 @@ class ListIT {
                 .hasContent(
                     "\n"
                         + "Build Plan for list-multimodule: \n"
-                        + "----------------------------------------------------------\n"
-                        + "PHASE   | PLUGIN               | GOAL    | EXECUTION ID   \n"
-                        + "----------------------------------------------------------\n"
-                        + "install | maven-install-plugin | install | default-install\n"
-                        + "deploy  | maven-deploy-plugin  | deploy  | default-deploy \n"
+                        + "--------------------------------------------------------------------\n"
+                        + "PHASE   | PLUGIN               | VERSION | GOAL    | EXECUTION ID   \n"
+                        + "--------------------------------------------------------------------\n"
+                        + "install | maven-install-plugin | 2.4     | install | default-install\n"
+                        + "deploy  | maven-deploy-plugin  | 2.7     | deploy  | default-deploy \n"
                 );
-
             assertThat(new File(result.getMavenProjectResult().getTargetProjectDirectory(), "module-a/list.txt"))
                 .hasContent(
                     "\n"
                         + "Build Plan for list-multimodule-module-a: \n"
-                        + "---------------------------------------------------------------------------------------\n"
-                        + "PHASE                  | PLUGIN                 | GOAL          | EXECUTION ID         \n"
-                        + "---------------------------------------------------------------------------------------\n"
-                        + "process-resources      | maven-resources-plugin | resources     | default-resources    \n"
-                        + "compile                | maven-compiler-plugin  | compile       | default-compile      \n"
-                        + "process-test-resources | maven-resources-plugin | testResources | default-testResources\n"
-                        + "test-compile           | maven-compiler-plugin  | testCompile   | default-testCompile  \n"
-                        + "test                   | maven-surefire-plugin  | test          | default-test         \n"
-                        + "package                | maven-jar-plugin       | jar           | default-jar          \n"
-                        + "install                | maven-install-plugin   | install       | default-install      \n"
-                        + "deploy                 | maven-deploy-plugin    | deploy        | default-deploy       \n"
+                        + "-------------------------------------------------------------------------------------------------\n"
+                        + "PHASE                  | PLUGIN                 | VERSION | GOAL          | EXECUTION ID         \n"
+                        + "-------------------------------------------------------------------------------------------------\n"
+                        + "process-resources      | maven-resources-plugin | 2.6     | resources     | default-resources    \n"
+                        + "compile                | maven-compiler-plugin  | 3.1     | compile       | default-compile      \n"
+                        + "process-test-resources | maven-resources-plugin | 2.6     | testResources | default-testResources\n"
+                        + "test-compile           | maven-compiler-plugin  | 3.1     | testCompile   | default-testCompile  \n"
+                        + "test                   | maven-surefire-plugin  | 2.12.4  | test          | default-test         \n"
+                        + "package                | maven-jar-plugin       | 2.4     | jar           | default-jar          \n"
+                        + "install                | maven-install-plugin   | 2.4     | install       | default-install      \n"
+                        + "deploy                 | maven-deploy-plugin    | 2.7     | deploy        | default-deploy       \n"
                 );
 
             assertThat(new File(result.getMavenProjectResult().getTargetProjectDirectory(), "module-b/list.txt"))
                 .hasContent(
                     "\n"
                         + "Build Plan for list-multimodule-module-b: \n"
-                        + "------------------------------------------------------------------------------------------\n"
-                        + "PHASE                  | PLUGIN                 | GOAL             | EXECUTION ID         \n"
-                        + "------------------------------------------------------------------------------------------\n"
-                        + "process-resources      | maven-resources-plugin | resources        | default-resources    \n"
-                        + "compile                | maven-compiler-plugin  | compile          | default-compile      \n"
-                        + "process-test-resources | maven-resources-plugin | testResources    | default-testResources\n"
-                        + "test-compile           | maven-compiler-plugin  | testCompile      | default-testCompile  \n"
-                        + "test                   | maven-surefire-plugin  | test             | default-test         \n"
-                        + "package                | maven-jar-plugin       | jar              | default-jar          \n"
-                        + "integration-test       | maven-failsafe-plugin  | integration-test | default              \n"
-                        + "verify                 | maven-failsafe-plugin  | verify           | default              \n"
-                        + "install                | maven-install-plugin   | install          | default-install      \n"
-                        + "deploy                 | maven-deploy-plugin    | deploy           | default-deploy       \n"
+                        + "----------------------------------------------------------------------------------------------------\n"
+                        + "PHASE                  | PLUGIN                 | VERSION | GOAL             | EXECUTION ID         \n"
+                        + "----------------------------------------------------------------------------------------------------\n"
+                        + "process-resources      | maven-resources-plugin | 2.6     | resources        | default-resources    \n"
+                        + "compile                | maven-compiler-plugin  | 3.1     | compile          | default-compile      \n"
+                        + "process-test-resources | maven-resources-plugin | 2.6     | testResources    | default-testResources\n"
+                        + "test-compile           | maven-compiler-plugin  | 3.1     | testCompile      | default-testCompile  \n"
+                        + "test                   | maven-surefire-plugin  | 2.12.4  | test             | default-test         \n"
+                        + "package                | maven-jar-plugin       | 2.4     | jar              | default-jar          \n"
+                        + "integration-test       | maven-failsafe-plugin  | 2.19.1  | integration-test | default              \n"
+                        + "verify                 | maven-failsafe-plugin  | 2.19.1  | verify           | default              \n"
+                        + "install                | maven-install-plugin   | 2.4     | install          | default-install      \n"
+                        + "deploy                 | maven-deploy-plugin    | 2.7     | deploy           | default-deploy       \n"
                 );
         }
 
@@ -191,39 +190,39 @@ class ListIT {
                 .hasContent(
                     "\n"
                         + "Build Plan for list-multimodule: \n"
-                        + "----------------------------------------------------------\n"
-                        + "PHASE   | PLUGIN               | GOAL    | EXECUTION ID   \n"
-                        + "----------------------------------------------------------\n"
-                        + "install | maven-install-plugin | install | default-install\n"
-                        + "deploy  | maven-deploy-plugin  | deploy  | default-deploy \n"
+                        + "--------------------------------------------------------------------\n"
+                        + "PHASE   | PLUGIN               | VERSION | GOAL    | EXECUTION ID   \n"
+                        + "--------------------------------------------------------------------\n"
+                        + "install | maven-install-plugin | 2.4     | install | default-install\n"
+                        + "deploy  | maven-deploy-plugin  | 2.7     | deploy  | default-deploy \n"
                         + "\n"
                         + "Build Plan for list-multimodule-module-a: \n"
-                        + "---------------------------------------------------------------------------------------\n"
-                        + "PHASE                  | PLUGIN                 | GOAL          | EXECUTION ID         \n"
-                        + "---------------------------------------------------------------------------------------\n"
-                        + "process-resources      | maven-resources-plugin | resources     | default-resources    \n"
-                        + "compile                | maven-compiler-plugin  | compile       | default-compile      \n"
-                        + "process-test-resources | maven-resources-plugin | testResources | default-testResources\n"
-                        + "test-compile           | maven-compiler-plugin  | testCompile   | default-testCompile  \n"
-                        + "test                   | maven-surefire-plugin  | test          | default-test         \n"
-                        + "package                | maven-jar-plugin       | jar           | default-jar          \n"
-                        + "install                | maven-install-plugin   | install       | default-install      \n"
-                        + "deploy                 | maven-deploy-plugin    | deploy        | default-deploy       \n"
+                        + "-------------------------------------------------------------------------------------------------\n"
+                        + "PHASE                  | PLUGIN                 | VERSION | GOAL          | EXECUTION ID         \n"
+                        + "-------------------------------------------------------------------------------------------------\n"
+                        + "process-resources      | maven-resources-plugin | 2.6     | resources     | default-resources    \n"
+                        + "compile                | maven-compiler-plugin  | 3.1     | compile       | default-compile      \n"
+                        + "process-test-resources | maven-resources-plugin | 2.6     | testResources | default-testResources\n"
+                        + "test-compile           | maven-compiler-plugin  | 3.1     | testCompile   | default-testCompile  \n"
+                        + "test                   | maven-surefire-plugin  | 2.12.4  | test          | default-test         \n"
+                        + "package                | maven-jar-plugin       | 2.4     | jar           | default-jar          \n"
+                        + "install                | maven-install-plugin   | 2.4     | install       | default-install      \n"
+                        + "deploy                 | maven-deploy-plugin    | 2.7     | deploy        | default-deploy       \n"
                         + "\n"
                         + "Build Plan for list-multimodule-module-b: \n"
-                        + "------------------------------------------------------------------------------------------\n"
-                        + "PHASE                  | PLUGIN                 | GOAL             | EXECUTION ID         \n"
-                        + "------------------------------------------------------------------------------------------\n"
-                        + "process-resources      | maven-resources-plugin | resources        | default-resources    \n"
-                        + "compile                | maven-compiler-plugin  | compile          | default-compile      \n"
-                        + "process-test-resources | maven-resources-plugin | testResources    | default-testResources\n"
-                        + "test-compile           | maven-compiler-plugin  | testCompile      | default-testCompile  \n"
-                        + "test                   | maven-surefire-plugin  | test             | default-test         \n"
-                        + "package                | maven-jar-plugin       | jar              | default-jar          \n"
-                        + "integration-test       | maven-failsafe-plugin  | integration-test | default              \n"
-                        + "verify                 | maven-failsafe-plugin  | verify           | default              \n"
-                        + "install                | maven-install-plugin   | install          | default-install      \n"
-                        + "deploy                 | maven-deploy-plugin    | deploy           | default-deploy       \n"
+                        + "----------------------------------------------------------------------------------------------------\n"
+                        + "PHASE                  | PLUGIN                 | VERSION | GOAL             | EXECUTION ID         \n"
+                        + "----------------------------------------------------------------------------------------------------\n"
+                        + "process-resources      | maven-resources-plugin | 2.6     | resources        | default-resources    \n"
+                        + "compile                | maven-compiler-plugin  | 3.1     | compile          | default-compile      \n"
+                        + "process-test-resources | maven-resources-plugin | 2.6     | testResources    | default-testResources\n"
+                        + "test-compile           | maven-compiler-plugin  | 3.1     | testCompile      | default-testCompile  \n"
+                        + "test                   | maven-surefire-plugin  | 2.12.4  | test             | default-test         \n"
+                        + "package                | maven-jar-plugin       | 2.4     | jar              | default-jar          \n"
+                        + "integration-test       | maven-failsafe-plugin  | 2.19.1  | integration-test | default              \n"
+                        + "verify                 | maven-failsafe-plugin  | 2.19.1  | verify           | default              \n"
+                        + "install                | maven-install-plugin   | 2.4     | install          | default-install      \n"
+                        + "deploy                 | maven-deploy-plugin    | 2.7     | deploy           | default-deploy       \n"
                 );
         }
 
@@ -236,42 +235,42 @@ class ListIT {
                 .plain()
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule: ",
-                    "----------------------------------------------------------------------",
-                    "LIFECYCLE | PHASE   | PLUGIN               | GOAL    | EXECUTION ID   ",
-                    "----------------------------------------------------------------------",
-                    "clean     | clean   | maven-clean-plugin   | clean   | default-clean  ",
-                    "default   | install | maven-install-plugin | install | default-install",
-                    "default   | deploy  | maven-deploy-plugin  | deploy  | default-deploy ")
+                    "--------------------------------------------------------------------------------",
+                    "LIFECYCLE | PHASE   | PLUGIN               | VERSION | GOAL    | EXECUTION ID   ",
+                    "--------------------------------------------------------------------------------",
+                    "clean     | clean   | maven-clean-plugin   | 2.5     | clean   | default-clean  ",
+                    "default   | install | maven-install-plugin | 2.4     | install | default-install",
+                    "default   | deploy  | maven-deploy-plugin  | 2.7     | deploy  | default-deploy ")
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule-module-a: ",
-                    "---------------------------------------------------------------------------------------------------",
-                    "LIFECYCLE | PHASE                  | PLUGIN                 | GOAL          | EXECUTION ID         ",
-                    "---------------------------------------------------------------------------------------------------",
-                    "clean     | clean                  | maven-clean-plugin     | clean         | default-clean        ",
-                    "default   | process-resources      | maven-resources-plugin | resources     | default-resources    ",
-                    "default   | compile                | maven-compiler-plugin  | compile       | default-compile      ",
-                    "default   | process-test-resources | maven-resources-plugin | testResources | default-testResources",
-                    "default   | test-compile           | maven-compiler-plugin  | testCompile   | default-testCompile  ",
-                    "default   | test                   | maven-surefire-plugin  | test          | default-test         ",
-                    "default   | package                | maven-jar-plugin       | jar           | default-jar          ",
-                    "default   | install                | maven-install-plugin   | install       | default-install      ",
-                    "default   | deploy                 | maven-deploy-plugin    | deploy        | default-deploy       ")
+                    "-------------------------------------------------------------------------------------------------------------",
+                    "LIFECYCLE | PHASE                  | PLUGIN                 | VERSION | GOAL          | EXECUTION ID         ",
+                    "-------------------------------------------------------------------------------------------------------------",
+                    "clean     | clean                  | maven-clean-plugin     | 2.5     | clean         | default-clean        ",
+                    "default   | process-resources      | maven-resources-plugin | 2.6     | resources     | default-resources    ",
+                    "default   | compile                | maven-compiler-plugin  | 3.1     | compile       | default-compile      ",
+                    "default   | process-test-resources | maven-resources-plugin | 2.6     | testResources | default-testResources",
+                    "default   | test-compile           | maven-compiler-plugin  | 3.1     | testCompile   | default-testCompile  ",
+                    "default   | test                   | maven-surefire-plugin  | 2.12.4  | test          | default-test         ",
+                    "default   | package                | maven-jar-plugin       | 2.4     | jar           | default-jar          ",
+                    "default   | install                | maven-install-plugin   | 2.4     | install       | default-install      ",
+                    "default   | deploy                 | maven-deploy-plugin    | 2.7     | deploy        | default-deploy       ")
                 .containsSequence(
                     "[INFO] Build Plan for list-multimodule-module-b: ",
-                    "------------------------------------------------------------------------------------------------------",
-                    "LIFECYCLE | PHASE                  | PLUGIN                 | GOAL             | EXECUTION ID         ",
-                    "------------------------------------------------------------------------------------------------------",
-                    "clean     | clean                  | maven-clean-plugin     | clean            | default-clean        ",
-                    "default   | process-resources      | maven-resources-plugin | resources        | default-resources    ",
-                    "default   | compile                | maven-compiler-plugin  | compile          | default-compile      ",
-                    "default   | process-test-resources | maven-resources-plugin | testResources    | default-testResources",
-                    "default   | test-compile           | maven-compiler-plugin  | testCompile      | default-testCompile  ",
-                    "default   | test                   | maven-surefire-plugin  | test             | default-test         ",
-                    "default   | package                | maven-jar-plugin       | jar              | default-jar          ",
-                    "default   | integration-test       | maven-failsafe-plugin  | integration-test | default              ",
-                    "default   | verify                 | maven-failsafe-plugin  | verify           | default              ",
-                    "default   | install                | maven-install-plugin   | install          | default-install      ",
-                    "default   | deploy                 | maven-deploy-plugin    | deploy           | default-deploy       "
+                    "----------------------------------------------------------------------------------------------------------------",
+                    "LIFECYCLE | PHASE                  | PLUGIN                 | VERSION | GOAL             | EXECUTION ID         ",
+                    "----------------------------------------------------------------------------------------------------------------",
+                    "clean     | clean                  | maven-clean-plugin     | 2.5     | clean            | default-clean        ",
+                    "default   | process-resources      | maven-resources-plugin | 2.6     | resources        | default-resources    ",
+                    "default   | compile                | maven-compiler-plugin  | 3.1     | compile          | default-compile      ",
+                    "default   | process-test-resources | maven-resources-plugin | 2.6     | testResources    | default-testResources",
+                    "default   | test-compile           | maven-compiler-plugin  | 3.1     | testCompile      | default-testCompile  ",
+                    "default   | test                   | maven-surefire-plugin  | 2.12.4  | test             | default-test         ",
+                    "default   | package                | maven-jar-plugin       | 2.4     | jar              | default-jar          ",
+                    "default   | integration-test       | maven-failsafe-plugin  | 2.19.1  | integration-test | default              ",
+                    "default   | verify                 | maven-failsafe-plugin  | 2.19.1  | verify           | default              ",
+                    "default   | install                | maven-install-plugin   | 2.4     | install          | default-install      ",
+                    "default   | deploy                 | maven-deploy-plugin    | 2.7     | deploy           | default-deploy       "
                 );
         }
     }

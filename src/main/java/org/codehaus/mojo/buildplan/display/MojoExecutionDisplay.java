@@ -42,6 +42,10 @@ public class MojoExecutionDisplay {
         return defaultString(execution.getArtifactId());
     }
 
+    public String getVersion() {
+        return defaultString(execution.getVersion());
+    }
+
     public String getGoal() {
         return defaultString(execution.getGoal());
     }
