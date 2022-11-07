@@ -15,11 +15,10 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
-import org.apache.maven.lifecycle.DefaultLifecycles;
-import org.apache.maven.plugin.MojoExecution;
-
 import java.util.Collection;
 import java.util.Map;
+import org.apache.maven.lifecycle.DefaultLifecycles;
+import org.apache.maven.plugin.MojoExecution;
 
 public class ListPhaseTableDescriptor extends AbstractTableDescriptor {
 
@@ -43,9 +42,9 @@ public class ListPhaseTableDescriptor extends AbstractTableDescriptor {
                .append(ROW_START)
                .append(FORMAT_LEFT_ALIGN).append(getPluginSize()).append(FORMAT_STRING)
                .append(SEPARATOR)
-               .append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING)
-               .append(SEPARATOR)
                .append(FORMAT_LEFT_ALIGN).append(getGoalSize()).append(FORMAT_STRING)
+               .append(SEPARATOR)
+               .append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING)
                .toString();
     }
 
