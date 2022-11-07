@@ -15,9 +15,9 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
 
 class ListPluginTableDescriptorTest {
 
@@ -30,6 +30,6 @@ class ListPluginTableDescriptorTest {
 
         String result = descriptor.rowFormat();
 
-        assertThat(result).isEqualTo("    + %-1s | %-2s | %-3s");
+        assertThat(result).isEqualTo("    + %-1s | %-3s | %-2s");
     }
 }
