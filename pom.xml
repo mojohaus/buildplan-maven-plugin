@@ -13,9 +13,16 @@
     <packaging>maven-plugin</packaging>
     <name>BuildPlan Maven Plugin</name>
     <description>The BuildPlan Plugin can inspect your project lifecycle.</description>
+    <url>https://www.mojohaus.org/buildplan-maven-plugin/</url>
 
     <inceptionYear>2012</inceptionYear>
-    <url>https://www.mojohaus.org/buildplan-maven-plugin/</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
 
     <prerequisites>
         <maven>3.2.5</maven>
@@ -24,20 +31,13 @@
     <scm>
         <connection>scm:git:https://github.com/mojohaus/buildplan-maven-plugin.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/mojohaus/buildplan-maven-plugin.git</developerConnection>
-        <url>https://github.com/mojohaus/buildplan-maven-plugin/tree/${project.scm.tag}</url>
         <tag>master</tag>
+        <url>https://github.com/mojohaus/buildplan-maven-plugin/tree/${project.scm.tag}</url>
     </scm>
     <issueManagement>
         <system>GitHub</system>
         <url>https://github.com/mojohaus/buildplan-maven-plugin/issues</url>
     </issueManagement>
-
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-        </license>
-    </licenses>
 
     <properties>
         <mojo.java.target>1.8</mojo.java.target>
@@ -54,8 +54,8 @@
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
                 <version>5.9.1</version>
-                <scope>import</scope>
                 <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -183,13 +183,6 @@
                         <exclude>.gitpod.yml</exclude>
                     </excludes>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
                 <dependencies>
                     <dependency>
                         <groupId>com.mycila</groupId>
@@ -197,6 +190,13 @@
                         <version>1</version>
                     </dependency>
                 </dependencies>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -205,16 +205,20 @@
                 <executions>
                     <execution>
                         <id>prepare-argument-for-test-runner</id>
-                        <configuration>
-                            <append>true</append>
-                        </configuration>
                         <goals>
                             <goal>prepare-agent</goal>
                             <goal>prepare-agent-integration</goal>
                         </goals>
+                        <configuration>
+                            <append>true</append>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>merge-unit-and-integration-tests-executions</id>
+                        <goals>
+                            <goal>merge</goal>
+                        </goals>
+                        <phase>verify</phase>
                         <configuration>
                             <fileSets>
                                 <fileSet>
@@ -226,18 +230,14 @@
                             </fileSets>
                             <destFile>${project.build.directory}/jacoco-merge.exec</destFile>
                         </configuration>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>merge</goal>
-                        </goals>
                     </execution>
                     <execution>
-                        <configuration>
-                            <dataFile>${project.build.directory}/jacoco-merge.exec</dataFile>
-                        </configuration>
                         <goals>
                             <goal>report</goal>
                         </goals>
+                        <configuration>
+                            <dataFile>${project.build.directory}/jacoco-merge.exec</dataFile>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -255,11 +255,11 @@
                 <executions>
                     <execution>
                         <id>installing</id>
-                        <phase>pre-integration-test</phase>
                         <goals>
                             <goal>install</goal>
                             <goal>resources-its</goal>
                         </goals>
+                        <phase>pre-integration-test</phase>
                     </execution>
                 </executions>
             </plugin>
@@ -307,13 +307,17 @@
                         <formatAnnotations />
                     </java>
                     <pom>
-                        <sortPom />
+                        <sortPom>
+                            <nrOfIndentSpace>4</nrOfIndentSpace>
+                            <expandEmptyElements>false</expandEmptyElements>
+                            <spaceBeforeCloseEmptyElement>true</spaceBeforeCloseEmptyElement>
+                        </sortPom>
                     </pom>
                     <markdown>
                         <includes>
                             <include>**/*.md</include>
                         </includes>
-                        <flexmark/>
+                        <flexmark />
                     </markdown>
                 </configuration>
                 <executions>
