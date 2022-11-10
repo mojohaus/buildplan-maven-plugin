@@ -15,6 +15,8 @@
  */
 package org.codehaus.mojo.buildplan;
 
+import java.io.File;
+import java.io.IOException;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.lifecycle.LifecycleExecutor;
@@ -26,9 +28,6 @@ import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
-import java.io.File;
-import java.io.IOException;
-
 public abstract class AbstractLifecycleMojo extends AbstractMojo {
 
     @Component(role = DefaultLifecycles.class)
@@ -37,7 +36,7 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
     @Parameter(defaultValue = "${session}", readonly = true)
     private MavenSession session;
 
-    @Parameter( defaultValue = "${project}", readonly = true)
+    @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
 
     @Component
@@ -55,7 +54,7 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
     @Parameter(property = "buildplan.appendOutput", defaultValue = "false")
     private boolean appendOutput;
 
-    /** Flag to easily skip all checks  */
+    /** Flag to easily skip all checks */
     @Parameter(property = "buildplan.skip", defaultValue = "false")
     private boolean skip;
 
@@ -63,7 +62,8 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
         try {
             return lifecycleExecutor.calculateExecutionPlan(session, tasks);
         } catch (Exception e) {
-            throw new MojoFailureException(String.format("Cannot calculate Maven execution plan, caused by: %s", e.getMessage()), e);
+            throw new MojoFailureException(
+                    String.format("Cannot calculate Maven execution plan, caused by: %s", e.getMessage()), e);
         }
     }
 

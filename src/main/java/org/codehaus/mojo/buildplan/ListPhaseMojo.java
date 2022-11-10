@@ -32,11 +32,8 @@ import org.codehaus.mojo.buildplan.display.TableDescriptor;
 import org.codehaus.mojo.buildplan.util.Multimap;
 import org.codehaus.plexus.util.StringUtils;
 
-/**
- * List plugin executions by phase for the current project.
- */
-@Mojo(name = "list-phase",
-      threadSafe = true)
+/** List plugin executions by phase for the current project. */
+@Mojo(name = "list-phase", threadSafe = true)
 public class ListPhaseMojo extends AbstractLifecycleMojo {
 
     /** Display plugin executions only for the specified phase. */
@@ -60,13 +57,15 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
             options = options.showingLifecycles();
         }
 
-        Multimap<String,MojoExecution> phases = Groups.ByPhase.of(calculateExecutionPlan().getMojoExecutions(), options);
+        Multimap<String, MojoExecution> phases =
+                Groups.ByPhase.of(calculateExecutionPlan().getMojoExecutions(), options);
 
         if (!phases.isEmpty()) {
             TableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values(), defaultLifecycles);
             Lifecycle currentLifecycle = null;
             StringBuilder output = new StringBuilder();
-            for (Map.Entry<String, Collection<MojoExecution>> currentPhase : phases.asMap().entrySet()) {
+            for (Map.Entry<String, Collection<MojoExecution>> currentPhase :
+                    phases.asMap().entrySet()) {
                 if (showLifecycles) {
                     Lifecycle lifecycleForPhase = defaultLifecycles.get(currentPhase.getKey());
                     if (lifecycleForPhase == null) {
@@ -74,15 +73,18 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
                     }
                     if (!lifecycleForPhase.equals(currentLifecycle)) {
                         currentLifecycle = lifecycleForPhase;
-                        output.append(lineSeparator()).append(lineSeparator()).append("[")
-                            .append(currentLifecycle.getId()).append("]");
+                        output.append(lineSeparator())
+                                .append(lineSeparator())
+                                .append("[")
+                                .append(currentLifecycle.getId())
+                                .append("]");
                     }
                 }
-                output.append(lineSeparator())
-                    .append(phaseTitleLine(descriptor, currentPhase.getKey()));
+                output.append(lineSeparator()).append(phaseTitleLine(descriptor, currentPhase.getKey()));
                 currentPhase.getValue().stream()
-                    .filter(execution -> execution != NoMojoExecution.INSTANCE)
-                    .forEach(execution -> output.append(lineSeparator()).append(line(descriptor.rowFormat(), execution)));
+                        .filter(execution -> execution != NoMojoExecution.INSTANCE)
+                        .forEach(execution ->
+                                output.append(lineSeparator()).append(line(descriptor.rowFormat(), execution)));
             }
             handleOutput(output.toString());
         } else {
@@ -93,9 +95,7 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
     private String line(String rowFormat, MojoExecution execution) {
         MojoExecutionDisplay display = new MojoExecutionDisplay(execution);
 
-        return String.format(rowFormat, display.getArtifactId(),
-                                        display.getGoal(),
-                                        display.getExecutionId());
+        return String.format(rowFormat, display.getArtifactId(), display.getGoal(), display.getExecutionId());
     }
 
     private String phaseTitleLine(TableDescriptor descriptor, String key) {

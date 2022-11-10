@@ -34,51 +34,69 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
 
     public static ListTableDescriptor of(Collection<MojoExecution> executions, DefaultLifecycles defaultLifecycles) {
 
-        Map<TableColumn,Integer> maxSize = findMaxSize(executions, defaultLifecycles, TableColumn.values());
+        Map<TableColumn, Integer> maxSize = findMaxSize(executions, defaultLifecycles, TableColumn.values());
 
-        return new ListTableDescriptor().setPluginSize(maxSize.get(TableColumn.ARTIFACT_ID))
-                                        .setVersionSize(maxSize.get(TableColumn.VERSION))
-                                        .setPhaseSize(maxSize.get(TableColumn.PHASE))
-                                        .setLifecycleSize(maxSize.get(TableColumn.LIFECYCLE))
-                                        .setGoalSize(maxSize.get(TableColumn.GOAL))
-                                        .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));
+        return new ListTableDescriptor()
+                .setPluginSize(maxSize.get(TableColumn.ARTIFACT_ID))
+                .setVersionSize(maxSize.get(TableColumn.VERSION))
+                .setPhaseSize(maxSize.get(TableColumn.PHASE))
+                .setLifecycleSize(maxSize.get(TableColumn.LIFECYCLE))
+                .setGoalSize(maxSize.get(TableColumn.GOAL))
+                .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));
     }
 
     public String rowFormat() {
         StringBuilder builder = new StringBuilder();
         if (lifecycleSize > 0) {
-            builder.append(FORMAT_LEFT_ALIGN).append(getLifecycleSize()).append(FORMAT_STRING)
-                .append(SEPARATOR);
+            builder.append(FORMAT_LEFT_ALIGN)
+                    .append(getLifecycleSize())
+                    .append(FORMAT_STRING)
+                    .append(SEPARATOR);
         }
-        builder.append(FORMAT_LEFT_ALIGN).append(getPhaseSize()).append(FORMAT_STRING)
-               .append(SEPARATOR)
-               .append(FORMAT_LEFT_ALIGN).append(getPluginSize()).append(FORMAT_STRING)
-               .append(SEPARATOR)
-               .append(FORMAT_LEFT_ALIGN).append(getVersionSize()).append(FORMAT_STRING)
-               .append(SEPARATOR);
+        builder.append(FORMAT_LEFT_ALIGN)
+                .append(getPhaseSize())
+                .append(FORMAT_STRING)
+                .append(SEPARATOR)
+                .append(FORMAT_LEFT_ALIGN)
+                .append(getPluginSize())
+                .append(FORMAT_STRING)
+                .append(SEPARATOR)
+                .append(FORMAT_LEFT_ALIGN)
+                .append(getVersionSize())
+                .append(FORMAT_STRING)
+                .append(SEPARATOR);
 
-        builder.append(FORMAT_LEFT_ALIGN).append(getGoalSize()).append(FORMAT_STRING)
-               .append(SEPARATOR)
-               .append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING);
+        builder.append(FORMAT_LEFT_ALIGN)
+                .append(getGoalSize())
+                .append(FORMAT_STRING)
+                .append(SEPARATOR)
+                .append(FORMAT_LEFT_ALIGN)
+                .append(getExecutionIdSize())
+                .append(FORMAT_STRING);
         return builder.toString();
     }
 
     public int width() {
-        return getPluginSize() + getVersionSize() + getPhaseSize() + getLifecycleSize() + getExecutionIdSize() + getGoalSize() + SEPARATOR_SIZE;
+        return getPluginSize()
+                + getVersionSize()
+                + getPhaseSize()
+                + getLifecycleSize()
+                + getExecutionIdSize()
+                + getGoalSize()
+                + SEPARATOR_SIZE;
     }
 
     @Override
     public String toString() {
         return new StringJoiner(", ", ListTableDescriptor.class.getSimpleName() + "[", "]")
-            .add("Plugin column size=" + pluginSize)
-            .add("Plugin version size=" + versionSize)
-            .add("Phase column size=" + phaseSize)
-            .add("Lifecycle column size=" + lifecycleSize)
-            .add("Execution ID column size=" + executionIdSize)
-            .add("Goal column size=" + goalSize)
-            .add("width=" + width())
-            .toString();
-
+                .add("Plugin column size=" + pluginSize)
+                .add("Plugin version size=" + versionSize)
+                .add("Phase column size=" + phaseSize)
+                .add("Lifecycle column size=" + lifecycleSize)
+                .add("Execution ID column size=" + executionIdSize)
+                .add("Goal column size=" + goalSize)
+                .add("width=" + width())
+                .toString();
     }
 
     public int getPluginSize() {

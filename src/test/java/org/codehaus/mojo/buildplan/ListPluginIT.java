@@ -35,34 +35,31 @@ class ListPluginIT {
 
         @MavenTest
         void list_plugin_with_default_cli(MavenExecutionResult result) {
-            assertThat(result).isSuccessful()
-                .out()
-                .plain()
-                .containsSequence(
-                    "maven-resources-plugin ----------------------------------------------",
-                    "    + process-resources      | resources     | default-resources    ",
-                    "    + process-test-resources | testResources | default-testResources",
-                    "maven-compiler-plugin -----------------------------------------------",
-                    "    + compile                | compile       | default-compile      ",
-                    "    + test-compile           | testCompile   | default-testCompile  ",
-                    "maven-surefire-plugin -----------------------------------------------",
-                    "    + test                   | test          | default-test         ",
-                    "maven-jar-plugin ----------------------------------------------------",
-                    "    + package                | jar           | default-jar          ",
-                    "maven-install-plugin ------------------------------------------------",
-                    "    + install                | install       | default-install      ",
-                    "maven-deploy-plugin -------------------------------------------------",
-                    "    + deploy                 | deploy        | default-deploy       "
-                );
+            assertThat(result)
+                    .isSuccessful()
+                    .out()
+                    .plain()
+                    .containsSequence(
+                            "maven-resources-plugin ----------------------------------------------",
+                            "    + process-resources      | resources     | default-resources    ",
+                            "    + process-test-resources | testResources | default-testResources",
+                            "maven-compiler-plugin -----------------------------------------------",
+                            "    + compile                | compile       | default-compile      ",
+                            "    + test-compile           | testCompile   | default-testCompile  ",
+                            "maven-surefire-plugin -----------------------------------------------",
+                            "    + test                   | test          | default-test         ",
+                            "maven-jar-plugin ----------------------------------------------------",
+                            "    + package                | jar           | default-jar          ",
+                            "maven-install-plugin ------------------------------------------------",
+                            "    + install                | install       | default-install      ",
+                            "maven-deploy-plugin -------------------------------------------------",
+                            "    + deploy                 | deploy        | default-deploy       ");
         }
 
         @MavenTest
-        @SystemProperty(value = "buildplan.skip", content="true")
+        @SystemProperty(value = "buildplan.skip", content = "true")
         void skip_execution(MavenExecutionResult result) {
-            assertThat(result).isSuccessful()
-                .out()
-                .info()
-                .contains("Skipping build plan execution.");
+            assertThat(result).isSuccessful().out().info().contains("Skipping build plan execution.");
         }
     }
 }

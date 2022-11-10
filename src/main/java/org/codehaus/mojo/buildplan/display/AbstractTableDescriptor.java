@@ -20,7 +20,6 @@ import static org.codehaus.plexus.util.StringUtils.defaultString;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.Map;
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.lifecycle.Lifecycle;
@@ -31,7 +30,8 @@ import org.codehaus.mojo.buildplan.util.Multimap;
 
 public abstract class AbstractTableDescriptor implements TableDescriptor {
 
-    protected static Map<TableColumn, Integer> findMaxSize(Collection<MojoExecution> executions, DefaultLifecycles defaultLifecycles, TableColumn... columns) {
+    protected static Map<TableColumn, Integer> findMaxSize(
+            Collection<MojoExecution> executions, DefaultLifecycles defaultLifecycles, TableColumn... columns) {
 
         Map<TableColumn, Integer> result = new EnumMap<>(TableColumn.class);
 
@@ -58,7 +58,6 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
                     case VERSION:
                         count.put(column, safeLength(execution.getVersion()));
                         break;
-
                 }
             }
         }

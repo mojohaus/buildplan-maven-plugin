@@ -15,7 +15,6 @@
  */
 package org.codehaus.mojo.buildplan;
 
-
 import static org.codehaus.mojo.buildplan.display.Output.lineSeparator;
 import static org.codehaus.mojo.buildplan.display.TableColumn.ARTIFACT_ID;
 import static org.codehaus.mojo.buildplan.display.TableColumn.EXECUTION_ID;
@@ -34,11 +33,8 @@ import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
 import org.codehaus.mojo.buildplan.display.TableDescriptor;
 import org.codehaus.plexus.util.StringUtils;
 
-/**
- * List plugin executions for the current project.
- */
-@Mojo(name = "list",
-      threadSafe = true)
+/** List plugin executions for the current project. */
+@Mojo(name = "list", threadSafe = true)
 public class ListMojo extends AbstractLifecycleMojo {
 
     /** Will show in which lifecycle a phase was defined (if any) */
@@ -64,8 +60,7 @@ public class ListMojo extends AbstractLifecycleMojo {
                 .append(titleSeparator(descriptor));
 
         for (MojoExecution execution : plan.getMojoExecutions()) {
-            output.append(lineSeparator())
-                    .append(tableRow(row, execution));
+            output.append(lineSeparator()).append(tableRow(row, execution));
         }
 
         handleOutput(output.toString());
@@ -76,15 +71,17 @@ public class ListMojo extends AbstractLifecycleMojo {
         MojoExecutionDisplay display = new MojoExecutionDisplay(execution);
 
         if (showLifecycles) {
-            return String.format(row,
-                display.getLifecycle(defaultLifecycles),
-                display.getPhase(),
-                display.getArtifactId(),
-                display.getVersion(),
-                display.getGoal(),
-                display.getExecutionId());
+            return String.format(
+                    row,
+                    display.getLifecycle(defaultLifecycles),
+                    display.getPhase(),
+                    display.getArtifactId(),
+                    display.getVersion(),
+                    display.getGoal(),
+                    display.getExecutionId());
         } else {
-            return String.format(row,
+            return String.format(
+                    row,
                     display.getPhase(),
                     display.getArtifactId(),
                     display.getVersion(),
@@ -95,9 +92,17 @@ public class ListMojo extends AbstractLifecycleMojo {
 
     private String tableHead(String row) {
         if (showLifecycles) {
-            return String.format(row, LIFECYCLE.title(), PHASE.title(), ARTIFACT_ID.title(), VERSION.title(), GOAL.title(), EXECUTION_ID.title());
+            return String.format(
+                    row,
+                    LIFECYCLE.title(),
+                    PHASE.title(),
+                    ARTIFACT_ID.title(),
+                    VERSION.title(),
+                    GOAL.title(),
+                    EXECUTION_ID.title());
         } else {
-            return String.format(row, PHASE.title(), ARTIFACT_ID.title(), VERSION.title(), GOAL.title(), EXECUTION_ID.title());
+            return String.format(
+                    row, PHASE.title(), ARTIFACT_ID.title(), VERSION.title(), GOAL.title(), EXECUTION_ID.title());
         }
     }
 

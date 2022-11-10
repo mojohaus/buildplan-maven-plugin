@@ -17,8 +17,7 @@ package org.codehaus.mojo.buildplan.util;
 
 public class Objects {
 
-    private Objects() {
-    }
+    private Objects() {}
 
     public static <T> T firstNonNull(T first, T second) {
         return first != null ? first : java.util.Objects.requireNonNull(second);

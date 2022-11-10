@@ -54,8 +54,6 @@ public class LinkedMultimap<K, V> implements Multimap<K, V> {
 
     @Override
     public Collection<V> values() {
-        return map.values().stream()
-            .flatMap(Collection::stream)
-            .collect(toList());
+        return map.values().stream().flatMap(Collection::stream).collect(toList());
     }
 }

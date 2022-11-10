@@ -15,22 +15,23 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
-import org.apache.maven.plugin.MojoExecution;
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.codehaus.mojo.buildplan.model.builder.MojoExecutionBuilder.aMojoExecution;
+
+import org.apache.maven.plugin.MojoExecution;
+import org.junit.jupiter.api.Test;
 
 class MojoExecutionDisplayTest {
 
     @Test
     void should_get_non_null_values_from_mojo_execution() {
 
-        MojoExecution execution = aMojoExecution().withArtifactId("artifactId")
-                                                  .withExecutionId("executionId")
-                                                  .withGoal("goal")
-                                                  .withLifecyclePhase("phase")
-                                                  .build();
+        MojoExecution execution = aMojoExecution()
+                .withArtifactId("artifactId")
+                .withExecutionId("executionId")
+                .withGoal("goal")
+                .withLifecyclePhase("phase")
+                .build();
 
         MojoExecutionDisplay result = new MojoExecutionDisplay(execution);
 
@@ -43,11 +44,12 @@ class MojoExecutionDisplayTest {
     @Test
     void should_get_empty_string_from_mojo_execution_when_a_value_is_null() {
 
-        MojoExecution execution = aMojoExecution().withArtifactId(null)
-                                                  .withExecutionId(null)
-                                                  .withGoal(null)
-                                                  .withLifecyclePhase(null)
-                                                  .build();
+        MojoExecution execution = aMojoExecution()
+                .withArtifactId(null)
+                .withExecutionId(null)
+                .withGoal(null)
+                .withLifecyclePhase(null)
+                .build();
 
         MojoExecutionDisplay result = new MojoExecutionDisplay(execution);
 
@@ -60,7 +62,8 @@ class MojoExecutionDisplayTest {
     @Test
     void should_get_mojo_lifecycle_phase_when_descriptor_phase_is_null() {
 
-        MojoExecution execution = aMojoExecution().withArtifactId("plugin-a")
+        MojoExecution execution = aMojoExecution()
+                .withArtifactId("plugin-a")
                 .withLifecyclePhase("phase-a")
                 .withDescriptorPhase("phase-b")
                 .withExecutionId("execution-id-a")
