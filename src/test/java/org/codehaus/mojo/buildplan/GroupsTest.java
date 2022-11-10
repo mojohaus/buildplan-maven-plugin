@@ -29,26 +29,30 @@ class GroupsTest {
     @Test
     void should_order_mojo_execution_by_phase_name() {
 
-        MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
-                                                .withExecutionId("a")
-                                                .withGoal("goal-a")
-                                                .withLifecyclePhase("phase")
-                                                .build();
-        MojoExecution pluginB = aMojoExecution().withArtifactId("plugin-b")
-                                                .withExecutionId("b")
-                                                .withGoal("goal-b")
-                                                .withLifecyclePhase("phase")
-                                                .build();
-        MojoExecution pluginC = aMojoExecution().withArtifactId("plugin-c")
-                                                .withExecutionId("c")
-                                                .withGoal("goal-c")
-                                                .withLifecyclePhase("a-phase")
-                                                .build();
-        MojoExecution pluginD = aMojoExecution().withArtifactId("plugin-d")
-                                                .withExecutionId("d")
-                                                .withGoal("goal-d")
-                                                .withLifecyclePhase("d-phase")
-                                                .build();
+        MojoExecution pluginA = aMojoExecution()
+                .withArtifactId("plugin-a")
+                .withExecutionId("a")
+                .withGoal("goal-a")
+                .withLifecyclePhase("phase")
+                .build();
+        MojoExecution pluginB = aMojoExecution()
+                .withArtifactId("plugin-b")
+                .withExecutionId("b")
+                .withGoal("goal-b")
+                .withLifecyclePhase("phase")
+                .build();
+        MojoExecution pluginC = aMojoExecution()
+                .withArtifactId("plugin-c")
+                .withExecutionId("c")
+                .withGoal("goal-c")
+                .withLifecyclePhase("a-phase")
+                .build();
+        MojoExecution pluginD = aMojoExecution()
+                .withArtifactId("plugin-d")
+                .withExecutionId("d")
+                .withGoal("goal-d")
+                .withLifecyclePhase("d-phase")
+                .build();
 
         Multimap<String, MojoExecution> result = Groups.ByPhase.of(asList(pluginD, pluginA, pluginC, pluginB));
 
@@ -61,26 +65,30 @@ class GroupsTest {
     @Test
     public void should_order_mojo_execution_by_artifact_id() {
 
-        MojoExecution pluginB = aMojoExecution().withArtifactId("plugin-b")
-                                                .withExecutionId("b")
-                                                .withGoal("goal-b")
-                                                .withLifecyclePhase("phase-b")
-                                                .build();
-        MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
-                                                .withExecutionId("a-a")
-                                                .withGoal("goal-a-a")
-                                                .withLifecyclePhase("phase-a")
-                                                .build();
-        MojoExecution pluginC = aMojoExecution().withArtifactId("plugin-c")
-                                                .withExecutionId("c")
-                                                .withGoal("goal-c")
-                                                .withLifecyclePhase("phase-c")
-                                                .build();
-        MojoExecution pluginAA = aMojoExecution().withArtifactId("plugin-a")
-                                                .withExecutionId("a-b")
-                                                .withGoal("goal-a-b")
-                                                .withLifecyclePhase("phase-a-b")
-                                                .build();
+        MojoExecution pluginB = aMojoExecution()
+                .withArtifactId("plugin-b")
+                .withExecutionId("b")
+                .withGoal("goal-b")
+                .withLifecyclePhase("phase-b")
+                .build();
+        MojoExecution pluginA = aMojoExecution()
+                .withArtifactId("plugin-a")
+                .withExecutionId("a-a")
+                .withGoal("goal-a-a")
+                .withLifecyclePhase("phase-a")
+                .build();
+        MojoExecution pluginC = aMojoExecution()
+                .withArtifactId("plugin-c")
+                .withExecutionId("c")
+                .withGoal("goal-c")
+                .withLifecyclePhase("phase-c")
+                .build();
+        MojoExecution pluginAA = aMojoExecution()
+                .withArtifactId("plugin-a")
+                .withExecutionId("a-b")
+                .withGoal("goal-a-b")
+                .withLifecyclePhase("phase-a-b")
+                .build();
 
         Multimap<String, MojoExecution> result = Groups.ByPlugin.of(asList(pluginA, pluginB, pluginC, pluginAA));
 
@@ -93,16 +101,18 @@ class GroupsTest {
     @Test
     public void should_filter_mojo_execution_by_phase_name() {
 
-        MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
-                                                .withExecutionId("a")
-                                                .withGoal("goal-a")
-                                                .withLifecyclePhase("phase-a")
-                                                .build();
-        MojoExecution pluginB = aMojoExecution().withArtifactId("plugin-b")
-                                                .withExecutionId("b")
-                                                .withGoal("goal-b")
-                                                .withLifecyclePhase("phase-b")
-                                                .build();
+        MojoExecution pluginA = aMojoExecution()
+                .withArtifactId("plugin-a")
+                .withExecutionId("a")
+                .withGoal("goal-a")
+                .withLifecyclePhase("phase-a")
+                .build();
+        MojoExecution pluginB = aMojoExecution()
+                .withArtifactId("plugin-b")
+                .withExecutionId("b")
+                .withGoal("goal-b")
+                .withLifecyclePhase("phase-b")
+                .build();
 
         Multimap<String, MojoExecution> result = Groups.ByPhase.of(asList(pluginA, pluginB), "phase-a");
 
@@ -112,16 +122,18 @@ class GroupsTest {
     @Test
     public void should_filter_mojo_execution_by_artifactId() {
 
-        MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
-                                                .withExecutionId("a")
-                                                .withGoal("goal-a")
-                                                .withLifecyclePhase("phase-a")
-                                                .build();
-        MojoExecution pluginB = aMojoExecution().withArtifactId("plugin-b")
-                                                .withExecutionId("b")
-                                                .withGoal("goal-b")
-                                                .withLifecyclePhase("phase-b")
-                                                .build();
+        MojoExecution pluginA = aMojoExecution()
+                .withArtifactId("plugin-a")
+                .withExecutionId("a")
+                .withGoal("goal-a")
+                .withLifecyclePhase("phase-a")
+                .build();
+        MojoExecution pluginB = aMojoExecution()
+                .withArtifactId("plugin-b")
+                .withExecutionId("b")
+                .withGoal("goal-b")
+                .withLifecyclePhase("phase-b")
+                .build();
 
         Multimap<String, MojoExecution> result = Groups.ByPlugin.of(asList(pluginA, pluginB), "plugin-a");
 
@@ -131,11 +143,12 @@ class GroupsTest {
     @Test
     void should_not_fail_when_grouping_mojo_execution_by_phase_with_null_phase() {
 
-        MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
-                                                .withExecutionId("a")
-                                                .withGoal("goal-a")
-                                                .withoutMojoDescriptor()
-                                                .build();
+        MojoExecution pluginA = aMojoExecution()
+                .withArtifactId("plugin-a")
+                .withExecutionId("a")
+                .withGoal("goal-a")
+                .withoutMojoDescriptor()
+                .build();
 
         Multimap<String, MojoExecution> result = Groups.ByPhase.of(asList(pluginA));
 
@@ -144,28 +157,32 @@ class GroupsTest {
 
     @Test
     void should_keep_phase_order_when_grouping_execution_by_phase() {
-        MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
+        MojoExecution pluginA = aMojoExecution()
+                .withArtifactId("plugin-a")
                 .withExecutionId("a")
                 .withGoal("goal-a")
                 .withLifecyclePhase("phase")
                 .build();
-        MojoExecution pluginB = aMojoExecution().withArtifactId("plugin-b")
+        MojoExecution pluginB = aMojoExecution()
+                .withArtifactId("plugin-b")
                 .withExecutionId("b")
                 .withGoal("goal-b")
                 .withLifecyclePhase("phase")
                 .build();
-        MojoExecution pluginC = aMojoExecution().withArtifactId("plugin-c")
+        MojoExecution pluginC = aMojoExecution()
+                .withArtifactId("plugin-c")
                 .withExecutionId("c")
                 .withGoal("goal-c")
                 .withLifecyclePhase("a-phase")
                 .build();
-        MojoExecution pluginD = aMojoExecution().withArtifactId("plugin-d")
+        MojoExecution pluginD = aMojoExecution()
+                .withArtifactId("plugin-d")
                 .withExecutionId("d")
                 .withGoal("goal-d")
                 .withLifecyclePhase("d-phase")
                 .build();
 
-        Multimap<String,MojoExecution> result = Groups.ByPhase.of(asList(pluginA, pluginB, pluginC, pluginD));
+        Multimap<String, MojoExecution> result = Groups.ByPhase.of(asList(pluginA, pluginB, pluginC, pluginD));
 
         assertThat(result.asMap().entrySet())
                 .extracting(Map.Entry::getKey)
@@ -180,22 +197,26 @@ class GroupsTest {
     @Test
     void should_keep_phase_order_when_grouping_execution_by_artifactId() {
 
-        MojoExecution pluginA = aMojoExecution().withArtifactId("plugin-a")
+        MojoExecution pluginA = aMojoExecution()
+                .withArtifactId("plugin-a")
                 .withExecutionId("a-a")
                 .withGoal("goal-a-a")
                 .withLifecyclePhase("phase-a")
                 .build();
-        MojoExecution pluginAA = aMojoExecution().withArtifactId("plugin-a")
+        MojoExecution pluginAA = aMojoExecution()
+                .withArtifactId("plugin-a")
                 .withExecutionId("a-b")
                 .withGoal("goal-a-b")
                 .withLifecyclePhase("phase-a-b")
                 .build();
-        MojoExecution pluginB = aMojoExecution().withArtifactId("plugin-b")
+        MojoExecution pluginB = aMojoExecution()
+                .withArtifactId("plugin-b")
                 .withExecutionId("b")
                 .withGoal("goal-b")
                 .withLifecyclePhase("phase-b")
                 .build();
-        MojoExecution pluginC = aMojoExecution().withArtifactId("plugin-c")
+        MojoExecution pluginC = aMojoExecution()
+                .withArtifactId("plugin-c")
                 .withExecutionId("c")
                 .withGoal("goal-c")
                 .withLifecyclePhase("phase-c")

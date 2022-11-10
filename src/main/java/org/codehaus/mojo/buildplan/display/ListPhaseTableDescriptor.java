@@ -28,24 +28,33 @@ public class ListPhaseTableDescriptor extends AbstractTableDescriptor {
     private int executionIdSize;
     private int goalSize;
 
-    public static ListPhaseTableDescriptor of(Collection<MojoExecution> executions, DefaultLifecycles defaultLifecycles) {
+    public static ListPhaseTableDescriptor of(
+            Collection<MojoExecution> executions, DefaultLifecycles defaultLifecycles) {
 
-        Map<TableColumn,Integer> maxSize = findMaxSize(executions, defaultLifecycles, TableColumn.ARTIFACT_ID, TableColumn.EXECUTION_ID, TableColumn.GOAL);
+        Map<TableColumn, Integer> maxSize = findMaxSize(
+                executions, defaultLifecycles, TableColumn.ARTIFACT_ID, TableColumn.EXECUTION_ID, TableColumn.GOAL);
 
-        return new ListPhaseTableDescriptor().setPluginSize(maxSize.get(TableColumn.ARTIFACT_ID))
-                                             .setGoalSize(maxSize.get(TableColumn.GOAL))
-                                             .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));
+        return new ListPhaseTableDescriptor()
+                .setPluginSize(maxSize.get(TableColumn.ARTIFACT_ID))
+                .setGoalSize(maxSize.get(TableColumn.GOAL))
+                .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));
     }
 
     public String rowFormat() {
         return new StringBuilder()
-               .append(ROW_START)
-               .append(FORMAT_LEFT_ALIGN).append(getPluginSize()).append(FORMAT_STRING)
-               .append(SEPARATOR)
-               .append(FORMAT_LEFT_ALIGN).append(getGoalSize()).append(FORMAT_STRING)
-               .append(SEPARATOR)
-               .append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING)
-               .toString();
+                .append(ROW_START)
+                .append(FORMAT_LEFT_ALIGN)
+                .append(getPluginSize())
+                .append(FORMAT_STRING)
+                .append(SEPARATOR)
+                .append(FORMAT_LEFT_ALIGN)
+                .append(getGoalSize())
+                .append(FORMAT_STRING)
+                .append(SEPARATOR)
+                .append(FORMAT_LEFT_ALIGN)
+                .append(getExecutionIdSize())
+                .append(FORMAT_STRING)
+                .toString();
     }
 
     public int width() {

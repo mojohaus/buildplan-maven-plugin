@@ -36,27 +36,27 @@ class ListPhaseIT {
 
         @MavenTest
         void list_phase_with_default_cli(MavenExecutionResult result) {
-            assertThat(result).isSuccessful()
-                .out()
-                .plain()
-                .containsSequence(
-                    "process-resources ---------------------------------------------------",
-                    "    + maven-resources-plugin | resources     | default-resources    ",
-                    "compile -------------------------------------------------------------",
-                    "    + maven-compiler-plugin  | compile       | default-compile      ",
-                    "process-test-resources ----------------------------------------------",
-                    "    + maven-resources-plugin | testResources | default-testResources",
-                    "test-compile --------------------------------------------------------",
-                    "    + maven-compiler-plugin  | testCompile   | default-testCompile  ",
-                    "test ----------------------------------------------------------------",
-                    "    + maven-surefire-plugin  | test          | default-test         ",
-                    "package -------------------------------------------------------------",
-                    "    + maven-jar-plugin       | jar           | default-jar          ",
-                    "install -------------------------------------------------------------",
-                    "    + maven-install-plugin   | install       | default-install      ",
-                    "deploy --------------------------------------------------------------",
-                    "    + maven-deploy-plugin    | deploy        | default-deploy       "
-                );
+            assertThat(result)
+                    .isSuccessful()
+                    .out()
+                    .plain()
+                    .containsSequence(
+                            "process-resources ---------------------------------------------------",
+                            "    + maven-resources-plugin | resources     | default-resources    ",
+                            "compile -------------------------------------------------------------",
+                            "    + maven-compiler-plugin  | compile       | default-compile      ",
+                            "process-test-resources ----------------------------------------------",
+                            "    + maven-resources-plugin | testResources | default-testResources",
+                            "test-compile --------------------------------------------------------",
+                            "    + maven-compiler-plugin  | testCompile   | default-testCompile  ",
+                            "test ----------------------------------------------------------------",
+                            "    + maven-surefire-plugin  | test          | default-test         ",
+                            "package -------------------------------------------------------------",
+                            "    + maven-jar-plugin       | jar           | default-jar          ",
+                            "install -------------------------------------------------------------",
+                            "    + maven-install-plugin   | install       | default-install      ",
+                            "deploy --------------------------------------------------------------",
+                            "    + maven-deploy-plugin    | deploy        | default-deploy       ");
         }
 
         @MavenTest
@@ -64,139 +64,136 @@ class ListPhaseIT {
         @SystemProperty(value = "buildplan.showAllPhases", content = "true")
         @SystemProperty(value = "buildplan.showLifecycles", content = "true")
         void list_phase_with_defined_tasks_and_configuration_with_cli(MavenExecutionResult result) {
-            assertThat(result).isSuccessful()
-                .out()
-                .plain()
-                .containsSequence(
-                    "[clean]",
-                    "pre-clean -----------------------------------------------------------",
-                    "clean ---------------------------------------------------------------",
-                    "    + maven-clean-plugin     | clean         | default-clean        ",
-                    "post-clean ----------------------------------------------------------",
-                    "",
-                    "[]",
-                    "<no phase> ----------------------------------------------------------",
-                    "    + versions-maven-plugin  | set           | default-cli          ",
-                    "",
-                    "[default]",
-                    "validate ------------------------------------------------------------",
-                    "initialize ----------------------------------------------------------",
-                    "generate-sources ----------------------------------------------------",
-                    "process-sources -----------------------------------------------------",
-                    "generate-resources --------------------------------------------------",
-                    "process-resources ---------------------------------------------------",
-                    "    + maven-resources-plugin | resources     | default-resources    ",
-                    "compile -------------------------------------------------------------",
-                    "    + maven-compiler-plugin  | compile       | default-compile      ",
-                    "process-classes -----------------------------------------------------",
-                    "generate-test-sources -----------------------------------------------",
-                    "process-test-sources ------------------------------------------------",
-                    "generate-test-resources ---------------------------------------------",
-                    "process-test-resources ----------------------------------------------",
-                    "    + maven-resources-plugin | testResources | default-testResources",
-                    "test-compile --------------------------------------------------------",
-                    "    + maven-compiler-plugin  | testCompile   | default-testCompile  ",
-                    "process-test-classes ------------------------------------------------",
-                    "test ----------------------------------------------------------------",
-                    "    + maven-surefire-plugin  | test          | default-test         ",
-                    "prepare-package -----------------------------------------------------",
-                    "package -------------------------------------------------------------",
-                    "    + maven-jar-plugin       | jar           | default-jar          ",
-                    "pre-integration-test ------------------------------------------------",
-                    "integration-test ----------------------------------------------------",
-                    "post-integration-test -----------------------------------------------",
-                    "verify --------------------------------------------------------------",
-                    "install -------------------------------------------------------------",
-                    "    + maven-install-plugin   | install       | default-install      ",
-                    "deploy --------------------------------------------------------------"
-                );
+            assertThat(result)
+                    .isSuccessful()
+                    .out()
+                    .plain()
+                    .containsSequence(
+                            "[clean]",
+                            "pre-clean -----------------------------------------------------------",
+                            "clean ---------------------------------------------------------------",
+                            "    + maven-clean-plugin     | clean         | default-clean        ",
+                            "post-clean ----------------------------------------------------------",
+                            "",
+                            "[]",
+                            "<no phase> ----------------------------------------------------------",
+                            "    + versions-maven-plugin  | set           | default-cli          ",
+                            "",
+                            "[default]",
+                            "validate ------------------------------------------------------------",
+                            "initialize ----------------------------------------------------------",
+                            "generate-sources ----------------------------------------------------",
+                            "process-sources -----------------------------------------------------",
+                            "generate-resources --------------------------------------------------",
+                            "process-resources ---------------------------------------------------",
+                            "    + maven-resources-plugin | resources     | default-resources    ",
+                            "compile -------------------------------------------------------------",
+                            "    + maven-compiler-plugin  | compile       | default-compile      ",
+                            "process-classes -----------------------------------------------------",
+                            "generate-test-sources -----------------------------------------------",
+                            "process-test-sources ------------------------------------------------",
+                            "generate-test-resources ---------------------------------------------",
+                            "process-test-resources ----------------------------------------------",
+                            "    + maven-resources-plugin | testResources | default-testResources",
+                            "test-compile --------------------------------------------------------",
+                            "    + maven-compiler-plugin  | testCompile   | default-testCompile  ",
+                            "process-test-classes ------------------------------------------------",
+                            "test ----------------------------------------------------------------",
+                            "    + maven-surefire-plugin  | test          | default-test         ",
+                            "prepare-package -----------------------------------------------------",
+                            "package -------------------------------------------------------------",
+                            "    + maven-jar-plugin       | jar           | default-jar          ",
+                            "pre-integration-test ------------------------------------------------",
+                            "integration-test ----------------------------------------------------",
+                            "post-integration-test -----------------------------------------------",
+                            "verify --------------------------------------------------------------",
+                            "install -------------------------------------------------------------",
+                            "    + maven-install-plugin   | install       | default-install      ",
+                            "deploy --------------------------------------------------------------");
         }
 
         @MavenTest
         @SystemProperty(value = "buildplan.skip", content = "true")
         void skip_list_phase(MavenExecutionResult result) {
-            assertThat(result).isSuccessful()
-                .out()
-                .info()
-                .contains("Skipping build plan execution.");
+            assertThat(result).isSuccessful().out().info().contains("Skipping build plan execution.");
         }
 
         @MavenTest
         @SystemProperty(value = "buildplan.tasks", content = "clean,deploy")
         @SystemProperty(value = "buildplan.showAllPhases", content = "true")
         void list_phase_show_all_phases(MavenExecutionResult result) {
-            assertThat(result).isSuccessful()
-                .out()
-                .plain()
-                .containsSequence(
-                    "pre-clean -----------------------------------------------------------",
-                    "clean ---------------------------------------------------------------",
-                    "    + maven-clean-plugin     | clean         | default-clean        ",
-                    "post-clean ----------------------------------------------------------",
-                    "validate ------------------------------------------------------------",
-                    "initialize ----------------------------------------------------------",
-                    "generate-sources ----------------------------------------------------",
-                    "process-sources -----------------------------------------------------",
-                    "generate-resources --------------------------------------------------",
-                    "process-resources ---------------------------------------------------",
-                    "    + maven-resources-plugin | resources     | default-resources    ",
-                    "compile -------------------------------------------------------------",
-                    "    + maven-compiler-plugin  | compile       | default-compile      ",
-                    "process-classes -----------------------------------------------------",
-                    "generate-test-sources -----------------------------------------------",
-                    "process-test-sources ------------------------------------------------",
-                    "generate-test-resources ---------------------------------------------",
-                    "process-test-resources ----------------------------------------------",
-                    "    + maven-resources-plugin | testResources | default-testResources",
-                    "test-compile --------------------------------------------------------",
-                    "    + maven-compiler-plugin  | testCompile   | default-testCompile  ",
-                    "process-test-classes ------------------------------------------------",
-                    "test ----------------------------------------------------------------",
-                    "    + maven-surefire-plugin  | test          | default-test         ",
-                    "prepare-package -----------------------------------------------------",
-                    "package -------------------------------------------------------------",
-                    "    + maven-jar-plugin       | jar           | default-jar          ",
-                    "pre-integration-test ------------------------------------------------",
-                    "integration-test ----------------------------------------------------",
-                    "post-integration-test -----------------------------------------------",
-                    "verify --------------------------------------------------------------",
-                    "install -------------------------------------------------------------",
-                    "    + maven-install-plugin   | install       | default-install      ",
-                    "deploy --------------------------------------------------------------",
-                    "    + maven-deploy-plugin    | deploy        | default-deploy       "
-                );
+            assertThat(result)
+                    .isSuccessful()
+                    .out()
+                    .plain()
+                    .containsSequence(
+                            "pre-clean -----------------------------------------------------------",
+                            "clean ---------------------------------------------------------------",
+                            "    + maven-clean-plugin     | clean         | default-clean        ",
+                            "post-clean ----------------------------------------------------------",
+                            "validate ------------------------------------------------------------",
+                            "initialize ----------------------------------------------------------",
+                            "generate-sources ----------------------------------------------------",
+                            "process-sources -----------------------------------------------------",
+                            "generate-resources --------------------------------------------------",
+                            "process-resources ---------------------------------------------------",
+                            "    + maven-resources-plugin | resources     | default-resources    ",
+                            "compile -------------------------------------------------------------",
+                            "    + maven-compiler-plugin  | compile       | default-compile      ",
+                            "process-classes -----------------------------------------------------",
+                            "generate-test-sources -----------------------------------------------",
+                            "process-test-sources ------------------------------------------------",
+                            "generate-test-resources ---------------------------------------------",
+                            "process-test-resources ----------------------------------------------",
+                            "    + maven-resources-plugin | testResources | default-testResources",
+                            "test-compile --------------------------------------------------------",
+                            "    + maven-compiler-plugin  | testCompile   | default-testCompile  ",
+                            "process-test-classes ------------------------------------------------",
+                            "test ----------------------------------------------------------------",
+                            "    + maven-surefire-plugin  | test          | default-test         ",
+                            "prepare-package -----------------------------------------------------",
+                            "package -------------------------------------------------------------",
+                            "    + maven-jar-plugin       | jar           | default-jar          ",
+                            "pre-integration-test ------------------------------------------------",
+                            "integration-test ----------------------------------------------------",
+                            "post-integration-test -----------------------------------------------",
+                            "verify --------------------------------------------------------------",
+                            "install -------------------------------------------------------------",
+                            "    + maven-install-plugin   | install       | default-install      ",
+                            "deploy --------------------------------------------------------------",
+                            "    + maven-deploy-plugin    | deploy        | default-deploy       ");
         }
 
         @MavenTest
         @SystemProperty(value = "buildplan.tasks", content = "clean,deploy")
         @SystemProperty(value = "buildplan.showLifecycles", content = "true")
         void list_phase_show_lifecycle(MavenExecutionResult result) {
-            assertThat(result).isSuccessful()
-                .out()
-                .plain()
-                .containsSequence(
-                    "[clean]",
-                    "clean ---------------------------------------------------------------",
-                    "    + maven-clean-plugin     | clean         | default-clean        ",
-                    "",
-                    "[default]",
-                    "process-resources ---------------------------------------------------",
-                    "    + maven-resources-plugin | resources     | default-resources    ",
-                    "compile -------------------------------------------------------------",
-                    "    + maven-compiler-plugin  | compile       | default-compile      ",
-                    "process-test-resources ----------------------------------------------",
-                    "    + maven-resources-plugin | testResources | default-testResources",
-                    "test-compile --------------------------------------------------------",
-                    "    + maven-compiler-plugin  | testCompile   | default-testCompile  ",
-                    "test ----------------------------------------------------------------",
-                    "    + maven-surefire-plugin  | test          | default-test         ",
-                    "package -------------------------------------------------------------",
-                    "    + maven-jar-plugin       | jar           | default-jar          ",
-                    "install -------------------------------------------------------------",
-                    "    + maven-install-plugin   | install       | default-install      ",
-                    "deploy --------------------------------------------------------------",
-                    "    + maven-deploy-plugin    | deploy        | default-deploy       "
-                );
+            assertThat(result)
+                    .isSuccessful()
+                    .out()
+                    .plain()
+                    .containsSequence(
+                            "[clean]",
+                            "clean ---------------------------------------------------------------",
+                            "    + maven-clean-plugin     | clean         | default-clean        ",
+                            "",
+                            "[default]",
+                            "process-resources ---------------------------------------------------",
+                            "    + maven-resources-plugin | resources     | default-resources    ",
+                            "compile -------------------------------------------------------------",
+                            "    + maven-compiler-plugin  | compile       | default-compile      ",
+                            "process-test-resources ----------------------------------------------",
+                            "    + maven-resources-plugin | testResources | default-testResources",
+                            "test-compile --------------------------------------------------------",
+                            "    + maven-compiler-plugin  | testCompile   | default-testCompile  ",
+                            "test ----------------------------------------------------------------",
+                            "    + maven-surefire-plugin  | test          | default-test         ",
+                            "package -------------------------------------------------------------",
+                            "    + maven-jar-plugin       | jar           | default-jar          ",
+                            "install -------------------------------------------------------------",
+                            "    + maven-install-plugin   | install       | default-install      ",
+                            "deploy --------------------------------------------------------------",
+                            "    + maven-deploy-plugin    | deploy        | default-deploy       ");
         }
     }
 
@@ -206,36 +203,33 @@ class ListPhaseIT {
         @MavenTest
         @MavenGoal("validate")
         void list_phase_with_plugin_defined_in_pom(MavenExecutionResult result) {
-            assertThat(result).isSuccessful()
-                .out()
-                .plain()
-                .containsSequence(
-                    "process-resources ---------------------------------------------------",
-                    "    + maven-resources-plugin | resources     | default-resources    ",
-                    "compile -------------------------------------------------------------",
-                    "    + maven-compiler-plugin  | compile       | default-compile      ",
-                    "process-test-resources ----------------------------------------------",
-                    "    + maven-resources-plugin | testResources | default-testResources",
-                    "test-compile --------------------------------------------------------",
-                    "    + maven-compiler-plugin  | testCompile   | default-testCompile  ",
-                    "test ----------------------------------------------------------------",
-                    "    + maven-surefire-plugin  | test          | default-test         ",
-                    "package -------------------------------------------------------------",
-                    "    + maven-jar-plugin       | jar           | default-jar          ",
-                    "install -------------------------------------------------------------",
-                    "    + maven-install-plugin   | install       | default-install      ",
-                    "deploy --------------------------------------------------------------",
-                    "    + maven-deploy-plugin    | deploy        | default-deploy       "
-                );
+            assertThat(result)
+                    .isSuccessful()
+                    .out()
+                    .plain()
+                    .containsSequence(
+                            "process-resources ---------------------------------------------------",
+                            "    + maven-resources-plugin | resources     | default-resources    ",
+                            "compile -------------------------------------------------------------",
+                            "    + maven-compiler-plugin  | compile       | default-compile      ",
+                            "process-test-resources ----------------------------------------------",
+                            "    + maven-resources-plugin | testResources | default-testResources",
+                            "test-compile --------------------------------------------------------",
+                            "    + maven-compiler-plugin  | testCompile   | default-testCompile  ",
+                            "test ----------------------------------------------------------------",
+                            "    + maven-surefire-plugin  | test          | default-test         ",
+                            "package -------------------------------------------------------------",
+                            "    + maven-jar-plugin       | jar           | default-jar          ",
+                            "install -------------------------------------------------------------",
+                            "    + maven-install-plugin   | install       | default-install      ",
+                            "deploy --------------------------------------------------------------",
+                            "    + maven-deploy-plugin    | deploy        | default-deploy       ");
         }
 
         @MavenTest
         @MavenGoal("validate")
         void skip_list_phase_with_plugin_defined_in_pom(MavenExecutionResult result) {
-            assertThat(result).isSuccessful()
-                .out()
-                .info()
-                .contains("Skipping build plan execution.");
+            assertThat(result).isSuccessful().out().info().contains("Skipping build plan execution.");
         }
     }
 }

@@ -29,11 +29,8 @@ import org.codehaus.mojo.buildplan.display.TableDescriptor;
 import org.codehaus.mojo.buildplan.util.Multimap;
 import org.codehaus.plexus.util.StringUtils;
 
-/**
- * List plugin executions by plugin for the current project.
- */
-@Mojo(name = "list-plugin",
-      threadSafe = true)
+/** List plugin executions by plugin for the current project. */
+@Mojo(name = "list-plugin", threadSafe = true)
 public class ListPluginMojo extends AbstractLifecycleMojo {
 
     /** Display plugin executions only for the specified plugin. */
@@ -42,19 +39,19 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
 
     public void executeInternal() throws MojoFailureException {
 
-        Multimap<String,MojoExecution> plan = Groups.ByPlugin.of(calculateExecutionPlan().getMojoExecutions(), plugin);
+        Multimap<String, MojoExecution> plan =
+                Groups.ByPlugin.of(calculateExecutionPlan().getMojoExecutions(), plugin);
 
         if (plan.isEmpty()) {
             getLog().warn("No plugin found with artifactId: " + plugin);
         } else {
             StringBuilder output = new StringBuilder();
             TableDescriptor descriptor = ListPluginTableDescriptor.of(plan.values(), defaultLifecycles);
-            for (Map.Entry<String, Collection<MojoExecution>> executions : plan.asMap().entrySet()) {
-                output.append(lineSeparator())
-                        .append(pluginTitleLine(descriptor, executions.getKey()));
+            for (Map.Entry<String, Collection<MojoExecution>> executions :
+                    plan.asMap().entrySet()) {
+                output.append(lineSeparator()).append(pluginTitleLine(descriptor, executions.getKey()));
                 for (MojoExecution execution : executions.getValue()) {
-                    output.append(lineSeparator())
-                            .append(line(descriptor.rowFormat(), execution));
+                    output.append(lineSeparator()).append(line(descriptor.rowFormat(), execution));
                 }
             }
             handleOutput(output.toString());
@@ -65,9 +62,7 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
 
         MojoExecutionDisplay display = new MojoExecutionDisplay(execution);
 
-        return String.format(rowFormat, display.getPhase(),
-                                        display.getGoal(),
-                                        display.getExecutionId());
+        return String.format(rowFormat, display.getPhase(), display.getGoal(), display.getExecutionId());
     }
 
     private String pluginTitleLine(TableDescriptor descriptor, String key) {

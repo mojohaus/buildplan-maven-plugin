@@ -15,7 +15,6 @@
  */
 package org.codehaus.mojo.buildplan;
 
-
 import static org.codehaus.mojo.buildplan.display.TableColumn.ARTIFACT_ID;
 import static org.codehaus.mojo.buildplan.display.TableColumn.EXECUTION_ID;
 import static org.codehaus.mojo.buildplan.display.TableColumn.GOAL;
@@ -40,11 +39,8 @@ import org.apache.maven.reporting.MavenReportException;
 import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
 import org.codehaus.mojo.buildplan.display.TableColumn;
 
-/**
- * Report plugin executions for the current project.
- */
-@Mojo(name = "report",
-      defaultPhase = LifecyclePhase.SITE)
+/** Report plugin executions for the current project. */
+@Mojo(name = "report", defaultPhase = LifecyclePhase.SITE)
 public class ReportMojo extends AbstractMavenReport {
 
     @Component
@@ -67,8 +63,8 @@ public class ReportMojo extends AbstractMavenReport {
         }
 
         Log logger = getLog();
-        logger.info("Generating " + getOutputName() + ".html"
-            + " for " + project.getName() + " " + project.getVersion());
+        logger.info(
+                "Generating " + getOutputName() + ".html" + " for " + project.getName() + " " + project.getVersion());
 
         // Get the Maven Doxia Sink, which will be used to generate the
         // various elements of the document
@@ -144,15 +140,17 @@ public class ReportMojo extends AbstractMavenReport {
     }
 
     private String currentProject() {
-        return session.getCurrentProject().getGroupId() + ":" + session.getCurrentProject()
-            .getArtifactId();
+        return session.getCurrentProject().getGroupId()
+                + ":"
+                + session.getCurrentProject().getArtifactId();
     }
 
     protected MavenExecutionPlan calculateExecutionPlan() throws MojoFailureException {
         try {
             return lifecycleExecutor.calculateExecutionPlan(session, "deploy");
         } catch (Exception e) {
-            throw new MojoFailureException(String.format("Cannot calculate Maven execution plan, caused by: %s", e.getMessage()), e);
+            throw new MojoFailureException(
+                    String.format("Cannot calculate Maven execution plan, caused by: %s", e.getMessage()), e);
         }
     }
 }

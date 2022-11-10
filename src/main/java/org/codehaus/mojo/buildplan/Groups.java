@@ -35,7 +35,7 @@ public class Groups {
             return of(executions, null);
         }
 
-        public static Multimap<String,MojoExecution> of(List<MojoExecution> executions, String artifactIdFilter) {
+        public static Multimap<String, MojoExecution> of(List<MojoExecution> executions, String artifactIdFilter) {
             Multimap<String, MojoExecution> result = new LinkedMultimap<>();
             boolean notFiltering = isEmpty(artifactIdFilter);
             for (MojoExecution execution : executions) {
@@ -65,7 +65,9 @@ public class Groups {
                 if (options.showingAllPhases) {
                     Lifecycle lifecycle = options.defaultLifecycles.get(phase);
                     if (lifecycle != null) {
-                        lifecycle.getPhases().forEach(defaultPhase -> result.put(defaultPhase, NoMojoExecution.INSTANCE));
+                        lifecycle
+                                .getPhases()
+                                .forEach(defaultPhase -> result.put(defaultPhase, NoMojoExecution.INSTANCE));
                     }
                 }
                 if (notFiltering || phase.equalsIgnoreCase(options.phase)) {
@@ -78,7 +80,6 @@ public class Groups {
         private static DefaultLifecycles defaultLifecycles() {
             return new DefaultLifecycles(Collections.emptyMap(), new ConsoleLogger());
         }
-
     }
 
     public static class Options {

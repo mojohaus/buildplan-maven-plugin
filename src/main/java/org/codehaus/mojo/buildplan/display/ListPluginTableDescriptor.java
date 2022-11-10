@@ -31,11 +31,17 @@ public class ListPluginTableDescriptor extends AbstractTableDescriptor {
     public String rowFormat() {
         StringBuilder builder = new StringBuilder();
         builder.append(ROW_START)
-                .append(FORMAT_LEFT_ALIGN).append(getPhaseSize()).append(FORMAT_STRING)
+                .append(FORMAT_LEFT_ALIGN)
+                .append(getPhaseSize())
+                .append(FORMAT_STRING)
                 .append(SEPARATOR)
-                .append(FORMAT_LEFT_ALIGN).append(getGoalSize()).append(FORMAT_STRING)
+                .append(FORMAT_LEFT_ALIGN)
+                .append(getGoalSize())
+                .append(FORMAT_STRING)
                 .append(SEPARATOR)
-                .append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING);
+                .append(FORMAT_LEFT_ALIGN)
+                .append(getExecutionIdSize())
+                .append(FORMAT_STRING);
         return builder.toString();
     }
 
@@ -70,12 +76,15 @@ public class ListPluginTableDescriptor extends AbstractTableDescriptor {
         return this;
     }
 
-    public static ListPluginTableDescriptor of(Collection<MojoExecution> executions, DefaultLifecycles defaultLifecycles) {
+    public static ListPluginTableDescriptor of(
+            Collection<MojoExecution> executions, DefaultLifecycles defaultLifecycles) {
 
-        Map<TableColumn,Integer> maxSize = findMaxSize(executions, defaultLifecycles, TableColumn.PHASE, TableColumn.EXECUTION_ID, TableColumn.GOAL);
+        Map<TableColumn, Integer> maxSize = findMaxSize(
+                executions, defaultLifecycles, TableColumn.PHASE, TableColumn.EXECUTION_ID, TableColumn.GOAL);
 
-        return new ListPluginTableDescriptor().setPhaseSize(maxSize.get(TableColumn.PHASE))
-                                              .setGoalSize(maxSize.get(TableColumn.GOAL))
-                                              .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));
+        return new ListPluginTableDescriptor()
+                .setPhaseSize(maxSize.get(TableColumn.PHASE))
+                .setGoalSize(maxSize.get(TableColumn.GOAL))
+                .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));
     }
 }

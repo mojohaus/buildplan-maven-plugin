@@ -16,7 +16,6 @@
 package org.codehaus.mojo.buildplan.display;
 
 public enum TableColumn {
-
     EXECUTION_ID("EXECUTION ID"),
     ARTIFACT_ID("PLUGIN"),
     GOAL("GOAL"),
