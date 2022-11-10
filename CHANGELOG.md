@@ -11,12 +11,14 @@
 - Add options showLifecycles and showAllPhases ([45c2cd9](http://github.com/mojohaus/buildplan-maven-plugin/commit/45c2cd9be647193dacb0f3607a78cc6bca069fe3)) by [@malice00](https://github.com/malice00)
 
 # 1.4
+
 ***
 
 - Migrate to Java 8 ([724e6fa](http://github.com/mojohaus/buildplan-maven-plugin/commit/724e6faa41ad555ea1fb8529552232b6464ccec2))
 - Add 'skip' parameter to bypass execution ([c443a6a](http://github.com/mojohaus/buildplan-maven-plugin/commit/c443a6add0930ca3d818f1aac6624d68b4105872)) by [@stdx](https://github.com/stdx)
 
 # 1.3
+
 ***
 
 - Ensure thread safety when writing output to file ([92a248a](http://github.com/mojohaus/buildplan-maven-plugin/commit/92a248a4e91bbe2258241eca28e4e06ef21c676b))
@@ -28,8 +30,10 @@
 - Correctly generate Introduction and Usage site pages ([9937ea6](http://github.com/mojohaus/buildplan-maven-plugin/commit/9937ea6774f546d5c407123d200c38db369b81cc))
 
 # 1.2
+
 ***
 
 - Respect maven lifecycle sequence in report ([e620021](http://github.com/mojohaus/buildplan-maven-plugin/commit/e620021c7af22db9f6fe10115ea2b76ca3177230))
 - Display build plan in one operation ([56879cb](http://github.com/mojohaus/buildplan-maven-plugin/commit/56879cbc1a908bb5c46dc934b2aa216cdd4f9b4f))
 - Report correct phase ([68a93d0](http://github.com/mojohaus/buildplan-maven-plugin/commit/68a93d09eb7488a42f8fc08a97c48d77c8ed4c38))
+
