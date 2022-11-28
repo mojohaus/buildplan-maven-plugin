@@ -43,37 +43,34 @@
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>  
 <a class="jxr_linenumber" name="L36" href="#L36">36</a>          @MavenTest
 <a class="jxr_linenumber" name="L37" href="#L37">37</a>          <strong class="jxr_keyword">void</strong> list_plugin_with_<strong class="jxr_keyword">default</strong>_cli(MavenExecutionResult result) {
-<a class="jxr_linenumber" name="L38" href="#L38">38</a>              assertThat(result).isSuccessful()
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>                  .out()
-<a class="jxr_linenumber" name="L40" href="#L40">40</a>                  .plain()
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>                  .containsSequence(
-<a class="jxr_linenumber" name="L42" href="#L42">42</a>                      <span class="jxr_string">"maven-resources-plugin ----------------------------------------------"</span>,
-<a class="jxr_linenumber" name="L43" href="#L43">43</a>                      <span class="jxr_string">"    + process-resources      | default-resources     | resources    "</span>,
-<a class="jxr_linenumber" name="L44" href="#L44">44</a>                      <span class="jxr_string">"    + process-test-resources | default-testResources | testResources"</span>,
-<a class="jxr_linenumber" name="L45" href="#L45">45</a>                      <span class="jxr_string">"maven-compiler-plugin -----------------------------------------------"</span>,
-<a class="jxr_linenumber" name="L46" href="#L46">46</a>                      <span class="jxr_string">"    + compile                | default-compile       | compile      "</span>,
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>                      <span class="jxr_string">"    + test-compile           | default-testCompile   | testCompile  "</span>,
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>                      <span class="jxr_string">"maven-surefire-plugin -----------------------------------------------"</span>,
-<a class="jxr_linenumber" name="L49" href="#L49">49</a>                      <span class="jxr_string">"    + test                   | default-test          | test         "</span>,
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>                      <span class="jxr_string">"maven-jar-plugin ----------------------------------------------------"</span>,
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>                      <span class="jxr_string">"    + package                | default-jar           | jar          "</span>,
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>                      <span class="jxr_string">"maven-install-plugin ------------------------------------------------"</span>,
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>                      <span class="jxr_string">"    + install                | default-install       | install      "</span>,
-<a class="jxr_linenumber" name="L54" href="#L54">54</a>                      <span class="jxr_string">"maven-deploy-plugin -------------------------------------------------"</span>,
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>                      <span class="jxr_string">"    + deploy                 | default-deploy        | deploy       "</span>
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>                  );
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>              assertThat(result)
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>                      .isSuccessful()
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>                      .out()
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>                      .plain()
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>                      .containsSequence(
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>                              <span class="jxr_string">"maven-resources-plugin ----------------------------------------------"</span>,
+<a class="jxr_linenumber" name="L44" href="#L44">44</a>                              <span class="jxr_string">"    + process-resources      | resources     | default-resources    "</span>,
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>                              <span class="jxr_string">"    + process-test-resources | testResources | default-testResources"</span>,
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>                              <span class="jxr_string">"maven-compiler-plugin -----------------------------------------------"</span>,
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>                              <span class="jxr_string">"    + compile                | compile       | default-compile      "</span>,
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>                              <span class="jxr_string">"    + test-compile           | testCompile   | default-testCompile  "</span>,
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>                              <span class="jxr_string">"maven-surefire-plugin -----------------------------------------------"</span>,
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>                              <span class="jxr_string">"    + test                   | test          | default-test         "</span>,
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>                              <span class="jxr_string">"maven-jar-plugin ----------------------------------------------------"</span>,
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>                              <span class="jxr_string">"    + package                | jar           | default-jar          "</span>,
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>                              <span class="jxr_string">"maven-install-plugin ------------------------------------------------"</span>,
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>                              <span class="jxr_string">"    + install                | install       | default-install      "</span>,
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>                              <span class="jxr_string">"maven-deploy-plugin -------------------------------------------------"</span>,
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>                              <span class="jxr_string">"    + deploy                 | deploy        | default-deploy       "</span>);
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>          }
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>  
 <a class="jxr_linenumber" name="L59" href="#L59">59</a>          @MavenTest
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>          @SystemProperty(value = <span class="jxr_string">"buildplan.skip"</span>, content=<span class="jxr_string">"true"</span>)
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>          @SystemProperty(value = <span class="jxr_string">"buildplan.skip"</span>, content = <span class="jxr_string">"true"</span>)
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>          <strong class="jxr_keyword">void</strong> skip_execution(MavenExecutionResult result) {
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>              assertThat(result).isSuccessful()
-<a class="jxr_linenumber" name="L63" href="#L63">63</a>                  .out()
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>                  .info()
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>                  .contains(<span class="jxr_string">"Skipping build plan execution."</span>);
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>          }
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>      }
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>  }
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>              assertThat(result).isSuccessful().out().info().contains(<span class="jxr_string">"Skipping build plan execution."</span>);
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>          }
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>      }
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>  }
 </pre>
 <hr/>
 <div id="footer">Copyright &#169; 2012&#x2013;2022 <a href="https://www.mojohaus.org">MojoHaus</a>. All rights reserved.</div>

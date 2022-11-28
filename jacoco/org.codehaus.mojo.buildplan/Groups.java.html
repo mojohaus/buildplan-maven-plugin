@@ -35,7 +35,7 @@ import org.codehaus.plexus.logging.console.ConsoleLogger;
 <span class="fc" id="L35">            return of(executions, null);</span>
         }
 
-        public static Multimap&lt;String,MojoExecution&gt; of(List&lt;MojoExecution&gt; executions, String artifactIdFilter) {
+        public static Multimap&lt;String, MojoExecution&gt; of(List&lt;MojoExecution&gt; executions, String artifactIdFilter) {
 <span class="fc" id="L39">            Multimap&lt;String, MojoExecution&gt; result = new LinkedMultimap&lt;&gt;();</span>
 <span class="fc" id="L40">            boolean notFiltering = isEmpty(artifactIdFilter);</span>
 <span class="fc bfc" id="L41" title="All 2 branches covered.">            for (MojoExecution execution : executions) {</span>
@@ -65,20 +65,21 @@ import org.codehaus.plexus.logging.console.ConsoleLogger;
 <span class="pc bpc" id="L65" title="1 of 2 branches missed.">                if (options.showingAllPhases) {</span>
 <span class="nc" id="L66">                    Lifecycle lifecycle = options.defaultLifecycles.get(phase);</span>
 <span class="nc bnc" id="L67" title="All 2 branches missed.">                    if (lifecycle != null) {</span>
-<span class="nc" id="L68">                        lifecycle.getPhases().forEach(defaultPhase -&gt; result.put(defaultPhase, NoMojoExecution.INSTANCE));</span>
+<span class="nc" id="L68">                        lifecycle</span>
+<span class="nc" id="L69">                                .getPhases()</span>
+<span class="nc" id="L70">                                .forEach(defaultPhase -&gt; result.put(defaultPhase, NoMojoExecution.INSTANCE));</span>
                     }
                 }
-<span class="fc bfc" id="L71" title="All 4 branches covered.">                if (notFiltering || phase.equalsIgnoreCase(options.phase)) {</span>
-<span class="fc" id="L72">                    result.put(phase, execution);</span>
+<span class="fc bfc" id="L73" title="All 4 branches covered.">                if (notFiltering || phase.equalsIgnoreCase(options.phase)) {</span>
+<span class="fc" id="L74">                    result.put(phase, execution);</span>
                 }
-<span class="fc" id="L74">            }</span>
-<span class="fc" id="L75">            return result;</span>
+<span class="fc" id="L76">            }</span>
+<span class="fc" id="L77">            return result;</span>
         }
 
         private static DefaultLifecycles defaultLifecycles() {
-<span class="fc" id="L79">            return new DefaultLifecycles(Collections.emptyMap(), new ConsoleLogger());</span>
+<span class="fc" id="L81">            return new DefaultLifecycles(Collections.emptyMap(), new ConsoleLogger());</span>
         }
-
     }
 
     public static class Options {
@@ -89,23 +90,23 @@ import org.codehaus.plexus.logging.console.ConsoleLogger;
         private boolean showingAllPhases;
         private boolean showingLifecycles;
 
-<span class="fc" id="L92">        public Options(DefaultLifecycles defaultLifecycles) {</span>
-<span class="fc" id="L93">            this.defaultLifecycles = defaultLifecycles;</span>
-<span class="fc" id="L94">        }</span>
+<span class="fc" id="L93">        public Options(DefaultLifecycles defaultLifecycles) {</span>
+<span class="fc" id="L94">            this.defaultLifecycles = defaultLifecycles;</span>
+<span class="fc" id="L95">        }</span>
 
         public Options forPhase(String phase) {
-<span class="fc" id="L97">            this.phase = phase;</span>
-<span class="fc" id="L98">            return this;</span>
+<span class="fc" id="L98">            this.phase = phase;</span>
+<span class="fc" id="L99">            return this;</span>
         }
 
         public Options showingAllPhases() {
-<span class="nc" id="L102">            this.showingAllPhases = true;</span>
-<span class="nc" id="L103">            return this;</span>
+<span class="nc" id="L103">            this.showingAllPhases = true;</span>
+<span class="nc" id="L104">            return this;</span>
         }
 
         public Options showingLifecycles() {
-<span class="nc" id="L107">            this.showingLifecycles = true;</span>
-<span class="nc" id="L108">            return this;</span>
+<span class="nc" id="L108">            this.showingLifecycles = true;</span>
+<span class="nc" id="L109">            return this;</span>
         }
     }
 }

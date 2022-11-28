@@ -15,17 +15,21 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import java.util.StringJoiner;
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.plugin.MojoExecution;
+import org.apache.maven.shared.utils.logging.MessageUtils;
 
-<span class="fc" id="L24">public class ListTableDescriptor extends AbstractTableDescriptor {</span>
+<span class="fc" id="L26">public class ListTableDescriptor extends AbstractTableDescriptor {</span>
 
-<span class="fc" id="L26">    static final int SEPARATOR_SIZE = 4 * SEPARATOR.length();</span>
+<span class="fc" id="L28">    private static final int ANSI_COLOR_CODES_LENGTH =</span>
+<span class="fc" id="L29">            MessageUtils.buffer().mojo(&quot;&quot;).toString().length();</span>
 
     private int pluginSize;
+    private int versionSize;
     private int phaseSize;
     private int lifecycleSize;
     private int executionIdSize;
@@ -33,95 +37,143 @@ import org.apache.maven.plugin.MojoExecution;
 
     public static ListTableDescriptor of(Collection&lt;MojoExecution&gt; executions, DefaultLifecycles defaultLifecycles) {
 
-<span class="fc" id="L36">        Map&lt;TableColumn,Integer&gt; maxSize = findMaxSize(executions, defaultLifecycles, TableColumn.values());</span>
+<span class="fc" id="L40">        Map&lt;TableColumn, Integer&gt; maxSize = findMaxSize(executions, defaultLifecycles, TableColumn.values());</span>
 
-<span class="fc" id="L38">        return new ListTableDescriptor().setPluginSize(maxSize.get(TableColumn.ARTIFACT_ID))</span>
-<span class="fc" id="L39">                                        .setPhaseSize(maxSize.get(TableColumn.PHASE))</span>
-<span class="fc" id="L40">                                        .setLifecycleSize(maxSize.get(TableColumn.LIFECYCLE))</span>
-<span class="fc" id="L41">                                        .setGoalSize(maxSize.get(TableColumn.GOAL))</span>
-<span class="fc" id="L42">                                        .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));</span>
+<span class="fc" id="L42">        return new ListTableDescriptor()</span>
+<span class="fc" id="L43">                .setPluginSize(maxSize.get(TableColumn.ARTIFACT_ID))</span>
+<span class="fc" id="L44">                .setVersionSize(maxSize.get(TableColumn.VERSION))</span>
+<span class="fc" id="L45">                .setPhaseSize(maxSize.get(TableColumn.PHASE))</span>
+<span class="fc" id="L46">                .setLifecycleSize(maxSize.get(TableColumn.LIFECYCLE))</span>
+<span class="fc" id="L47">                .setGoalSize(maxSize.get(TableColumn.GOAL))</span>
+<span class="fc" id="L48">                .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));</span>
     }
 
     public String rowFormat() {
-<span class="fc" id="L46">        StringBuilder builder = new StringBuilder();</span>
-<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (lifecycleSize &gt; 0) {</span>
-<span class="fc" id="L48">            builder.append(FORMAT_LEFT_ALIGN).append(getLifecycleSize()).append(FORMAT_STRING)</span>
-<span class="fc" id="L49">                .append(SEPARATOR);</span>
+<span class="fc" id="L52">        return columns(getPluginSize());</span>
+    }
+
+    private String columns(int pluginSize) {
+<span class="fc" id="L56">        StringBuilder builder = new StringBuilder();</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (lifecycleSize &gt; 0) {</span>
+<span class="fc" id="L58">            builder.append(FORMAT_LEFT_ALIGN)</span>
+<span class="fc" id="L59">                    .append(getLifecycleSize())</span>
+<span class="fc" id="L60">                    .append(FORMAT_STRING)</span>
+<span class="fc" id="L61">                    .append(SEPARATOR);</span>
         }
-<span class="fc" id="L51">        builder.append(FORMAT_LEFT_ALIGN).append(getPhaseSize()).append(FORMAT_STRING)</span>
-<span class="fc" id="L52">               .append(SEPARATOR)</span>
-<span class="fc" id="L53">               .append(FORMAT_LEFT_ALIGN).append(getPluginSize()).append(FORMAT_STRING)</span>
-<span class="fc" id="L54">               .append(SEPARATOR);</span>
-<span class="fc" id="L55">        builder.append(FORMAT_LEFT_ALIGN).append(getGoalSize()).append(FORMAT_STRING)</span>
-<span class="fc" id="L56">               .append(SEPARATOR)</span>
-<span class="fc" id="L57">               .append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING);</span>
-<span class="fc" id="L58">        return builder.toString();</span>
+<span class="fc" id="L63">        builder.append(FORMAT_LEFT_ALIGN)</span>
+<span class="fc" id="L64">                .append(getPhaseSize())</span>
+<span class="fc" id="L65">                .append(FORMAT_STRING)</span>
+<span class="fc" id="L66">                .append(SEPARATOR)</span>
+<span class="fc" id="L67">                .append(FORMAT_LEFT_ALIGN)</span>
+<span class="fc" id="L68">                .append(pluginSize)</span>
+<span class="fc" id="L69">                .append(FORMAT_STRING)</span>
+<span class="fc" id="L70">                .append(SEPARATOR)</span>
+<span class="fc" id="L71">                .append(FORMAT_LEFT_ALIGN)</span>
+<span class="fc" id="L72">                .append(getVersionSize())</span>
+<span class="fc" id="L73">                .append(FORMAT_STRING)</span>
+<span class="fc" id="L74">                .append(SEPARATOR);</span>
+
+<span class="fc" id="L76">        builder.append(FORMAT_LEFT_ALIGN)</span>
+<span class="fc" id="L77">                .append(getGoalSize())</span>
+<span class="fc" id="L78">                .append(FORMAT_STRING)</span>
+<span class="fc" id="L79">                .append(SEPARATOR)</span>
+<span class="fc" id="L80">                .append(FORMAT_LEFT_ALIGN)</span>
+<span class="fc" id="L81">                .append(getExecutionIdSize())</span>
+<span class="fc" id="L82">                .append(FORMAT_STRING);</span>
+<span class="fc" id="L83">        return builder.toString();</span>
+    }
+
+    public String titleFormat() {
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        if (MessageUtils.isColorEnabled()) {</span>
+<span class="fc" id="L88">            return columns(getPluginSize() - ANSI_COLOR_CODES_LENGTH);</span>
+        }
+<span class="fc" id="L90">        return columns(getPluginSize());</span>
     }
 
     public int width() {
-<span class="fc" id="L62">        return getPluginSize() + getPhaseSize() + getLifecycleSize() + getExecutionIdSize() + getGoalSize() + SEPARATOR_SIZE;</span>
+<span class="fc" id="L94">        return withSeparator(</span>
+<span class="fc" id="L95">                getPluginSize(),</span>
+<span class="fc" id="L96">                getVersionSize(),</span>
+<span class="fc" id="L97">                getPhaseSize(),</span>
+<span class="fc" id="L98">                getLifecycleSize(),</span>
+<span class="fc" id="L99">                getExecutionIdSize(),</span>
+<span class="fc" id="L100">                getGoalSize());</span>
+    }
+
+    private int withSeparator(int... ints) {
+<span class="fc" id="L104">        int width = Arrays.stream(ints).sum() + (ints.length - 1) * SEPARATOR.length();</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        return MessageUtils.isColorEnabled() ? width - ANSI_COLOR_CODES_LENGTH : width;</span>
     }
 
     @Override
     public String toString() {
-<span class="nc" id="L67">        return new StringJoiner(&quot;, &quot;, ListTableDescriptor.class.getSimpleName() + &quot;[&quot;, &quot;]&quot;)</span>
-<span class="nc" id="L68">            .add(&quot;Plugin column size=&quot; + pluginSize)</span>
-<span class="nc" id="L69">            .add(&quot;Phase column size=&quot; + phaseSize)</span>
-<span class="nc" id="L70">            .add(&quot;Lifecycle column size=&quot; + lifecycleSize)</span>
-<span class="nc" id="L71">            .add(&quot;Execution ID column size=&quot; + executionIdSize)</span>
-<span class="nc" id="L72">            .add(&quot;Goal column size=&quot; + goalSize)</span>
-<span class="nc" id="L73">            .add(&quot;width=&quot; + width())</span>
-<span class="nc" id="L74">            .toString();</span>
-
+<span class="nc" id="L110">        return new StringJoiner(&quot;, &quot;, ListTableDescriptor.class.getSimpleName() + &quot;[&quot;, &quot;]&quot;)</span>
+<span class="nc" id="L111">                .add(&quot;Plugin column size=&quot; + pluginSize)</span>
+<span class="nc" id="L112">                .add(&quot;Plugin version size=&quot; + versionSize)</span>
+<span class="nc" id="L113">                .add(&quot;Phase column size=&quot; + phaseSize)</span>
+<span class="nc" id="L114">                .add(&quot;Lifecycle column size=&quot; + lifecycleSize)</span>
+<span class="nc" id="L115">                .add(&quot;Execution ID column size=&quot; + executionIdSize)</span>
+<span class="nc" id="L116">                .add(&quot;Goal column size=&quot; + goalSize)</span>
+<span class="nc" id="L117">                .add(&quot;width=&quot; + width())</span>
+<span class="nc" id="L118">                .toString();</span>
     }
 
     public int getPluginSize() {
-<span class="fc" id="L79">        return pluginSize;</span>
+<span class="fc" id="L122">        return pluginSize;</span>
     }
 
     public ListTableDescriptor setPluginSize(int pluginSize) {
-<span class="fc" id="L83">        this.pluginSize = pluginSize;</span>
-<span class="fc" id="L84">        return this;</span>
+<span class="fc" id="L126">        this.pluginSize = pluginSize;</span>
+<span class="fc" id="L127">        return this;</span>
+    }
+
+    private int getVersionSize() {
+<span class="fc" id="L131">        return versionSize;</span>
+    }
+
+    public ListTableDescriptor setVersionSize(int versionSize) {
+<span class="fc" id="L135">        this.versionSize = versionSize;</span>
+<span class="fc" id="L136">        return this;</span>
     }
 
     public int getPhaseSize() {
-<span class="fc" id="L88">        return phaseSize;</span>
+<span class="fc" id="L140">        return phaseSize;</span>
     }
 
     public ListTableDescriptor setPhaseSize(int phaseSize) {
-<span class="fc" id="L92">        this.phaseSize = phaseSize;</span>
-<span class="fc" id="L93">        return this;</span>
+<span class="fc" id="L144">        this.phaseSize = phaseSize;</span>
+<span class="fc" id="L145">        return this;</span>
     }
 
     public int getLifecycleSize() {
-<span class="fc" id="L97">        return lifecycleSize;</span>
+<span class="fc" id="L149">        return lifecycleSize;</span>
     }
 
     public ListTableDescriptor setLifecycleSize(int lifecycleSize) {
-<span class="fc" id="L101">        this.lifecycleSize = lifecycleSize;</span>
-<span class="fc" id="L102">        return this;</span>
+<span class="fc" id="L153">        this.lifecycleSize = lifecycleSize;</span>
+<span class="fc" id="L154">        return this;</span>
     }
 
     public int getExecutionIdSize() {
-<span class="fc" id="L106">        return executionIdSize;</span>
+<span class="fc" id="L158">        return executionIdSize;</span>
     }
 
     public ListTableDescriptor setExecutionIdSize(int executionIdSize) {
-<span class="fc" id="L110">        this.executionIdSize = executionIdSize;</span>
-<span class="fc" id="L111">        return this;</span>
+<span class="fc" id="L162">        this.executionIdSize = executionIdSize;</span>
+<span class="fc" id="L163">        return this;</span>
     }
 
     public int getGoalSize() {
-<span class="fc" id="L115">        return goalSize;</span>
+<span class="fc" id="L167">        return goalSize;</span>
     }
 
     public ListTableDescriptor setGoalSize(int goalSize) {
-<span class="fc" id="L119">        this.goalSize = goalSize;</span>
-<span class="fc" id="L120">        return this;</span>
+<span class="fc" id="L171">        this.goalSize = goalSize;</span>
+<span class="fc" id="L172">        return this;</span>
     }
 
     public void hideLifecycle() {
-<span class="fc" id="L124">        this.lifecycleSize = -1 * SEPARATOR.length();</span>
-<span class="fc" id="L125">    }</span>
+<span class="fc" id="L176">        this.lifecycleSize = -1 * SEPARATOR.length();</span>
+<span class="fc" id="L177">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

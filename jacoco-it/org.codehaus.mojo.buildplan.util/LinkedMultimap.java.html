@@ -54,9 +54,7 @@ import java.util.Set;
 
     @Override
     public Collection&lt;V&gt; values() {
-<span class="fc" id="L57">        return map.values().stream()</span>
-<span class="fc" id="L58">            .flatMap(Collection::stream)</span>
-<span class="fc" id="L59">            .collect(toList());</span>
+<span class="fc" id="L57">        return map.values().stream().flatMap(Collection::stream).collect(toList());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

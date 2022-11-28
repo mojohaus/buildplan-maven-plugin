@@ -18,17 +18,16 @@ package org.codehaus.mojo.buildplan;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import org.codehaus.mojo.buildplan.display.Output;
 
-<span class="nc" id="L24">class SynchronizedFileReporter {</span>
+<span class="nc" id="L23">class SynchronizedFileReporter {</span>
 
     static synchronized void write(String output, File outputFile, boolean appendOutput) throws IOException {
-<span class="fc" id="L27">        try (FileWriter writer = new FileWriter(outputFile, appendOutput)) {</span>
-<span class="fc" id="L28">            writer.write(Output.lineSeparator());</span>
-<span class="fc" id="L29">            writer.write(output);</span>
-<span class="fc" id="L30">            writer.write(Output.lineSeparator());</span>
+<span class="fc" id="L26">        try (FileWriter writer = new FileWriter(outputFile, appendOutput)) {</span>
+<span class="fc" id="L27">            writer.write(Output.lineSeparator());</span>
+<span class="fc" id="L28">            writer.write(output);</span>
+<span class="fc" id="L29">            writer.write(Output.lineSeparator());</span>
         }
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L31">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

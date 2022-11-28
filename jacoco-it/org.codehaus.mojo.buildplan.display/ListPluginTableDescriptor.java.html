@@ -15,69 +15,77 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
+import java.util.Collection;
+import java.util.Map;
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.plugin.MojoExecution;
 
-import java.util.Collection;
-import java.util.Map;
+<span class="fc" id="L23">public class ListPluginTableDescriptor extends AbstractTableDescriptor {</span>
 
-<span class="fc" id="L24">public class ListPluginTableDescriptor extends AbstractTableDescriptor {</span>
-
-<span class="fc" id="L26">    private static final int SEPARATOR_SIZE = ROW_START.length() + 2 * SEPARATOR.length();</span>
+<span class="fc" id="L25">    private static final int SEPARATOR_SIZE = ROW_START.length() + 2 * SEPARATOR.length();</span>
 
     private int phaseSize;
     private int executionIdSize;
     private int goalSize;
 
     public String rowFormat() {
-<span class="fc" id="L33">        StringBuilder builder = new StringBuilder();</span>
-<span class="fc" id="L34">        builder.append(ROW_START)</span>
-<span class="fc" id="L35">                .append(FORMAT_LEFT_ALIGN).append(getPhaseSize()).append(FORMAT_STRING)</span>
-<span class="fc" id="L36">                .append(SEPARATOR)</span>
-<span class="fc" id="L37">                .append(FORMAT_LEFT_ALIGN).append(getExecutionIdSize()).append(FORMAT_STRING)</span>
-<span class="fc" id="L38">                .append(SEPARATOR)</span>
-<span class="fc" id="L39">                .append(FORMAT_LEFT_ALIGN).append(getGoalSize()).append(FORMAT_STRING);</span>
-<span class="fc" id="L40">        return builder.toString();</span>
+<span class="fc" id="L32">        StringBuilder builder = new StringBuilder();</span>
+<span class="fc" id="L33">        builder.append(ROW_START)</span>
+<span class="fc" id="L34">                .append(FORMAT_LEFT_ALIGN)</span>
+<span class="fc" id="L35">                .append(getPhaseSize())</span>
+<span class="fc" id="L36">                .append(FORMAT_STRING)</span>
+<span class="fc" id="L37">                .append(SEPARATOR)</span>
+<span class="fc" id="L38">                .append(FORMAT_LEFT_ALIGN)</span>
+<span class="fc" id="L39">                .append(getGoalSize())</span>
+<span class="fc" id="L40">                .append(FORMAT_STRING)</span>
+<span class="fc" id="L41">                .append(SEPARATOR)</span>
+<span class="fc" id="L42">                .append(FORMAT_LEFT_ALIGN)</span>
+<span class="fc" id="L43">                .append(getExecutionIdSize())</span>
+<span class="fc" id="L44">                .append(FORMAT_STRING);</span>
+<span class="fc" id="L45">        return builder.toString();</span>
     }
 
     public int width() {
-<span class="fc" id="L44">        return getExecutionIdSize() + getGoalSize() + getPhaseSize() + SEPARATOR_SIZE;</span>
+<span class="fc" id="L49">        return getExecutionIdSize() + getGoalSize() + getPhaseSize() + SEPARATOR_SIZE;</span>
     }
 
     public int getPhaseSize() {
-<span class="fc" id="L48">        return phaseSize;</span>
+<span class="fc" id="L53">        return phaseSize;</span>
     }
 
     public int getExecutionIdSize() {
-<span class="fc" id="L52">        return executionIdSize;</span>
+<span class="fc" id="L57">        return executionIdSize;</span>
     }
 
     public int getGoalSize() {
-<span class="fc" id="L56">        return goalSize;</span>
+<span class="fc" id="L61">        return goalSize;</span>
     }
 
     public ListPluginTableDescriptor setPhaseSize(int phaseSize) {
-<span class="fc" id="L60">        this.phaseSize = phaseSize;</span>
-<span class="fc" id="L61">        return this;</span>
-    }
-
-    public ListPluginTableDescriptor setExecutionIdSize(int executionIdSize) {
-<span class="fc" id="L65">        this.executionIdSize = executionIdSize;</span>
+<span class="fc" id="L65">        this.phaseSize = phaseSize;</span>
 <span class="fc" id="L66">        return this;</span>
     }
 
-    public ListPluginTableDescriptor setGoalSize(int goalSize) {
-<span class="fc" id="L70">        this.goalSize = goalSize;</span>
+    public ListPluginTableDescriptor setExecutionIdSize(int executionIdSize) {
+<span class="fc" id="L70">        this.executionIdSize = executionIdSize;</span>
 <span class="fc" id="L71">        return this;</span>
     }
 
-    public static ListPluginTableDescriptor of(Collection&lt;MojoExecution&gt; executions, DefaultLifecycles defaultLifecycles) {
+    public ListPluginTableDescriptor setGoalSize(int goalSize) {
+<span class="fc" id="L75">        this.goalSize = goalSize;</span>
+<span class="fc" id="L76">        return this;</span>
+    }
 
-<span class="fc" id="L76">        Map&lt;TableColumn,Integer&gt; maxSize = findMaxSize(executions, defaultLifecycles, TableColumn.PHASE, TableColumn.EXECUTION_ID, TableColumn.GOAL);</span>
+    public static ListPluginTableDescriptor of(
+            Collection&lt;MojoExecution&gt; executions, DefaultLifecycles defaultLifecycles) {
 
-<span class="fc" id="L78">        return new ListPluginTableDescriptor().setPhaseSize(maxSize.get(TableColumn.PHASE))</span>
-<span class="fc" id="L79">                                              .setGoalSize(maxSize.get(TableColumn.GOAL))</span>
-<span class="fc" id="L80">                                              .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));</span>
+<span class="fc" id="L82">        Map&lt;TableColumn, Integer&gt; maxSize = findMaxSize(</span>
+                executions, defaultLifecycles, TableColumn.PHASE, TableColumn.EXECUTION_ID, TableColumn.GOAL);
+
+<span class="fc" id="L85">        return new ListPluginTableDescriptor()</span>
+<span class="fc" id="L86">                .setPhaseSize(maxSize.get(TableColumn.PHASE))</span>
+<span class="fc" id="L87">                .setGoalSize(maxSize.get(TableColumn.GOAL))</span>
+<span class="fc" id="L88">                .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

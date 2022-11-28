@@ -32,12 +32,9 @@ import org.codehaus.mojo.buildplan.display.TableDescriptor;
 import org.codehaus.mojo.buildplan.util.Multimap;
 import org.codehaus.plexus.util.StringUtils;
 
-/**
- * List plugin executions by phase for the current project.
- */
-@Mojo(name = &quot;list-phase&quot;,
-      threadSafe = true)
-<span class="nc" id="L40">public class ListPhaseMojo extends AbstractLifecycleMojo {</span>
+/** List plugin executions by phase for the current project. */
+@Mojo(name = &quot;list-phase&quot;, threadSafe = true)
+<span class="nc" id="L37">public class ListPhaseMojo extends AbstractLifecycleMojo {</span>
 
     /** Display plugin executions only for the specified phase. */
     @Parameter(property = &quot;buildplan.phase&quot;)
@@ -52,50 +49,53 @@ import org.codehaus.plexus.util.StringUtils;
     private boolean showAllPhases;
 
     public void executeInternal() throws MojoFailureException {
-<span class="nc" id="L55">        Groups.Options options = new Groups.Options(defaultLifecycles);</span>
-<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (showAllPhases) {</span>
-<span class="nc" id="L57">            options = options.showingAllPhases();</span>
+<span class="nc" id="L52">        Groups.Options options = new Groups.Options(defaultLifecycles);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if (showAllPhases) {</span>
+<span class="nc" id="L54">            options = options.showingAllPhases();</span>
         }
-<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (showLifecycles) {</span>
-<span class="nc" id="L60">            options = options.showingLifecycles();</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (showLifecycles) {</span>
+<span class="nc" id="L57">            options = options.showingLifecycles();</span>
         }
 
-<span class="nc" id="L63">        Multimap&lt;String,MojoExecution&gt; phases = Groups.ByPhase.of(calculateExecutionPlan().getMojoExecutions(), options);</span>
+<span class="nc" id="L60">        Multimap&lt;String, MojoExecution&gt; phases =</span>
+<span class="nc" id="L61">                Groups.ByPhase.of(calculateExecutionPlan().getMojoExecutions(), options);</span>
 
-<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (!phases.isEmpty()) {</span>
-<span class="nc" id="L66">            TableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values(), defaultLifecycles);</span>
-<span class="nc" id="L67">            Lifecycle currentLifecycle = null;</span>
-<span class="nc" id="L68">            StringBuilder output = new StringBuilder();</span>
-<span class="nc bnc" id="L69" title="All 2 branches missed.">            for (Map.Entry&lt;String, Collection&lt;MojoExecution&gt;&gt; currentPhase : phases.asMap().entrySet()) {</span>
-<span class="nc bnc" id="L70" title="All 2 branches missed.">                if (showLifecycles) {</span>
-<span class="nc" id="L71">                    Lifecycle lifecycleForPhase = defaultLifecycles.get(currentPhase.getKey());</span>
-<span class="nc bnc" id="L72" title="All 2 branches missed.">                    if (lifecycleForPhase == null) {</span>
-<span class="nc" id="L73">                        lifecycleForPhase = new Lifecycle(&quot;&quot;, emptyList(), emptyMap());</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (!phases.isEmpty()) {</span>
+<span class="nc" id="L64">            TableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values(), defaultLifecycles);</span>
+<span class="nc" id="L65">            Lifecycle currentLifecycle = null;</span>
+<span class="nc" id="L66">            StringBuilder output = new StringBuilder();</span>
+            for (Map.Entry&lt;String, Collection&lt;MojoExecution&gt;&gt; currentPhase :
+<span class="nc bnc" id="L68" title="All 2 branches missed.">                    phases.asMap().entrySet()) {</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">                if (showLifecycles) {</span>
+<span class="nc" id="L70">                    Lifecycle lifecycleForPhase = defaultLifecycles.get(currentPhase.getKey());</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">                    if (lifecycleForPhase == null) {</span>
+<span class="nc" id="L72">                        lifecycleForPhase = new Lifecycle(&quot;&quot;, emptyList(), emptyMap());</span>
                     }
-<span class="nc bnc" id="L75" title="All 2 branches missed.">                    if (!lifecycleForPhase.equals(currentLifecycle)) {</span>
-<span class="nc" id="L76">                        currentLifecycle = lifecycleForPhase;</span>
-<span class="nc" id="L77">                        output.append(lineSeparator()).append(lineSeparator()).append(&quot;[&quot;)</span>
-<span class="nc" id="L78">                            .append(currentLifecycle.getId()).append(&quot;]&quot;);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">                    if (!lifecycleForPhase.equals(currentLifecycle)) {</span>
+<span class="nc" id="L75">                        currentLifecycle = lifecycleForPhase;</span>
+<span class="nc" id="L76">                        output.append(lineSeparator())</span>
+<span class="nc" id="L77">                                .append(lineSeparator())</span>
+<span class="nc" id="L78">                                .append(&quot;[&quot;)</span>
+<span class="nc" id="L79">                                .append(currentLifecycle.getId())</span>
+<span class="nc" id="L80">                                .append(&quot;]&quot;);</span>
                     }
                 }
-<span class="nc" id="L81">                output.append(lineSeparator())</span>
-<span class="nc" id="L82">                    .append(phaseTitleLine(descriptor, currentPhase.getKey()));</span>
-<span class="nc" id="L83">                currentPhase.getValue().stream()</span>
-<span class="nc bnc" id="L84" title="All 2 branches missed.">                    .filter(execution -&gt; execution != NoMojoExecution.INSTANCE)</span>
-<span class="nc" id="L85">                    .forEach(execution -&gt; output.append(lineSeparator()).append(line(descriptor.rowFormat(), execution)));</span>
-<span class="nc" id="L86">            }</span>
-<span class="nc" id="L87">            handleOutput(output.toString());</span>
-<span class="nc" id="L88">        } else {</span>
-<span class="nc" id="L89">            getLog().warn(&quot;No plugin execution found within phase: &quot; + phase);</span>
+<span class="nc" id="L83">                output.append(lineSeparator()).append(phaseTitleLine(descriptor, currentPhase.getKey()));</span>
+<span class="nc" id="L84">                currentPhase.getValue().stream()</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">                        .filter(execution -&gt; execution != NoMojoExecution.INSTANCE)</span>
+<span class="nc" id="L86">                        .forEach(execution -&gt;</span>
+<span class="nc" id="L87">                                output.append(lineSeparator()).append(line(descriptor.rowFormat(), execution)));</span>
+<span class="nc" id="L88">            }</span>
+<span class="nc" id="L89">            handleOutput(output.toString());</span>
+<span class="nc" id="L90">        } else {</span>
+<span class="nc" id="L91">            getLog().warn(&quot;No plugin execution found within phase: &quot; + phase);</span>
         }
-<span class="nc" id="L91">    }</span>
+<span class="nc" id="L93">    }</span>
 
     private String line(String rowFormat, MojoExecution execution) {
-<span class="nc" id="L94">        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);</span>
+<span class="nc" id="L96">        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);</span>
 
-<span class="nc" id="L96">        return String.format(rowFormat, display.getArtifactId(),</span>
-<span class="nc" id="L97">                                        display.getExecutionId(),</span>
-<span class="nc" id="L98">                                        display.getGoal());</span>
+<span class="nc" id="L98">        return String.format(rowFormat, display.getArtifactId(), display.getGoal(), display.getExecutionId());</span>
     }
 
     private String phaseTitleLine(TableDescriptor descriptor, String key) {

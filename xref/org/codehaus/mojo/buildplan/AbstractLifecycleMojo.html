@@ -23,55 +23,55 @@
 <a class="jxr_linenumber" name="L15" href="#L15">15</a>  <em class="jxr_comment"> */</em>
 <a class="jxr_linenumber" name="L16" href="#L16">16</a>  <strong class="jxr_keyword">package</strong> org.codehaus.mojo.buildplan;
 <a class="jxr_linenumber" name="L17" href="#L17">17</a>  
-<a class="jxr_linenumber" name="L18" href="#L18">18</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.execution.MavenSession;
-<a class="jxr_linenumber" name="L19" href="#L19">19</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.lifecycle.DefaultLifecycles;
-<a class="jxr_linenumber" name="L20" href="#L20">20</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.lifecycle.LifecycleExecutor;
-<a class="jxr_linenumber" name="L21" href="#L21">21</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.lifecycle.MavenExecutionPlan;
-<a class="jxr_linenumber" name="L22" href="#L22">22</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.plugin.AbstractMojo;
-<a class="jxr_linenumber" name="L23" href="#L23">23</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.plugin.MojoExecutionException;
-<a class="jxr_linenumber" name="L24" href="#L24">24</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.plugin.MojoFailureException;
-<a class="jxr_linenumber" name="L25" href="#L25">25</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.plugins.annotations.Component;
-<a class="jxr_linenumber" name="L26" href="#L26">26</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.plugins.annotations.Parameter;
-<a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.project.MavenProject;
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>  
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> java.io.File;
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">import</strong> java.io.IOException;
-<a class="jxr_linenumber" name="L31" href="#L31">31</a>  
-<a class="jxr_linenumber" name="L32" href="#L32">32</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">class</strong> <a name="AbstractLifecycleMojo" href="../../../../org/codehaus/mojo/buildplan/AbstractLifecycleMojo.html#AbstractLifecycleMojo">AbstractLifecycleMojo</a> <strong class="jxr_keyword">extends</strong> AbstractMojo {
-<a class="jxr_linenumber" name="L33" href="#L33">33</a>  
-<a class="jxr_linenumber" name="L34" href="#L34">34</a>      @Component(role = DefaultLifecycles.<strong class="jxr_keyword">class</strong>)
-<a class="jxr_linenumber" name="L35" href="#L35">35</a>      <strong class="jxr_keyword">protected</strong> DefaultLifecycles defaultLifecycles;
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>  
-<a class="jxr_linenumber" name="L37" href="#L37">37</a>      @Parameter(defaultValue = <span class="jxr_string">"${session}"</span>, readonly = <strong class="jxr_keyword">true</strong>)
-<a class="jxr_linenumber" name="L38" href="#L38">38</a>      <strong class="jxr_keyword">private</strong> MavenSession session;
-<a class="jxr_linenumber" name="L39" href="#L39">39</a>  
-<a class="jxr_linenumber" name="L40" href="#L40">40</a>      @Parameter( defaultValue = <span class="jxr_string">"${project}"</span>, readonly = <strong class="jxr_keyword">true</strong>)
-<a class="jxr_linenumber" name="L41" href="#L41">41</a>      <strong class="jxr_keyword">private</strong> MavenProject project;
-<a class="jxr_linenumber" name="L42" href="#L42">42</a>  
-<a class="jxr_linenumber" name="L43" href="#L43">43</a>      @Component
-<a class="jxr_linenumber" name="L44" href="#L44">44</a>      <strong class="jxr_keyword">private</strong> LifecycleExecutor lifecycleExecutor;
-<a class="jxr_linenumber" name="L45" href="#L45">45</a>  
-<a class="jxr_linenumber" name="L46" href="#L46">46</a>      <em class="jxr_javadoccomment">/** Allow to specify which tasks will be used to calculate execution plan. */</em>
-<a class="jxr_linenumber" name="L47" href="#L47">47</a>      @Parameter(property = <span class="jxr_string">"buildplan.tasks"</span>, defaultValue = <span class="jxr_string">"deploy"</span>)
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>      <strong class="jxr_keyword">private</strong> String[] tasks;
-<a class="jxr_linenumber" name="L49" href="#L49">49</a>  
-<a class="jxr_linenumber" name="L50" href="#L50">50</a>      <em class="jxr_javadoccomment">/** Allow to specify an output file to bypass console output */</em>
-<a class="jxr_linenumber" name="L51" href="#L51">51</a>      @Parameter(property = <span class="jxr_string">"buildplan.outputFile"</span>)
-<a class="jxr_linenumber" name="L52" href="#L52">52</a>      <strong class="jxr_keyword">private</strong> File outputFile;
-<a class="jxr_linenumber" name="L53" href="#L53">53</a>  
-<a class="jxr_linenumber" name="L54" href="#L54">54</a>      <em class="jxr_javadoccomment">/** Allow to specify appending to the output file */</em>
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>      @Parameter(property = <span class="jxr_string">"buildplan.appendOutput"</span>, defaultValue = <span class="jxr_string">"false"</span>)
-<a class="jxr_linenumber" name="L56" href="#L56">56</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> appendOutput;
-<a class="jxr_linenumber" name="L57" href="#L57">57</a>  
-<a class="jxr_linenumber" name="L58" href="#L58">58</a>      <em class="jxr_javadoccomment">/** Flag to easily skip all checks  */</em>
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>      @Parameter(property = <span class="jxr_string">"buildplan.skip"</span>, defaultValue = <span class="jxr_string">"false"</span>)
-<a class="jxr_linenumber" name="L60" href="#L60">60</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> skip;
-<a class="jxr_linenumber" name="L61" href="#L61">61</a>  
-<a class="jxr_linenumber" name="L62" href="#L62">62</a>      <strong class="jxr_keyword">protected</strong> MavenExecutionPlan calculateExecutionPlan() <strong class="jxr_keyword">throws</strong> MojoFailureException {
-<a class="jxr_linenumber" name="L63" href="#L63">63</a>          <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="L64" href="#L64">64</a>              <strong class="jxr_keyword">return</strong> lifecycleExecutor.calculateExecutionPlan(session, tasks);
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>          } <strong class="jxr_keyword">catch</strong> (Exception e) {
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> MojoFailureException(String.format(<span class="jxr_string">"Cannot calculate Maven execution plan, caused by: %s"</span>, e.getMessage()), e);
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>  <strong class="jxr_keyword">import</strong> java.io.File;
+<a class="jxr_linenumber" name="L19" href="#L19">19</a>  <strong class="jxr_keyword">import</strong> java.io.IOException;
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.execution.MavenSession;
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.lifecycle.DefaultLifecycles;
+<a class="jxr_linenumber" name="L22" href="#L22">22</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.lifecycle.LifecycleExecutor;
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.lifecycle.MavenExecutionPlan;
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.plugin.AbstractMojo;
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.plugin.MojoExecutionException;
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.plugin.MojoFailureException;
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.plugins.annotations.Component;
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.plugins.annotations.Parameter;
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">import</strong> org.apache.maven.project.MavenProject;
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>  
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">abstract</strong> <strong class="jxr_keyword">class</strong> <a name="AbstractLifecycleMojo" href="../../../../org/codehaus/mojo/buildplan/AbstractLifecycleMojo.html#AbstractLifecycleMojo">AbstractLifecycleMojo</a> <strong class="jxr_keyword">extends</strong> AbstractMojo {
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>  
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>      @Component(role = DefaultLifecycles.<strong class="jxr_keyword">class</strong>)
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>      <strong class="jxr_keyword">protected</strong> DefaultLifecycles defaultLifecycles;
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>  
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>      @Parameter(defaultValue = <span class="jxr_string">"${session}"</span>, readonly = <strong class="jxr_keyword">true</strong>)
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>      <strong class="jxr_keyword">private</strong> MavenSession session;
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>  
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>      @Parameter(defaultValue = <span class="jxr_string">"${project}"</span>, readonly = <strong class="jxr_keyword">true</strong>)
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>      <strong class="jxr_keyword">private</strong> MavenProject project;
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>  
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>      @Component
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>      <strong class="jxr_keyword">private</strong> LifecycleExecutor lifecycleExecutor;
+<a class="jxr_linenumber" name="L44" href="#L44">44</a>  
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>      <em class="jxr_javadoccomment">/** Allow to specify which tasks will be used to calculate execution plan. */</em>
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>      @Parameter(property = <span class="jxr_string">"buildplan.tasks"</span>, defaultValue = <span class="jxr_string">"deploy"</span>)
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>      <strong class="jxr_keyword">private</strong> String[] tasks;
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>  
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>      <em class="jxr_javadoccomment">/** Allow to specify an output file to bypass console output */</em>
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>      @Parameter(property = <span class="jxr_string">"buildplan.outputFile"</span>)
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>      <strong class="jxr_keyword">private</strong> File outputFile;
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>  
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>      <em class="jxr_javadoccomment">/** Allow to specify appending to the output file */</em>
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>      @Parameter(property = <span class="jxr_string">"buildplan.appendOutput"</span>, defaultValue = <span class="jxr_string">"false"</span>)
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> appendOutput;
+<a class="jxr_linenumber" name="L56" href="#L56">56</a>  
+<a class="jxr_linenumber" name="L57" href="#L57">57</a>      <em class="jxr_javadoccomment">/** Flag to easily skip all checks */</em>
+<a class="jxr_linenumber" name="L58" href="#L58">58</a>      @Parameter(property = <span class="jxr_string">"buildplan.skip"</span>, defaultValue = <span class="jxr_string">"false"</span>)
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">boolean</strong> skip;
+<a class="jxr_linenumber" name="L60" href="#L60">60</a>  
+<a class="jxr_linenumber" name="L61" href="#L61">61</a>      <strong class="jxr_keyword">protected</strong> MavenExecutionPlan calculateExecutionPlan() <strong class="jxr_keyword">throws</strong> MojoFailureException {
+<a class="jxr_linenumber" name="L62" href="#L62">62</a>          <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>              <strong class="jxr_keyword">return</strong> lifecycleExecutor.calculateExecutionPlan(session, tasks);
+<a class="jxr_linenumber" name="L64" href="#L64">64</a>          } <strong class="jxr_keyword">catch</strong> (Exception e) {
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>              <strong class="jxr_keyword">throw</strong> <strong class="jxr_keyword">new</strong> MojoFailureException(
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>                      String.format(<span class="jxr_string">"Cannot calculate Maven execution plan, caused by: %s"</span>, e.getMessage()), e);
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>          }
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>      }
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>  

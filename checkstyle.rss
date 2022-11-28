@@ -25,10 +25,10 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2012 - 2022 MojoHaus</copyright>
     <item>
-      <title>File: 20,
-             Errors: 852,
-             Warnings: 12,
-             Infos: 11
+      <title>File: 30,
+             Errors: 2012,
+             Warnings: 17,
+             Infos: 12
       </title>
             <link>https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html</link>
       <description>
@@ -55,12 +55,12 @@ under the License.
                   3
                 </td>
                 <td>
-                  60
+                  54
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.ListPhaseMojo.java">org/codehaus/mojo/buildplan/ListPhaseMojo.java</a>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.ListPluginIT.java">org/codehaus/mojo/buildplan/ListPluginIT.java</a>
                 </td>
                 <td>
                   0
@@ -69,21 +69,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  91
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.display.MojoExecutionDisplay.java">org/codehaus/mojo/buildplan/display/MojoExecutionDisplay.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  24
+                  21
                 </td>
               </tr>
                           <tr>
@@ -97,7 +83,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  6
+                  5
                 </td>
               </tr>
                           <tr>
@@ -111,7 +97,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  51
+                  50
                 </td>
               </tr>
                           <tr>
@@ -119,27 +105,13 @@ under the License.
                   <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.display.TableColumn.java">org/codehaus/mojo/buildplan/display/TableColumn.java</a>
                 </td>
                 <td>
-                  5
+                  6
                 </td>
                 <td>
                   0
                 </td>
                 <td>
-                  16
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.HelpMojo.java">org/codehaus/mojo/buildplan/HelpMojo.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  1
+                  17
                 </td>
               </tr>
                           <tr>
@@ -158,20 +130,6 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.ListMojo.java">org/codehaus/mojo/buildplan/ListMojo.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  75
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.display.AbstractTableDescriptor.java">org/codehaus/mojo/buildplan/display/AbstractTableDescriptor.java</a>
                 </td>
                 <td>
@@ -181,21 +139,21 @@ under the License.
                   0
                 </td>
                 <td>
-                  70
+                  62
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.display.ListTableDescriptor.java">org/codehaus/mojo/buildplan/display/ListTableDescriptor.java</a>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.ReportIT.java">org/codehaus/mojo/buildplan/ReportIT.java</a>
                 </td>
                 <td>
                   0
                 </td>
                 <td>
-                  5
+                  0
                 </td>
                 <td>
-                  108
+                  80
                 </td>
               </tr>
                           <tr>
@@ -209,7 +167,35 @@ under the License.
                   0
                 </td>
                 <td>
-                  2
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.ListPhaseIT.java">org/codehaus/mojo/buildplan/ListPhaseIT.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  76
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.display.ListPhaseTableDescriptorTest.java">org/codehaus/mojo/buildplan/display/ListPhaseTableDescriptorTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  13
                 </td>
               </tr>
                           <tr>
@@ -223,21 +209,7 @@ under the License.
                   3
                 </td>
                 <td>
-                  60
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.ListReportMojo.java">org/codehaus/mojo/buildplan/ListReportMojo.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  89
+                  54
                 </td>
               </tr>
                           <tr>
@@ -251,7 +223,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  9
+                  8
                 </td>
               </tr>
                           <tr>
@@ -265,7 +237,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  16
+                  15
                 </td>
               </tr>
                           <tr>
@@ -279,35 +251,21 @@ under the License.
                   0
                 </td>
                 <td>
-                  6
+                  5
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.Groups.java">org/codehaus/mojo/buildplan/Groups.java</a>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.display.ListTableDescriptorTest.java">org/codehaus/mojo/buildplan/display/ListTableDescriptorTest.java</a>
                 </td>
                 <td>
                   0
                 </td>
                 <td>
-                  1
-                </td>
-                <td>
-                  83
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.AbstractLifecycleMojo.java">org/codehaus/mojo/buildplan/AbstractLifecycleMojo.java</a>
-                </td>
-                <td>
-                  1
-                </td>
-                <td>
                   0
                 </td>
                 <td>
-                  55
+                  210
                 </td>
               </tr>
                           <tr>
@@ -321,7 +279,189 @@ under the License.
                   0
                 </td>
                 <td>
-                  22
+                  21
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.ListPhaseMojo.java">org/codehaus/mojo/buildplan/ListPhaseMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  88
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.display.MojoExecutionDisplay.java">org/codehaus/mojo/buildplan/display/MojoExecutionDisplay.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  32
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.model.builder.MojoExecutionBuilder.java">org/codehaus/mojo/buildplan/model/builder/MojoExecutionBuilder.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+                <td>
+                  42
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.ReportMojo.java">org/codehaus/mojo/buildplan/ReportMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  85
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.GroupsTest.java">org/codehaus/mojo/buildplan/GroupsTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  293
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.ListMojo.java">org/codehaus/mojo/buildplan/ListMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  69
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.display.ListTableDescriptor.java">org/codehaus/mojo/buildplan/display/ListTableDescriptor.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  7
+                </td>
+                <td>
+                  146
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.display.MavenPluginPatterns.java">org/codehaus/mojo/buildplan/display/MavenPluginPatterns.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  36
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.display.ListPluginTableDescriptorTest.java">org/codehaus/mojo/buildplan/display/ListPluginTableDescriptorTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  13
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.display.MojoExecutionDisplayTest.java">org/codehaus/mojo/buildplan/display/MojoExecutionDisplayTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  115
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.Groups.java">org/codehaus/mojo/buildplan/Groups.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  80
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.AbstractLifecycleMojo.java">org/codehaus/mojo/buildplan/AbstractLifecycleMojo.java</a>
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  53
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://www.mojohaus.org/buildplan-maven-plugin//checkstyle.html#org.codehaus.mojo.buildplan.ListIT.java">org/codehaus/mojo/buildplan/ListIT.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  260
                 </td>
               </tr>
                       </tbody>
