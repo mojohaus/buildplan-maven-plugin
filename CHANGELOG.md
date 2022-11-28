@@ -1,3 +1,17 @@
+# 2.2.0
+
+- Highlight plugin prefix in buildplan:list ([1436b5f](https://github.com/mojohaus/buildplan-maven-plugin/commit/1436b5f188086c2def07af7a9b9becbd5d121b19))
+- Reorder columns order for list-plugin goal ([6cc881e](https://github.com/mojohaus/buildplan-maven-plugin/commit/6cc881eb2d18c27dc761fd75e6bbaefdeb23b01e))
+- Reorder columns order for list-phase goal ([e92e69d](https://github.com/mojohaus/buildplan-maven-plugin/commit/e92e69d1d2f4404ea1086d1f3dacc500601cda12))
+- Display plugins version ([822d7fa](https://github.com/mojohaus/buildplan-maven-plugin/commit/822d7fa72eec21801679ae0aeb2e6032a9b9fb8c)) by [@nhumblot](https://github.com/nhumblot) and [@welfoz](https://github.com/welfoz)
+- Rename ID column to EXECUTION ID ([b32ed85](https://github.com/mojohaus/buildplan-maven-plugin/commit/b32ed8549990512698cb2896a0e5ae70dc5ab5b3)) by [@hboutemy](https://github.com/hboutemy)
+- Rename last column PLUGIN to ID in HTML report ([da3befb](https://github.com/mojohaus/buildplan-maven-plugin/commit/da3befbe5cbdda3121a3157d2885fc31912e8754)) by [@hboutemy](https://github.com/hboutemy)
+
+# 2.1.0
+
+- Add a :report goal to generate plugin executions list in HTML ([86b2717](https://github.com/mojohaus/buildplan-maven-plugin/commit/86b2717deaf3212b72d48f604f55012d38930e08))
+- Reorder table columns order for list goal ([6b21c97](https://github.com/mojohaus/buildplan-maven-plugin/commit/6b21c97937f704b5d03a7846ad22de07a5bf565f))
+
 # 2.0.0
 
 - Add missing documentation on showLifecycles and showAllPhases ([d6d115a](https://github.com/mojohaus/buildplan-maven-plugin/commit/d6d115ada8e83a96ee54432a4f103e6bde284e62))
