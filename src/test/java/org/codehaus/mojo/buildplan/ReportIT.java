@@ -20,6 +20,7 @@ import static com.soebes.itf.extension.assertj.MavenITAssertions.assertThat;
 import com.soebes.itf.jupiter.extension.MavenGoal;
 import com.soebes.itf.jupiter.extension.MavenJupiterExtension;
 import com.soebes.itf.jupiter.extension.MavenTest;
+import com.soebes.itf.jupiter.extension.SystemProperty;
 import com.soebes.itf.jupiter.maven.MavenExecutionResult;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -29,6 +30,7 @@ class ReportIT {
 
     @MavenTest
     @MavenGoal("site")
+    @SystemProperty(value = "style.color", content = "always")
     void generate_report_for_multimodule_project(MavenExecutionResult result) {
         assertThat(result)
                 .isSuccessful()
