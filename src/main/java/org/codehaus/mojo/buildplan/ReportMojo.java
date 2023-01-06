@@ -37,6 +37,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.reporting.AbstractMavenReport;
 import org.apache.maven.reporting.MavenReportException;
 import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
+import org.codehaus.mojo.buildplan.display.PlainTextMojoExecutionDisplay;
 import org.codehaus.mojo.buildplan.display.TableColumn;
 
 /** Report plugin executions for the current project. */
@@ -97,7 +98,7 @@ public class ReportMojo extends AbstractMavenReport {
         mainSink.tableRow_();
 
         for (MojoExecution execution : plan.getMojoExecutions()) {
-            MojoExecutionDisplay display = new MojoExecutionDisplay(execution);
+            MojoExecutionDisplay display = new PlainTextMojoExecutionDisplay(execution);
             mainSink.tableRow();
             tableCell(mainSink, display.getLifecycle(defaultLifecycles));
             tableCell(mainSink, display.getPhase());

@@ -24,7 +24,7 @@ import org.apache.maven.plugin.descriptor.MojoDescriptor;
 
 public class MojoExecutionDisplay {
 
-    private final MojoExecution execution;
+    protected final MojoExecution execution;
 
     public MojoExecutionDisplay(MojoExecution execution) {
         this.execution = execution;
