@@ -1,3 +1,7 @@
+# 2.2.1
+
+- Do not print ANSI escape codes in site report ([5372440](http://github.com/mojohaus/buildplan-maven-plugin/commit/53724405228ccba9922731446839c3ad5243b810))
+
 # 2.2.0
 
 - Highlight plugin prefix in buildplan:list ([1436b5f](https://github.com/mojohaus/buildplan-maven-plugin/commit/1436b5f188086c2def07af7a9b9becbd5d121b19))
