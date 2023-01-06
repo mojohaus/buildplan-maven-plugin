@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>buildplan-maven-plugin</artifactId>
-    <version>2.2.1</version>
+    <version>2.2.2-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <name>BuildPlan Maven Plugin</name>
     <description>The BuildPlan Plugin can inspect your project lifecycle.</description>
@@ -31,7 +31,7 @@
     <scm>
         <connection>scm:git:https://github.com/mojohaus/buildplan-maven-plugin.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/mojohaus/buildplan-maven-plugin.git</developerConnection>
-        <tag>v2.2.1</tag>
+        <tag>master</tag>
         <url>https://github.com/mojohaus/buildplan-maven-plugin/tree/${project.scm.tag}</url>
     </scm>
     <issueManagement>
@@ -41,7 +41,7 @@
 
     <properties>
         <mojo.java.target>1.8</mojo.java.target>
-        <project.build.outputTimestamp>2023-01-06T21:06:08Z</project.build.outputTimestamp>
+        <project.build.outputTimestamp>2023-01-06T21:08:21Z</project.build.outputTimestamp>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
         <doxia.version>1.11.1</doxia.version>
         <maven-reporting.version>3.1.0</maven-reporting.version>
