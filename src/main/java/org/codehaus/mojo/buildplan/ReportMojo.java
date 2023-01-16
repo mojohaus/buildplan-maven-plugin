@@ -88,6 +88,7 @@ public class ReportMojo extends AbstractMavenReport {
         mainSink.header_();
 
         mainSink.table();
+        mainSink.tableRows(null, false);
 
         mainSink.tableRow();
         tableHead(mainSink, LIFECYCLE);
@@ -108,6 +109,7 @@ public class ReportMojo extends AbstractMavenReport {
             mainSink.tableRow_();
         }
 
+        mainSink.tableRows_();
         mainSink.table_();
 
         mainSink.body_();
