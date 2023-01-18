@@ -31,6 +31,82 @@ class ReportIT {
     @MavenTest
     @MavenGoal("site")
     @SystemProperty(value = "style.color", content = "always")
+    void generate_report_with_mvn_site_plugin_v4(MavenExecutionResult result) {
+        assertThat(result)
+                .isSuccessful()
+                .project()
+                .withFile("site/buildplan-report.html")
+                .content()
+                .satisfies(html -> {
+                    Document document = Jsoup.parse(html);
+                    assertThat(document.title())
+                            .isEqualTo("list-multimodule – Build Plan for list-multimodule 1.0-SNAPSHOT");
+                    assertThat(document.select("#titleContent").text())
+                            .isEqualTo("List plugin executions for org.codehaus.mojo.buildplan:list-multimodule");
+                    assertThat(document.select("table.table").outerHtml())
+                            .isEqualTo("<table class=\"table table-striped\">\n"
+                                    + " <tbody>\n"
+                                    + "  <tr class=\"a\">\n"
+                                    + "   <th>LIFECYCLE</th>\n"
+                                    + "   <th>PHASE</th>\n"
+                                    + "   <th>PLUGIN</th>\n"
+                                    + "   <th>GOAL</th>\n"
+                                    + "   <th>EXECUTION ID</th>\n"
+                                    + "  </tr>\n"
+                                    + "  <tr class=\"b\">\n"
+                                    + "   <td>default</td>\n"
+                                    + "   <td>install</td>\n"
+                                    + "   <td>maven-install-plugin</td>\n"
+                                    + "   <td>install</td>\n"
+                                    + "   <td>default-install</td>\n"
+                                    + "  </tr>\n"
+                                    + "  <tr class=\"a\">\n"
+                                    + "   <td>default</td>\n"
+                                    + "   <td>deploy</td>\n"
+                                    + "   <td>maven-deploy-plugin</td>\n"
+                                    + "   <td>deploy</td>\n"
+                                    + "   <td>default-deploy</td>\n"
+                                    + "  </tr>\n"
+                                    + " </tbody>\n"
+                                    + "</table>");
+                });
+
+        assertThat(result)
+                .project()
+                .withModule("module-a")
+                .withFile("site/buildplan-report.html")
+                .content()
+                .satisfies(html -> {
+                    Document document = Jsoup.parse(html);
+                    assertThat(document.title())
+                            .isEqualTo(
+                                    "list-multimodule-module-a – Build Plan for list-multimodule-module-a 1.0-SNAPSHOT");
+                    assertThat(document.select("#titleContent").text())
+                            .isEqualTo(
+                                    "List plugin executions for org.codehaus.mojo.buildplan:list-multimodule-module-a");
+                    assertThat(document.select("table.table").outerHtml()).isNotEmpty();
+                });
+
+        assertThat(result)
+                .project()
+                .withModule("module-b")
+                .withFile("site/buildplan-report.html")
+                .content()
+                .satisfies(html -> {
+                    Document document = Jsoup.parse(html);
+                    assertThat(document.title())
+                            .isEqualTo(
+                                    "list-multimodule-module-b – Build Plan for list-multimodule-module-b 1.0-SNAPSHOT");
+                    assertThat(document.select("#titleContent").text())
+                            .isEqualTo(
+                                    "List plugin executions for org.codehaus.mojo.buildplan:list-multimodule-module-b");
+                    assertThat(document.select("table.table").outerHtml()).isNotEmpty();
+                });
+    }
+
+    @MavenTest
+    @MavenGoal("site")
+    @SystemProperty(value = "style.color", content = "always")
     void generate_report_for_multimodule_project(MavenExecutionResult result) {
         assertThat(result)
                 .isSuccessful()
