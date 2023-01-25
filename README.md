@@ -5,7 +5,9 @@
 [![Build Status](https://github.com/mojohaus/buildplan-maven-plugin/actions/workflows/maven.yml/badge.svg)](https://github.com/mojohaus/buildplan-maven-plugin/actions/workflows/maven.yml)
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
 
-A Maven 3.x plugin to inspect the lifecycle of your project. [Documentation](http://www.mojohaus.org/buildplan-maven-plugin/)
+A Maven 3.x plugin to inspect the lifecycle of your project: [Documentation](http://www.mojohaus.org/buildplan-maven-plugin/)
+
+## Basic usage
 
 ### List plugin executions within a project
 
@@ -34,4 +36,12 @@ It is possible to limit the list to a specific plugin:
 ### Report plugin executions within a project
 
         mvn buildplan:report
+
+## Release
+
+Summary of full [process](https://www.mojohaus.org/development/performing-a-release.html):
+
+        $> mvn release:prepare release:perform
+        $> cd target/checkout
+        $> mvn site site:stage scm-publish:publish-scm
 
