@@ -3,7 +3,7 @@ BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,HelpMojo,854,0,108,0,153,0,70
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,AbstractLifecycleMojo,94,0,4,0,19,0,6,0,4,0
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,ListPhaseMojo,193,0,16,0,37,0,14,0,6,0
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,Groups,3,0,0,0,1,0,1,0,1,0
-BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,ReportMojo,250,0,4,0,58,0,11,0,9,0
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,ReportMojo,256,0,4,0,60,0,11,0,9,0
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,ListPluginMojo,130,0,6,0,18,0,7,0,4,0
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,Groups.ByPlugin,3,37,0,6,1,8,1,5,1,2
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,SynchronizedFileReporter,19,0,0,0,6,0,2,0,2,0

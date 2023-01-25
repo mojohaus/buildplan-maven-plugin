@@ -88,70 +88,72 @@ import org.codehaus.mojo.buildplan.display.TableColumn;
 <span class="fc" id="L88">        mainSink.header_();</span>
 
 <span class="fc" id="L90">        mainSink.table();</span>
+<span class="fc" id="L91">        mainSink.tableRows(null, false);</span>
 
-<span class="fc" id="L92">        mainSink.tableRow();</span>
-<span class="fc" id="L93">        tableHead(mainSink, LIFECYCLE);</span>
-<span class="fc" id="L94">        tableHead(mainSink, PHASE);</span>
-<span class="fc" id="L95">        tableHead(mainSink, ARTIFACT_ID);</span>
-<span class="fc" id="L96">        tableHead(mainSink, GOAL);</span>
-<span class="fc" id="L97">        tableHead(mainSink, EXECUTION_ID);</span>
-<span class="fc" id="L98">        mainSink.tableRow_();</span>
+<span class="fc" id="L93">        mainSink.tableRow();</span>
+<span class="fc" id="L94">        tableHead(mainSink, LIFECYCLE);</span>
+<span class="fc" id="L95">        tableHead(mainSink, PHASE);</span>
+<span class="fc" id="L96">        tableHead(mainSink, ARTIFACT_ID);</span>
+<span class="fc" id="L97">        tableHead(mainSink, GOAL);</span>
+<span class="fc" id="L98">        tableHead(mainSink, EXECUTION_ID);</span>
+<span class="fc" id="L99">        mainSink.tableRow_();</span>
 
-<span class="fc bfc" id="L100" title="All 2 branches covered.">        for (MojoExecution execution : plan.getMojoExecutions()) {</span>
-<span class="fc" id="L101">            MojoExecutionDisplay display = new PlainTextMojoExecutionDisplay(execution);</span>
-<span class="fc" id="L102">            mainSink.tableRow();</span>
-<span class="fc" id="L103">            tableCell(mainSink, display.getLifecycle(defaultLifecycles));</span>
-<span class="fc" id="L104">            tableCell(mainSink, display.getPhase());</span>
-<span class="fc" id="L105">            tableCell(mainSink, display.getArtifactId());</span>
-<span class="fc" id="L106">            tableCell(mainSink, display.getGoal());</span>
-<span class="fc" id="L107">            tableCell(mainSink, display.getExecutionId());</span>
-<span class="fc" id="L108">            mainSink.tableRow_();</span>
-<span class="fc" id="L109">        }</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        for (MojoExecution execution : plan.getMojoExecutions()) {</span>
+<span class="fc" id="L102">            MojoExecutionDisplay display = new PlainTextMojoExecutionDisplay(execution);</span>
+<span class="fc" id="L103">            mainSink.tableRow();</span>
+<span class="fc" id="L104">            tableCell(mainSink, display.getLifecycle(defaultLifecycles));</span>
+<span class="fc" id="L105">            tableCell(mainSink, display.getPhase());</span>
+<span class="fc" id="L106">            tableCell(mainSink, display.getArtifactId());</span>
+<span class="fc" id="L107">            tableCell(mainSink, display.getGoal());</span>
+<span class="fc" id="L108">            tableCell(mainSink, display.getExecutionId());</span>
+<span class="fc" id="L109">            mainSink.tableRow_();</span>
+<span class="fc" id="L110">        }</span>
 
-<span class="fc" id="L111">        mainSink.table_();</span>
+<span class="fc" id="L112">        mainSink.tableRows_();</span>
+<span class="fc" id="L113">        mainSink.table_();</span>
 
-<span class="fc" id="L113">        mainSink.body_();</span>
-<span class="fc" id="L114">    }</span>
+<span class="fc" id="L115">        mainSink.body_();</span>
+<span class="fc" id="L116">    }</span>
 
     private void tableCell(Sink mainSink, String content) {
-<span class="fc" id="L117">        mainSink.tableCell();</span>
-<span class="fc" id="L118">        mainSink.text(content);</span>
-<span class="fc" id="L119">        mainSink.tableCell_();</span>
-<span class="fc" id="L120">    }</span>
+<span class="fc" id="L119">        mainSink.tableCell();</span>
+<span class="fc" id="L120">        mainSink.text(content);</span>
+<span class="fc" id="L121">        mainSink.tableCell_();</span>
+<span class="fc" id="L122">    }</span>
 
     private void tableHead(Sink mainSink, TableColumn lifecycle) {
-<span class="fc" id="L123">        mainSink.tableHeaderCell();</span>
-<span class="fc" id="L124">        mainSink.text(lifecycle.title());</span>
-<span class="fc" id="L125">        mainSink.tableHeaderCell_();</span>
-<span class="fc" id="L126">    }</span>
+<span class="fc" id="L125">        mainSink.tableHeaderCell();</span>
+<span class="fc" id="L126">        mainSink.text(lifecycle.title());</span>
+<span class="fc" id="L127">        mainSink.tableHeaderCell_();</span>
+<span class="fc" id="L128">    }</span>
 
     @Override
     public String getOutputName() {
-<span class="fc" id="L130">        return &quot;buildplan-report&quot;;</span>
+<span class="fc" id="L132">        return &quot;buildplan-report&quot;;</span>
     }
 
     @Override
     public String getName(Locale locale) {
-<span class="fc" id="L135">        return &quot;Build Plan&quot;;</span>
+<span class="fc" id="L137">        return &quot;Build Plan&quot;;</span>
     }
 
     @Override
     public String getDescription(Locale locale) {
-<span class="fc" id="L140">        return &quot;List plugin executions for &quot; + currentProject();</span>
+<span class="fc" id="L142">        return &quot;List plugin executions for &quot; + currentProject();</span>
     }
 
     private String currentProject() {
-<span class="fc" id="L144">        return session.getCurrentProject().getGroupId()</span>
+<span class="fc" id="L146">        return session.getCurrentProject().getGroupId()</span>
                 + &quot;:&quot;
-<span class="fc" id="L146">                + session.getCurrentProject().getArtifactId();</span>
+<span class="fc" id="L148">                + session.getCurrentProject().getArtifactId();</span>
     }
 
     protected MavenExecutionPlan calculateExecutionPlan() throws MojoFailureException {
         try {
-<span class="fc" id="L151">            return lifecycleExecutor.calculateExecutionPlan(session, &quot;deploy&quot;);</span>
-<span class="nc" id="L152">        } catch (Exception e) {</span>
-<span class="nc" id="L153">            throw new MojoFailureException(</span>
-<span class="nc" id="L154">                    String.format(&quot;Cannot calculate Maven execution plan, caused by: %s&quot;, e.getMessage()), e);</span>
+<span class="fc" id="L153">            return lifecycleExecutor.calculateExecutionPlan(session, &quot;deploy&quot;);</span>
+<span class="nc" id="L154">        } catch (Exception e) {</span>
+<span class="nc" id="L155">            throw new MojoFailureException(</span>
+<span class="nc" id="L156">                    String.format(&quot;Cannot calculate Maven execution plan, caused by: %s&quot;, e.getMessage()), e);</span>
         }
     }
 }
