@@ -1,3 +1,7 @@
+# 2.2.2
+
+- Explicitly start and end Doxia table rows in site report ([3db5435](http://github.com/jcgay/buildplan-maven-plugin/commit/3db5435ccb85c9d4265ca4e62f063f17fd48540d)) by [@nyg](https://github.com/nyg)
+
 # 2.2.1
 
 - Do not print ANSI escape codes in site report ([5372440](http://github.com/mojohaus/buildplan-maven-plugin/commit/53724405228ccba9922731446839c3ad5243b810))
