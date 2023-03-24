@@ -29,7 +29,7 @@ import org.codehaus.plexus.logging.console.ConsoleLogger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ListTableDescriptorTest {
+class ListTableDescriptorTest {
 
     private DefaultLifecycles defaultLifecycles;
 
@@ -59,7 +59,7 @@ public class ListTableDescriptorTest {
     }
 
     @Test
-    public void should_calculate_column_size_from_longest_element_in_each_column() {
+    void should_calculate_column_size_from_longest_element_in_each_column() {
 
         MojoExecution executionA = aMojoExecution()
                 .withArtifactId("plugin-a")
@@ -86,7 +86,7 @@ public class ListTableDescriptorTest {
     }
 
     @Test
-    public void should_not_fail_when_finding_max_size_with_a_mojo_execution_with_a_null_mojo_descriptor() {
+    void should_not_fail_when_finding_max_size_with_a_mojo_execution_with_a_null_mojo_descriptor() {
 
         MojoExecution executionA = aMojoExecution()
                 .withArtifactId("plugin-a")
