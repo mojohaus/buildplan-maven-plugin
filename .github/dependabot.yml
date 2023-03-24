@@ -1,11 +1,10 @@
 version: 2
 updates:
-- package-ecosystem: maven
-  directory: "/"
-  schedule:
-    interval: daily
-    time: "04:00"
-  ignore:
-    # ignore Maven Core updates
-    - dependency-name: "org.apache.maven:*"
-  open-pull-requests-limit: 10
+  - package-ecosystem: "maven"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    ignore:
+      # ignore Maven Core updates
+      - dependency-name: "org.apache.maven:*"
+    open-pull-requests-limit: 10
