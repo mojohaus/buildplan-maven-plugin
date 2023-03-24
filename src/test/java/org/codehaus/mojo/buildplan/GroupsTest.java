@@ -63,7 +63,7 @@ class GroupsTest {
     }
 
     @Test
-    public void should_order_mojo_execution_by_artifact_id() {
+    void should_order_mojo_execution_by_artifact_id() {
 
         MojoExecution pluginB = aMojoExecution()
                 .withArtifactId("plugin-b")
@@ -99,7 +99,7 @@ class GroupsTest {
     }
 
     @Test
-    public void should_filter_mojo_execution_by_phase_name() {
+    void should_filter_mojo_execution_by_phase_name() {
 
         MojoExecution pluginA = aMojoExecution()
                 .withArtifactId("plugin-a")
@@ -120,7 +120,7 @@ class GroupsTest {
     }
 
     @Test
-    public void should_filter_mojo_execution_by_artifactId() {
+    void should_filter_mojo_execution_by_artifactId() {
 
         MojoExecution pluginA = aMojoExecution()
                 .withArtifactId("plugin-a")
