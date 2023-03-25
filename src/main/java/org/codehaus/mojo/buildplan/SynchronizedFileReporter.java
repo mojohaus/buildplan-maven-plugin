@@ -15,18 +15,19 @@
  */
 package org.codehaus.mojo.buildplan;
 
+import static java.lang.System.lineSeparator;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import org.codehaus.mojo.buildplan.display.Output;
 
 class SynchronizedFileReporter {
 
     static synchronized void write(String output, File outputFile, boolean appendOutput) throws IOException {
         try (FileWriter writer = new FileWriter(outputFile, appendOutput)) {
-            writer.write(Output.lineSeparator());
+            writer.write(lineSeparator());
             writer.write(output);
-            writer.write(Output.lineSeparator());
+            writer.write(lineSeparator());
         }
     }
 }

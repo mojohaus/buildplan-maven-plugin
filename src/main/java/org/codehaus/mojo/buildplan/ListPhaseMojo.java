@@ -15,9 +15,9 @@
  */
 package org.codehaus.mojo.buildplan;
 
+import static java.lang.System.lineSeparator;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
-import static org.codehaus.mojo.buildplan.display.Output.lineSeparator;
 
 import java.util.Collection;
 import java.util.Map;
@@ -60,36 +60,37 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
         Multimap<String, MojoExecution> phases =
                 Groups.ByPhase.of(calculateExecutionPlan().getMojoExecutions(), options);
 
-        if (!phases.isEmpty()) {
-            TableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values(), defaultLifecycles);
-            Lifecycle currentLifecycle = null;
-            StringBuilder output = new StringBuilder();
-            for (Map.Entry<String, Collection<MojoExecution>> currentPhase :
-                    phases.asMap().entrySet()) {
-                if (showLifecycles) {
-                    Lifecycle lifecycleForPhase = defaultLifecycles.get(currentPhase.getKey());
-                    if (lifecycleForPhase == null) {
-                        lifecycleForPhase = new Lifecycle("", emptyList(), emptyMap());
-                    }
-                    if (!lifecycleForPhase.equals(currentLifecycle)) {
-                        currentLifecycle = lifecycleForPhase;
-                        output.append(lineSeparator())
-                                .append(lineSeparator())
-                                .append("[")
-                                .append(currentLifecycle.getId())
-                                .append("]");
-                    }
-                }
-                output.append(lineSeparator()).append(phaseTitleLine(descriptor, currentPhase.getKey()));
-                currentPhase.getValue().stream()
-                        .filter(execution -> execution != NoMojoExecution.INSTANCE)
-                        .forEach(execution ->
-                                output.append(lineSeparator()).append(line(descriptor.rowFormat(), execution)));
-            }
-            handleOutput(output.toString());
-        } else {
+        if (phases.isEmpty()) {
             getLog().warn("No plugin execution found within phase: " + phase);
+            return;
         }
+
+        TableDescriptor descriptor = ListPhaseTableDescriptor.of(phases.values(), defaultLifecycles);
+        Lifecycle currentLifecycle = null;
+        StringBuilder output = new StringBuilder();
+        for (Map.Entry<String, Collection<MojoExecution>> currentPhase :
+                phases.asMap().entrySet()) {
+            if (showLifecycles) {
+                Lifecycle lifecycleForPhase = defaultLifecycles.get(currentPhase.getKey());
+                if (lifecycleForPhase == null) {
+                    lifecycleForPhase = new Lifecycle("", emptyList(), emptyMap());
+                }
+                if (!lifecycleForPhase.equals(currentLifecycle)) {
+                    currentLifecycle = lifecycleForPhase;
+                    output.append(lineSeparator())
+                            .append(lineSeparator())
+                            .append("[")
+                            .append(currentLifecycle.getId())
+                            .append("]");
+                }
+            }
+            output.append(lineSeparator()).append(phaseTitleLine(descriptor, currentPhase.getKey()));
+            currentPhase.getValue().stream()
+                    .filter(execution -> execution != NoMojoExecution.INSTANCE)
+                    .forEach(execution ->
+                            output.append(lineSeparator()).append(line(descriptor.rowFormat(), execution)));
+        }
+        handleOutput(output.toString());
     }
 
     private String line(String rowFormat, MojoExecution execution) {

@@ -15,7 +15,7 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import static org.codehaus.mojo.buildplan.display.Output.lineSeparator;
+import static java.lang.System.lineSeparator;
 
 import java.util.Collection;
 import java.util.Map;
@@ -44,18 +44,19 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
 
         if (plan.isEmpty()) {
             getLog().warn("No plugin found with artifactId: " + plugin);
-        } else {
-            StringBuilder output = new StringBuilder();
-            TableDescriptor descriptor = ListPluginTableDescriptor.of(plan.values(), defaultLifecycles);
-            for (Map.Entry<String, Collection<MojoExecution>> executions :
-                    plan.asMap().entrySet()) {
-                output.append(lineSeparator()).append(pluginTitleLine(descriptor, executions.getKey()));
-                for (MojoExecution execution : executions.getValue()) {
-                    output.append(lineSeparator()).append(line(descriptor.rowFormat(), execution));
-                }
-            }
-            handleOutput(output.toString());
+            return;
         }
+
+        StringBuilder output = new StringBuilder();
+        TableDescriptor descriptor = ListPluginTableDescriptor.of(plan.values(), defaultLifecycles);
+        for (Map.Entry<String, Collection<MojoExecution>> executions :
+                plan.asMap().entrySet()) {
+            output.append(lineSeparator()).append(pluginTitleLine(descriptor, executions.getKey()));
+            for (MojoExecution execution : executions.getValue()) {
+                output.append(lineSeparator()).append(line(descriptor.rowFormat(), execution));
+            }
+        }
+        handleOutput(output.toString());
     }
 
     private String line(String rowFormat, MojoExecution execution) {

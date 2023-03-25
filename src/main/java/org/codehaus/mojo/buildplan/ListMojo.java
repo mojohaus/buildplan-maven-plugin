@@ -15,7 +15,7 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import static org.codehaus.mojo.buildplan.display.Output.lineSeparator;
+import static java.lang.System.lineSeparator;
 import static org.codehaus.mojo.buildplan.display.TableColumn.ARTIFACT_ID;
 import static org.codehaus.mojo.buildplan.display.TableColumn.EXECUTION_ID;
 import static org.codehaus.mojo.buildplan.display.TableColumn.GOAL;

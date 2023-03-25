@@ -15,6 +15,8 @@
  */
 package org.codehaus.mojo.buildplan;
 
+import static java.util.Objects.isNull;
+
 import java.io.File;
 import java.io.IOException;
 import org.apache.maven.execution.MavenSession;
@@ -69,15 +71,16 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
 
     protected void handleOutput(final String output) {
         String outputWithTitle = "Build Plan for " + project.getName() + ": " + output;
-        if (outputFile == null) {
+        if (isNull(outputFile)) {
             getLog().info(outputWithTitle);
-        } else {
-            try {
-                SynchronizedFileReporter.write(outputWithTitle, outputFile, appendOutput);
-                getLog().info("Wrote build plan output to: " + outputFile);
-            } catch (IOException e) {
-                getLog().warn("Unable to write to output file: " + outputFile, e);
-            }
+            return;
+        }
+
+        try {
+            SynchronizedFileReporter.write(outputWithTitle, outputFile, appendOutput);
+            getLog().info("Wrote build plan output to: " + outputFile);
+        } catch (IOException e) {
+            getLog().warn("Unable to write to output file: " + outputFile, e);
         }
     }
 
