@@ -24,7 +24,6 @@ import com.soebes.itf.jupiter.extension.MavenProject;
 import com.soebes.itf.jupiter.extension.MavenTest;
 import com.soebes.itf.jupiter.extension.SystemProperty;
 import com.soebes.itf.jupiter.maven.MavenExecutionResult;
-import java.io.File;
 import org.junit.jupiter.api.Nested;
 
 @MavenJupiterExtension
@@ -192,7 +191,9 @@ class ListIT {
         void list_with_multiple_outputfile(MavenExecutionResult result) {
             assertThat(result).isSuccessful();
 
-            assertThat(new File(result.getMavenProjectResult().getTargetProjectDirectory(), "list.txt"))
+            assertThat(result.getMavenProjectResult()
+                            .getTargetProjectDirectory()
+                            .resolve("list.txt"))
                     .hasContent("\n"
                             + "Build Plan for list-multimodule: \n"
                             + "--------------------------------------------------------------------\n"
@@ -200,7 +201,9 @@ class ListIT {
                             + "--------------------------------------------------------------------\n"
                             + "install | maven-install-plugin | 2.4     | install | default-install\n"
                             + "deploy  | maven-deploy-plugin  | 2.7     | deploy  | default-deploy \n");
-            assertThat(new File(result.getMavenProjectResult().getTargetProjectDirectory(), "module-a/list.txt"))
+            assertThat(result.getMavenProjectResult()
+                            .getTargetProjectDirectory()
+                            .resolve("module-a/list.txt"))
                     .hasContent(
                             "\n"
                                     + "Build Plan for list-multimodule-module-a: \n"
@@ -216,7 +219,9 @@ class ListIT {
                                     + "install                | maven-install-plugin   | 2.4     | install       | default-install      \n"
                                     + "deploy                 | maven-deploy-plugin    | 2.7     | deploy        | default-deploy       \n");
 
-            assertThat(new File(result.getMavenProjectResult().getTargetProjectDirectory(), "module-b/list.txt"))
+            assertThat(result.getMavenProjectResult()
+                            .getTargetProjectDirectory()
+                            .resolve("module-b/list.txt"))
                     .hasContent(
                             "\n"
                                     + "Build Plan for list-multimodule-module-b: \n"
@@ -245,11 +250,12 @@ class ListIT {
                     .info()
                     .contains("Wrote build plan output to: "
                             + result.getMavenProjectResult()
-                                    .getTargetBaseDirectory()
-                                    .getAbsolutePath()
-                            + "/project/list-single.txt");
+                                    .getTargetProjectDirectory()
+                                    .resolve("list-single.txt"));
 
-            assertThat(new File(result.getMavenProjectResult().getTargetBaseDirectory(), "/project/list-single.txt"))
+            assertThat(result.getMavenProjectResult()
+                            .getTargetProjectDirectory()
+                            .resolve("list-single.txt"))
                     .hasContent(
                             "\n"
                                     + "Build Plan for list-multimodule: \n"
