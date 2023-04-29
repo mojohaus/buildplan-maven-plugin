@@ -25,7 +25,7 @@
     </licenses>
 
     <prerequisites>
-        <maven>3.2.5</maven>
+        <maven>3.5.4</maven>
     </prerequisites>
 
     <scm>
