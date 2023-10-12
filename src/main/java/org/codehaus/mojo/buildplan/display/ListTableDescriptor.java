@@ -35,6 +35,12 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
     private int executionIdSize;
     private int goalSize;
 
+    private boolean isFileOutput;
+
+    public void setFileOutput(boolean fileOutput) {
+        isFileOutput = fileOutput;
+    }
+
     public static ListTableDescriptor of(Collection<MojoExecution> executions, DefaultLifecycles defaultLifecycles) {
 
         Map<TableColumn, Integer> maxSize = findMaxSize(executions, defaultLifecycles, TableColumn.values());
@@ -46,6 +52,10 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
                 .setLifecycleSize(maxSize.get(TableColumn.LIFECYCLE))
                 .setGoalSize(maxSize.get(TableColumn.GOAL))
                 .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));
+    }
+
+    private boolean isEscCodeEnabled() {
+        return !isFileOutput && MessageUtils.isColorEnabled();
     }
 
     public String rowFormat() {
@@ -84,7 +94,7 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
     }
 
     public String titleFormat() {
-        if (MessageUtils.isColorEnabled()) {
+        if (isEscCodeEnabled()) {
             return columns(getPluginSize() - ANSI_COLOR_CODES_LENGTH);
         }
         return columns(getPluginSize());
@@ -102,7 +112,7 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
 
     private int withSeparator(int... ints) {
         int width = Arrays.stream(ints).sum() + (ints.length - 1) * SEPARATOR.length();
-        return MessageUtils.isColorEnabled() ? width - ANSI_COLOR_CODES_LENGTH : width;
+        return isEscCodeEnabled() ? width - ANSI_COLOR_CODES_LENGTH : width;
     }
 
     @Override

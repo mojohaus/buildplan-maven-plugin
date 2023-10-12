@@ -16,6 +16,7 @@
 package org.codehaus.mojo.buildplan;
 
 import static java.lang.System.lineSeparator;
+import static java.util.Objects.isNull;
 import static org.codehaus.mojo.buildplan.display.TableColumn.ARTIFACT_ID;
 import static org.codehaus.mojo.buildplan.display.TableColumn.EXECUTION_ID;
 import static org.codehaus.mojo.buildplan.display.TableColumn.GOAL;
@@ -30,6 +31,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.buildplan.display.ListTableDescriptor;
 import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
+import org.codehaus.mojo.buildplan.display.PlainTextMojoExecutionDisplay;
 import org.codehaus.mojo.buildplan.display.TableDescriptor;
 import org.codehaus.plexus.util.StringUtils;
 
@@ -49,6 +51,9 @@ public class ListMojo extends AbstractLifecycleMojo {
         if (!showLifecycles) {
             descriptor.hideLifecycle();
         }
+
+        descriptor.setFileOutput(!isNull(outputFile));
+
         String row = descriptor.rowFormat();
         String head = descriptor.titleFormat();
 
@@ -69,7 +74,8 @@ public class ListMojo extends AbstractLifecycleMojo {
 
     private String tableRow(String row, MojoExecution execution) {
 
-        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);
+        MojoExecutionDisplay display =
+                isNull(outputFile) ? new MojoExecutionDisplay(execution) : new PlainTextMojoExecutionDisplay(execution);
 
         if (showLifecycles) {
             return String.format(

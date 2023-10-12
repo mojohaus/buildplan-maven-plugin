@@ -50,7 +50,7 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
 
     /** Allow to specify an output file to bypass console output */
     @Parameter(property = "buildplan.outputFile")
-    private File outputFile;
+    protected File outputFile;
 
     /** Allow to specify appending to the output file */
     @Parameter(property = "buildplan.appendOutput", defaultValue = "false")

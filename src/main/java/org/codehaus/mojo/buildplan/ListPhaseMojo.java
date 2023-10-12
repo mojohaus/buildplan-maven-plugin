@@ -18,6 +18,7 @@ package org.codehaus.mojo.buildplan;
 import static java.lang.System.lineSeparator;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
+import static java.util.Objects.isNull;
 
 import java.util.Collection;
 import java.util.Map;
@@ -28,6 +29,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.mojo.buildplan.display.ListPhaseTableDescriptor;
 import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
+import org.codehaus.mojo.buildplan.display.PlainTextMojoExecutionDisplay;
 import org.codehaus.mojo.buildplan.display.TableDescriptor;
 import org.codehaus.mojo.buildplan.util.Multimap;
 import org.codehaus.plexus.util.StringUtils;
@@ -94,7 +96,8 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
     }
 
     private String line(String rowFormat, MojoExecution execution) {
-        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);
+        MojoExecutionDisplay display =
+                isNull(outputFile) ? new MojoExecutionDisplay(execution) : new PlainTextMojoExecutionDisplay(execution);
 
         return String.format(rowFormat, display.getArtifactId(), display.getGoal(), display.getExecutionId());
     }
