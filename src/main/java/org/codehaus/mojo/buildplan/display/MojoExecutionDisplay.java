@@ -20,7 +20,6 @@ import static org.codehaus.plexus.util.StringUtils.defaultString;
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
-import org.apache.maven.plugin.descriptor.MojoDescriptor;
 
 public class MojoExecutionDisplay {
 
@@ -31,10 +30,6 @@ public class MojoExecutionDisplay {
     }
 
     public String getPhase() {
-        MojoDescriptor mojoDescriptor = execution.getMojoDescriptor();
-        if (mojoDescriptor != null && mojoDescriptor.getPhase() != null) {
-            return mojoDescriptor.getPhase();
-        }
         return defaultString(execution.getLifecyclePhase());
     }
 
