@@ -45,7 +45,7 @@
         <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
         <doxia.version>1.11.1</doxia.version>
         <maven-reporting.version>3.1.0</maven-reporting.version>
-        <itf.version>0.12.0</itf.version>
+        <itf.version>0.13.1</itf.version>
     </properties>
 
     <dependencyManagement>
