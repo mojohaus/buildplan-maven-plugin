@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>mojo-parent</artifactId>
-        <version>78</version>
+        <version>80</version>
     </parent>
 
     <artifactId>buildplan-maven-plugin</artifactId>
@@ -304,7 +304,6 @@
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
-                <version>2.27.2</version>
                 <configuration>
                     <java>
                         <importOrder />
