@@ -15,8 +15,6 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import static com.soebes.itf.extension.assertj.MavenITAssertions.assertThat;
-
 import com.soebes.itf.jupiter.extension.MavenGoal;
 import com.soebes.itf.jupiter.extension.MavenJupiterExtension;
 import com.soebes.itf.jupiter.extension.MavenProject;
@@ -24,6 +22,8 @@ import com.soebes.itf.jupiter.extension.MavenTest;
 import com.soebes.itf.jupiter.extension.SystemProperty;
 import com.soebes.itf.jupiter.maven.MavenExecutionResult;
 import org.junit.jupiter.api.Nested;
+
+import static com.soebes.itf.extension.assertj.MavenITAssertions.assertThat;
 
 @MavenJupiterExtension
 class ListPluginIT {

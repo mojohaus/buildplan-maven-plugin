@@ -17,6 +17,7 @@ package org.codehaus.mojo.buildplan.display;
 
 import java.util.Collection;
 import java.util.Map;
+
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.plugin.MojoExecution;
 

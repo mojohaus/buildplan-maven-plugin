@@ -15,14 +15,15 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import static java.util.Arrays.asList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.codehaus.mojo.buildplan.model.builder.MojoExecutionBuilder.aMojoExecution;
-
 import java.util.Map;
+
 import org.apache.maven.plugin.MojoExecution;
 import org.codehaus.mojo.buildplan.util.Multimap;
 import org.junit.jupiter.api.Test;
+
+import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.codehaus.mojo.buildplan.model.builder.MojoExecutionBuilder.aMojoExecution;
 
 class GroupsTest {
 

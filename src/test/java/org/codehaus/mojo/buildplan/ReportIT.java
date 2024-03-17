@@ -15,8 +15,6 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import static com.soebes.itf.extension.assertj.MavenITAssertions.assertThat;
-
 import com.soebes.itf.jupiter.extension.MavenGoal;
 import com.soebes.itf.jupiter.extension.MavenJupiterExtension;
 import com.soebes.itf.jupiter.extension.MavenTest;
@@ -24,6 +22,8 @@ import com.soebes.itf.jupiter.extension.SystemProperty;
 import com.soebes.itf.jupiter.maven.MavenExecutionResult;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+
+import static com.soebes.itf.extension.assertj.MavenITAssertions.assertThat;
 
 @MavenJupiterExtension
 class ReportIT {
