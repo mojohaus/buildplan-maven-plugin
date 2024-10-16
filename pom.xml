@@ -44,7 +44,7 @@
         <project.build.outputTimestamp>2023-01-25T11:04:54Z</project.build.outputTimestamp>
         <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
         <doxia.version>1.11.1</doxia.version>
-        <maven-reporting.version>3.1.0</maven-reporting.version>
+        <maven-reporting.version>4.0.0</maven-reporting.version>
         <itf.version>0.13.1</itf.version>
     </properties>
 
