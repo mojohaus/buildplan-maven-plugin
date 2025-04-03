@@ -42,7 +42,7 @@
     <properties>
         <mojo.java.target>1.8</mojo.java.target>
         <project.build.outputTimestamp>2023-01-25T11:04:54Z</project.build.outputTimestamp>
-        <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+        <jacoco-maven-plugin.version>0.8.13</jacoco-maven-plugin.version>
         <doxia.version>2.0.0</doxia.version>
         <maven-reporting.version>4.0.0</maven-reporting.version>
         <itf.version>0.13.1</itf.version>
