@@ -15,11 +15,11 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import static java.lang.System.lineSeparator;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import static java.lang.System.lineSeparator;
 
 class SynchronizedFileReporter {
 

@@ -15,17 +15,18 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
-import static org.codehaus.plexus.util.StringUtils.defaultString;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
+
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
 import org.codehaus.mojo.buildplan.util.LinkedMultimap;
 import org.codehaus.mojo.buildplan.util.Multimap;
+
+import static org.codehaus.plexus.util.StringUtils.defaultString;
 
 public abstract class AbstractTableDescriptor implements TableDescriptor {
 

@@ -15,12 +15,12 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.codehaus.mojo.buildplan.model.builder.MojoExecutionBuilder.aMojoExecution;
-
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.shared.utils.logging.MessageUtils;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.codehaus.mojo.buildplan.model.builder.MojoExecutionBuilder.aMojoExecution;
 
 class MojoExecutionDisplayTest {
 

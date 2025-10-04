@@ -15,13 +15,8 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import static org.codehaus.mojo.buildplan.display.TableColumn.ARTIFACT_ID;
-import static org.codehaus.mojo.buildplan.display.TableColumn.EXECUTION_ID;
-import static org.codehaus.mojo.buildplan.display.TableColumn.GOAL;
-import static org.codehaus.mojo.buildplan.display.TableColumn.LIFECYCLE;
-import static org.codehaus.mojo.buildplan.display.TableColumn.PHASE;
-
 import java.util.Locale;
+
 import org.apache.maven.doxia.sink.Sink;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.lifecycle.DefaultLifecycles;
@@ -39,6 +34,12 @@ import org.apache.maven.reporting.MavenReportException;
 import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
 import org.codehaus.mojo.buildplan.display.PlainTextMojoExecutionDisplay;
 import org.codehaus.mojo.buildplan.display.TableColumn;
+
+import static org.codehaus.mojo.buildplan.display.TableColumn.ARTIFACT_ID;
+import static org.codehaus.mojo.buildplan.display.TableColumn.EXECUTION_ID;
+import static org.codehaus.mojo.buildplan.display.TableColumn.GOAL;
+import static org.codehaus.mojo.buildplan.display.TableColumn.LIFECYCLE;
+import static org.codehaus.mojo.buildplan.display.TableColumn.PHASE;
 
 /** Report plugin executions for the current project. */
 @Mojo(name = "report", defaultPhase = LifecyclePhase.SITE)

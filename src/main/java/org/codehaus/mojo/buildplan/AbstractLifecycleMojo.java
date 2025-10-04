@@ -15,10 +15,9 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import static java.util.Objects.isNull;
-
 import java.io.File;
 import java.io.IOException;
+
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.lifecycle.LifecycleExecutor;
@@ -29,6 +28,8 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+
+import static java.util.Objects.isNull;
 
 public abstract class AbstractLifecycleMojo extends AbstractMojo {
 
