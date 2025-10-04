@@ -15,17 +15,18 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import static org.codehaus.mojo.buildplan.util.Objects.firstNonNull;
-import static org.codehaus.plexus.util.StringUtils.isEmpty;
-
 import java.util.Collections;
 import java.util.List;
+
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
 import org.codehaus.mojo.buildplan.util.LinkedMultimap;
 import org.codehaus.mojo.buildplan.util.Multimap;
 import org.codehaus.plexus.logging.console.ConsoleLogger;
+
+import static org.codehaus.mojo.buildplan.util.Objects.firstNonNull;
+import static org.codehaus.plexus.util.StringUtils.isEmpty;
 
 public class Groups {
 

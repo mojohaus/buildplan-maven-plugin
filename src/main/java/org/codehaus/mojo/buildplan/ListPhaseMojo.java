@@ -15,12 +15,9 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import static java.lang.System.lineSeparator;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.emptyMap;
-
 import java.util.Collection;
 import java.util.Map;
+
 import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoFailureException;
@@ -31,6 +28,10 @@ import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
 import org.codehaus.mojo.buildplan.display.TableDescriptor;
 import org.codehaus.mojo.buildplan.util.Multimap;
 import org.codehaus.plexus.util.StringUtils;
+
+import static java.lang.System.lineSeparator;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
 
 /** List plugin executions by phase for the current project. */
 @Mojo(name = "list-phase", threadSafe = true)

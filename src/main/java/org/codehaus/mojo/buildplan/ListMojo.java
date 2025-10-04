@@ -15,14 +15,6 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import static java.lang.System.lineSeparator;
-import static org.codehaus.mojo.buildplan.display.TableColumn.ARTIFACT_ID;
-import static org.codehaus.mojo.buildplan.display.TableColumn.EXECUTION_ID;
-import static org.codehaus.mojo.buildplan.display.TableColumn.GOAL;
-import static org.codehaus.mojo.buildplan.display.TableColumn.LIFECYCLE;
-import static org.codehaus.mojo.buildplan.display.TableColumn.PHASE;
-import static org.codehaus.mojo.buildplan.display.TableColumn.VERSION;
-
 import org.apache.maven.lifecycle.MavenExecutionPlan;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoFailureException;
@@ -32,6 +24,14 @@ import org.codehaus.mojo.buildplan.display.ListTableDescriptor;
 import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
 import org.codehaus.mojo.buildplan.display.TableDescriptor;
 import org.codehaus.plexus.util.StringUtils;
+
+import static java.lang.System.lineSeparator;
+import static org.codehaus.mojo.buildplan.display.TableColumn.ARTIFACT_ID;
+import static org.codehaus.mojo.buildplan.display.TableColumn.EXECUTION_ID;
+import static org.codehaus.mojo.buildplan.display.TableColumn.GOAL;
+import static org.codehaus.mojo.buildplan.display.TableColumn.LIFECYCLE;
+import static org.codehaus.mojo.buildplan.display.TableColumn.PHASE;
+import static org.codehaus.mojo.buildplan.display.TableColumn.VERSION;
 
 /** List plugin executions for the current project. */
 @Mojo(name = "list", threadSafe = true)
