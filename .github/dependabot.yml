@@ -4,7 +4,8 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    ignore:
-      # ignore Maven Core updates
-      - dependency-name: "org.apache.maven:*"
-    open-pull-requests-limit: 10
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
