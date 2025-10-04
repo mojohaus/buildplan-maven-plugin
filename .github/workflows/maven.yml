@@ -29,7 +29,7 @@ jobs:
             target/failsafe-reports/TEST*.xml
     - name: Publish Code Coverage in PR
       id: jacoco
-      uses: madrapps/jacoco-report@v1.2
+      uses: madrapps/jacoco-report@v1.6
       with:
         paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
         token: ${{ secrets.GITHUB_TOKEN }}
