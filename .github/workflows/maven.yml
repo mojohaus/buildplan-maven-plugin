@@ -15,7 +15,7 @@ jobs:
       uses: actions/setup-java@v6
       with:
         java-version: '8'
-        distribution: 'adopt'
+        distribution: 'temurin'
         cache: maven
     - name: Build with Maven
       run: ./mvnw --batch-mode verify
