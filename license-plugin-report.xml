@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<licensePluginReport goal="CHECK" timestamp="1789161384068">
-    <module artifactId="buildplan-maven-plugin" groupId="org.codehaus.mojo" version="2.3.0"/>
+<licensePluginReport goal="CHECK" timestamp="1789164433103">
+    <module artifactId="buildplan-maven-plugin" groupId="org.codehaus.mojo" version="2.3.1"/>
     <files>
         <file path="src/main/java/org/codehaus/mojo/buildplan/AbstractLifecycleMojo.java" result="PRESENT"/>
         <file path="src/main/java/org/codehaus/mojo/buildplan/Groups.java" result="PRESENT"/>
