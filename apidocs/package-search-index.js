@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"org.codehaus.mojo.buildplan"},{"l":"org.codehaus.mojo.buildplan.display"},{"l":"org.codehaus.mojo.buildplan.util"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"org.codehaus.mojo.buildplan"},{"l":"org.codehaus.mojo.buildplan_maven_plugin"},{"l":"org.codehaus.mojo.buildplan.display"},{"l":"org.codehaus.mojo.buildplan.util"}]

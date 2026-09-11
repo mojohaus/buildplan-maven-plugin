@@ -1,10 +1,9 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,HelpMojo,854,0,108,0,153,0,70,0,16,0
-BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,AbstractLifecycleMojo,29,65,0,4,5,14,0,6,0,4
-BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,ListPhaseMojo,12,181,1,15,1,36,1,13,0,6
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,AbstractLifecycleMojo,29,66,0,4,5,15,0,6,0,4
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,ListPhaseMojo,13,180,1,15,2,35,1,13,0,6
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,Groups,3,0,0,0,1,0,1,0,1,0
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,ReportMojo,27,229,1,3,6,54,1,10,0,9
-BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,ListPluginMojo,13,117,1,5,1,17,1,6,0,4
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,ListPluginMojo,13,117,1,5,2,17,1,6,0,4
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,Groups.ByPlugin,12,28,3,3,2,7,4,2,2,1
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,SynchronizedFileReporter,3,16,0,0,1,5,1,1,1,1
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,ListMojo,0,219,0,8,0,45,0,9,0,5
@@ -13,12 +12,12 @@ BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,NoMojoExecution,2,15,0,0,1,6,
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan,Groups.ByPhase,32,55,3,7,4,14,6,5,4,2
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.util,Objects,0,7,0,2,0,1,0,2,0,1
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.util,LinkedMultimap,0,48,0,0,0,8,0,8,0,8
+BuildPlan Maven Plugin,org.codehaus.mojo.buildplan_maven_plugin,HelpMojo,864,0,112,0,156,0,72,0,16,0
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,ListPluginTableDescriptor,0,123,0,0,0,31,0,11,0,11
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,AbstractTableDescriptor,0,156,1,14,0,26,1,13,0,4
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,TableColumn,0,81,0,0,0,11,0,3,0,3
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,TableDescriptor,0,4,0,0,0,1,0,1,0,1
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,MojoExecutionDisplay,2,61,2,6,1,14,2,9,0,7
-BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,Output,0,6,0,0,0,2,0,2,0,2
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,PlainTextMojoExecutionDisplay,0,11,0,0,0,3,0,2,0,2
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,ListTableDescriptor,86,251,0,6,9,70,1,24,1,21
 BuildPlan Maven Plugin,org.codehaus.mojo.buildplan.display,ListPhaseTableDescriptor,0,119,0,0,0,31,0,11,0,11

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Groups.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BuildPlan Maven Plugin</a> &gt; <a href="index.source.html" class="el_package">org.codehaus.mojo.buildplan</a> &gt; <span class="el_source">Groups.java</span></div><h1>Groups.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Groups.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BuildPlan Maven Plugin</a> &gt; <a href="index.source.html" class="el_package">org.codehaus.mojo.buildplan</a> &gt; <span class="el_source">Groups.java</span></div><h1>Groups.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2012 Jean-Christophe Gay (contact@jeanchristophegay.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -15,11 +15,9 @@
  */
 package org.codehaus.mojo.buildplan;
 
-import static org.codehaus.mojo.buildplan.util.Objects.firstNonNull;
-import static org.codehaus.plexus.util.StringUtils.isEmpty;
-
 import java.util.Collections;
 import java.util.List;
+
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
@@ -27,58 +25,61 @@ import org.codehaus.mojo.buildplan.util.LinkedMultimap;
 import org.codehaus.mojo.buildplan.util.Multimap;
 import org.codehaus.plexus.logging.console.ConsoleLogger;
 
-<span class="nc" id="L30">public class Groups {</span>
+import static org.codehaus.mojo.buildplan.util.Objects.firstNonNull;
+import static org.codehaus.plexus.util.StringUtils.isEmpty;
 
-<span class="nc" id="L32">    public static class ByPlugin {</span>
+<span class="nc" id="L31">public class Groups {</span>
+
+<span class="nc" id="L33">    public static class ByPlugin {</span>
 
         public static Multimap&lt;String, MojoExecution&gt; of(List&lt;MojoExecution&gt; executions) {
-<span class="fc" id="L35">            return of(executions, null);</span>
+<span class="fc" id="L36">            return of(executions, null);</span>
         }
 
         public static Multimap&lt;String, MojoExecution&gt; of(List&lt;MojoExecution&gt; executions, String artifactIdFilter) {
-<span class="fc" id="L39">            Multimap&lt;String, MojoExecution&gt; result = new LinkedMultimap&lt;&gt;();</span>
-<span class="fc" id="L40">            boolean notFiltering = isEmpty(artifactIdFilter);</span>
-<span class="fc bfc" id="L41" title="All 2 branches covered.">            for (MojoExecution execution : executions) {</span>
-<span class="fc bfc" id="L42" title="All 4 branches covered.">                if (notFiltering || execution.getArtifactId().equalsIgnoreCase(artifactIdFilter)) {</span>
-<span class="fc" id="L43">                    result.put(execution.getArtifactId(), execution);</span>
+<span class="fc" id="L40">            Multimap&lt;String, MojoExecution&gt; result = new LinkedMultimap&lt;&gt;();</span>
+<span class="fc" id="L41">            boolean notFiltering = isEmpty(artifactIdFilter);</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">            for (MojoExecution execution : executions) {</span>
+<span class="fc bfc" id="L43" title="All 4 branches covered.">                if (notFiltering || execution.getArtifactId().equalsIgnoreCase(artifactIdFilter)) {</span>
+<span class="fc" id="L44">                    result.put(execution.getArtifactId(), execution);</span>
                 }
-<span class="fc" id="L45">            }</span>
-<span class="fc" id="L46">            return result;</span>
+<span class="fc" id="L46">            }</span>
+<span class="fc" id="L47">            return result;</span>
         }
     }
 
-<span class="nc" id="L50">    public static class ByPhase {</span>
+<span class="nc" id="L51">    public static class ByPhase {</span>
 
         public static Multimap&lt;String, MojoExecution&gt; of(List&lt;MojoExecution&gt; plan) {
-<span class="fc" id="L53">            return of(plan, new Options(defaultLifecycles()));</span>
+<span class="fc" id="L54">            return of(plan, new Options(defaultLifecycles()));</span>
         }
 
         public static Multimap&lt;String, MojoExecution&gt; of(List&lt;MojoExecution&gt; executions, String phaseFilter) {
-<span class="fc" id="L57">            return of(executions, new Options(defaultLifecycles()).forPhase(phaseFilter));</span>
+<span class="fc" id="L58">            return of(executions, new Options(defaultLifecycles()).forPhase(phaseFilter));</span>
         }
 
         public static Multimap&lt;String, MojoExecution&gt; of(List&lt;MojoExecution&gt; executions, Options options) {
-<span class="fc" id="L61">            Multimap&lt;String, MojoExecution&gt; result = new LinkedMultimap&lt;&gt;();</span>
-<span class="fc" id="L62">            boolean notFiltering = isEmpty(options.phase);</span>
-<span class="fc bfc" id="L63" title="All 2 branches covered.">            for (MojoExecution execution : executions) {</span>
-<span class="fc" id="L64">                String phase = firstNonNull(execution.getLifecyclePhase(), &quot;&lt;no phase&gt;&quot;);</span>
-<span class="pc bpc" id="L65" title="1 of 2 branches missed.">                if (options.showingAllPhases) {</span>
-<span class="nc" id="L66">                    Lifecycle lifecycle = options.defaultLifecycles.get(phase);</span>
-<span class="nc bnc" id="L67" title="All 2 branches missed.">                    if (lifecycle != null) {</span>
-<span class="nc" id="L68">                        lifecycle</span>
-<span class="nc" id="L69">                                .getPhases()</span>
-<span class="nc" id="L70">                                .forEach(defaultPhase -&gt; result.put(defaultPhase, NoMojoExecution.INSTANCE));</span>
+<span class="fc" id="L62">            Multimap&lt;String, MojoExecution&gt; result = new LinkedMultimap&lt;&gt;();</span>
+<span class="fc" id="L63">            boolean notFiltering = isEmpty(options.phase);</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">            for (MojoExecution execution : executions) {</span>
+<span class="fc" id="L65">                String phase = firstNonNull(execution.getLifecyclePhase(), &quot;&lt;no phase&gt;&quot;);</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">                if (options.showingAllPhases) {</span>
+<span class="nc" id="L67">                    Lifecycle lifecycle = options.defaultLifecycles.get(phase);</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">                    if (lifecycle != null) {</span>
+<span class="nc" id="L69">                        lifecycle</span>
+<span class="nc" id="L70">                                .getPhases()</span>
+<span class="nc" id="L71">                                .forEach(defaultPhase -&gt; result.put(defaultPhase, NoMojoExecution.INSTANCE));</span>
                     }
                 }
-<span class="fc bfc" id="L73" title="All 4 branches covered.">                if (notFiltering || phase.equalsIgnoreCase(options.phase)) {</span>
-<span class="fc" id="L74">                    result.put(phase, execution);</span>
+<span class="fc bfc" id="L74" title="All 4 branches covered.">                if (notFiltering || phase.equalsIgnoreCase(options.phase)) {</span>
+<span class="fc" id="L75">                    result.put(phase, execution);</span>
                 }
-<span class="fc" id="L76">            }</span>
-<span class="fc" id="L77">            return result;</span>
+<span class="fc" id="L77">            }</span>
+<span class="fc" id="L78">            return result;</span>
         }
 
         private static DefaultLifecycles defaultLifecycles() {
-<span class="fc" id="L81">            return new DefaultLifecycles(Collections.emptyMap(), new ConsoleLogger());</span>
+<span class="fc" id="L82">            return new DefaultLifecycles(Collections.emptyMap(), new ConsoleLogger());</span>
         }
     }
 
@@ -90,24 +91,24 @@ import org.codehaus.plexus.logging.console.ConsoleLogger;
         private boolean showingAllPhases;
         private boolean showingLifecycles;
 
-<span class="fc" id="L93">        public Options(DefaultLifecycles defaultLifecycles) {</span>
-<span class="fc" id="L94">            this.defaultLifecycles = defaultLifecycles;</span>
-<span class="fc" id="L95">        }</span>
+<span class="fc" id="L94">        public Options(DefaultLifecycles defaultLifecycles) {</span>
+<span class="fc" id="L95">            this.defaultLifecycles = defaultLifecycles;</span>
+<span class="fc" id="L96">        }</span>
 
         public Options forPhase(String phase) {
-<span class="fc" id="L98">            this.phase = phase;</span>
-<span class="fc" id="L99">            return this;</span>
+<span class="fc" id="L99">            this.phase = phase;</span>
+<span class="fc" id="L100">            return this;</span>
         }
 
         public Options showingAllPhases() {
-<span class="nc" id="L103">            this.showingAllPhases = true;</span>
-<span class="nc" id="L104">            return this;</span>
+<span class="nc" id="L104">            this.showingAllPhases = true;</span>
+<span class="nc" id="L105">            return this;</span>
         }
 
         public Options showingLifecycles() {
-<span class="nc" id="L108">            this.showingLifecycles = true;</span>
-<span class="nc" id="L109">            return this;</span>
+<span class="nc" id="L109">            this.showingLifecycles = true;</span>
+<span class="nc" id="L110">            return this;</span>
         }
     }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

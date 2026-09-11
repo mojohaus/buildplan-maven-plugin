@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractTableDescriptor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BuildPlan Maven Plugin</a> &gt; <a href="index.source.html" class="el_package">org.codehaus.mojo.buildplan.display</a> &gt; <span class="el_source">AbstractTableDescriptor.java</span></div><h1>AbstractTableDescriptor.java</h1><pre class="source lang-java linenums">/*
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractTableDescriptor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BuildPlan Maven Plugin</a> &gt; <a href="index.source.html" class="el_package">org.codehaus.mojo.buildplan.display</a> &gt; <span class="el_source">AbstractTableDescriptor.java</span></div><h1>AbstractTableDescriptor.java</h1><pre class="source lang-java linenums">/*
  * Copyright (C) 2012 Jean-Christophe Gay (contact@jeanchristophegay.com)
  *
  * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
@@ -15,64 +15,65 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
-import static org.codehaus.plexus.util.StringUtils.defaultString;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
+
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
 import org.codehaus.mojo.buildplan.util.LinkedMultimap;
 import org.codehaus.mojo.buildplan.util.Multimap;
 
-<span class="fc" id="L30">public abstract class AbstractTableDescriptor implements TableDescriptor {</span>
+import static org.codehaus.plexus.util.StringUtils.defaultString;
+
+<span class="fc" id="L31">public abstract class AbstractTableDescriptor implements TableDescriptor {</span>
 
     protected static Map&lt;TableColumn, Integer&gt; findMaxSize(
             Collection&lt;MojoExecution&gt; executions, DefaultLifecycles defaultLifecycles, TableColumn... columns) {
 
-<span class="fc" id="L35">        Map&lt;TableColumn, Integer&gt; result = new EnumMap&lt;&gt;(TableColumn.class);</span>
+<span class="fc" id="L36">        Map&lt;TableColumn, Integer&gt; result = new EnumMap&lt;&gt;(TableColumn.class);</span>
 
-<span class="fc" id="L37">        Multimap&lt;TableColumn, Integer&gt; count = new LinkedMultimap&lt;&gt;();</span>
-<span class="fc" id="L38">        executions.stream().map(MojoExecutionDisplay::new).forEach(execution -&gt; {</span>
-<span class="fc bfc" id="L39" title="All 2 branches covered.">            for (TableColumn column : columns) {</span>
-<span class="pc bpc" id="L40" title="1 of 7 branches missed.">                switch (column) {</span>
+<span class="fc" id="L38">        Multimap&lt;TableColumn, Integer&gt; count = new LinkedMultimap&lt;&gt;();</span>
+<span class="fc" id="L39">        executions.stream().map(MojoExecutionDisplay::new).forEach(execution -&gt; {</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">            for (TableColumn column : columns) {</span>
+<span class="pc bpc" id="L41" title="1 of 7 branches missed.">                switch (column) {</span>
                     case ARTIFACT_ID:
-<span class="fc" id="L42">                        count.put(column, safeLength(execution.getArtifactId()));</span>
-<span class="fc" id="L43">                        break;</span>
+<span class="fc" id="L43">                        count.put(column, safeLength(execution.getArtifactId()));</span>
+<span class="fc" id="L44">                        break;</span>
                     case EXECUTION_ID:
-<span class="fc" id="L45">                        count.put(column, safeLength(execution.getExecutionId()));</span>
-<span class="fc" id="L46">                        break;</span>
+<span class="fc" id="L46">                        count.put(column, safeLength(execution.getExecutionId()));</span>
+<span class="fc" id="L47">                        break;</span>
                     case GOAL:
-<span class="fc" id="L48">                        count.put(column, safeLength(execution.getGoal()));</span>
-<span class="fc" id="L49">                        break;</span>
+<span class="fc" id="L49">                        count.put(column, safeLength(execution.getGoal()));</span>
+<span class="fc" id="L50">                        break;</span>
                     case PHASE:
-<span class="fc" id="L51">                        count.put(column, safeLength(execution.getPhase()));</span>
-<span class="fc" id="L52">                        break;</span>
+<span class="fc" id="L52">                        count.put(column, safeLength(execution.getPhase()));</span>
+<span class="fc" id="L53">                        break;</span>
                     case LIFECYCLE:
-<span class="fc" id="L54">                        Lifecycle lifecycle = defaultLifecycles.get(execution.getPhase());</span>
-<span class="fc bfc" id="L55" title="All 2 branches covered.">                        count.put(column, lifecycle == null ? 0 : safeLength(lifecycle.getId()));</span>
-<span class="fc" id="L56">                        break;</span>
+<span class="fc" id="L55">                        Lifecycle lifecycle = defaultLifecycles.get(execution.getPhase());</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">                        count.put(column, lifecycle == null ? 0 : safeLength(lifecycle.getId()));</span>
+<span class="fc" id="L57">                        break;</span>
                     case VERSION:
-<span class="fc" id="L58">                        count.put(column, safeLength(execution.getVersion()));</span>
+<span class="fc" id="L59">                        count.put(column, safeLength(execution.getVersion()));</span>
                         break;
                 }
             }
-<span class="fc" id="L62">        });</span>
-<span class="fc bfc" id="L63" title="All 2 branches covered.">        for (TableColumn column : TableColumn.values()) {</span>
-<span class="fc" id="L64">            count.put(column, column.title().length());</span>
+<span class="fc" id="L63">        });</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        for (TableColumn column : TableColumn.values()) {</span>
+<span class="fc" id="L65">            count.put(column, column.title().length());</span>
         }
 
-<span class="fc bfc" id="L67" title="All 2 branches covered.">        for (TableColumn key : count.keySet()) {</span>
-<span class="fc" id="L68">            result.put(key, Collections.max(count.get(key)));</span>
-<span class="fc" id="L69">        }</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        for (TableColumn key : count.keySet()) {</span>
+<span class="fc" id="L69">            result.put(key, Collections.max(count.get(key)));</span>
+<span class="fc" id="L70">        }</span>
 
-<span class="fc" id="L71">        return result;</span>
+<span class="fc" id="L72">        return result;</span>
     }
 
     private static int safeLength(String string) {
-<span class="fc" id="L75">        return defaultString(string).length();</span>
+<span class="fc" id="L76">        return defaultString(string).length();</span>
     }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>
