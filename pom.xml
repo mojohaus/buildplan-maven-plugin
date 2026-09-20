@@ -25,7 +25,7 @@
   </licenses>
 
   <prerequisites>
-    <maven>3.5.4</maven>
+    <maven>3.6.3</maven>
   </prerequisites>
 
   <scm>
@@ -40,6 +40,7 @@
   </issueManagement>
 
   <properties>
+    <mavenVersion>3.9.16</mavenVersion>
     <mojo.java.target>8</mojo.java.target>
     <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
     <doxia.version>2.1.0</doxia.version>
@@ -92,13 +93,13 @@
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-core</artifactId>
-      <version>${project.prerequisites.maven}</version>
+      <version>${mavenVersion}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-artifact</artifactId>
-      <version>${project.prerequisites.maven}</version>
+      <version>${mavenVersion}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
