@@ -40,7 +40,7 @@
   </issueManagement>
 
   <properties>
-    <mavenVersion>3.9.16</mavenVersion>
+    <mavenVersion>3.10.0</mavenVersion>
     <mojo.java.target>8</mojo.java.target>
     <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
     <doxia.version>2.1.0</doxia.version>
