@@ -1,49 +1,15 @@
-# This workflow will build a Java project with Maven
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
-name: CI
+name: GitHub CI
 
 on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v7
-    - name: Set up JDK 8
-      uses: actions/setup-java@v6
-      with:
-        java-version: '8'
-        distribution: 'temurin'
-        cache: maven
-    - name: Build with Maven
-      run: ./mvnw --batch-mode verify
-    - name: Upload test results
-      uses: actions/upload-artifact@v7
-      if: always()
-      with:
-        name: Test Results
-        path: |
-            target/surefire-reports/TEST*.xml
-            target/failsafe-reports/TEST*.xml
-    - name: Publish Code Coverage in PR
-      id: jacoco
-      uses: madrapps/jacoco-report@v1.8
-      with:
-        paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
-        token: ${{ secrets.GITHUB_TOKEN }}
-        min-coverage-overall: 55
-        min-coverage-changed-files: 70
-      if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == 'mojohaus/buildplan-maven-plugin' && github.actor != 'dependabot[bot]'
-    - name: Build documentation
-      run: ./mvnw --batch-mode site
-  event_file:
-    name: "Publish event file"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Upload
-        uses: actions/upload-artifact@v7
-        with:
-          name: Event File
-          path: ${{ github.event_path }}
+    name: Verify
+    uses: apache/maven-gh-actions-shared/.github/workflows/maven-verify.yml@v5
+    with:
+      matrix-exclude: >
+        [
+          {"os": "macos-latest", "jdk": "8"},
+          {"os": "macos-latest", "jdk": "21"},
+          {"os": "windows-latest", "jdk": "21"}
+        ]
