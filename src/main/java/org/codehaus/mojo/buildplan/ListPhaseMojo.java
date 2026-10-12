@@ -76,7 +76,7 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
                 if (lifecycleForPhase == null) {
                     lifecycleForPhase = new Lifecycle("", emptyList(), emptyMap());
                 }
-                if (!lifecycleForPhase.equals(currentLifecycle)) {
+                if (currentLifecycle == null || !lifecycleForPhase.getId().equals(currentLifecycle.getId())) {
                     currentLifecycle = lifecycleForPhase;
                     output.append(lineSeparator())
                             .append(lineSeparator())

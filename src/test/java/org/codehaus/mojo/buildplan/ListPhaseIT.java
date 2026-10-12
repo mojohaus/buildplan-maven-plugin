@@ -190,12 +190,16 @@ class ListPhaseIT {
     private static String[] maven4Blocks(java.util.List<String[]> phaseLists, java.util.List<String> lifecycles) {
         java.util.List<String> lines = new java.util.ArrayList<>();
         for (int i = 0; i < phaseLists.size(); i++) {
+            boolean firstPhase = true;
             for (String entry : phaseLists.get(i)) {
                 if (!isPluginLine(entry)) {
-                    if (!lines.isEmpty()) {
-                        lines.add("");
+                    if (firstPhase) {
+                        if (!lines.isEmpty()) {
+                            lines.add("");
+                        }
+                        lines.add("[" + lifecycles.get(i) + "]");
+                        firstPhase = false;
                     }
-                    lines.add("[" + lifecycles.get(i) + "]");
                     lines.add(header(entry));
                 } else {
                     lines.add(entry);
@@ -277,7 +281,6 @@ class ListPhaseIT {
             "deploy",
             DEPLOY
         };
-        // Maven 4 reports every phase with its own "[default]" header here
         return maven4Blocks(java.util.Arrays.asList(clean, def), java.util.Arrays.asList("clean", "default"));
     }
 
