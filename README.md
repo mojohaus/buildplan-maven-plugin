@@ -37,6 +37,8 @@ It is possible to limit the list to a specific plugin:
 
         mvn buildplan:report
 
+Contributor and agent notes are in [AGENTS.md](AGENTS.md).
+
 ## Release
 
 Summary of full [process](https://www.mojohaus.org/development/performing-a-release.html):
