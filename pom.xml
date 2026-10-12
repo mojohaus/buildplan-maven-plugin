@@ -155,7 +155,6 @@
                 <exclude>.editorconfig</exclude>
                 <exclude>etc/*</exclude>
                 <exclude>src/it/**</exclude>
-                <exclude>src/test/resources-its/**</exclude>
                 <exclude>.github/**</exclude>
                 <exclude>src/license/**</exclude>
                 <exclude>jreleaser.yml</exclude>
