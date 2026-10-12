@@ -42,7 +42,6 @@
   <properties>
     <mavenVersion>3.9.16</mavenVersion>
     <mojo.java.target>8</mojo.java.target>
-    <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
     <doxia.version>2.1.0</doxia.version>
     <maven-reporting.version>4.0.0</maven-reporting.version>
     <project.build.outputTimestamp>2026-09-11T22:00:33Z</project.build.outputTimestamp>
@@ -194,49 +193,6 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco-maven-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>prepare-argument-for-test-runner</id>
-            <goals>
-              <goal>prepare-agent</goal>
-              <goal>prepare-agent-integration</goal>
-            </goals>
-            <configuration>
-              <append>true</append>
-            </configuration>
-          </execution>
-          <execution>
-            <id>merge-unit-and-integration-tests-executions</id>
-            <goals>
-              <goal>merge</goal>
-            </goals>
-            <phase>verify</phase>
-            <configuration>
-              <fileSets>
-                <fileSet>
-                  <directory>${project.build.directory}</directory>
-                  <includes>
-                    <include>*.exec</include>
-                  </includes>
-                </fileSet>
-              </fileSets>
-              <destFile>${project.build.directory}/jacoco-merge.exec</destFile>
-            </configuration>
-          </execution>
-          <execution>
-            <goals>
-              <goal>report</goal>
-            </goals>
-            <configuration>
-              <dataFile>${project.build.directory}/jacoco-merge.exec</dataFile>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <artifactId>maven-release-plugin</artifactId>
         <configuration>
           <tagNameFormat>v@{project.version}</tagNameFormat>
@@ -245,16 +201,6 @@
       </plugin>
     </plugins>
   </build>
-
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco-maven-plugin.version}</version>
-      </plugin>
-    </plugins>
-  </reporting>
 
   <profiles>
     <profile>
