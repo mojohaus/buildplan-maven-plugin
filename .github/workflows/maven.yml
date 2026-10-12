@@ -8,6 +8,9 @@ jobs:
     uses: apache/maven-gh-actions-shared/.github/workflows/maven-verify.yml@v5
     with:
       maven4-enabled: true
+      # no run-its profile here; Maven 4 fails on a requested profile that does not exist
+      ff-goal: 'verify'
+      verify-goal: 'verify'
       matrix-exclude: >
         [
           {"os": "macos-latest", "jdk": "8"},
