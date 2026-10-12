@@ -45,7 +45,6 @@
     <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
     <doxia.version>2.1.0</doxia.version>
     <maven-reporting.version>4.0.0</maven-reporting.version>
-    <itf.version>0.13.1</itf.version>
     <project.build.outputTimestamp>2026-09-11T22:00:33Z</project.build.outputTimestamp>
   </properties>
 
@@ -59,24 +58,6 @@
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
       <version>3.27.7</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.soebes.itf.jupiter.extension</groupId>
-      <artifactId>itf-jupiter-extension</artifactId>
-      <version>${itf.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.soebes.itf.jupiter.extension</groupId>
-      <artifactId>itf-assertj</artifactId>
-      <version>${itf.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jsoup</groupId>
-      <artifactId>jsoup</artifactId>
-      <version>1.23.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -156,27 +137,40 @@
         <artifactId>license-maven-plugin</artifactId>
         <version>4.6</version>
         <configuration>
-          <header>com/mycila/licenses/APACHE-2</header>
-          <properties>
-            <owner>Jean-Christophe Gay</owner>
-            <year>${project.inceptionYear}</year>
-            <email>contact@jeanchristophegay.com</email>
-          </properties>
-          <excludes>
-            <exclude>**/README</exclude>
-            <exclude>LICENSE</exclude>
-            <exclude>pom.xml</exclude>
-            <exclude>src/test/resources/**</exclude>
-            <exclude>src/main/resources/**</exclude>
-            <exclude>src/site/**</exclude>
-            <exclude>.editorconfig</exclude>
-            <exclude>etc/*</exclude>
-            <exclude>src/it/**</exclude>
-            <exclude>src/test/resources-its/**</exclude>
-            <exclude>.github/**</exclude>
-            <exclude>jreleaser.yml</exclude>
-            <exclude>.gitpod.yml</exclude>
-          </excludes>
+          <licenseSets>
+            <licenseSet>
+              <header>com/mycila/licenses/APACHE-2</header>
+              <properties>
+                <owner>Jean-Christophe Gay</owner>
+                <year>${project.inceptionYear}</year>
+                <email>contact@jeanchristophegay.com</email>
+              </properties>
+              <excludes>
+                <exclude>**/README</exclude>
+                <exclude>LICENSE</exclude>
+                <exclude>pom.xml</exclude>
+                <exclude>src/test/resources/**</exclude>
+                <exclude>src/main/resources/**</exclude>
+                <exclude>src/site/**</exclude>
+                <exclude>.editorconfig</exclude>
+                <exclude>etc/*</exclude>
+                <exclude>src/it/**</exclude>
+                <exclude>src/test/resources-its/**</exclude>
+                <exclude>.github/**</exclude>
+                <exclude>src/license/**</exclude>
+                <exclude>jreleaser.yml</exclude>
+                <exclude>.gitpod.yml</exclude>
+                <!-- covered by the MojoHaus license set below -->
+                <exclude>src/test/java/org/codehaus/mojo/buildplan/SkipTest.java</exclude>
+              </excludes>
+            </licenseSet>
+            <licenseSet>
+              <header>src/license/mojohaus-header.txt</header>
+              <includes>
+                <include>src/test/java/org/codehaus/mojo/buildplan/SkipTest.java</include>
+              </includes>
+            </licenseSet>
+          </licenseSets>
         </configuration>
         <dependencies>
           <dependency>
@@ -243,42 +237,6 @@
           <localCheckout>true</localCheckout>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>com.soebes.itf.jupiter.extension</groupId>
-        <artifactId>itf-maven-plugin</artifactId>
-        <version>${itf.version}</version>
-        <executions>
-          <execution>
-            <id>installing</id>
-            <goals>
-              <goal>install</goal>
-              <goal>resources-its</goal>
-            </goals>
-            <phase>pre-integration-test</phase>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <configuration>
-          <systemProperties>
-            <maven.version>${maven.version}</maven.version>
-            <maven.home>${maven.home}</maven.home>
-          </systemProperties>
-          <environmentVariables>
-            <MAVEN_OPTS>${argLine}</MAVEN_OPTS>
-          </environmentVariables>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
     </plugins>
   </build>
 
@@ -291,4 +249,38 @@
       </plugin>
     </plugins>
   </reporting>
+
+  <profiles>
+    <profile>
+      <id>run-its</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-invoker-plugin</artifactId>
+            <configuration>
+              <environmentVariables>
+                <!-- each IT is a short-lived JVM: C2 compilation and parallel GC only add startup time -->
+                <JAVA_TOOL_OPTIONS>-XX:TieredStopAtLevel=1 -XX:+UseSerialGC</JAVA_TOOL_OPTIONS>
+              </environmentVariables>
+              <addTestClassPath>true</addTestClassPath>
+              <postBuildHookScript>verify</postBuildHookScript>
+              <localRepositoryPath>${project.build.directory}/local-repo</localRepositoryPath>
+              <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
+              <parallelThreads>1C</parallelThreads>
+            </configuration>
+            <executions>
+              <execution>
+                <id>integration-test</id>
+                <goals>
+                  <goal>install</goal>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
