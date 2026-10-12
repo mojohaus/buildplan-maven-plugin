@@ -20,8 +20,9 @@ what the code and the POMs do not make obvious.
   palantir-java-format and also reformats Markdown, so run `mvn spotless:apply` after editing the
   README or this file.
 - `license-maven-plugin` checks the file headers during the build. The Java files carry an Apache
-  2.0 header owned by Jean-Christophe Gay; keep each file's header as it is, and copy that header
-  into new Java files. Fixtures under `src/test/resources-its` and `src/site` are excluded.
+  2.0 header owned by Jean-Christophe Gay; keep each file's header as it is. New Java files take
+  the MojoHaus header in `src/license/mojohaus-header.txt`; list each one under the second
+  `licenseSet` and in the first set's excludes in `pom.xml`. `src/it` and `src/site` are excluded.
 - The plugin compiles against Maven 3.9.16 (`mavenVersion`) and declares a literal
   `<prerequisites><maven>3.9.0</maven>`; keep the two apart, so raising `mavenVersion` does not
   raise the prerequisite.
@@ -32,16 +33,12 @@ what the code and the POMs do not make obvious.
 ## Tests
 
 - JUnit 5 and AssertJ. The unit tests (`*Test`) are in `src/test/java`, next to the code they test.
-- The integration tests (`*IT`) use the Maven Integration Testing Framework (ITF) for JUnit 5 and run
-  under Failsafe. Each `@MavenTest` method builds a fixture project from
-  `src/test/resources-its/<IT class>/<nested class>/<project name>`, where the project name is the
-  test method name or `maven_project` for a `@MavenProject` shared by a nested class, and asserts
-  on the output with `MavenITAssertions`. `itf-maven-plugin` installs the plugin and copies the
-  fixtures in `pre-integration-test`.
-- Run one integration test class (the unit tests are skipped by the `-Dtest` filter):
+- The integration tests are maven-invoker-plugin projects in `src/it/<name>`, with `invoker.properties`,
+  an optional `test.properties` (`-D` values) and a `verify.groovy` that asserts on `build.log`. They
+  run in the `run-its` profile, which the shared CI workflow activates:
 
   ```shell
-  mvn -B verify -Dtest=NoSuchTest -Dsurefire.failIfNoSpecifiedTests=false -Dit.test=ListPluginIT
+  mvn -B -P run-its verify -Dinvoker.test=list-with-default-cli
   ```
 - Add an integration test only for what needs a real Maven build, such as the lifecycle computed for
   a reactor or the site report; prefer a unit test otherwise.
