@@ -16,6 +16,9 @@ updates:
         versions: [">= 3.10.0"]
       - dependency-name: "org.apache.maven:maven-plugin-api"
         versions: [">= 3.10.0"]
+      # Maven Wrapper: stay on Maven 3.9.x
+      - dependency-name: "org.apache.maven:apache-maven"
+        versions: [">= 3.10.0"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
