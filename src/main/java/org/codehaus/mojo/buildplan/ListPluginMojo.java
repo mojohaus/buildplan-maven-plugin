@@ -15,9 +15,13 @@
  */
 package org.codehaus.mojo.buildplan;
 
+import javax.inject.Inject;
+
 import java.util.Collection;
 import java.util.Map;
 
+import org.apache.maven.lifecycle.DefaultLifecycles;
+import org.apache.maven.lifecycle.LifecycleExecutor;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -33,6 +37,11 @@ import static java.lang.System.lineSeparator;
 /** List plugin executions by plugin for the current project. */
 @Mojo(name = "list-plugin", threadSafe = true)
 public class ListPluginMojo extends AbstractLifecycleMojo {
+
+    @Inject
+    public ListPluginMojo(LifecycleExecutor lifecycleExecutor, DefaultLifecycles defaultLifecycles) {
+        super(lifecycleExecutor, defaultLifecycles);
+    }
 
     /** Display plugin executions only for the specified plugin. */
     @Parameter(property = "buildplan.plugin")
