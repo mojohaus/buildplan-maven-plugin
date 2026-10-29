@@ -15,6 +15,8 @@
  */
 package org.codehaus.mojo.buildplan;
 
+import javax.inject.Inject;
+
 import java.util.Locale;
 
 import org.apache.maven.doxia.sink.Sink;
@@ -25,7 +27,6 @@ import org.apache.maven.lifecycle.MavenExecutionPlan;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.logging.Log;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -45,14 +46,18 @@ import static org.codehaus.mojo.buildplan.display.TableColumn.PHASE;
 @Mojo(name = "report", defaultPhase = LifecyclePhase.SITE)
 public class ReportMojo extends AbstractMavenReport {
 
-    @Component
-    private LifecycleExecutor lifecycleExecutor;
+    private final LifecycleExecutor lifecycleExecutor;
 
-    @Component(role = DefaultLifecycles.class)
-    DefaultLifecycles defaultLifecycles;
+    final DefaultLifecycles defaultLifecycles;
 
     @Parameter(defaultValue = "${session}", readonly = true)
     private MavenSession session;
+
+    @Inject
+    public ReportMojo(LifecycleExecutor lifecycleExecutor, DefaultLifecycles defaultLifecycles) {
+        this.lifecycleExecutor = lifecycleExecutor;
+        this.defaultLifecycles = defaultLifecycles;
+    }
 
     @Override
     protected void executeReport(Locale locale) throws MavenReportException {

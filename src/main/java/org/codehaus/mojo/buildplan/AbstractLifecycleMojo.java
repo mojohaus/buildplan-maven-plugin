@@ -25,7 +25,6 @@ import org.apache.maven.lifecycle.MavenExecutionPlan;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
@@ -33,8 +32,7 @@ import static java.util.Objects.isNull;
 
 public abstract class AbstractLifecycleMojo extends AbstractMojo {
 
-    @Component(role = DefaultLifecycles.class)
-    protected DefaultLifecycles defaultLifecycles;
+    protected final DefaultLifecycles defaultLifecycles;
 
     @Parameter(defaultValue = "${session}", readonly = true)
     private MavenSession session;
@@ -42,8 +40,7 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
 
-    @Component
-    private LifecycleExecutor lifecycleExecutor;
+    private final LifecycleExecutor lifecycleExecutor;
 
     /** Allow to specify which tasks will be used to calculate execution plan. */
     @Parameter(property = "buildplan.tasks", defaultValue = "deploy")
@@ -60,6 +57,11 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
     /** Flag to easily skip all checks */
     @Parameter(property = "buildplan.skip", defaultValue = "false")
     private boolean skip;
+
+    protected AbstractLifecycleMojo(LifecycleExecutor lifecycleExecutor, DefaultLifecycles defaultLifecycles) {
+        this.lifecycleExecutor = lifecycleExecutor;
+        this.defaultLifecycles = defaultLifecycles;
+    }
 
     protected MavenExecutionPlan calculateExecutionPlan() throws MojoFailureException {
         try {

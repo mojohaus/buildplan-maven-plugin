@@ -15,6 +15,10 @@
  */
 package org.codehaus.mojo.buildplan;
 
+import javax.inject.Inject;
+
+import org.apache.maven.lifecycle.DefaultLifecycles;
+import org.apache.maven.lifecycle.LifecycleExecutor;
 import org.apache.maven.lifecycle.MavenExecutionPlan;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoFailureException;
@@ -36,6 +40,11 @@ import static org.codehaus.mojo.buildplan.display.TableColumn.VERSION;
 /** List plugin executions for the current project. */
 @Mojo(name = "list", threadSafe = true)
 public class ListMojo extends AbstractLifecycleMojo {
+
+    @Inject
+    public ListMojo(LifecycleExecutor lifecycleExecutor, DefaultLifecycles defaultLifecycles) {
+        super(lifecycleExecutor, defaultLifecycles);
+    }
 
     /** Will show in which lifecycle a phase was defined (if any) */
     @Parameter(property = "buildplan.showLifecycles", defaultValue = "false")

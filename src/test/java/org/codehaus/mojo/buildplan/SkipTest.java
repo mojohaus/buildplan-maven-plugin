@@ -29,12 +29,12 @@ class SkipTest {
 
     @Test
     void list_plugin_skips_execution() throws Exception {
-        assertThat(executeSkipped(new ListPluginMojo())).containsExactly("Skipping build plan execution.");
+        assertThat(executeSkipped(new ListPluginMojo(null, null))).containsExactly("Skipping build plan execution.");
     }
 
     @Test
     void list_phase_skips_execution() throws Exception {
-        assertThat(executeSkipped(new ListPhaseMojo())).containsExactly("Skipping build plan execution.");
+        assertThat(executeSkipped(new ListPhaseMojo(null, null))).containsExactly("Skipping build plan execution.");
     }
 
     /** Runs the mojo with {@code buildplan.skip} set; the other parameters are left unset, so any real work would fail. */
