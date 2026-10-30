@@ -41,7 +41,6 @@
 
   <properties>
     <mavenVersion>3.9.16</mavenVersion>
-    <mojo.java.target>8</mojo.java.target>
     <doxia.version>2.1.0</doxia.version>
     <maven-reporting.version>4.0.0</maven-reporting.version>
     <plexus-utils.version>3.6.1</plexus-utils.version>
