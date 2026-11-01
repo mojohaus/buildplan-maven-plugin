@@ -40,6 +40,7 @@
   </issueManagement>
 
   <properties>
+    <sisuVersion>1.0.0</sisuVersion>
     <mavenVersion>3.9.16</mavenVersion>
     <doxia.version>2.1.0</doxia.version>
     <maven-reporting.version>4.0.0</maven-reporting.version>
@@ -119,7 +120,14 @@
     <dependency>
       <groupId>org.eclipse.sisu</groupId>
       <artifactId>org.eclipse.sisu.plexus</artifactId>
-      <version>1.0.0</version>
+      <version>${sisuVersion}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <!-- keep in step with org.eclipse.sisu.plexus, which calls into it -->
+      <groupId>org.eclipse.sisu</groupId>
+      <artifactId>org.eclipse.sisu.inject</artifactId>
+      <version>${sisuVersion}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
