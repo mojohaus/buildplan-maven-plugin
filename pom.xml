@@ -40,12 +40,12 @@
   </issueManagement>
 
   <properties>
-    <sisuVersion>1.0.0</sisuVersion>
+    <sisuVersion>1.1.1</sisuVersion>
     <mavenVersion>3.9.16</mavenVersion>
     <doxia.version>2.1.0</doxia.version>
     <maven-reporting.version>4.0.0</maven-reporting.version>
     <plexus-utils.version>4.1.0</plexus-utils.version>
-    <maven-shared-utils.version>3.4.2</maven-shared-utils.version>
+    <maven-shared-utils.version>3.5.0</maven-shared-utils.version>
     <project.build.outputTimestamp>2026-09-11T22:00:33Z</project.build.outputTimestamp>
   </properties>
 
