@@ -36,31 +36,33 @@ public abstract class AbstractTableDescriptor implements TableDescriptor {
         Map<TableColumn, Integer> result = new EnumMap<>(TableColumn.class);
 
         Multimap<TableColumn, Integer> count = new LinkedMultimap<>();
-        executions.stream().map(MojoExecutionDisplay::new).forEach(execution -> {
-            for (TableColumn column : columns) {
-                switch (column) {
-                    case ARTIFACT_ID:
-                        count.put(column, safeLength(execution.getArtifactId()));
-                        break;
-                    case EXECUTION_ID:
-                        count.put(column, safeLength(execution.getExecutionId()));
-                        break;
-                    case GOAL:
-                        count.put(column, safeLength(execution.getGoal()));
-                        break;
-                    case PHASE:
-                        count.put(column, safeLength(execution.getPhase()));
-                        break;
-                    case LIFECYCLE:
-                        Lifecycle lifecycle = defaultLifecycles.get(execution.getPhase());
-                        count.put(column, lifecycle == null ? 0 : safeLength(lifecycle.getId()));
-                        break;
-                    case VERSION:
-                        count.put(column, safeLength(execution.getVersion()));
-                        break;
-                }
-            }
-        });
+        executions.stream()
+                .map(e -> new MojoExecutionDisplay(e, defaultLifecycles))
+                .forEach(execution -> {
+                    for (TableColumn column : columns) {
+                        switch (column) {
+                            case ARTIFACT_ID:
+                                count.put(column, safeLength(execution.getArtifactId()));
+                                break;
+                            case EXECUTION_ID:
+                                count.put(column, safeLength(execution.getExecutionId()));
+                                break;
+                            case GOAL:
+                                count.put(column, safeLength(execution.getGoal()));
+                                break;
+                            case PHASE:
+                                count.put(column, safeLength(execution.getPhase()));
+                                break;
+                            case LIFECYCLE:
+                                Lifecycle lifecycle = defaultLifecycles.get(execution.getPhase());
+                                count.put(column, lifecycle == null ? 0 : safeLength(lifecycle.getId()));
+                                break;
+                            case VERSION:
+                                count.put(column, safeLength(execution.getVersion()));
+                                break;
+                        }
+                    }
+                });
         for (TableColumn column : TableColumn.values()) {
             count.put(column, column.title().length());
         }

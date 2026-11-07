@@ -104,7 +104,7 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
     }
 
     private String line(String rowFormat, MojoExecution execution) {
-        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);
+        MojoExecutionDisplay display = new MojoExecutionDisplay(execution, defaultLifecycles);
 
         return String.format(rowFormat, display.getArtifactId(), display.getGoal(), display.getExecutionId());
     }

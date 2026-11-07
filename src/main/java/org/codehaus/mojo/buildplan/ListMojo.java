@@ -78,7 +78,7 @@ public class ListMojo extends AbstractLifecycleMojo {
 
     private String tableRow(String row, MojoExecution execution) {
 
-        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);
+        MojoExecutionDisplay display = new MojoExecutionDisplay(execution, defaultLifecycles);
 
         if (showLifecycles) {
             return String.format(

@@ -71,7 +71,7 @@ public class ListPluginMojo extends AbstractLifecycleMojo {
 
     private String line(String rowFormat, MojoExecution execution) {
 
-        MojoExecutionDisplay display = new MojoExecutionDisplay(execution);
+        MojoExecutionDisplay display = new MojoExecutionDisplay(execution, defaultLifecycles);
 
         return String.format(rowFormat, display.getPhase(), display.getGoal(), display.getExecutionId());
     }
