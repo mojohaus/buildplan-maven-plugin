@@ -1,3 +1,5 @@
+Releases from 2.3.0 on are documented on [GitHub Releases](https://github.com/mojohaus/buildplan-maven-plugin/releases).
+
 # 2.2.2
 
 - Explicitly start and end Doxia table rows in site report ([3db5435](http://github.com/jcgay/buildplan-maven-plugin/commit/3db5435ccb85c9d4265ca4e62f063f17fd48540d)) by [@nyg](https://github.com/nyg)
