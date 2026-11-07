@@ -77,6 +77,36 @@ class MojoExecutionDisplayTest {
     }
 
     @Test
+    void should_get_phase_bound_in_pom_over_descriptor_default_phase() {
+
+        MojoExecution execution = aMojoExecution()
+                .withArtifactId("sortpom-maven-plugin")
+                .withLifecyclePhase("verify")
+                .withDescriptorPhase("validate")
+                .withGoal("verify")
+                .build();
+
+        MojoExecutionDisplay result = new MojoExecutionDisplay(execution);
+
+        assertThat(result.getPhase()).isEqualTo("verify");
+    }
+
+    @Test
+    void should_get_descriptor_default_phase_when_execution_has_no_lifecycle_phase() {
+
+        MojoExecution execution = aMojoExecution()
+                .withArtifactId("sortpom-maven-plugin")
+                .withLifecyclePhase(null)
+                .withDescriptorPhase("validate")
+                .withGoal("verify")
+                .build();
+
+        MojoExecutionDisplay result = new MojoExecutionDisplay(execution);
+
+        assertThat(result.getPhase()).isEqualTo("validate");
+    }
+
+    @Test
     void should_highlight_mojo_for_mojo_pattern() {
         MojoExecution execution =
                 aMojoExecution().withArtifactId("maven-jar-plugin").build();

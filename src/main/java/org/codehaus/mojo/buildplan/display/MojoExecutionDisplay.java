@@ -30,12 +30,19 @@ public class MojoExecutionDisplay {
         this.execution = execution;
     }
 
+    /**
+     * The phase this execution runs in: the one bound in the POM when there is one, otherwise the goal's
+     * default phase from its descriptor.
+     */
     public String getPhase() {
+        if (execution.getLifecyclePhase() != null) {
+            return execution.getLifecyclePhase();
+        }
         MojoDescriptor mojoDescriptor = execution.getMojoDescriptor();
         if (mojoDescriptor != null && mojoDescriptor.getPhase() != null) {
             return mojoDescriptor.getPhase();
         }
-        return defaultString(execution.getLifecyclePhase());
+        return "";
     }
 
     public String getLifecycle(DefaultLifecycles defaultLifecycles) {
