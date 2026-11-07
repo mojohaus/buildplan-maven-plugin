@@ -15,13 +15,14 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
+import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.plugin.MojoExecution;
 import org.codehaus.mojo.buildplan.util.Objects;
 
 public class PlainTextMojoExecutionDisplay extends MojoExecutionDisplay {
 
-    public PlainTextMojoExecutionDisplay(MojoExecution execution) {
-        super(execution);
+    public PlainTextMojoExecutionDisplay(MojoExecution execution, DefaultLifecycles defaultLifecycles) {
+        super(execution, defaultLifecycles);
     }
 
     @Override

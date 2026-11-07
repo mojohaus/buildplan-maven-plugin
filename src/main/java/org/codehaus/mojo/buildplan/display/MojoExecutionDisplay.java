@@ -26,17 +26,24 @@ public class MojoExecutionDisplay {
 
     protected final MojoExecution execution;
 
+    private final DefaultLifecycles defaultLifecycles;
+
     public MojoExecutionDisplay(MojoExecution execution) {
+        this(execution, null);
+    }
+
+    public MojoExecutionDisplay(MojoExecution execution, DefaultLifecycles defaultLifecycles) {
         this.execution = execution;
+        this.defaultLifecycles = defaultLifecycles;
     }
 
     /**
      * The phase this execution runs in: the one bound in the POM when there is one, otherwise the goal's
-     * default phase from its descriptor.
+     * default phase from its descriptor. Maven 4 phase names are shown under their Maven 3 name.
      */
     public String getPhase() {
         if (execution.getLifecyclePhase() != null) {
-            return execution.getLifecyclePhase();
+            return PhaseNames.toMaven3Name(execution.getLifecyclePhase(), defaultLifecycles);
         }
         MojoDescriptor mojoDescriptor = execution.getMojoDescriptor();
         if (mojoDescriptor != null && mojoDescriptor.getPhase() != null) {

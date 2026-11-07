@@ -105,7 +105,7 @@ public class ReportMojo extends AbstractMavenReport {
         mainSink.tableRow_();
 
         for (MojoExecution execution : plan.getMojoExecutions()) {
-            MojoExecutionDisplay display = new PlainTextMojoExecutionDisplay(execution);
+            MojoExecutionDisplay display = new PlainTextMojoExecutionDisplay(execution, defaultLifecycles);
             mainSink.tableRow();
             tableCell(mainSink, display.getLifecycle(defaultLifecycles));
             tableCell(mainSink, display.getPhase());

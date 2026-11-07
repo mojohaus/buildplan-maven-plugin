@@ -58,6 +58,14 @@
               <goal>resources</goal>
             </goals>
           </execution>
+          <!-- process-test-resources is a name Maven 4 reports as after:test-resources -->
+          <execution>
+            <id>late-resources</id>
+            <phase>process-test-resources</phase>
+            <goals>
+              <goal>resources</goal>
+            </goals>
+          </execution>
         </executions>
       </plugin>
     </plugins>
