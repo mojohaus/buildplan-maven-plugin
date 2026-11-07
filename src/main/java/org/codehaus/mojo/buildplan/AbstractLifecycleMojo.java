@@ -17,6 +17,7 @@ package org.codehaus.mojo.buildplan;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.lifecycle.DefaultLifecycles;
@@ -39,6 +40,8 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${project}", readonly = true)
     private MavenProject project;
+
+    private static final Pattern ANSI_ESCAPE = Pattern.compile("\u001B\\[[\\d;]*m");
 
     private final LifecycleExecutor lifecycleExecutor;
 
@@ -80,11 +83,16 @@ public abstract class AbstractLifecycleMojo extends AbstractMojo {
         }
 
         try {
-            SynchronizedFileReporter.write(outputWithTitle, outputFile, appendOutput);
+            // The console colouring is meant for a terminal; the file gets the same text without it.
+            SynchronizedFileReporter.write(stripAnsi(outputWithTitle), outputFile, appendOutput);
             getLog().info("Wrote build plan output to: " + outputFile);
         } catch (IOException e) {
             getLog().warn("Unable to write to output file: " + outputFile, e);
         }
+    }
+
+    private static String stripAnsi(String text) {
+        return ANSI_ESCAPE.matcher(text).replaceAll("");
     }
 
     @Override
