@@ -13,8 +13,8 @@ what the code and the POMs do not make obvious.
 
 ## Build gates
 
-- Main code must use the Java 8 API: `mojo.java.target` is 8 and mojo-parent turns it into
-  `maven.compiler.release`.
+- Main code must use the Java 8 API: mojo-parent sets `mojo.java.target` to 8 and turns it into
+  `maven.compiler.release`; this POM does not override it.
 - Spotless runs on JDK 17 and later only. It applies the formatting in `process-sources` on a local
   build and checks it when the `CI` environment variable is set. It formats Java with
   palantir-java-format and also reformats Markdown, so run `mvn spotless:apply` after editing the
@@ -26,8 +26,10 @@ what the code and the POMs do not make obvious.
 - The plugin compiles against Maven 3.9.16 (`mavenVersion`) and declares a literal
   `<prerequisites><maven>3.9.0</maven>`; keep the two apart, so raising `mavenVersion` does not
   raise the prerequisite.
-- `.github/workflows/maven.yml` calls the shared `apache/maven-gh-actions-shared`
-  `maven-verify.yml@v5` workflow. Branches in this repository build under the push event.
+- `.github/workflows/maven.yml` calls the MojoHaus `maven-verify.yml` workflow in `mojohaus/.github`, which
+  wraps the shared Maven verify workflow with the MojoHaus matrix: Linux on JDK 8, 21 and 25, Windows and
+  macOS on fewer JDKs, each on Maven 3.10 and on Maven 4. Branches in this repository build under the push
+  event, so a pull request from a branch here shows the push run.
 - `mvnw` pins the Maven version of the wrapper (3.9.16).
 
 ## Tests
@@ -35,10 +37,18 @@ what the code and the POMs do not make obvious.
 - JUnit 5 and AssertJ. The unit tests (`*Test`) are in `src/test/java`, next to the code they test.
 - The integration tests are maven-invoker-plugin projects in `src/it/<name>`, with `invoker.properties`,
   an optional `test.properties` (`-D` values) and a `verify.groovy` that asserts on `build.log`. They
-  run in the `run-its` profile, which the shared CI workflow activates:
+  run in the `run-its` profile, which the CI workflow activates with `-P ?run-its`. A plain `mvn verify`
+  runs none of them:
 
   ```shell
   mvn -B -P run-its verify -Dinvoker.test=list-with-default-cli
+  ```
+- Maven 4 reports phases under its own names (`after:resources` for `process-resources`); `PhaseNames`
+  maps them back, so assertions on the phase column use the Maven 3 names on both lines. Run the
+  integration tests on a Maven 4 install too before changing anything in `display`:
+
+  ```shell
+  ~/.sdkman/candidates/maven/4.0.0-rc-7/bin/mvn -B -P run-its verify -DskipTests
   ```
 - Add an integration test only for what needs a real Maven build, such as the lifecycle computed for
   a reactor or the site report; prefer a unit test otherwise.

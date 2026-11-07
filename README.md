@@ -3,9 +3,11 @@
 [![Apache License, Version 2.0, January 2004](https://img.shields.io/github/license/mojohaus/buildplan-maven-plugin.svg?label=License)](http://www.apache.org/licenses/)
 [![Maven Central](https://img.shields.io/maven-central/v/org.codehaus.mojo/buildplan-maven-plugin.svg?label=Maven%20Central)](https://search.maven.org/artifact/org.codehaus.mojo/buildplan-maven-plugin)
 [![Build Status](https://github.com/mojohaus/buildplan-maven-plugin/actions/workflows/maven.yml/badge.svg)](https://github.com/mojohaus/buildplan-maven-plugin/actions/workflows/maven.yml)
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/from-referrer/)
 
-A Maven 3.x plugin to inspect the lifecycle of your project: [Documentation](http://www.mojohaus.org/buildplan-maven-plugin/)
+A Maven plugin to inspect the lifecycle of your project: which plugin executions run, in which phase, and for
+which plugin. Documentation: <https://www.mojohaus.org/buildplan-maven-plugin/>
+
+Requires Maven 3.9.0 or newer (3.10 recommended; Maven 4 is also tested) and Java 8 or newer.
 
 ## Basic usage
 
@@ -29,9 +31,19 @@ It is possible to limit the list to a specific plugin:
 
         mvn buildplan:list-plugin -Dbuildplan.plugin=maven-compiler-plugin
 
-### List to output file
+### Choose the tasks the plan is calculated for
+
+The plan is calculated for `deploy` by default. Any goals or phases can be given instead, with the profiles and
+properties on the same invocation:
+
+        mvn buildplan:list -Dbuildplan.tasks=clean,verify -Pcoverage
+
+### Write the list to a file
 
         mvn buildplan:list -Dbuildplan.outputFile=buildplan_output.txt
+
+Add `-Dbuildplan.appendOutput=true` to append instead of overwrite, which collects every module of a reactor in
+one file. `-Dbuildplan.skip=true` skips the goal.
 
 ### Report plugin executions within a project
 
@@ -41,7 +53,8 @@ Contributor and agent notes are in [AGENTS.md](AGENTS.md).
 
 ## Release
 
-Summary of full [process](https://www.mojohaus.org/development/performing-a-release.html):
+Release notes are drafted on [GitHub Releases](https://github.com/mojohaus/buildplan-maven-plugin/releases) from
+the merged pull requests. Summary of the full [process](https://www.mojohaus.org/development/performing-a-release.html):
 
         $> mvn release:prepare release:perform
         $> cd target/checkout
