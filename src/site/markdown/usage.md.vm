@@ -24,9 +24,16 @@
 [INFO] install                | maven-install-plugin        | 2.4     | install                   | default-install
 [INFO] deploy                 | maven-deploy-plugin         | 2.7     | deploy                    | default-deploy
 ```
-It is possible to define the tasks used to calculate execution plan:
+By default the plan is calculated for `deploy`, so the list holds the executions bound to a phase of the
+default lifecycle up to `deploy`. A goal that is only run from the command line, such as `release:prepare`,
+is not part of that plan. It is possible to define the tasks used to calculate execution plan:
 
 	mvn buildplan:list-phase -Dbuildplan.tasks=clean,test
+
+Profiles and user properties are taken from the Maven invocation, not from `buildplan.tasks`, so pass them
+as usual to see the plan they produce:
+
+	mvn buildplan:list -Pcoverage -DskipTests -Dbuildplan.tasks=clean,verify
 
 If you want to show the lifecycle that defines the listed phase(s), add this parameter:
 
