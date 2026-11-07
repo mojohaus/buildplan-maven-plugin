@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>buildplan-maven-plugin</artifactId>
-  <version>2.3.2-SNAPSHOT</version>
+  <version>2.4.0</version>
   <packaging>maven-plugin</packaging>
   <name>BuildPlan Maven Plugin</name>
   <description>Inspects the lifecycle of a project: which plugin executions run, in which phase, and for which plugin.</description>
@@ -31,7 +31,7 @@
   <scm>
     <connection>scm:git:https://github.com/mojohaus/buildplan-maven-plugin.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/mojohaus/buildplan-maven-plugin.git</developerConnection>
-    <tag>master</tag>
+    <tag>v2.4.0</tag>
     <url>https://github.com/mojohaus/buildplan-maven-plugin/tree/${project.scm.tag}</url>
   </scm>
   <issueManagement>
@@ -46,7 +46,7 @@
     <maven-reporting.version>4.0.0</maven-reporting.version>
     <plexus-utils.version>4.1.0</plexus-utils.version>
     <maven-shared-utils.version>3.5.0</maven-shared-utils.version>
-    <project.build.outputTimestamp>2026-09-11T22:00:33Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2026-11-07T17:10:40Z</project.build.outputTimestamp>
   </properties>
 
   <dependencies>
