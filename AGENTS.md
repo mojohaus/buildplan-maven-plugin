@@ -51,12 +51,10 @@ what the code and the POMs do not make obvious.
   ~/.sdkman/candidates/maven/4.0.0-rc-7/bin/mvn -B -P run-its verify -DskipTests
   ```
 - The ITs keep their own repository in `target/local-repo`, so nothing they install reaches your
-  local repository. `src/it/settings.xml` lets them read your local repository first, and the
-  plugins only the fixtures use, at their pinned versions and at the default lifecycle versions of
-  Maven 3.x and Maven 4, are listed as `extraArtifacts` of the invoker `install` goal: the main build
-  resolves them into your local repository, which CI caches, and the install goal copies them over.
-  When a fixture needs a plugin version that is not on that list, add it there, or every CI job
-  downloads it from Central again.
+  local repository, and `src/it/settings.xml` lets them read your local repository first. The site
+  plugins of the report fixtures are `extraArtifacts` of the invoker `install` goal, so the main
+  build resolves their large closure into your local repository, which CI caches. Other plugins the
+  fixtures use are downloaded on each run; list one there only if it brings in a large closure.
 - Add an integration test only for what needs a real Maven build, such as the lifecycle computed for
   a reactor or the site report; prefer a unit test otherwise.
 
