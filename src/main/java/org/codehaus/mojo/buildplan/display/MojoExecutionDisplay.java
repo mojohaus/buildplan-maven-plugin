@@ -15,12 +15,12 @@
  */
 package org.codehaus.mojo.buildplan.display;
 
+import java.util.Objects;
+
 import org.apache.maven.lifecycle.DefaultLifecycles;
 import org.apache.maven.lifecycle.Lifecycle;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.descriptor.MojoDescriptor;
-
-import static org.codehaus.plexus.util.StringUtils.defaultString;
 
 public class MojoExecutionDisplay {
 
@@ -54,7 +54,7 @@ public class MojoExecutionDisplay {
 
     public String getLifecycle(DefaultLifecycles defaultLifecycles) {
         Lifecycle lifecycle = defaultLifecycles.get(execution.getLifecyclePhase());
-        return defaultString(lifecycle == null ? null : lifecycle.getId());
+        return Objects.toString(lifecycle == null ? null : lifecycle.getId(), "");
     }
 
     public String getArtifactId() {
@@ -65,14 +65,14 @@ public class MojoExecutionDisplay {
     }
 
     public String getVersion() {
-        return defaultString(execution.getVersion());
+        return Objects.toString(execution.getVersion(), "");
     }
 
     public String getGoal() {
-        return defaultString(execution.getGoal());
+        return Objects.toString(execution.getGoal(), "");
     }
 
     public String getExecutionId() {
-        return defaultString(execution.getExecutionId());
+        return Objects.toString(execution.getExecutionId(), "");
     }
 }
