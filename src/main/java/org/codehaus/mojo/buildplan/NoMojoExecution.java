@@ -17,7 +17,7 @@ package org.codehaus.mojo.buildplan;
 
 import org.apache.maven.plugin.MojoExecution;
 
-public class NoMojoExecution extends MojoExecution {
+public final class NoMojoExecution extends MojoExecution {
 
     public static final NoMojoExecution INSTANCE = new NoMojoExecution();
 
