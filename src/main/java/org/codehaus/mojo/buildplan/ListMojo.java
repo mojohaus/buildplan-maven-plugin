@@ -50,6 +50,7 @@ public class ListMojo extends AbstractLifecycleMojo {
     @Parameter(property = "buildplan.showLifecycles", defaultValue = "false")
     private boolean showLifecycles;
 
+    @Override
     public void executeInternal() throws MojoFailureException {
 
         MavenExecutionPlan plan = calculateExecutionPlan();

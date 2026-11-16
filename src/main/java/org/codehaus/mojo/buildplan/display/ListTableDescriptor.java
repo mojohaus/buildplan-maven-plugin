@@ -49,6 +49,7 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
                 .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));
     }
 
+    @Override
     public String rowFormat() {
         return columns(getPluginSize());
     }
@@ -91,6 +92,7 @@ public class ListTableDescriptor extends AbstractTableDescriptor {
         return columns(getPluginSize());
     }
 
+    @Override
     public int width() {
         return withSeparator(
                 getPluginSize(),

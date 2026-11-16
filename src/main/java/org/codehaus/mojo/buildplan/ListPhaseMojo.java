@@ -58,6 +58,7 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
     @Parameter(property = "buildplan.showAllPhases", defaultValue = "false")
     private boolean showAllPhases;
 
+    @Override
     public void executeInternal() throws MojoFailureException {
         Groups.Options options = new Groups.Options(defaultLifecycles);
         if (showAllPhases) {
