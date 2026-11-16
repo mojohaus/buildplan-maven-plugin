@@ -55,10 +55,12 @@ class PhaseNamesTest {
 
     private static Alias alias(String v3, String v4) {
         return new Alias() {
+            @Override
             public String v3Phase() {
                 return v3;
             }
 
+            @Override
             public String v4Phase() {
                 return v4;
             }

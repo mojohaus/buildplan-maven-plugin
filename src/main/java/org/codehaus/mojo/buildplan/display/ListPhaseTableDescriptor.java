@@ -41,6 +41,7 @@ public class ListPhaseTableDescriptor extends AbstractTableDescriptor {
                 .setExecutionIdSize(maxSize.get(TableColumn.EXECUTION_ID));
     }
 
+    @Override
     public String rowFormat() {
         return ROW_START
                 + FORMAT_LEFT_ALIGN
@@ -56,6 +57,7 @@ public class ListPhaseTableDescriptor extends AbstractTableDescriptor {
                 + FORMAT_STRING;
     }
 
+    @Override
     public int width() {
         return getExecutionIdSize() + getGoalSize() + getPluginSize() + SEPARATOR_SIZE;
     }

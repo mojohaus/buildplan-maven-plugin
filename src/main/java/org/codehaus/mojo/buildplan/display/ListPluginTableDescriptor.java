@@ -29,6 +29,7 @@ public class ListPluginTableDescriptor extends AbstractTableDescriptor {
     private int executionIdSize;
     private int goalSize;
 
+    @Override
     public String rowFormat() {
         StringBuilder builder = new StringBuilder();
         builder.append(ROW_START)
@@ -46,6 +47,7 @@ public class ListPluginTableDescriptor extends AbstractTableDescriptor {
         return builder.toString();
     }
 
+    @Override
     public int width() {
         return getExecutionIdSize() + getGoalSize() + getPhaseSize() + SEPARATOR_SIZE;
     }
