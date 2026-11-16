@@ -26,7 +26,6 @@ import org.codehaus.mojo.buildplan.util.Multimap;
 import org.codehaus.plexus.logging.console.ConsoleLogger;
 
 import static org.codehaus.mojo.buildplan.util.Objects.firstNonNull;
-import static org.codehaus.plexus.util.StringUtils.isEmpty;
 
 public class Groups {
 
@@ -38,7 +37,7 @@ public class Groups {
 
         public static Multimap<String, MojoExecution> of(List<MojoExecution> executions, String artifactIdFilter) {
             Multimap<String, MojoExecution> result = new LinkedMultimap<>();
-            boolean notFiltering = isEmpty(artifactIdFilter);
+            boolean notFiltering = artifactIdFilter == null || artifactIdFilter.isEmpty();
             for (MojoExecution execution : executions) {
                 if (notFiltering || execution.getArtifactId().equalsIgnoreCase(artifactIdFilter)) {
                     result.put(execution.getArtifactId(), execution);
@@ -60,7 +59,7 @@ public class Groups {
 
         public static Multimap<String, MojoExecution> of(List<MojoExecution> executions, Options options) {
             Multimap<String, MojoExecution> result = new LinkedMultimap<>();
-            boolean notFiltering = isEmpty(options.phase);
+            boolean notFiltering = options.phase == null || options.phase.isEmpty();
             for (MojoExecution execution : executions) {
                 String phase = firstNonNull(execution.getLifecyclePhase(), "<no phase>");
                 if (options.showingAllPhases) {
