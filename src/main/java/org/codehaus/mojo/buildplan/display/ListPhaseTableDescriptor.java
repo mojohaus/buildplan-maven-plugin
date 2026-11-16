@@ -42,20 +42,18 @@ public class ListPhaseTableDescriptor extends AbstractTableDescriptor {
     }
 
     public String rowFormat() {
-        return new StringBuilder()
-                .append(ROW_START)
-                .append(FORMAT_LEFT_ALIGN)
-                .append(getPluginSize())
-                .append(FORMAT_STRING)
-                .append(SEPARATOR)
-                .append(FORMAT_LEFT_ALIGN)
-                .append(getGoalSize())
-                .append(FORMAT_STRING)
-                .append(SEPARATOR)
-                .append(FORMAT_LEFT_ALIGN)
-                .append(getExecutionIdSize())
-                .append(FORMAT_STRING)
-                .toString();
+        return ROW_START
+                + FORMAT_LEFT_ALIGN
+                + getPluginSize()
+                + FORMAT_STRING
+                + SEPARATOR
+                + FORMAT_LEFT_ALIGN
+                + getGoalSize()
+                + FORMAT_STRING
+                + SEPARATOR
+                + FORMAT_LEFT_ALIGN
+                + getExecutionIdSize()
+                + FORMAT_STRING;
     }
 
     public int width() {

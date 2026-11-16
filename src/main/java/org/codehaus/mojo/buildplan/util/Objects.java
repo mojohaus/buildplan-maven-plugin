@@ -15,7 +15,7 @@
  */
 package org.codehaus.mojo.buildplan.util;
 
-public class Objects {
+public final class Objects {
 
     private Objects() {}
 
