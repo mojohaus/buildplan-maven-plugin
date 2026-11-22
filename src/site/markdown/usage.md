@@ -1,10 +1,11 @@
 # Usage
 
-#[[##]]# List plugin executions within a project
+## List plugin executions within a project
+
 ```
 > mvn buildplan:list
 
-[INFO] --- buildplan-maven-plugin:${project.version}:list (default-cli) @ buildplan-maven-plugin ---
+[INFO] --- buildplan-maven-plugin:2.4.0:list (default-cli) @ buildplan-maven-plugin ---
 [INFO] ------------------------------------------------------------------------------------------------------------------------------
 [INFO] PHASE                  | PLUGIN                      | VERSION | GOAL                      | EXECUTION ID
 [INFO] ------------------------------------------------------------------------------------------------------------------------------
@@ -24,26 +25,28 @@
 [INFO] install                | maven-install-plugin        | 2.4     | install                   | default-install
 [INFO] deploy                 | maven-deploy-plugin         | 2.7     | deploy                    | default-deploy
 ```
+
 By default the plan is calculated for `deploy`, so the list holds the executions bound to a phase of the
 default lifecycle up to `deploy`. A goal that is only run from the command line, such as `release:prepare`,
 is not part of that plan. It is possible to define the tasks used to calculate execution plan:
 
-	mvn buildplan:list-phase -Dbuildplan.tasks=clean,test
+        mvn buildplan:list-phase -Dbuildplan.tasks=clean,test
 
 Profiles and user properties are taken from the Maven invocation, not from `buildplan.tasks`, so pass them
 as usual to see the plan they produce:
 
-	mvn buildplan:list -Pcoverage -DskipTests -Dbuildplan.tasks=clean,verify
+        mvn buildplan:list -Pcoverage -DskipTests -Dbuildplan.tasks=clean,verify
 
 If you want to show the lifecycle that defines the listed phase(s), add this parameter:
 
-	mvn buildplan:list-phase -Dbuildplan.showLifecycles
+        mvn buildplan:list-phase -Dbuildplan.showLifecycles
 
-#[[##]]# List plugin executions within phases
+## List plugin executions within phases
+
 ```
 > mvn buildplan:list-phase
 
-[INFO] --- buildplan-maven-plugin:${project.version}:list-phase (default-cli) @ buildplan-maven-plugin ---
+[INFO] --- buildplan-maven-plugin:2.4.0:list-phase (default-cli) @ buildplan-maven-plugin ---
 [INFO] install ------------------------------------------------------------------------------------------
 [INFO]     + maven-install-plugin        | install                   | default-install
 [INFO] generate-sources ---------------------------------------------------------------------------------
@@ -71,26 +74,28 @@ If you want to show the lifecycle that defines the listed phase(s), add this par
 [INFO] deploy -------------------------------------------------------------------------------------------
 [INFO]     + maven-deploy-plugin         | deploy                    | default-deploy
 ```
+
 It is possible to limit the list to a specific phase:
 
-	mvn buildplan:list-phase -Dbuildplan.phase=test
+        mvn buildplan:list-phase -Dbuildplan.phase=test
 
 If you want to include phases that have no executions mapped:
 
-	mvn buildplan:list-phase -Dbuildplan.showAllPhases
+        mvn buildplan:list-phase -Dbuildplan.showAllPhases
 
 Here it is also possible to show the lifecycle(s) by running:
 
-	mvn buildplan:list-phase -Dbuildplan.showLifecycles
+        mvn buildplan:list-phase -Dbuildplan.showLifecycles
 
 Be aware that setting `buildplan.tasks` to direct plugin-executions (eg 'release:prepare') will show an empty lifecycle and '&lt;no phase&gt;', since they are not mapped.
 Also, because executions are collected per phase, direct plugin-executions are shown in the list at the location of the very first execution.
 
-#[[##]]# List plugin executions by plugins
+## List plugin executions by plugins
+
 ```
 > mvn buildplan:list-plugin
 
-[INFO] --- buildplan-maven-plugin:${project.version}:list-plugin (default-cli) @ buildplan-maven-plugin ---
+[INFO] --- buildplan-maven-plugin:2.4.0:list-plugin (default-cli) @ buildplan-maven-plugin ---
 [INFO] maven-deploy-plugin -------------------------------------------------------------------------
 [INFO]     + deploy                 | deploy                    | default-deploy
 [INFO] maven-source-plugin -------------------------------------------------------------------------
@@ -117,41 +122,42 @@ Also, because executions are collected per phase, direct plugin-executions are s
 [INFO] maven-install-plugin ------------------------------------------------------------------------
 [INFO]     + install                | install                   | default-install
 ```
+
 It is possible to limit the list to a specific plugin:
 
-	mvn buildplan:list-plugin -Dbuildplan.plugin=maven-compiler-plugin
+        mvn buildplan:list-plugin -Dbuildplan.plugin=maven-compiler-plugin
 
 It is possible to redirect the output to a file:
 
-	mvn buildplan:list-plugin -Dbuildplan.outputFile=buildplan_output.txt
+        mvn buildplan:list-plugin -Dbuildplan.outputFile=buildplan_output.txt
 
-#[[##]]# Generate the report as part of project reports
+## Generate the report as part of project reports
 
 To generate the report as part of the site generation, add the following in the `<reporting>` section of your POM:
 
 ```
-    <project>
-      ...
-      <reporting>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>buildplan-maven-plugin</artifactId>
-            <version>${project.version}</version>
-          </plugin>
-        </plugins>
-      </reporting>
-      ...
-    </project>
+<project>
+  ...
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>buildplan-maven-plugin</artifactId>
+        <version><!-- latest release --></version>
+      </plugin>
+    </plugins>
+  </reporting>
+  ...
+</project>
 ```
 
 When `mvn site` is invoked, the report will automatically be
-  included in the Project Reports menu as shown in the figure below.
+included in the Project Reports menu as shown in the figure below.
 
 ![buildplan report example](images/report-example.png "BuildPlan report example")
 
-#[[##]]# Generate the report in a standalone fashion
+## Generate the report in a standalone fashion
 
-    mvn buildplan:report
+        mvn buildplan:report
 
 A HTML report should be generated in `${basedir}/target/site/buildplan-report.html`.

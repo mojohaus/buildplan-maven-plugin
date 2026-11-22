@@ -23,14 +23,14 @@ what the code and the POMs do not make obvious.
   2.0 header owned by Jean-Christophe Gay; keep each file's header as it is. New Java files take
   the MojoHaus header in `src/license/mojohaus-header.txt`; list each one under the second
   `licenseSet` and in the first set's excludes in `pom.xml`. `src/it` and `src/site` are excluded.
-- The plugin compiles against Maven 3.9.16 (`mavenVersion`) and declares a literal
+- The plugin compiles against the latest Maven 3.9.x (`mavenVersion`) and declares a literal
   `<prerequisites><maven>3.9.0</maven>`; keep the two apart, so raising `mavenVersion` does not
   raise the prerequisite.
-- `.github/workflows/maven.yml` calls the MojoHaus `maven-verify.yml` workflow in `mojohaus/.github`, which
-  wraps the shared Maven verify workflow with the MojoHaus matrix: Linux on JDK 8, 21 and 25, Windows and
-  macOS on fewer JDKs, each on Maven 3.10 and on Maven 4. Branches in this repository build under the push
-  event, so a pull request from a branch here shows the push run.
-- `mvnw` pins the Maven version of the wrapper (3.9.16).
+- `.github/workflows/maven.yml` calls the MojoHaus `maven-verify.yml` workflow in `mojohaus/.github`,
+  which wraps the shared Maven verify workflow with the MojoHaus matrix: Linux on JDK 8, 21 and 25,
+  Windows and macOS on fewer JDKs, each on Maven 3.10 and on Maven 4. Branches in this repository
+  build under the push event, so a pull request from a branch here shows the push run.
+- `mvnw` pins the Maven version of the wrapper, in `.mvn/wrapper/maven-wrapper.properties`.
 
 ## Tests
 
@@ -62,6 +62,24 @@ what the code and the POMs do not make obvious.
 
 - Deliberate pins in `.github/dependabot.yml`: `maven-artifact`, `maven-core` and
   `maven-plugin-api` stay below 3.10.0, the Maven 3.9.x line being the plugin baseline.
+
+## Documentation updates
+
+A change that users or contributors can notice ships with the documentation it affects, in the
+same pull request. A refactor with no visible effect needs none.
+
+- A new goal, parameter or default: the mojo Javadoc, which becomes the goal page, the goal list in
+  `src/site/markdown/index.md`, and the goal entries in `src/site/site.xml`.
+- New or changed output or usage: the examples in `src/site/markdown/usage.md` and the basic
+  usage in `README.md`. The page is plain Markdown: in the plugin declaration write
+  `<version><!-- latest release --></version>`, and use a released version in the sample output.
+- A page added, removed or renamed: the menu in `src/site/site.xml`. Never rename a published
+  page; its URL is linked from elsewhere.
+- The Maven or Java requirement, or how to build and release: `README.md`, and the requirement
+  sentence in `src/site/markdown/index.md`.
+- A new convention, build gate or test fixture: this file.
+
+Check the result with `mvn site` and open `target/site/index.html`.
 
 ## Pull requests
 
