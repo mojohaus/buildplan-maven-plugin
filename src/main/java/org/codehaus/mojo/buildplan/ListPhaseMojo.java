@@ -18,6 +18,7 @@ package org.codehaus.mojo.buildplan;
 import javax.inject.Inject;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
 import org.apache.maven.lifecycle.DefaultLifecycles;
@@ -31,7 +32,6 @@ import org.codehaus.mojo.buildplan.display.ListPhaseTableDescriptor;
 import org.codehaus.mojo.buildplan.display.MojoExecutionDisplay;
 import org.codehaus.mojo.buildplan.display.TableDescriptor;
 import org.codehaus.mojo.buildplan.util.Multimap;
-import org.codehaus.plexus.util.StringUtils;
 
 import static java.lang.System.lineSeparator;
 import static java.util.Collections.emptyList;
@@ -111,6 +111,6 @@ public class ListPhaseMojo extends AbstractLifecycleMojo {
     }
 
     private String phaseTitleLine(TableDescriptor descriptor, String key) {
-        return key + " " + StringUtils.repeat("-", descriptor.width() - key.length());
+        return key + " " + String.join("", Collections.nCopies(descriptor.width() - key.length(), "-"));
     }
 }
