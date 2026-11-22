@@ -44,7 +44,6 @@
     <mavenVersion>3.9.16</mavenVersion>
     <doxia.version>2.1.0</doxia.version>
     <maven-reporting.version>4.0.0</maven-reporting.version>
-    <plexus-utils.version>4.2.0</plexus-utils.version>
     <maven-shared-utils.version>3.5.0</maven-shared-utils.version>
     <project.build.outputTimestamp>2026-11-07T17:10:54Z</project.build.outputTimestamp>
   </properties>
@@ -101,11 +100,6 @@
       <artifactId>maven-model</artifactId>
       <version>${mavenVersion}</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.plexus</groupId>
-      <artifactId>plexus-utils</artifactId>
-      <version>${plexus-utils.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.maven.shared</groupId>
