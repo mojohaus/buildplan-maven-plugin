@@ -4,7 +4,11 @@ def lines = new File(basedir, 'build.log').readLines('UTF-8')
 def assertSequence = { List<String> expected ->
     assert Collections.indexOfSubList(lines, expected) >= 0 : "build.log does not contain the sequence:\n" + expected.join('\n')
 }
-def infoLines = lines.findAll { it.startsWith('[INFO] ') }.collect { it.substring('[INFO] '.length()) }
+def infoLines = lines.findAll {
+    it.startsWith('[INFO] ')
+}.collect {
+    it.substring('[INFO] '.length())
+}
 
 assert infoLines.contains('Skipping build plan execution.')
 
